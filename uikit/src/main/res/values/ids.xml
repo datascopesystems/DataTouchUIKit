@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tag_favorite_user" type="id" />
+    <item name="tag_photo_url" type="id" />
+    <item name="rotation_angle_tag" type="id" />
+    <item name="fgelv_tag_changed_visibility" type="id"/>
+</resources>

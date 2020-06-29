@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/ellipsized_primary_transparent_background">
+
+
+    <View
+        android:id="@+id/vHighlight"
+        android:layout_width="60dp"
+        android:layout_height="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/transparent" />
+
+
+    <TextView
+        android:id="@+id/tvButtonText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vHighlight"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/ivButtonIcon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/tvButtonText"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp" />
+
+
+</RelativeLayout>

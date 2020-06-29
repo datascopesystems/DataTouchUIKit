@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlRoot"
+
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="-1dp"
+    android:background="@color/ab_background">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="3dp"
+        android:orientation="horizontal"
+        android:padding="6sp">
+
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+            android:id="@+id/fatActionImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textColor="@color/buttons_background"
+            android:textSize="42sp"
+            fontawesometext:fa_icon="fa-angle-right" />
+    </LinearLayout>
+
+
+    <com.beardedhen.androidbootstrap.FontAwesomeText
+        android:id="@+id/fatDot"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:textColor="@color/buttons_background"
+        android:textSize="22sp"
+        fontawesometext:fa_icon="fa-angle-right" />
+
+    <TextView
+        android:id="@+id/tvActionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:ellipsize="none"
+        android:gravity="center_vertical"
+        android:scrollHorizontally="false"
+        android:textColor="#607B8B"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/tvActionDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvActionTitle"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:ellipsize="none"
+        android:scrollHorizontally="false"
+        android:textColor="@color/LightGrey"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+
+</merge>

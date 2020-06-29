@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/action_button_background_primary"
+    android:gravity="center"
+    android:paddingLeft="13dp"
+    android:paddingTop="7dp"
+    android:paddingRight="13dp"
+    android:paddingBottom="7dp">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_settings_white"
+        android:contentDescription="@null" />
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_height="0dp"
+        android:layout_width="7dp"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+</LinearLayout>

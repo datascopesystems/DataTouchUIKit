@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CIconTitleView">
+        <attr name="vtiIconDrawable" format="reference" />
+        <attr name="vtiTitle" format="string" />
+        <attr name="vtiTitleFontSize" format="dimension" />
+        <attr name="vtiIconSize" format="dimension" />
+    </declare-styleable>
+</resources>

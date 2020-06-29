@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="pinpad_button_size">60dp</dimen>
+    <dimen name="pinpad_text_size">23sp</dimen>
+    <dimen name="pinpad_button_margin">3dp</dimen>
+    <dimen name="pinpad_checkboxes_container_vertical_margin">10dp</dimen>
+
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppSettingsDetailsButton">
+        <attr name="SettingsIcon" format="reference" />
+        <attr name="SettingsIconColor" format="color" />
+        <attr name="SettingsTextColor" format="color" />
+        <attr name="SettingsTitle" format="string" />
+        <attr name="SettingsDescription" format="string" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ArcProgressView">
+        <attr name="arc_stroke_width" format="dimension" />
+        <attr name="arc_progress_width_stroke" format="dimension" />
+        <attr name="arc_inactive_color" format="color" />
+        <attr name="arc_active_color" format="color" />
+        <attr name="arc_start_angle" format="integer" />
+        <attr name="arc_progress_glow" format="boolean" />
+        <attr name="arc_progress_glow_radius" format="dimension" />
+        <attr name="arc_progress_value" format="integer"/>
+
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HotspotIconItem">
+        <attr name="hotspotIcon" format="reference|integer"/>
+        <attr name="hotspotTitle" format="string"/>
+        <attr name="textSizeTitle" format="dimension"/>
+        <attr name="colorTitle" format="color"/>
+    </declare-styleable>
+</resources>

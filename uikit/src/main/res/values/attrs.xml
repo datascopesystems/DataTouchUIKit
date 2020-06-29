@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DrawingView">
+        <attr name="src" format="reference" />
+        <attr name="assetName" format="string" />
+        <attr name="panEnabled" format="boolean" />
+        <attr name="zoomEnabled" format="boolean" />
+        <attr name="quickScaleEnabled" format="boolean" />
+        <attr name="tileBackgroundColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="SeekBarHint">
+        <attr name="popupWidth" format="dimension" />
+        <attr name="yOffset" format="dimension" />
+        <attr name="popupStyle" format="enum">
+            <enum name="follow" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MultiStateButton">
+        <attr name="offSrc" format="integer" />
+        <attr name="isOn" format="boolean" />
+        <attr name="pressedColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="ArcProgress">
+        <attr name="arc_progress" format="integer" />
+        <attr name="arc_angle" format="float" />
+        <attr name="arc_max" format="integer" />
+        <attr name="arc_unfinished_color" format="color" />
+        <attr name="arc_finished_color" format="color" />
+        <attr name="arc_text_size" format="dimension" />
+        <attr name="arc_text_color" format="color" />
+        <attr name="arc_suffix_text" format="string" />
+        <attr name="arc_suffix_text_size" format="dimension" />
+        <attr name="arc_suffix_text_padding" format="dimension" />
+        <attr name="arc_bottom_text" format="string" />
+        <attr name="arc_bottom_text_size" format="dimension" />
+        <attr name="arc_progress_stroke_width" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="PinPad">
+        <attr name="actionButtonName" format="string" />
+        <attr name="buttonsHeight" format="dimension" />
+        <attr name="buttonsWidth" format="dimension" />
+        <attr name="actionEventId" format="integer" />
+        <attr name="enableActionButton" format="boolean" />
+        <attr name="android:inputType" />
+        <attr name="android:hint" />
+        <attr name="editTextInputType" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ButtonAreaSettings">
+        <attr name="buttonIcons" format="reference" />
+        <attr name="buttonName" format="string" />
+        <attr name="buttonBackground" format="integer" />
+        <attr name="buttonHeight" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ColorPicker">
+        <attr name="color_wheel_radius" format="dimension" />
+        <attr name="color_wheel_thickness" format="dimension" />
+        <attr name="color_center_radius" format="dimension" />
+        <attr name="color_center_halo_radius" format="dimension" />
+        <attr name="color_pointer_radius" format="dimension" />
+        <attr name="color_pointer_halo_radius" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="ColorBars">
+        <attr name="bar_thickness" format="dimension" />
+        <attr name="bar_length" format="dimension" />
+        <attr name="bar_pointer_radius" format="dimension" />
+        <attr name="bar_pointer_halo_radius" format="dimension" />
+        <attr name="bar_orientation_horizontal" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="DayPickerView">
+        <attr name="colorCurrentDay" format="color" />
+        <attr name="colorSelectedDayBackground" format="color" />
+        <attr name="colorSelectedDayText" format="color" />
+        <attr name="colorPreviousDay" format="color" />
+        <attr name="colorNormalDay" format="color" />
+        <attr name="colorMonthName" format="color" />
+        <attr name="colorDayName" format="color" />
+        <attr name="textSizeDay" format="dimension" />
+        <attr name="textSizeMonth" format="dimension" />
+        <attr name="textSizeDayName" format="dimension" />
+        <attr name="headerMonthHeight" format="dimension" />
+        <attr name="selectedDayRadius" format="dimension" />
+        <attr name="calendarHeight" format="dimension" />
+        <attr name="enablePreviousDay" format="boolean" />
+        <attr name="startCurrentMonth" format="boolean" />
+        <attr name="currentDaySelected" format="boolean" />
+        <attr name="drawRoundRect" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MaterialEditText">
+        <attr name="rightActionButton" format="boolean" />
+        <attr name="rightActionButtonBackground" format="reference" />
+        <attr name="hint" format="string" />
+        <attr name="accentColor" format="color" />
+        <attr name="text" format="string" />
+        <attr name="maxTextLength" format="integer|reference" />
+        <attr name="singleLine" format="boolean" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="hintColor" format="color" />
+        <attr name="hintAppearance" format="reference" />
+        <attr name="lines" format="integer" />
+        <attr name="inputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="number" value="1" />
+            <enum name="password" value="2" />
+            <enum name="text_multiline" value="3" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="CircleLetterView">
+        <attr name="clvLetter" format="string" />
+        <attr name="clvCircleColor" format="reference|color" />
+        <attr name="clvTextColor" format="reference|color" />
+        <attr name="clvTextSize" format="reference|dimension" />
+        <attr name="clvEllipsize" format="enum">
+            <enum name="none" value="0" />
+            <enum name="fitFontSize" value="4" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="BadgeCircle">
+        <attr name="bcNumber" format="string" />
+        <attr name="bcCircleColor" format="reference|color" />
+        <attr name="bcTextColor" format="reference|color" />
+        <attr name="bcTextSize" format="reference|dimension" />
+        <attr name="bcMaxNumChars" format="integer" />
+        <attr name="bcEllipsize" format="enum">
+            <enum name="none" value="0" />
+            <enum name="abbreviation" value="1" />
+            <enum name="dots" value="2" />
+            <enum name="moreThan" value="3" />
+            <enum name="fitFontSize" value="4" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="RealtimeBlurView">
+        <attr name="realtimeBlurRadius" format="dimension" />
+        <attr name="realtimeDownsampleFactor" format="float" />
+        <attr name="realtimeOverlayColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="IndexFastScrollRecyclerView">
+        <attr name="setIndexTextSize" format="integer" />
+        <attr name="setIndexbarWidth" format="dimension" />
+        <attr name="setIndexbarMargin" format="float" />
+        <attr name="setPreviewPadding" format="integer" />
+        <attr name="setIndexBarCornerRadius" format="integer" />
+        <attr name="setIndexBarTransparentValue" format="float" />
+        <attr name="setIndexBarColor" format="string" />
+        <attr name="setIndexBarTextColor" format="string" />
+        <attr name="setIndexBarHighlightTextColor" format="string" />
+        <attr name="setIndexBarColorRes" format="color" />
+        <attr name="setIndexBarTextColorRes" format="color" />
+        <attr name="setIndexBarHighlightTextColorRes" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularProgressBarView">
+        <attr name="cpb_progress" format="integer" />
+        <attr name="cpb_progress_max" format="integer" />
+        <attr name="cpb_indeterminate_mode" format="boolean" />
+        <attr name="cpb_progressbar_color" format="color" />
+        <attr name="cpb_background_progressbar_color" format="color" />
+        <attr name="cpb_progressbar_width" format="dimension" />
+        <attr name="cpb_background_progressbar_width" format="dimension" />
+        <attr name="cpb_show_progressbar_glow" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MaterialDayPicker">
+      <!--  <attr name="selectionMode"/> -->
+        <attr name="dayPickerSize" format="enum">
+            <enum name="small" value="0" />
+            <enum name="medium" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

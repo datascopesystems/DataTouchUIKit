@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/menu_button_background_pressed_selected" android:state_focused="true" />
+
+    <item android:drawable="@drawable/menu_button_background_pressed_selected" android:state_pressed="true" />
+
+    <item android:drawable="@drawable/menu_button_background_general_selected" android:state_pressed="false" />
+
+    <item android:drawable="@drawable/menu_button_background_general_selected" android:state_focused="false" />
+
+    <item android:layout_height="wrap_content" android:drawable="@drawable/menu_button_background_general_selected" />
+
+
+</selector>

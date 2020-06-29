@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinPadView">
+        <attr name="checkBoxesCount" format="integer" />
+        <attr name="singleButtonSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

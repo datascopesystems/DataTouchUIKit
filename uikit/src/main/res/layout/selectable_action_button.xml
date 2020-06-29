@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selectable_action_button_background_general"
+    android:paddingBottom="10dp"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/ic_settings_white"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="-3dp"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</RelativeLayout>

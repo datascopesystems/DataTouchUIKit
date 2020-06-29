@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CSettingsButtonCheck">
+        <attr name="CCIcon" format="reference" />
+        <attr name="CCIconColor" format="color" />
+        <attr name="CCTextColor" format="color" />
+        <attr name="CCTitle" format="string" />
+        <attr name="CCIconSize" format="dimension" />
+        <attr name="CCTextSize" format="dimension" />
+    </declare-styleable>
+</resources>

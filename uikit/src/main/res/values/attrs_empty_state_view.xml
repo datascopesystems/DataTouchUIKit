@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EmptyStateView">
+        <attr name="detailed_loading_info" format="boolean" />
+
+        <attr name="state_text_color" format="color" />
+
+        <attr name="dim_title" format="string" />
+
+        <attr name="empty_state_title" format="string" />
+        <attr name="empty_state_subtitle" format="string" />
+        <attr name="empty_state_drawable" format="reference" />
+
+        <attr name="loading_state_title" format="string" />
+        <attr name="loading_state_subtitle" format="string" />
+
+        <attr name="action_button_visible" format="boolean" />
+        <attr name="action_button_text" format="string" />
+
+        <attr name="initial_state" format="enum">
+            <enum name="loading" value="0" />
+            <enum name="empty" value="1" />
+            <enum name="container" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

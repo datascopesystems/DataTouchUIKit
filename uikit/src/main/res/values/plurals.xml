@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="duration_days">
+        <item quantity="one">%d Day</item>
+        <item quantity="other">%d Days</item>
+    </plurals>
+    <plurals name="segments_count_plural">
+        <item quantity="one">%d %s</item>
+        <item quantity="other">%d %ss</item>
+    </plurals>
+</resources>

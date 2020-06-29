@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CActionButton">
+        <attr name="icon" format="reference" />
+        <attr name="label" format="string" />
+        <attr name="outline" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="text_size" format="dimension" />
+        <attr name="checkedLabel" format="string" />
+        <attr name="uncheckedLabel" format="string" />
+        <attr name="title_color" format="color" />
+        <attr name="icon_colour" format="color" />
+        <attr name="background" format="reference" />
+        <attr name="maxTextCharacters" format="integer" />
+        <attr name="checked" format="boolean" />
+        <attr name="active_background" format="reference" />
+        <attr name="inactive_background" format="reference" />
+        <attr name="is_enabled" format="boolean" />
+        <attr name="icon_padding" format="dimension"/>
+        <attr name="disable_bottom_divider" format="boolean"/>
+        <attr name="maxLines" format="integer" />
+    </declare-styleable>
+</resources>

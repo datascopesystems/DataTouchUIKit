@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rlRoot">
+
+    <ScrollView
+        android:id="@+id/svLoadingState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvLoadingStateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="Loading State Title"
+                android:textAlignment="center"
+                android:textColor="@color/default_text_colour"
+                android:textSize="30sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvLoadingStateSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="Loading State Subtitle"
+                android:textAlignment="center"
+                android:textColor="#BFFFFFFF"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <datatouch.uikit.components.views.CircularProgressBarView
+                android:id="@+id/circularProgressBar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cpb_background_progressbar_color="@color/secondary_light_transparent"
+                app:cpb_background_progressbar_width="2dp"
+                app:cpb_indeterminate_mode="true"
+                app:cpb_progressbar_color="@color/accent_start_light"
+                app:cpb_progressbar_width="4dp"
+                app:cpb_show_progressbar_glow="true"/>
+
+            <FrameLayout
+                android:id="@+id/flProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <datatouch.uikit.components.views.CircularProgressBarView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:cpb_background_progressbar_color="@color/secondary_light_transparent"
+                    app:cpb_background_progressbar_width="2dp"
+                    app:cpb_indeterminate_mode="true"
+                    app:cpb_progressbar_color="@color/accent_start_light"
+                    app:cpb_progressbar_width="5dp"
+                    app:cpb_show_progressbar_glow="true" />
+
+                <TextView
+                    android:id="@+id/tvIndeterminateProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@string/working"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--Layout for list containing view (ListView, RecyclerView, GridView) etc-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/flContainer">
+
+        <LinearLayout
+            android:id="@+id/llListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+
+        <RelativeLayout
+            android:id="@+id/rlDim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/primary_transparent_dim_background"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvDimStateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/list_is_empty"
+                android:textAlignment="center"
+                android:textColor="@color/white_transparent_text"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+
+    <ScrollView
+        android:id="@+id/svEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <!--Empty state-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/ivEmptyStatePicture"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_smile"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvEmptyStateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_below="@+id/ivEmptyStatePicture"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/list_is_empty"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/tvEmptyStateSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvEmptyStateTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="Empty State Subtitle"
+                android:textAlignment="center"
+                android:textColor="@color/white_transparent_text"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <datatouch.uikit.components.buttons.CActionButtonAccent
+                android:id="@+id/btnEmptyStateAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvEmptyStateSubTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                app:icon="@drawable/ic_add_white_2"
+                app:title="Some Action" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

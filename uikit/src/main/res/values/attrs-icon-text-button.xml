@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ButtonIconText">
+        <attr name="citabIcon" format="reference" />
+        <attr name="citabIconWidth" format="dimension" />
+        <attr name="citabIconHeight" format="dimension" />
+        <attr name="citabContentAligment" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="citabTextGravity" format="integer">
+            <flag name="bottom" value="80" />
+            <flag name="center" value="17" />
+            <flag name="center_horizontal" value="1" />
+            <flag name="center_vertical" value="16" />
+            <flag name="clip_horizontal" value="8" />
+            <flag name="clip_vertical" value="128" />
+            <flag name="end" value="8388613" />
+            <flag name="fill" value="119" />
+            <flag name="fill_horizontal" value="7" />
+            <flag name="fill_vertical" value="112" />
+            <flag name="left" value="3" />
+            <flag name="right" value="5" />
+            <flag name="start" value="8388611" />
+            <flag name="top" value="48" />
+        </attr>
+        <attr name="citabTextSideMargin" format="dimension" />
+        <attr name="citabTitle" format="string" />
+        <attr name="citabBackgroundDrawable" format="reference" />
+        <attr name="citabIconCircleAsTextColour" format="boolean" />
+        <attr name="citabCardElevation" format="float" />
+        <attr name="citabCardRadius" format="float" />
+        <attr name="citabDescription" format="string" />
+        <attr name="citabColor" format="integer" />
+        <attr name="citabTextColor" format="integer" />
+        <attr name="citabTextSize" format="dimension" />
+        <attr name="citabTextDescriptionSize" format="dimension" />
+        <attr name="citabBorderWidth" format="dimension" />
+    </declare-styleable>
+</resources>

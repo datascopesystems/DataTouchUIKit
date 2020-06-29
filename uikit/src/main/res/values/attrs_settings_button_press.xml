@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CSettingsButtonPress">
+        <attr name="CPIconRightVisible" format="boolean" />
+        <attr name="CPIconRight" format="reference" />
+        <attr name="CPIconRightColor" format="color" />
+        <attr name="CPIcon" format="reference" />
+        <attr name="CPIconColor" format="color" />
+        <attr name="CPTitle" format="string" />
+    </declare-styleable>
+
+</resources>

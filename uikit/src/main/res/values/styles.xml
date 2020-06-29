@@ -1,0 +1,829 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <attr name="amdp_theme_dark" format="boolean">false</attr>
+
+
+    <style name="amdp_ActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/amdp_material_button_height</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="StreamingDataTableSubHeaderAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BackToButtonTitle" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- Due to https://issuetracker.google.com/issues/68454482 bug with Android O+, DO NOT set windowIsTranslucent=true -->
+    <style name="RoutingActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="StreamingDataTableValueAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#fff</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="StreamDataTableLabelAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="amdp_ActionButton.Text" tools:ignore="NewApi">
+        <item name="android:textSize">@dimen/amdp_material_button_textsize</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@drawable/amdp_material_button_background</item>
+        <item name="android:minWidth">@dimen/amdp_material_button_minwidth</item>
+        <item name="android:paddingLeft">@dimen/amdp_material_button_textpadding_horizontal</item>
+        <item name="android:paddingRight">@dimen/amdp_material_button_textpadding_horizontal</item>
+        <item name="android:textColor">@color/amdp_button_color</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+
+    <style name="DatascopeTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="droppyMenuSeparatorStyle">@style/Datascope.Droppy.DroppyMenuSeparator</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="Datascope.Droppy.DroppyMenuSeparator" parent="Droppy.DroppyMenuSeparator">
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="TreeNodeStyleCustom">
+        <item name="android:paddingLeft">20dp</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="OkAcceptButtonStyle">
+        <item name="bb_icon_left">fa-thumbs-o-up</item>
+        <item name="bb_roundedCorners">false</item>
+        <item name="bb_type">success</item>
+        <item name="android:text">@string/OK</item>
+    </style>
+
+    <style name="DangerButtonExitCloseStyle">
+        <item name="bb_icon_left">fa-close</item>
+        <item name="bb_roundedCorners">false</item>
+        <item name="bb_type">danger</item>
+    </style>
+
+    <style name="DefaultBlueButtonStyle">
+        <item name="bb_roundedCorners">true</item>
+        <item name="bb_type">primary</item>
+    </style>
+
+    <style name="WarningButtonStyle">
+        <item name="bb_roundedCorners">false</item>
+        <item name="bb_type">warning</item>
+    </style>
+
+    <style name="WarningButtonStyle.ApplyForAllModules">
+        <item name="bb_icon_left">fa-exclamation</item>
+    </style>
+
+    <style name="CancelButtonStyle" parent="DangerButtonExitCloseStyle">
+        <item name="android:text">@string/cancel</item>
+    </style>
+
+    <style name="DrawingSettingIconStyle">
+        <item name="android:background">@drawable/circle_background</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:src">@drawable/different_shapes</item>
+    </style>
+
+    <style name="DrawingSettingIconStyle.NoLayout">
+        <item name="android:background">@drawable/background_view_circle_single</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/different_shapes</item>
+    </style>
+
+
+    <style name="MenuLabelsStyle">
+        <item name="android:background">@drawable/background_rounded_cornerns_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="InputFieldTextAnnotation">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_alignWithParentIfMissing">true</item>
+    </style>
+
+    <style name="HotstpotButtonText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxEms">15</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/buttons_background</item>
+        <item name="android:layout_alignWithParentIfMissing">true</item>
+    </style>
+
+    <style name="DropAreaButtonTextDescrion">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxEms">15</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/buttons_background</item>
+    </style>
+
+    <style name="HotstpotButtonTextLinearLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxEms">15</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/buttons_background</item>
+    </style>
+
+    <style name="NavigationPathTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="swipe_text_color">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="main_menu_buttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:maxLines">100</item>
+        <item name="android:minLines">2</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:textColor">@color/default_text_colour</item>
+    </style>
+
+    <style name="IconTextActionButtonTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineSpacingExtra">0dp</item>
+    </style>
+
+
+    <style name="IconTextActionButtonDescription">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="main_menu_button_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:textColor">@color/default_text_colour</item>
+    </style>
+
+    <style name="menu_buttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textColor">@color/default_text_colour</item>
+    </style>
+
+    <style name="user_information">
+        <item name="citabIconWidth">70dp</item>
+        <item name="citabIconHeight">70dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="citabCardElevation">@dimen/menu_button_elevation</item>
+        <item name="citabCardRadius">@dimen/menu_button_radius</item>
+        <item name="citabIconCircleAsTextColour">true</item>
+        <item name="android:textColor">@color/default_text_colour</item>
+    </style>
+
+    <style name="ListItemActionButton">
+        <item name="citabIconWidth">80dp</item>
+        <item name="citabIconHeight">80dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="citabCardElevation">@dimen/menu_button_elevation</item>
+        <item name="citabCardRadius">@dimen/menu_button_radius</item>
+        <item name="citabIconCircleAsTextColour">true</item>
+        <item name="android:textColor">@color/default_text_colour</item>
+    </style>
+
+    <style name="menu_settings">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:weightSum">3</item>
+    </style>
+
+    <style name="MenuSettingsButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="MenuSettingsButton.Resources" parent="MenuSettingsButton">
+        <item name="android:layout_height">100dp</item>
+    </style>
+
+    <style name="MenuButtonDescription">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MenuDescription">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="hotspot_button_style">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+    <style name="rl_hotspot_button_wrapper">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/background_view_circle_single_black</item>
+    </style>
+
+    <style name="style_change_hotspot_settings">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:textColor">@color/buttons_background</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TimeTabItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="citabTextSize">12sp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="menu_rl_item">
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="citabIconWidth">80dp</item>
+        <item name="citabTextSideMargin">15dp</item>
+        <item name="citabTextGravity">left</item>
+        <item name="citabContentAligment">left</item>
+    </style>
+
+
+    <style name="MaterialMenuButton">
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="citabIconWidth">80dp</item>
+        <item name="citabTextSideMargin">15dp</item>
+        <item name="citabTextGravity">left</item>
+        <item name="citabContentAligment">left</item>
+        <item name="citabCardElevation">@dimen/menu_button_elevation</item>
+        <item name="citabCardRadius">@dimen/menu_button_radius</item>
+        <item name="citabIconCircleAsTextColour">true</item>
+    </style>
+
+    <style name="MainMenuButton">
+        <item name="android:layout_height">160dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="citabIconCircleAsTextColour">true</item>
+        <item name="citabIconWidth">120dp</item>
+        <item name="citabIconHeight">120dp</item>
+        <item name="citabTextGravity">left</item>
+        <item name="citabContentAligment">left</item>
+        <item name="citabCardElevation">10</item>
+        <item name="citabTextSideMargin">20dp</item>
+        <item name="citabBorderWidth">10dp</item>
+    </style>
+
+    <style name="weather_icon">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:textColor">@color/AntiqueWhite</item>
+        <item name="android:contentDescription">@null</item>
+    </style>
+
+    <style name="current_weather_text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tv_hotspots_hints">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/buttons_background</item>
+        <item name="android:textSize">@dimen/size_text_hotspot_item</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="button_hotspot_settings">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#1E88E5</item>
+    </style>
+
+    <style name="button_area_settings">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#1E88E5</item>
+    </style>
+
+    <style name="rbChecklistSettingsStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/default_text_colour</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NavigationActionButton">
+        <item name="android:background">?android:selectableItemBackground</item>
+    </style>
+
+    <style name="MaterialButton">
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="MaterialButtonGreen" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_green</item>
+    </style>
+
+    <style name="MaterialButtonRed" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_red</item>
+    </style>
+
+    <style name="MaterialButtonGrey" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_grey</item>
+    </style>
+
+    <style name="MaterialButtonWhite" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_white</item>
+    </style>
+
+    <style name="MaterialButtonTransparent" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_transparent</item>
+    </style>
+
+    <style name="MaterialButtonOrange" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_orange</item>
+    </style>
+
+    <style name="MaterialButtonAccentEnd" parent="MaterialButton">
+        <item name="android:background">
+            @drawable/rounded_rectangle_white_corner_transparent_background_accent
+        </item>
+    </style>
+
+    <style name="MaterialButtonCyan" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_cyan</item>
+    </style>
+
+    <style name="MaterialButtonBlue" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_blue</item>
+    </style>
+
+    <style name="MaterialButtonPrimary" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_primary</item>
+    </style>
+
+    <style name="MaterialButtonAccent" parent="MaterialButton">
+        <item name="android:background">@drawable/material_button_rectangle_primary</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DeliveryDescriptionTextView" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/buttons_background</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <!--Check date showcase warning-->
+
+    <style name="BaseHintAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/ab_background</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="BaseHintAppearance.Red">
+        <item name="android:textColor">@color/deep_red</item>
+    </style>
+
+    <style name="BaseHintAppearance.Green">
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+    <style name="BaseHintAppearance.PrimaryText">
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="BaseHintAppearance.SecondaryText">
+        <item name="android:textColor">@color/secondary_text</item>
+    </style>
+
+    <style name="BaseHintAppearance.Blue">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="BaseHintAppearance.Violet">
+        <item name="android:textColor">@color/graphBgViolet</item>
+    </style>
+
+    <style name="BaseHintAppearance.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SegmentNavigationButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="AssetInfoTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bottom_line</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="ab_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="BackgroundCardView.Transparent">
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardElevation">11dp</item>
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardBackgroundColor">@color/transparent</item>
+    </style>
+
+    <style name="BackgroundCardView">
+        <item name="android:layout_margin">5dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="ButtonClose" parent="MaterialButtonRed">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:src">@drawable/ic_close_white_small</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="ButtonOk" parent="MaterialButtonGreen">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableLeft">@drawable/ic_check_white_small</item>
+        <item name="android:drawableStart">@drawable/ic_check_white_small</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:text">@string/ok</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="ButtonCancel" parent="MaterialButtonRed">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableLeft">@drawable/ic_close_white_small</item>
+        <item name="android:drawableStart">@drawable/ic_close_white_small</item>
+        <item name="android:text">@string/cancel</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="ActionButtonEdit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_edit_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonInfo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_info_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_label_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_image_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonArchive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_archive_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonUnarchive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_unarchive_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonOffhire">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_fix_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonFix">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_fix_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonDelete">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_delete_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonPdf">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_pdf_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonSave">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_save_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonPlay">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_video_player_white</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ActionButtonAdd">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconDrawable">@drawable/ic_add_white_2</item>
+        <item name="iconBackground">@drawable/action_rectangle_button_background_transparent</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="ButtonEdit" parent="MaterialButtonOrange">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:src">@drawable/ic_edit_white_small</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="ButtonDelete" parent="MaterialButtonRed">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/ic_delete_white_small</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="ButtonAdd" parent="MaterialButtonGreen">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/ic_add_white_small</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+
+    <style name="ButtonSave" parent="MaterialButtonCyan">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/ic_save_white_small</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="MarginlessToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/toolbar_size</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:background">@drawable/primary_actionbar_background</item>
+    </style>
+
+    <style name="ToolbarColorArcStyle">
+        <item name="android:layout_width">550dp</item>
+        <item name="android:layout_height">@dimen/toolbar_size</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+
+    <style name="SettingsSectionButton">
+
+        <!-- <item description="android:textColor">@color/white</item>
+         <item description="background">@drawable/settings_section_button_unpressed</item>
+         <item description="textAllCaps">false</item>
+         <item description="fontFamily">@font/roboto_bold"</item>
+         <item description="textAlignment">textStart</item>
+         <item description="drawablePadding">15dp</item>
+         <item description="textSize">24sp</item>
+ -->
+    </style>
+
+    <style name="MaterialWeekDayPickerToggle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">@dimen/day_button_size</item>
+        <item name="android:layout_height">@dimen/day_button_size</item>
+        <item name="android:background">@drawable/circle_toggle_button</item>
+        <item name="android:textSize">@dimen/day_button_max_font_size</item>
+        <item name="android:textColor">@color/calendar_text</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="MaterialWeekDayPickerSmallToggle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">@dimen/day_small_button_size</item>
+        <item name="android:layout_height">@dimen/day_small_button_size</item>
+        <item name="android:background">@drawable/circle_toggle_button</item>
+        <item name="android:textSize">@dimen/day_button_max_font_size</item>
+        <item name="android:textColor">@color/calendar_text</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="MaterialWeekendPickerToggle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">@dimen/day_button_size</item>
+        <item name="android:layout_height">@dimen/day_button_size</item>
+        <item name="android:background">@drawable/circle_toggle_button_weekend</item>
+        <item name="android:textSize">@dimen/day_button_max_font_size</item>
+        <item name="android:textColor">@color/calendar_text</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="MaterialWeekendPickerSmallToggle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">@dimen/day_small_button_size</item>
+        <item name="android:layout_height">@dimen/day_small_button_size</item>
+        <item name="android:background">@drawable/circle_toggle_button_weekend</item>
+        <item name="android:textSize">@dimen/day_button_max_font_size</item>
+        <item name="android:textColor">@color/calendar_text</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+</resources>

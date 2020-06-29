@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <gradient android:angle="90" android:endColor="@color/accent_negative_end_dark" android:startColor="@color/accent_negative_start_dark" android:type="linear" />
+            <corners android:radius="@dimen/radius_circle_background" />
+            <size android:width="@dimen/size_background_circle" android:height="@dimen/size_background_circle" />
+
+        </shape>
+    </item>
+
+    <item android:state_focused="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <gradient android:angle="90" android:endColor="@color/accent_negative_end_dark" android:startColor="@color/accent_negative_start_dark" android:type="linear" />
+            <corners android:radius="@dimen/radius_circle_background" />
+            <size android:width="@dimen/size_background_circle" android:height="@dimen/size_background_circle" />
+        </shape>
+    </item>
+
+    <item android:state_focused="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <gradient android:angle="90" android:endColor="@color/accent_negative_end" android:startColor="@color/accent_negative_start" android:type="linear" />
+            <size android:width="@dimen/size_background_circle" android:height="@dimen/size_background_circle" />
+            <corners android:radius="@dimen/radius_circle_background" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <gradient android:angle="90" android:endColor="@color/accent_negative_end" android:startColor="@color/accent_negative_start" android:type="linear" />
+            <corners android:radius="@dimen/radius_circle_background" />
+            <size android:width="@dimen/size_background_circle" android:height="@dimen/size_background_circle" />
+
+        </shape>
+    </item>
+
+</selector>

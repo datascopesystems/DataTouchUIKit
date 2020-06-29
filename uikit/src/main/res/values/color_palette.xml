@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="color_palette_default">
+        <item>#4cffcf</item>
+        <item>#caff4c</item>
+        <item>#ff7f4c</item>
+        <item>#4ccfff</item>
+        <item>#00a8ff</item>
+        <item>#ffc888</item>
+        <item>#cc51f0</item>
+        <item>#feff8a</item>
+        <item>#b9f4fb</item>
+        <item>#ff4bd7</item>
+        <item>#4cf0ff</item>
+        <item>#a0ff4c</item>
+        <item>#fff94c</item>
+        <item>#ff8a00</item>
+        <item>#d088ff</item>
+        <item>#ff4b93</item>
+
+    </string-array>
+
+    <string-array name="color_palette_report">
+        <item>#000000</item>
+        <item>#4a94a8</item>
+        <item>#ff7f4c</item>
+        <item>#873299</item>
+        <item>#00a8ff</item>
+        <item>#0B6121</item>
+        <item>#cc51f0</item>
+        <item>#3F51B5</item>
+        <item>#e11383</item>
+        <item>#ff4bd7</item>
+        <item>#303F9F</item>
+        <item>#FF4081</item>
+        <item>#668400</item>
+        <item>#ff8a00</item>
+        <item>#009688</item>
+        <item>#ff4b93</item>
+
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
+    android:layout_width="@dimen/floating_circle_button_size"
+    android:layout_height="@dimen/floating_circle_button_size"
+    android:background="@drawable/floating_action_button_background_accent"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_add_white_2"
+        android:visibility="visible" />
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:bottomRightRadius="50dp" android:topRightRadius="50dp" />
+            <gradient android:angle="45" android:endColor="@color/accent_end_dark" android:startColor="@color/accent_start_dark" android:type="linear" />
+            <size android:width="@dimen/floating_circle_button_size" android:height="@dimen/floating_circle_button_size" />
+            <padding android:bottom="0dip" android:left="0dip" android:right="0dip" android:top="0dip" />
+        </shape>
+    </item>
+
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:bottomRightRadius="50dp" android:topRightRadius="50dp" />
+            <gradient android:angle="45" android:endColor="@color/accent_end_dark" android:startColor="@color/accent_start_dark" android:type="linear" />
+            <size android:width="@dimen/floating_circle_button_size" android:height="@dimen/floating_circle_button_size" />
+            <padding android:bottom="0dip" android:left="0dip" android:right="0dip" android:top="0dip" />
+        </shape>
+    </item>
+
+    <item android:state_focused="false">
+        <shape android:shape="rectangle">
+            <corners android:bottomRightRadius="50dp" android:topRightRadius="50dp" />
+            <gradient android:angle="45" android:endColor="@color/accent_end" android:startColor="@color/accent_start" android:type="linear" />
+            <size android:width="@dimen/floating_circle_button_size" android:height="@dimen/floating_circle_button_size" />
+            <padding android:bottom="0dip" android:left="0dip" android:right="0dip" android:top="0dip" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <corners android:bottomRightRadius="50dp" android:topRightRadius="50dp" />
+            <gradient android:angle="45" android:endColor="@color/accent_end" android:startColor="@color/accent_start" android:type="linear" />
+            <size android:width="@dimen/floating_circle_button_size" android:height="@dimen/floating_circle_button_size" />
+            <padding android:bottom="0dip" android:left="0dip" android:right="0dip" android:top="0dip" />
+        </shape>
+    </item>
+
+
+</selector>
+
+

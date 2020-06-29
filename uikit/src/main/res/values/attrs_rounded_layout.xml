@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedRelativeLayout">
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="roundCorners">
+            <flag name="none" value="0" />
+            <flag name="topLeft" value="1" />
+            <flag name="topRight" value="2" />
+            <flag name="bottomLeft" value="4" />
+            <flag name="bottomRight" value="8" />
+            <flag name="all" value="15" />
+        </attr>
+    </declare-styleable>
+</resources>

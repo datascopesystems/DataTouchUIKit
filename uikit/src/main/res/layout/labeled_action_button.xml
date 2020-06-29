@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/action_rectangle_button_background_transparent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="7dp"
+    android:paddingLeft="13dp"
+    android:paddingRight="13dp"
+    android:paddingTop="7dp">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="7dp"
+        android:src="@drawable/ic_settings_white"
+        android:tint="@color/accent_end" />
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="From"
+        android:textColor="@color/accent_end"
+        android:textSize="15sp"
+        android:layout_marginEnd="7dp" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>

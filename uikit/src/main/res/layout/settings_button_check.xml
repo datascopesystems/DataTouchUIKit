@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:id="@+id/rlRoot">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/ivIcon"
+        android:layout_toStartOf="@+id/ivChecked"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/ivChecked"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:padding="5dp"
+        android:src="@drawable/ic_check_box_unchecked_green"/>
+
+
+</RelativeLayout>

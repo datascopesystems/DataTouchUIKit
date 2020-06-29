@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/enter_pin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/pinpad_text_size" />
+
+
+    <EditText
+        android:id="@+id/etAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/primary_edit_text_rounded_corner"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:drawableStart="@drawable/ic_amount_grey"
+        android:drawablePadding="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:fontFamily="@font/roboto_regular"
+        android:inputType="number"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/primary_light"
+        android:textColorHint="@color/secondary_text"
+        android:textCursorDrawable="@null"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llCheckBoxesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/pinpad_checkboxes_container_vertical_margin"
+        android:layout_marginBottom="@dimen/pinpad_checkboxes_container_vertical_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPinPadButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/pinpad_button_margin">
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="1" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="2" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_number="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/pinpad_button_margin">
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="4" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="5" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_number="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/pinpad_button_margin">
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="7" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="8" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_number="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <datatouch.uikit.components.CPinPadCancelButton
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin" />
+
+            <datatouch.uikit.components.CPinPadNumberButton
+                android:id="@+id/btn0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/pinpad_button_margin"
+                app:button_number="0" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <datatouch.uikit.components.CPinPadOkButton
+                    android:id="@+id/btnOk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+
+                <datatouch.uikit.components.views.CircularProgressBarView
+                    android:id="@+id/pbLoading"
+                    android:layout_width="@dimen/pinpad_button_size"
+                    android:layout_height="@dimen/pinpad_button_size"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:cpb_background_progressbar_color="@color/secondary_light_transparent"
+                    app:cpb_background_progressbar_width="2dp"
+                    app:cpb_indeterminate_mode="true"
+                    app:cpb_progressbar_color="@color/accent_start_light"
+                    app:cpb_progressbar_width="4dp"
+                    app:cpb_show_progressbar_glow="true" />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

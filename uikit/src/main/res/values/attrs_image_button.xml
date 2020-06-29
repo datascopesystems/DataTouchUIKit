@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CImageButtonWithText">
+        <attr name="CIBIcon" format="reference" />
+        <attr name="CIBText" format="string" />
+        <attr name="CIBIconBackground" format="reference" />
+    </declare-styleable>
+</resources>

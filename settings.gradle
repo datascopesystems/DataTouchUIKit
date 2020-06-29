@@ -1,0 +1,3 @@
+rootProject.name='UiKit'
+include ':app'
+include ':uikit'

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/rlGroupHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_top_group"
+        android:padding="7dp">
+
+        <ImageView
+            android:id="@+id/ivHeaderIcon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/image_background_circle_accent"
+            android:padding="5dp"
+            android:src="@drawable/ic_lab_flask_white" />
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/ivHeaderIcon"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Resources"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llItemsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_thin_grey"
+        android:layout_below="@+id/rlGroupHeader"
+        android:orientation="vertical"
+        android:padding="10dp" />
+</merge>

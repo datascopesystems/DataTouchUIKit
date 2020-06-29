@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="camera_login_smile_size">150dp</dimen>
+    <dimen name="camera_login_text_size">24sp</dimen>
+
+</resources>
