@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <datatouch.uikit.components.spinner.ExtendedBetterSpinner
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
     <datatouch.uikit.components.buttons.CActionButtonAccent
         android:layout_width="match_parent"
         android:layout_height="20dp"

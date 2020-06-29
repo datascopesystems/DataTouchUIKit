@@ -1,8 +1,7 @@
-package datatouch.uikit.components
+package datatouch.uikit.components.spinner
 
 import android.content.Context
 import android.util.AttributeSet
-import com.weiwangcn.betterspinner.library.BetterSpinner
 
 class ExtendedBetterSpinner : BetterSpinner {
     constructor(context: Context?) : super(context) {}
