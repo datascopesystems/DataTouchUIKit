@@ -16,7 +16,6 @@ import datatouch.uikit.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_button.view.*
 
 class CActionButton : RelativeLayout {
-
     private var titleText: String? = null
     private var iconDrawable: Drawable? = null
     private var backgroundDrawableImg: Drawable? = null
@@ -106,6 +105,7 @@ class CActionButton : RelativeLayout {
 
     private fun applyNativeAttributes() {
         applyLayoutParams()
+
     }
 
     private fun applyLayoutParams() {
