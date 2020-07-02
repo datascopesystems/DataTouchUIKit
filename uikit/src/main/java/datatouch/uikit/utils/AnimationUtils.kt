@@ -1,5 +1,6 @@
 package datatouch.uikit.utils
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.View
@@ -10,10 +11,39 @@ import android.widget.TextView
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import datatouch.uikit.interfaces.AnimationListenerWrapper
+import datatouch.uikit.interfaces.UiJustCallback
 
 object AnimationUtils {
     private const val NORMAL = 500L
     private const val FAST = 300L
+
+    @JvmStatic
+    fun animate(target: View?,
+                animationTechniques: AnimationTechniques = AnimationTechniques.ZOOM_IN,
+                onAnimationEnd: UiJustCallback) {
+        if (target == null) return
+        YoYo.with(getActualTechniques(animationTechniques))
+            .duration(NORMAL)
+            .withListener(object : Animator.AnimatorListener {
+                override fun onAnimationRepeat(animation: Animator?) {
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    animation?.apply {
+                        runCatching {
+                            onAnimationEnd.invoke()
+                        }
+                    }
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                }
+
+                override fun onAnimationStart(animation: Animator?) {
+                }
+            })
+            .playOn(target)
+    }
 
     @JvmStatic
     fun animate(delayInMillis: Int, target: View?, animationTechniques: AnimationTechniques) {
