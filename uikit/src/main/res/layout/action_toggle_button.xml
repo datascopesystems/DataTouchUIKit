@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootView"
-    android:layout_width="120dp"
+    android:id="@+id/rlRoot"
+    android:layout_width="wrap_content"
     android:layout_height="35dp"
     android:background="@drawable/toggle_button_background_inactive"
     android:gravity="center"
@@ -10,14 +10,14 @@
     android:paddingRight="13dp"
     android:paddingTop="7dp">
 
-
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="true"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/ivIcon"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:fontFamily="@font/roboto_regular"
         android:text="INACTIVE"
         android:textAllCaps="true"
