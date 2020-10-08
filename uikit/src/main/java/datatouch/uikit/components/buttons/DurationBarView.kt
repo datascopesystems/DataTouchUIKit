@@ -8,6 +8,9 @@ import datatouch.uikit.R
 import datatouch.uikit.interfaces.UiJustCallback
 import datatouch.uikit.utils.Dates
 import kotlinx.android.synthetic.main.duration_bar_view.view.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 
 class DurationBarView : LinearLayout {
 
@@ -60,7 +63,7 @@ class DurationBarView : LinearLayout {
 
     private fun updateDurationDays() {
         val dayDifference =
-            Dates.dateDiffInDays(tvDateFrom?.text.toString(), tvDateTo?.text.toString())
+            dateDiffInDays(tvDateFrom?.text.toString(), tvDateTo?.text.toString())
         val durationString =
             resources.getQuantityString(R.plurals.duration_days, dayDifference, dayDifference)
         tvDuration?.text = durationString
@@ -88,4 +91,25 @@ class DurationBarView : LinearLayout {
         onDurationClickCallback?.invoke()
     }
 
+    companion object {
+        private const val dateFormat = "dd/MM/yyyy"
+        private val formatter = Dates.createFormatter(dateFormat)
+
+        @JvmStatic
+        fun dateDiffInDays(from: String?, to: String?): Int {
+            try {
+                val fromDate = formatter.parse(from)
+                val toDate = formatter.parse(to)
+                var diffInDays =
+                    TimeUnit.DAYS.convert(toDate.time - fromDate.time, TimeUnit.MILLISECONDS) + 1
+                if (diffInDays <= 0) {
+                    diffInDays = 1
+                }
+                return diffInDays.toInt()
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+            return 1
+        }
+    }
 }
