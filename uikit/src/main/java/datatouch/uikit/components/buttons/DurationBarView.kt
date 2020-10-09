@@ -6,10 +6,11 @@ import android.view.View
 import android.widget.LinearLayout
 import datatouch.uikit.R
 import datatouch.uikit.interfaces.UiJustCallback
-import datatouch.uikit.utils.Dates
+import datatouch.uikit.utils.default
 import kotlinx.android.synthetic.main.duration_bar_view.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class DurationBarView : LinearLayout {
@@ -93,7 +94,15 @@ class DurationBarView : LinearLayout {
 
     companion object {
         private const val dateFormat = "dd/MM/yyyy"
-        private val formatter = Dates.createFormatter(dateFormat)
+        private val formatter = createFormatter(dateFormat)
+
+        @JvmStatic
+        fun createFormatter(format: String?, setDefTimezone: Boolean = false): SimpleDateFormat {
+            return SimpleDateFormat(
+                format.default(dateFormat),
+                Locale.getDefault()
+            ).also { if (setDefTimezone) it.timeZone = TimeZone.getDefault() }
+        }
 
         @JvmStatic
         fun dateDiffInDays(from: String?, to: String?): Int {
