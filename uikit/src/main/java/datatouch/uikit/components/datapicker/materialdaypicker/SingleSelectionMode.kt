@@ -1,7 +1,5 @@
 package datatouch.uikit.components.datapicker.materialdaypicker
 
-import datatouch.views.datapicker.materialdaypicker.SelectionMode
-
 /**
  * An implementation of [SelectionMode] that only allows one day to be
  * selected at a time. If a day was already selected when a user selected

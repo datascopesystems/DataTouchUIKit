@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="datatouch.uikit" />
+    package="datatouch.uikit" >
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+</manifest>

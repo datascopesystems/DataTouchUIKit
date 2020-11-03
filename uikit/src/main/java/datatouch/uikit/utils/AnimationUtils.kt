@@ -1,8 +1,6 @@
 package datatouch.uikit.utils
 
-import android.animation.Animator
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
+import android.animation.*
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -14,8 +12,10 @@ import datatouch.uikit.interfaces.AnimationListenerWrapper
 import datatouch.uikit.interfaces.UiJustCallback
 
 object AnimationUtils {
-    private const val NORMAL = 500L
-    private const val FAST = 300L
+    private const val Normal = 500L
+    private const val Fast = 300L
+
+    private const val PulseAnimatorDuration = 544L
 
     @JvmStatic
     fun animate(target: View?,
@@ -23,7 +23,7 @@ object AnimationUtils {
                 onAnimationEnd: UiJustCallback) {
         if (target == null) return
         YoYo.with(getActualTechniques(animationTechniques))
-            .duration(NORMAL)
+            .duration(Normal)
             .withListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {
                 }
@@ -48,14 +48,14 @@ object AnimationUtils {
     @JvmStatic
     fun animate(delayInMillis: Int, target: View?, animationTechniques: AnimationTechniques) {
         if (target == null) return
-        YoYo.with(getActualTechniques(animationTechniques)).duration(NORMAL)
+        YoYo.with(getActualTechniques(animationTechniques)).duration(Normal)
             .delay(delayInMillis.toLong()).playOn(target)
     }
 
     @JvmStatic
     fun animate(target: View?, animationTechniques: AnimationTechniques) {
         if (target == null) return
-        YoYo.with(getActualTechniques(animationTechniques)).duration(NORMAL).playOn(target)
+        YoYo.with(getActualTechniques(animationTechniques)).duration(Normal).playOn(target)
     }
 
     @JvmStatic
@@ -66,7 +66,7 @@ object AnimationUtils {
     ) {
         if (target == null) return
         YoYo.with(getActualTechniques(animationTechniques))
-            .duration(NORMAL)
+            .duration(Normal)
             .withListener(listener)
             .playOn(target)
     }
@@ -88,7 +88,7 @@ object AnimationUtils {
     @JvmStatic
     fun animateFast(target: View?, animationTechniques: AnimationTechniques) {
         if (target == null) return
-        YoYo.with(getActualTechniques(animationTechniques)).duration(FAST).playOn(target)
+        YoYo.with(getActualTechniques(animationTechniques)).duration(Fast).playOn(target)
     }
 
     @JvmStatic
@@ -218,7 +218,7 @@ object AnimationUtils {
             }
         }
 
-        a.duration = NORMAL
+        a.duration = Normal
         view.startAnimation(a)
     }
 
@@ -250,7 +250,7 @@ object AnimationUtils {
             }
         }
 
-        a.duration = NORMAL
+        a.duration = Normal
         view.startAnimation(a)
     }
 
@@ -317,5 +317,21 @@ object AnimationUtils {
         ZOOM_OUT_LEFT,
         ZOOM_OUT_RIGHT,
         ZOOM_OUT_UP
+    }
+
+    fun getPulseAnimator(
+        labelToAnimate: View?,
+        decreaseRatio: Float,
+        increaseRatio: Float
+    ): ObjectAnimator {
+        val k0 = Keyframe.ofFloat(0f, 1f)
+        val k1 = Keyframe.ofFloat(0.275f, decreaseRatio)
+        val k2 = Keyframe.ofFloat(0.69f, increaseRatio)
+        val k3 = Keyframe.ofFloat(1f, 1f)
+        val scaleX = PropertyValuesHolder.ofKeyframe("scaleX", k0, k1, k2, k3)
+        val scaleY = PropertyValuesHolder.ofKeyframe("scaleY", k0, k1, k2, k3)
+        val pulseAnimator = ObjectAnimator.ofPropertyValuesHolder(labelToAnimate, scaleX, scaleY)
+        pulseAnimator.duration = PulseAnimatorDuration
+        return pulseAnimator
     }
 }

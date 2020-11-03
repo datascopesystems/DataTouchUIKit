@@ -17,7 +17,7 @@ package datatouch.uikit.components.datapicker.date
 
 import android.os.Parcel
 import android.os.Parcelable
-import datatouch.uikit.components.datapicker.DatePickerUtils.trimToMidnight
+import datatouch.uikit.utils.datetime.DatePickerUtils.trimToMidnight
 import java.util.*
 
 internal class DefaultDateRangeLimiter : DateRangeLimiter {

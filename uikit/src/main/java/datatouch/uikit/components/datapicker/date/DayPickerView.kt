@@ -27,9 +27,9 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import datatouch.uikit.components.datapicker.DatePickerUtils.tryAccessibilityAnnounce
 import datatouch.uikit.components.datapicker.GravitySnapHelper
 import datatouch.uikit.components.datapicker.date.MonthAdapter.CalendarDay
+import datatouch.uikit.utils.datetime.DatePickerUtils.tryAccessibilityAnnounce
 import java.text.SimpleDateFormat
 import java.util.*
 

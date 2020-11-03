@@ -1,7 +1,4 @@
-package datatouch.views.datapicker.materialdaypicker
-
-import datatouch.uikit.components.datapicker.materialdaypicker.MaterialDayPicker
-import datatouch.uikit.components.datapicker.materialdaypicker.SelectionState
+package datatouch.uikit.components.datapicker.materialdaypicker
 
 /**
  * A [SelectionMode] intercepts when a day is selected/deselected

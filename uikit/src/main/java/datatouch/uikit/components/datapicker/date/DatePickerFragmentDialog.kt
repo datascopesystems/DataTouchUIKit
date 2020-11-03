@@ -33,15 +33,15 @@ import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import datatouch.uikit.R
-import datatouch.uikit.components.datapicker.DatePickerUtils.darkenColor
-import datatouch.uikit.components.datapicker.DatePickerUtils.getAccentColorFromThemeIfAvailable
-import datatouch.uikit.components.datapicker.DatePickerUtils.getPulseAnimator
-import datatouch.uikit.components.datapicker.DatePickerUtils.isDarkTheme
-import datatouch.uikit.components.datapicker.DatePickerUtils.trimToMidnight
-import datatouch.uikit.components.datapicker.DatePickerUtils.tryAccessibilityAnnounce
 import datatouch.uikit.components.datapicker.HapticFeedbackController
 import datatouch.uikit.components.datapicker.TypefaceHelper.get
 import datatouch.uikit.components.datapicker.date.MonthAdapter.CalendarDay
+import datatouch.uikit.utils.AnimationUtils.getPulseAnimator
+import datatouch.uikit.utils.ColorUtils
+import datatouch.uikit.utils.ColorUtils.getAccentColorFromThemeIfAvailable
+import datatouch.uikit.utils.ColorUtils.isDarkTheme
+import datatouch.uikit.utils.datetime.DatePickerUtils.trimToMidnight
+import datatouch.uikit.utils.datetime.DatePickerUtils.tryAccessibilityAnnounce
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -312,7 +312,7 @@ class DatePickerFragmentDialog : DialogFragment(),
             accentColor = getAccentColorFromThemeIfAvailable(getActivity()!!)
         }
         if (mDatePickerHeaderView != null) {
-            mDatePickerHeaderView!!.setBackgroundColor(darkenColor(accentColor))
+            mDatePickerHeaderView!!.setBackgroundColor(ColorUtils.darkenColor(accentColor))
         }
         view.findViewById<View>(R.id.amdp_day_picker_selected_date_layout)
             .setBackgroundColor(accentColor)

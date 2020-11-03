@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.ToggleButton
 import datatouch.uikit.R
-import datatouch.views.datapicker.materialdaypicker.SelectionMode
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.day_of_the_week_picker_medium.view.*
 import kotlinx.android.synthetic.main.day_of_the_week_picker_small.view.*

@@ -1,7 +1,5 @@
 package datatouch.uikit.components.datapicker.materialdaypicker
 
-import datatouch.views.datapicker.materialdaypicker.SelectionMode
-
 /**
  * An implementation of [SelectionMode] that allows users to select and
  * deselect days without any restrictions.

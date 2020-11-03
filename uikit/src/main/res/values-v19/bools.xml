@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Datascope Systems Ltd. Copyright (c) 2016.
+  -->
+
+<resources>
+    <bool name="notification_service_enabled">false</bool>
+</resources>
