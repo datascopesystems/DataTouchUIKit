@@ -54,10 +54,8 @@ class CActionButtonAccent : RelativeLayout {
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
-        inflateView()
         parseNativeAttributes(attrs)
         parseCustomAttributes(attrs)
-        initViews()
     }
 
     private fun parseNativeAttributes(attrs: AttributeSet?) {
