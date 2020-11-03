@@ -62,7 +62,7 @@
         android:background="@color/transparency_title"
         android:gravity="bottom|center_horizontal"
         android:padding="5dp"
-        android:text="@string/message_loading_wait"
+        android:text="@string/loading"
         android:textColor="#0D80BA"
         android:textStyle="bold|italic" />
 

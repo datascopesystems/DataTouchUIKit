@@ -38,10 +38,6 @@ object DatePickerUtils {
         }
     }
 
-
-
-
-
     @JvmStatic
     fun trimToMidnight(calendar: Calendar): Calendar {
         calendar[Calendar.HOUR_OF_DAY] = 0

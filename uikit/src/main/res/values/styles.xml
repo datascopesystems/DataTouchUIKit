@@ -77,7 +77,7 @@
         <item name="bb_icon_left">fa-thumbs-o-up</item>
         <item name="bb_roundedCorners">false</item>
         <item name="bb_type">success</item>
-        <item name="android:text">@string/OK</item>
+        <item name="android:text">@string/ok</item>
     </style>
 
     <style name="DangerButtonExitCloseStyle">
