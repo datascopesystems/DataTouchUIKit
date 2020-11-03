@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import datatouch.uikit.R
-import datatouch.uikit.utils.ResourceUtils.convertDpToPixel
+import datatouch.uikit.core.utils.ResourceUtils.convertDpToPixel
 
 class ArcProgressView : View {
     private var bitmap: Bitmap? = null

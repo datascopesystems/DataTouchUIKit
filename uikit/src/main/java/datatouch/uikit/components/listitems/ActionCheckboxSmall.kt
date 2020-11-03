@@ -9,8 +9,8 @@ import android.widget.RelativeLayout
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions.isNotNull
-import datatouch.uikit.utils.ResourceUtils
+import datatouch.uikit.core.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_checkbox_small.view.*
 
 class ActionCheckboxSmall : RelativeLayout {

@@ -14,8 +14,8 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions.isNotNull
-import datatouch.uikit.utils.Conditions.isNullOrEmpty
+import datatouch.uikit.core.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNullOrEmpty
 import kotlinx.android.synthetic.main.material_edit_text_view.view.*
 
 class MaterialEditText : RelativeLayout {

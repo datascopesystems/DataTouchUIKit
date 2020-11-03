@@ -36,12 +36,12 @@ import datatouch.uikit.R
 import datatouch.uikit.components.datapicker.HapticFeedbackController
 import datatouch.uikit.components.datapicker.TypefaceHelper.get
 import datatouch.uikit.components.datapicker.date.MonthAdapter.CalendarDay
-import datatouch.uikit.utils.AnimationUtils.getPulseAnimator
-import datatouch.uikit.utils.ColorUtils
-import datatouch.uikit.utils.ColorUtils.getAccentColorFromThemeIfAvailable
-import datatouch.uikit.utils.ColorUtils.isDarkTheme
-import datatouch.uikit.utils.datetime.DatePickerUtils.trimToMidnight
-import datatouch.uikit.utils.datetime.DatePickerUtils.tryAccessibilityAnnounce
+import datatouch.uikit.core.utils.ColorUtils
+import datatouch.uikit.core.utils.ColorUtils.getAccentColorFromThemeIfAvailable
+import datatouch.uikit.core.utils.ColorUtils.isDarkTheme
+import datatouch.uikit.core.utils.animation.AnimationUtils.getPulseAnimator
+import datatouch.uikit.core.utils.datetime.DatePickerUtils.trimToMidnight
+import datatouch.uikit.core.utils.datetime.DatePickerUtils.tryAccessibilityAnnounce
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -24,7 +24,7 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.ColorUtils
+import datatouch.uikit.core.utils.ColorUtils
 import java.text.DateFormatSymbols
 import java.util.*
 

@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.AbsoluteLayout
 import androidx.appcompat.widget.AppCompatTextView
-import datatouch.uikit.utils.Conditions.isNotNull
-import datatouch.uikit.utils.Conditions.isNull
-import datatouch.uikit.utils.PointMath
+import datatouch.uikit.core.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNull
 
 class ClusteringCircleView : AbsoluteLayout {
     private var circlePaint: Paint? = null
@@ -22,28 +21,28 @@ class ClusteringCircleView : AbsoluteLayout {
     private var isPositionAdjustmentRequired = true
 
     constructor(context: Context?, attrs: AttributeSet?) : super(
-        context,
-        attrs
+            context,
+            attrs
     ) {
         initPaints()
         layoutParamsLoc = LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         )
         layoutParams = layoutParamsLoc
     }
 
     constructor(
-        context: Context?,
-        circlePosition: PointF,
-        radius: Float,
-        circleColor: Int
+            context: Context?,
+            circlePosition: PointF,
+            radius: Float,
+            circleColor: Int
     ) : super(context) {
         color = circleColor
         initPaints()
         layoutParamsLoc = LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         )
         setLayoutParams(layoutParamsLoc)
         setupCircle(circlePosition, radius)
@@ -101,15 +100,15 @@ class ClusteringCircleView : AbsoluteLayout {
     }
 
     fun addHotspotButtonMarker(
-        realHotspotPos: PointF,
-        hotspotButton: View?
+            realHotspotPos: PointF,
+            hotspotButton: View?
     ) {
         isPositionAdjustmentRequired = true
         realHotspotPos.x = realHotspotPos.x - viewX
         realHotspotPos.y = realHotspotPos.y - viewY
         addView(
-            hotspotButton,
-            createLayoutParams(realHotspotPos.x, realHotspotPos.y)
+                hotspotButton,
+                createLayoutParams(realHotspotPos.x, realHotspotPos.y)
         )
     }
 
@@ -127,9 +126,9 @@ class ClusteringCircleView : AbsoluteLayout {
     }
 
     override fun measureChild(
-        child: View,
-        parentWidthMeasureSpec: Int,
-        parentHeightMeasureSpec: Int
+            child: View,
+            parentWidthMeasureSpec: Int,
+            parentHeightMeasureSpec: Int
     ) {
         val lp = child.layoutParams as LayoutParams
         val childWidthMeasureSpec =
@@ -171,17 +170,17 @@ class ClusteringCircleView : AbsoluteLayout {
         maxW = Math.max(maxW, suggestedMinimumWidth)
         maxH = Math.max(maxH, suggestedMinimumHeight)
         setMeasuredDimension(
-            View.resolveSizeAndState(maxW, widthMeasureSpec, 0),
-            View.resolveSizeAndState(maxH, heightMeasureSpec, 0)
+                View.resolveSizeAndState(maxW, widthMeasureSpec, 0),
+                View.resolveSizeAndState(maxH, heightMeasureSpec, 0)
         )
     }
 
     override fun onLayout(
-        changed: Boolean,
-        l: Int,
-        t: Int,
-        r: Int,
-        b: Int
+            changed: Boolean,
+            l: Int,
+            t: Int,
+            r: Int,
+            b: Int
     ) {
         if (isPositionAdjustmentRequired) {
             isPositionAdjustmentRequired = false
@@ -200,8 +199,8 @@ class ClusteringCircleView : AbsoluteLayout {
     }
 
     private fun applyHotspotMarkerConstraint(
-        markerRect: RectF,
-        markerLayoutParams: LayoutParams
+            markerRect: RectF,
+            markerLayoutParams: LayoutParams
     ) {
         if (radius <= markerRect.width()) {
             return
@@ -232,10 +231,10 @@ class ClusteringCircleView : AbsoluteLayout {
     }
 
     private fun calculateConstraintOffset(
-        centerX: Float,
-        centerY: Float,
-        endX: Float,
-        endY: Float
+            centerX: Float,
+            centerY: Float,
+            endX: Float,
+            endY: Float
     ): PointF? {
         val distance: Float = PointMath.getDistance(endX, endY, centerX, centerY)
         if (distance <= radius) {
@@ -255,9 +254,9 @@ class ClusteringCircleView : AbsoluteLayout {
     }
 
     private class HotspotPointMarkerItem(
-        context: Context?,
-        hotspotPos: PointF,
-        hotspotId: Int
+            context: Context?,
+            hotspotPos: PointF,
+            hotspotId: Int
     ) : AppCompatTextView(context) {
         private val pointMarkerPadding =
             TEXT_PADDING / 2.0f
@@ -265,10 +264,10 @@ class ClusteringCircleView : AbsoluteLayout {
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
             canvas.drawCircle(
-                pointMarkerPadding,
-                height - pointMarkerPadding,
-                pointMarkerPadding,
-                paint
+                    pointMarkerPadding,
+                    height - pointMarkerPadding,
+                    pointMarkerPadding,
+                    paint
             )
         }
 
@@ -287,14 +286,14 @@ class ClusteringCircleView : AbsoluteLayout {
             includeFontPadding = false
             setPaddingRelative(0, 0, 0, 0)
             setPadding(
-                TEXT_PADDING.toInt(),
-                0,
-                0,
-                TEXT_PADDING.toInt()
+                    TEXT_PADDING.toInt(),
+                    0,
+                    0,
+                    TEXT_PADDING.toInt()
             )
             layoutParams = createLayoutParams(
-                hotspotPos.x - pointMarkerPadding,
-                hotspotPos.y - TEXT_Y_OFFSET + pointMarkerPadding
+                    hotspotPos.x - pointMarkerPadding,
+                    hotspotPos.y - TEXT_Y_OFFSET + pointMarkerPadding
             )
         }
     }
@@ -303,11 +302,78 @@ class ClusteringCircleView : AbsoluteLayout {
         const val STROKE_WIDTH = 3
         private fun createLayoutParams(x: Float, y: Float): ViewGroup.LayoutParams {
             return LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                x.toInt(),
-                y.toInt()
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    x.toInt(),
+                    y.toInt()
             )
+        }
+    }
+
+    object PointMath {
+        fun getLength(x: Float, y: Float): Float {
+            return Math.sqrt(x * x + y * y.toDouble()).toFloat()
+        }
+
+        fun getDistance(a: PointF, b: PointF): Float {
+            val x = a.x - b.x
+            val y = a.y - b.y
+            return getLength(x, y)
+        }
+
+        fun getDistance(ax: Float, ay: Float, bx: Float, by: Float): Float {
+            val x = ax - bx
+            val y = ay - by
+            return getLength(x, y)
+        }
+
+        fun sum(a: PointF, b: PointF): PointF {
+            return PointF(a.x + b.x, a.y + b.y)
+        }
+
+        fun add(dst: PointF, src: PointF) {
+            dst.x += src.x
+            dst.y += src.y
+        }
+
+        fun sub(dst: PointF, src: PointF) {
+            dst.x -= src.x
+            dst.y -= src.y
+        }
+
+        fun sub(dst: PointF, srcX: Float, srcY: Float) {
+            dst.x -= srcX
+            dst.y -= srcY
+        }
+
+        fun getMiddle(a: PointF, b: PointF): PointF {
+            val res = sum(a, b)
+            res.x /= 2f
+            res.y /= 2f
+            return res
+        }
+
+        fun getAngleRad(ax: Float, ay: Float, bx: Float, by: Float): Float {
+            val xd = bx - ax
+            val yd = by - ay
+            return Math.atan2(yd.toDouble(), xd.toDouble()).toFloat()
+        }
+
+        fun getPolarLineEndPoint(startX: Float, startY: Float, lineLen: Float, angleRad: Float): PointF {
+            val result = PointF()
+            result.x = startX + lineLen * Math.cos(angleRad.toDouble()).toFloat()
+            result.y = startY + lineLen * Math.sin(angleRad.toDouble()).toFloat()
+            return result
+        }
+
+        fun getPolarLineEndPoint(startX: Float, startY: Float, lineLen: Float, angleRad: Float, result: PointF) {
+            result.x = startX + lineLen * Math.cos(angleRad.toDouble()).toFloat()
+            result.y = startY + lineLen * Math.sin(angleRad.toDouble()).toFloat()
+        }
+
+        fun getPolarLineEndPoint(start: PointF, lineLen: Float, angleRad: Float, result: PointF) {
+            result.x = start.x + lineLen * Math.cos(angleRad.toDouble()).toFloat()
+            result.y = start.y + lineLen * Math.sin(angleRad.toDouble()).toFloat()
         }
     }
 }

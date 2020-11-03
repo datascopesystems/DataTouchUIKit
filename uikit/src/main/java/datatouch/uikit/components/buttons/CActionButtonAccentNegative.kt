@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions
-import datatouch.uikit.utils.ResourceUtils
+import datatouch.uikit.core.utils.Conditions
+import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_button_accent_negative.view.*
 
 class CActionButtonAccentNegative : RelativeLayout {

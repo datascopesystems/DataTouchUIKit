@@ -69,21 +69,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/pinpad_button_margin">
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin"
                 app:button_number="1" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin"
                 app:button_number="2" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,21 +95,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/pinpad_button_margin">
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin"
                 app:button_number="4" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin"
                 app:button_number="5" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,21 +122,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/pinpad_button_margin">
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin"
                 app:button_number="7" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin"
                 app:button_number="8" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,13 +150,13 @@
             android:layout_gravity="center"
             android:gravity="center">
 
-            <datatouch.uikit.components.CPinPadCancelButton
+            <datatouch.uikit.components.pinpad.CPinPadCancelButton
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/pinpad_button_margin" />
 
-            <datatouch.uikit.components.CPinPadNumberButton
+            <datatouch.uikit.components.pinpad.CPinPadNumberButton
                 android:id="@+id/btn0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <datatouch.uikit.components.CPinPadOkButton
+                <datatouch.uikit.components.pinpad.CPinPadOkButton
                     android:id="@+id/btnOk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

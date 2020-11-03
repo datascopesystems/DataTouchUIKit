@@ -5,9 +5,9 @@ import android.graphics.*
 import android.view.MotionEvent
 import android.view.View
 import datatouch.uikit.R
-import datatouch.uikit.utils.ResourceUtils.calculateRectOnScreen
-import datatouch.uikit.utils.ResourceUtils.convertDipToPixels
-import datatouch.uikit.utils.ResourceUtils.convertDpToPixel
+import datatouch.uikit.core.utils.ResourceUtils.calculateRectOnScreen
+import datatouch.uikit.core.utils.ResourceUtils.convertDipToPixels
+import datatouch.uikit.core.utils.ResourceUtils.convertDpToPixel
 
 class OverlayTooltipView(
     context: Context?,

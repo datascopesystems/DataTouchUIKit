@@ -7,9 +7,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import datatouch.uikit.interfaces.UiJustCallback
-import datatouch.uikit.utils.Conditions
-import datatouch.uikit.utils.ResourceUtils
+import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.utils.Conditions
+import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_toggle_button.view.*
 
 private const val TitleMarginDp = 20f

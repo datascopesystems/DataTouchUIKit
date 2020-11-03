@@ -8,7 +8,7 @@ import datatouch.uikit.R
 import datatouch.uikit.components.views.groupedlist.SectionGroupItemView
 import datatouch.uikit.components.views.groupedlist.SectionGroupItemView.OnSectionItemClickCallback
 import datatouch.uikit.components.views.groupedlist.viewmodels.SectionGroupItemViewModel
-import datatouch.uikit.utils.Conditions
+import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.section_group_item_view.view.*
 
 class DefaultSectionGroupItemView : RelativeLayout, SectionGroupItemView {

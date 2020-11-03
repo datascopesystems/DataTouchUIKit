@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions
+import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.settings_button.view.*
 
 

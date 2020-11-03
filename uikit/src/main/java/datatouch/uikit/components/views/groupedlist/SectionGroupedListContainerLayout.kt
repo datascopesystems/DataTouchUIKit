@@ -12,7 +12,7 @@ import datatouch.uikit.R
 import datatouch.uikit.components.views.groupedlist.SectionGroupView.OnGroupItemClickListener
 import datatouch.uikit.components.views.groupedlist.implementation.DefaultGroupViewRenderer
 import datatouch.uikit.components.views.groupedlist.viewmodels.SectionGroupViewModel
-import datatouch.uikit.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNotNull
 import kotlinx.android.synthetic.main.section_grouped_list_container.view.*
 
 class SectionGroupedListContainerLayout : ScrollView, OnGroupItemClickListener {

@@ -28,7 +28,7 @@ import datatouch.uikit.components.floatingrevealmenu.listeners.AnimationListener
 import datatouch.uikit.components.floatingrevealmenu.listeners.OnFABMenuSelectedListener
 import datatouch.uikit.components.floatingrevealmenu.listeners.OnMenuStateChangedListener
 import datatouch.uikit.components.floatingrevealmenu.model.FABMenuItem
-import datatouch.uikit.utils.Conditions
+import datatouch.uikit.core.utils.Conditions
 import java.util.*
 
 class FABRevealMenu : FrameLayout {

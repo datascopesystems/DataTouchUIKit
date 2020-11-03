@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions
+import datatouch.uikit.core.utils.Conditions
 
 class CActionToggleButtonSmall : RelativeLayout {
 

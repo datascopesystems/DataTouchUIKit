@@ -11,8 +11,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.AnimationUtils
-import datatouch.uikit.utils.Conditions
+import datatouch.uikit.core.utils.Conditions
+import datatouch.uikit.core.utils.animation.AnimationUtils
 import kotlinx.android.synthetic.main.image_button_with_text.view.*
 
 class CImageButtonWithText : RelativeLayout {

@@ -13,8 +13,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions.isNotNull
-import datatouch.uikit.utils.ResourceUtils.convertDpToPixel
+import datatouch.uikit.core.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.ResourceUtils.convertDpToPixel
 import kotlinx.android.synthetic.main.button_check.view.*
 
 class CButtonCheck : RelativeLayout {

@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions.isNotNull
-import datatouch.uikit.utils.Conditions.isNotNullOrEmpty
-import datatouch.uikit.utils.Conditions.isNull
-import datatouch.uikit.utils.ResourceUtils
+import datatouch.uikit.core.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNotNullOrEmpty
+import datatouch.uikit.core.utils.Conditions.isNull
+import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_button.view.*
 
 class CActionButton : RelativeLayout {

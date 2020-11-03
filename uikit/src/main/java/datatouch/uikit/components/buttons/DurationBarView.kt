@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import datatouch.uikit.R
-import datatouch.uikit.interfaces.UiJustCallback
-import datatouch.uikit.utils.default
+import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.GenericExtensions.default
 import kotlinx.android.synthetic.main.duration_bar_view.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat

@@ -11,8 +11,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions
-import datatouch.uikit.utils.ResourceUtils
+import datatouch.uikit.core.utils.Conditions
+import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.settings_button_check.view.*
 
 class CSettingsButtonCheck : RelativeLayout {

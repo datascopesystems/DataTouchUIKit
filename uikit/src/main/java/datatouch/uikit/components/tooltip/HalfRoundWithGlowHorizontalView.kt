@@ -7,7 +7,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
-import datatouch.uikit.utils.ResourceUtils
+import datatouch.uikit.core.utils.ResourceUtils
 
 class HalfRoundWithGlowHorizontalView : View {
     private var bitmap: Bitmap? = null

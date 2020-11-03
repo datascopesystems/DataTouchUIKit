@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.webkit.WebView
-import datatouch.uikit.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNotNull
 
 open class InterceptableWebView(
     context: Context?,

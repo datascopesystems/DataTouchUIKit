@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import datatouch.uikit.utils.AnimationUtils
-import datatouch.uikit.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.animation.AnimationUtils
 import kotlinx.android.synthetic.main.drawing_color_selector.view.*
 import yuku.ambilwarna.AmbilWarnaDialog
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener

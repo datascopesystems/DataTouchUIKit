@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import datatouch.uikit.utils.Conditions
+import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.action_button_accent_outline.view.*
 
 class CActionButtonAccentOutline : RelativeLayout {

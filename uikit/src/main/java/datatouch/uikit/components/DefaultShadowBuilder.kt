@@ -3,7 +3,7 @@ package datatouch.uikit.components
 import android.graphics.*
 import android.view.View
 import android.view.View.DragShadowBuilder
-import datatouch.uikit.utils.Conditions.isNotNull
+import datatouch.uikit.core.utils.Conditions.isNotNull
 
 class DefaultShadowBuilder(v: View?, shadowText: String?) :
     DragShadowBuilder(v) {

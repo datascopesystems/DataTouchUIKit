@@ -34,11 +34,11 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import datatouch.uikit.R
-import datatouch.uikit.utils.AnimationUtils.getPulseAnimator
-import datatouch.uikit.utils.ColorUtils
-import datatouch.uikit.utils.ColorUtils.darkenColor
-import datatouch.uikit.utils.datetime.DatePickerUtils.tryAccessibilityAnnounce
-import datatouch.uikit.utils.datetime.TimePickerCallback
+import datatouch.uikit.core.utils.ColorUtils
+import datatouch.uikit.core.utils.ColorUtils.darkenColor
+import datatouch.uikit.core.utils.animation.AnimationUtils.getPulseAnimator
+import datatouch.uikit.core.utils.datetime.DatePickerUtils.tryAccessibilityAnnounce
+import datatouch.uikit.core.utils.datetime.TimePickerCallback
 import java.text.DateFormatSymbols
 import java.util.*
 
