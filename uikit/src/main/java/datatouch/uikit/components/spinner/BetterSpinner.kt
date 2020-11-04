@@ -21,11 +21,11 @@ open class BetterSpinner : AppCompatAutoCompleteTextView, OnItemClickListener {
     var position = ListView.INVALID_POSITION
         private set
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         onItemClickListener = this
     }
 
-    constructor(arg0: Context?, arg1: AttributeSet?) : super(
+    constructor(arg0: Context, arg1: AttributeSet?) : super(
         arg0,
         arg1
     ) {
@@ -33,7 +33,7 @@ open class BetterSpinner : AppCompatAutoCompleteTextView, OnItemClickListener {
     }
 
     constructor(
-        arg0: Context?,
+        arg0: Context,
         arg1: AttributeSet?,
         arg2: Int
     ) : super(arg0, arg1, arg2) {

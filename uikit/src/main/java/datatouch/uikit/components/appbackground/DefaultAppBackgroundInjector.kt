@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.View
 import datatouch.uikit.components.appbackground.interfaces.IAppBackgroundInjector
 
+
 abstract class DefaultAppBackgroundInjector : IAppBackgroundInjector {
 
     protected val allBackgrounds by lazy { AppBackground.List.createFromAll() }

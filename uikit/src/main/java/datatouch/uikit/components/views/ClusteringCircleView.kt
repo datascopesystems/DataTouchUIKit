@@ -254,7 +254,7 @@ class ClusteringCircleView : AbsoluteLayout {
     }
 
     private class HotspotPointMarkerItem(
-            context: Context?,
+            context: Context,
             hotspotPos: PointF,
             hotspotId: Int
     ) : AppCompatTextView(context) {

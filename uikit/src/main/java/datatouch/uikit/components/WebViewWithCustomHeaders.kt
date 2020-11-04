@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import java.util.*
 
 class WebViewWithCustomHeaders(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet?
 ) : InterceptableWebView(context, attrs) {
     private var httpHeaders =

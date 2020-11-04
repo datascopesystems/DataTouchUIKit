@@ -25,7 +25,7 @@ import androidx.appcompat.widget.AppCompatTextView
 /**
  * Fake Button class, used so TextViews can announce themselves as Buttons, for accessibility.
  */
-class AccessibleTextView(context: Context?, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
+class AccessibleTextView(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
     override fun onInitializeAccessibilityEvent(event: AccessibilityEvent) {
         super.onInitializeAccessibilityEvent(event)
         event.className = Button::class.java.name

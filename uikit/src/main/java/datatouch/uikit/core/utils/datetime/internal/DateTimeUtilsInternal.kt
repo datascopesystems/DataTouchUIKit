@@ -2,7 +2,7 @@ package datatouch.uikit.core.utils.datetime.internal
 
 import java.util.*
 
-internal object DateTimeUtils {
+internal object DateTimeUtilsInternal {
 
     internal fun now() = Date()
 

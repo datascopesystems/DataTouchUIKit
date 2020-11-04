@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import datatouch.uikit.R
 import datatouch.uikit.components.datapicker.date.DatePickerFragmentDialog
 import datatouch.uikit.core.extensions.GenericExtensions.default
-import datatouch.uikit.core.utils.datetime.internal.DateTimeUtils
+import datatouch.uikit.core.utils.datetime.internal.DateTimeUtilsInternal
 import java.util.*
 
 typealias DatePickerCallback = (pickedDate: Date, pickedDateStr: String) -> Unit
@@ -51,15 +51,15 @@ object DatePickerUtils {
                        currentDate: Date?,
                        callback: DatePickerCallback
     ) = fragmentActivity?.let {
-        val calendar = DateTimeUtils.calendar()
-        calendar.time = currentDate.default(DateTimeUtils.now())
+        val calendar = DateTimeUtilsInternal.calendar()
+        calendar.time = currentDate.default(DateTimeUtilsInternal.now())
         val dialog = DatePickerFragmentDialog.newInstance(
             object : DatePickerFragmentDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePickerFragmentDialog?,
                                        year: Int, monthOfYear: Int, dayOfMonth: Int) {
                     callback.invoke(
-                        DateTimeUtils.getDate(year, monthOfYear, dayOfMonth),
-                        DateTimeFormatUtils.format(DateTimeUtils.getDate(year, monthOfYear, dayOfMonth)))
+                        DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth),
+                        DateTimeFormatUtils.format(DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth)))
                 }
             },
             calendar[Calendar.YEAR],
@@ -78,15 +78,15 @@ object DatePickerUtils {
                               minDate: Date?,
                               maxDate: Date?,
                               disableDates: List<Date>? = null) = fragmentActivity?.let {
-        val calendar = DateTimeUtils.calendar()
-        calendar.time = currentDate.default(DateTimeUtils.now())
+        val calendar = DateTimeUtilsInternal.calendar()
+        calendar.time = currentDate.default(DateTimeUtilsInternal.now())
         val dialog = DatePickerFragmentDialog.newInstance(
             object : DatePickerFragmentDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePickerFragmentDialog?,
                                        year: Int, monthOfYear: Int, dayOfMonth: Int) {
                     callback.invoke(
-                        DateTimeUtils.getDate(year, monthOfYear, dayOfMonth),
-                        DateTimeFormatUtils.format(DateTimeUtils.getDate(year, monthOfYear, dayOfMonth)))
+                        DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth),
+                        DateTimeFormatUtils.format(DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth)))
                 }
             },
             calendar[Calendar.YEAR],

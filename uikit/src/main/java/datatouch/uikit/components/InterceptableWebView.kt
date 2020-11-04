@@ -8,7 +8,7 @@ import android.webkit.WebView
 import datatouch.uikit.core.utils.Conditions.isNotNull
 
 open class InterceptableWebView(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet?
 ) : WebView(context, attrs) {
     private var callback: OnTouchEventCallback? = null

@@ -1,6 +1,7 @@
 package datatouch.uikit.core.utils.datetime
 
 import datatouch.uikit.core.extensions.GenericExtensions.default
+import datatouch.uikit.core.utils.datetime.internal.DateTimeUtilsInternal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,5 +21,15 @@ object DateTimeFormatUtils {
             .also { if (setDefTimezone) it.timeZone = TimeZone.getDefault() }
 
     fun format(dateToFormat: Date): String = formatter.format(dateToFormat)
+
+    fun tryParseDate(date: String?): Date? {
+        return try {
+            formatter.parse(date.orEmpty())
+        } catch (ex: Exception) {
+            null
+        }
+    }
+
+    fun parseDate(date: String?) = tryParseDate(date) ?: DateTimeUtilsInternal.now()
 
 }

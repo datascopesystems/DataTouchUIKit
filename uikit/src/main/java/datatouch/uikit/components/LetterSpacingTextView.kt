@@ -13,16 +13,16 @@ class LetterSpacingTextView : AppCompatTextView {
     private var spacing = Spacing.NORMAL
     private var originalText: CharSequence = ""
 
-    constructor(context: Context?) : super(context) {}
+    constructor(context: Context) : super(context) {}
     constructor(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet
     ) : super(context, attrs) {
         parseCustomAttributes(attrs)
     }
 
     constructor(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
