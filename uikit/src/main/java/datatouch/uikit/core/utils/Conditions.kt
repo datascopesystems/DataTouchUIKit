@@ -5,59 +5,59 @@ object Conditions {
         return if (value < min) min else value
     }
 
-    fun isNotNullOrEmpty(list: Collection<*>): Boolean {
-        return !isNull(list) && !list.isEmpty()
+    fun isNotNullOrEmpty(list: Collection<*>?): Boolean {
+        return list != null && !list.isEmpty()
     }
 
-    fun isNullOrZero(integer: Int): Boolean {
+    fun isNullOrZero(integer: Int?): Boolean {
         return isNull(integer) || integer == 0
     }
 
-    fun isNotNullOrZero(integer: Int): Boolean {
+    fun isNotNullOrZero(integer: Int?): Boolean {
         return !isNullOrZero(integer)
     }
 
-    fun isNullOrEmpty(string: String): Boolean {
-        return isNull(string) || string.isEmpty() || string.trim { it <= ' ' }
+    fun isNullOrEmpty(string: String?): Boolean {
+        return string == null || string.isEmpty() || string.trim { it <= ' ' }
             .isEmpty()
     }
 
-    fun isNullOrEmpty(jArray: Set<*>): Boolean {
-        return isNull(jArray) || jArray.isEmpty()
+    fun isNullOrEmpty(jArray: Set<*>?): Boolean {
+        return jArray == null || jArray.isEmpty()
     }
 
-    fun isNullOrEmpty(jArray: Collection<*>): Boolean {
-        return isNull(jArray) || jArray.isEmpty()
+    fun isNullOrEmpty(jArray: Collection<*>?): Boolean {
+        return jArray == null|| jArray.isEmpty()
     }
 
     fun isNullOrEmpty(charSequence: CharSequence): Boolean {
-        return isNull(charSequence) || charSequence.length == 0
+        return isNull(charSequence) || charSequence.isEmpty()
     }
 
-    fun isNotNullOrEmpty(charSequence: CharSequence): Boolean {
-        return isNotNull(charSequence) && charSequence.length != 0
+    fun isNotNullOrEmpty(charSequence: CharSequence?): Boolean {
+        return charSequence != null && charSequence.isNotEmpty()
     }
 
-    fun isNotNullOrEmptyString(charSequence: String): Boolean {
-        return isNotNull(charSequence) && charSequence.trim { it <= ' ' }.length != 0
+    fun isNotNullOrEmptyString(charSequence: String?): Boolean {
+        return charSequence != null && charSequence.trim { it <= ' ' }.isNotEmpty()
     }
 
-    fun isNullOrEmptyString(string: String): Boolean {
+    fun isNullOrEmptyString(string: String?): Boolean {
         return !isNotNullOrEmptyString(string)
     }
 
-    fun isNullOrEmpty(map: Map<*, *>): Boolean {
-        return isNull(map) || map.isEmpty()
+    fun isNullOrEmpty(map: Map<*, *>?): Boolean {
+        return map == null || map.isEmpty()
     }
 
     fun getIntValueIfValid(intStr: String?): Int {
-        return if (intStr != null && !intStr.isEmpty()) {
+        return if (intStr != null && intStr.isNotEmpty()) {
             Integer.valueOf(intStr)
         } else 0
     }
 
-    fun isNullOrEmpty(stringArray: Array<String?>): Boolean {
-        return isNull(stringArray) || stringArray.size == 0
+    fun isNullOrEmpty(stringArray: Array<String?>?): Boolean {
+        return stringArray == null || stringArray.isEmpty()
     }
 
     fun isNull(obj: Any?): Boolean {
