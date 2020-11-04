@@ -7,7 +7,7 @@ import datatouch.uikit.components.appbackground.interfaces.IAppBackgroundInjecto
 
 abstract class DefaultAppBackgroundInjector : IAppBackgroundInjector {
 
-    private val allBackgrounds by lazy { AppBackground.List.createFromAll() }
+    protected val allBackgrounds by lazy { AppBackground.List.createFromAll() }
 
     protected fun setBackground(view: View, resourceId: Int, defaultColor: Int = Color.DKGRAY) {
         val resources: Resources? = view.resources
