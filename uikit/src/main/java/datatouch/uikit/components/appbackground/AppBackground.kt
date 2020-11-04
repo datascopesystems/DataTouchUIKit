@@ -1,6 +1,7 @@
 package datatouch.uikit.components.appbackground
 
 import androidx.annotation.DrawableRes
+import datatouch.uikit.R
 import java.io.Serializable
 import java.util.*
 
@@ -33,7 +34,7 @@ class AppBackground private constructor(
             fun createFromAll(): List {
                 val list = List()
 
-              /*  list.add(AppBackground(AppBackgroundEnum.RiverThames, "River Thames",
+                list.add(AppBackground(AppBackgroundEnum.RiverThames, "River Thames",
                         R.drawable.app_background_london_thames,
                         R.drawable.app_background_blur_london_thames))
 
@@ -43,7 +44,7 @@ class AppBackground private constructor(
 
                 list.add(AppBackground(AppBackgroundEnum.NewYork, "New York",
                         R.drawable.app_background_new_york,
-                        R.drawable.app_background_blur_new_york))*/
+                        R.drawable.app_background_blur_new_york))
 
                 return list
             }
