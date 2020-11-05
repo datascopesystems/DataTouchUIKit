@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FormAutoCompleteDropDownListView">
+        <attr format="string" name="actv_hint"/>
+        <attr format="string" name="actv_left_unselected_hint"/>
+        <attr format="reference" name="actv_icon"/>
+        <attr format="boolean" name="actv_mandatory_field"/>
+    </declare-styleable>
+
+</resources>

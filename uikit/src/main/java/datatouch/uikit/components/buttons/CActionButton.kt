@@ -25,7 +25,6 @@ class CActionButton : RelativeLayout {
     private var iconColor = 0
     private var maxLines = 0
 
-    constructor(context: Context?) : super(context) {}
     constructor(
         context: Context?,
         attrs: AttributeSet
@@ -99,7 +98,7 @@ class CActionButton : RelativeLayout {
         setupBackground()
     }
 
-    protected fun inflateView() {
+    private fun inflateView() {
         View.inflate(context, R.layout.action_button, this)
     }
 

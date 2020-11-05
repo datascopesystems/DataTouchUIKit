@@ -9,9 +9,9 @@ object DateTimeUtils  {
     @JvmStatic
     fun currentSystemTimeMillis() = System.currentTimeMillis()
 
-    fun isDateInPast(dateToCheck: Date?) = DateTimeUtilsInternal.now().run {
+    fun isDateInPast(dateToCheck: Date?) : Boolean = DateTimeUtilsInternal.now().runCatching {
         !DateUtils.isSameDay(dateToCheck, this) && this > dateToCheck
-    }
+    }.getOrDefault(false)
 
     fun isDateInRange(startDate: String?, endDate: String?, selectedDate: String?): Boolean {
         val start = DateTimeFormatUtils.parseDate(startDate)

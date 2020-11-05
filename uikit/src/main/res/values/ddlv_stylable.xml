@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FormDropDownListView">
+        <attr format="string" name="ddlv_hint"/>
+        <attr format="string" name="ddlv_left_unselected_hint"/>
+        <attr format="reference" name="ddlv_icon"/>
+        <attr format="boolean" name="ddlv_mandatory_field"/>
+    </declare-styleable>
+
+</resources>
