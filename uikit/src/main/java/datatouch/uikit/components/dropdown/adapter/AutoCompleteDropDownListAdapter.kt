@@ -4,9 +4,10 @@ import android.widget.Filter
 import datatouch.uikit.components.recyclerview.ListFilter
 
 abstract class AutoCompleteDropDownListAdapter<TItem : IDropDownListAdapterItem>
-    : DropDownListAdapter<TItem>() {
+    : SelectableDropDownListAdapter<TItem>() {
 
-    private val listFilter = ListFilter<DropDownListFilterItem<TItem>, DefaultDropDownListCriterion>()
+    private val listFilter =
+        ListFilter<DropDownListFilterItem<TItem>, DefaultDropDownListCriterion>()
 
     override var data: MutableList<TItem>
         get() = super.data
@@ -18,8 +19,10 @@ abstract class AutoCompleteDropDownListAdapter<TItem : IDropDownListAdapterItem>
 
     private val filterObject = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
-            val filteredList = listFilter.invoke(constraint.toString(),
-                DefaultDropDownListCriterion.Default)
+            val filteredList = listFilter.invoke(
+                constraint.toString(),
+                DefaultDropDownListCriterion.Default
+            )
             val filterResults = FilterResults()
             filterResults.values = filteredList
             filterResults.count = filteredList.size
@@ -31,7 +34,8 @@ abstract class AutoCompleteDropDownListAdapter<TItem : IDropDownListAdapterItem>
             val filteredItems = results?.values
                     as? MutableList<DropDownListFilterItem<TItem>>? ?: mutableListOf()
 
-            super@AutoCompleteDropDownListAdapter.data = filteredItems.map { it.item }.toMutableList()
+            super@AutoCompleteDropDownListAdapter.data =
+                filteredItems.map { it.item }.toMutableList()
 
             notifyDataSetChanged()
         }
