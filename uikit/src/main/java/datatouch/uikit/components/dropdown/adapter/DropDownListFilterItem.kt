@@ -7,7 +7,7 @@ data class DropDownListFilterItem<TItem: IDropDownListAdapterItem>(val item : TI
 
     override fun getSearchString(criterion: DefaultDropDownListCriterion): String {
         return when (criterion) {
-            DefaultDropDownListCriterion.Default -> item.getString()
+            DefaultDropDownListCriterion.Default -> item.name
         }
     }
 

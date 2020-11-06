@@ -5,29 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <datatouch.uikit.components.spinner.ExtendedBetterSpinner
+    <datatouch.uikit.components.edittext.search.CriteriaSearchEditText
+        android:id="@+id/cset"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <datatouch.uikit.components.buttons.CActionToggleButton
-        android:id="@+id/toogleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        app:checked="true"
-        app:active_background="@drawable/toggle_button_background_active_blue"
-        app:inactive_background="@drawable/toggle_button_background_inactive" />
-
-
-    <datatouch.uikit.components.buttons.CActionToggleButtonSmall
-    android:id="@+id/toggleButtonSmall"
-    android:layout_width="wrap_content"
-    android:layout_height="40dp"
-    />
-
-
-    <datatouch.uikit.components.buttons.CActionImageButton
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        app:iconDrawable="@drawable/ic_search_white" />
+        android:layout_height="wrap_content"
+        app:cset_hint="Type something"/>
 
 </LinearLayout>

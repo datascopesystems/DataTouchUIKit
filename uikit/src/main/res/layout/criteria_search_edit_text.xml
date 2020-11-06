@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@drawable/ellipsized_primary_half_transparent_background"
+    android:gravity="center_vertical"
+    android:paddingStart="15dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="15dp"
+    android:paddingBottom="10dp">
+
+    <FrameLayout
+        android:id="@+id/flIcon"
+        android:layout_width="40dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true">
+
+        <AutoCompleteTextView
+            android:id="@+id/actv"
+            style="@style/DropDownListViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/roboto_regular"
+            android:inputType="none"
+            android:maxLines="1"
+            android:popupBackground="@drawable/ellipsized_primary_half_transparent_background"
+            android:textColor="@color/primary_light"
+            android:textCursorDrawable="@null"
+            android:textSize="18sp"
+            tools:ignore="LabelFor" />
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_search_white"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/ivArrowIcon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_down_white"
+            android:layout_gravity="end|bottom"
+            app:tint="@color/white" />
+
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/ivClear"
+        android:layout_toEndOf="@+id/flIcon"
+        android:background="@color/transparent"
+        android:fontFamily="@font/roboto_regular"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/primary_light"
+        android:textCursorDrawable="@null"
+        android:textSize="18sp"
+        tools:ignore="LabelFor" />
+
+    <ImageView
+        android:id="@+id/ivClear"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_clear_white"
+        app:tint="@color/white" />
+
+</RelativeLayout>

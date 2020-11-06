@@ -10,7 +10,7 @@ import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import datatouch.uikit.components.dropdown.adapter.SelectableAutoCompleteTextViewListAdapter
+import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.*
 
 private const val DefaultThreshold = 1
@@ -31,7 +31,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private var iconDrawable: Drawable? = null
     private var isMandatoryField = false
 
-    private var adapter: SelectableAutoCompleteTextViewListAdapter? = null
+    private var adapter: ISelectableDropDownListAdapter? = null
 
     private var isInputFromUser = true
 
@@ -117,10 +117,10 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
 
     private fun isItemSelected() = adapter?.isItemSelected == true
 
-    fun setAdapter(adapter: SelectableAutoCompleteTextViewListAdapter) {
+    fun setAdapter(adapter: ISelectableDropDownListAdapter) {
         actv?.setAdapter(adapter)
         this.adapter = adapter
-        adapter.onItemClickCallback = { onItemClick(it) }
+        adapter.onItemClickCallback = { onItemClick(it.name) }
     }
 
     private fun onItemClick(selectedText: String) {
@@ -155,8 +155,9 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private fun isUserLeftUnselected(focused: Boolean) = !focused && !isItemSelected()
 
     override fun onDetachedFromWindow() {
-        adapter = null
         adapter?.onItemClickCallback = null
+        adapter = null
+        actv?.setAdapter(null)
         super.onDetachedFromWindow()
     }
 
