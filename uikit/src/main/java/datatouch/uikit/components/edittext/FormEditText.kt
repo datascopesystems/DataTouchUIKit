@@ -6,11 +6,14 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.components.dropdown.AfterTextChangedListener
 import datatouch.uikit.components.dropdown.IFormView
 import datatouch.uikit.core.callbacks.UiJustCallback
+import kotlinx.android.synthetic.main.form_edit_text.view.*
 
 @SuppressLint("NonConstantResourceId")
 class FormEditText : LinearLayout, IFormView {
@@ -21,8 +24,7 @@ class FormEditText : LinearLayout, IFormView {
     private var normalHintTextColor = 0
     private var defaultIconDrawable: Drawable? = null
 
-    var originalTypeface: Typeface? = null
-
+    private var originalTypeface: Typeface? = null
     private var hint = ""
     private var leftUnselectedHint = ""
     private var iconDrawable: Drawable? = null
@@ -60,7 +62,7 @@ class FormEditText : LinearLayout, IFormView {
         normalHintTextColor = ContextCompat.getColor(context, R.color.secondary_light)
         defaultIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_search_white)
     }
-    
+
     private fun parseCustomAttributes(attrs: AttributeSet) {
         val typedArray =
             context.obtainStyledAttributes(
@@ -71,25 +73,28 @@ class FormEditText : LinearLayout, IFormView {
             hint = typedArray.getString(R.styleable.FormEditText_et_hint).orEmpty()
 
             leftUnselectedHint = typedArray.getString(
-                R.styleable.FormEditText_et_left_unselected_hint).orEmpty()
+                R.styleable.FormEditText_et_left_unselected_hint
+            ).orEmpty()
 
             iconDrawable = typedArray.getDrawable(
-                R.styleable.FormEditText_et_icon)
+                R.styleable.FormEditText_et_icon
+            )
                 ?: defaultIconDrawable
 
-            isMandatoryField = typedArray.getBoolean(R.styleable
-                .FormEditText_et_mandatory_field, false)
+            isMandatoryField = typedArray.getBoolean(
+                R.styleable
+                    .FormEditText_et_mandatory_field, false
+            )
 
             val inputTypeInt = typedArray.getInt(R.styleable.FormEditText_et_inputType, 0)
             inputType = InputType.fromInt(inputTypeInt)
 
             isEditable = typedArray.getBoolean(R.styleable.FormEditText_et_editable, true)
-        } privately {
+        } finally {
             typedArray.recycle()
         }
     }
 
-    @AfterViews
     fun afterViews() {
         originalTypeface = et?.typeface
         et?.hint = hint
@@ -97,6 +102,8 @@ class FormEditText : LinearLayout, IFormView {
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
         setupInputType()
         ivIcon?.setImageDrawable(iconDrawable)
+        et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
+        et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
     }
 
     private fun setupInputType() {
@@ -112,8 +119,7 @@ class FormEditText : LinearLayout, IFormView {
         }
     }
 
-    @AfterTextChange(R.id.et)
-    fun afterTextChange() {
+    private fun afterTextChanged() {
         if (hasValidInput)
             showAsValidInput()
         else
@@ -122,14 +128,13 @@ class FormEditText : LinearLayout, IFormView {
         onTextChangeCallback?.invoke()
     }
 
-    @FocusChange(R.id.et)
-    fun onFocusChange(focused: Boolean) {
+    private fun onFocusChange(focused: Boolean) {
         if (focused) onFocused()
         else onUnfocused()
     }
 
     private fun onFocused() {
-        afterTextChange()
+        afterTextChanged()
 
         if (enableClickOnFocus)
             llFormEditTextRoot.performClick()

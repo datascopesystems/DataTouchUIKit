@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FormEditText">
+        <attr name="et_hint" format="string" />
+        <attr name="et_left_unselected_hint" format="string" />
+        <attr name="et_icon" format="reference" />
+        <attr name="et_mandatory_field" format="boolean" />
+        <attr name="et_inputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="number" value="1" />
+        </attr>
+        <attr name="et_editable" format="boolean"/>
+    </declare-styleable>
+
+</resources>
