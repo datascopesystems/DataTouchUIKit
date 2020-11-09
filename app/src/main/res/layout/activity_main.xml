@@ -12,4 +12,11 @@
         android:layout_height="wrap_content"
         app:cset_hint="Type something"/>
 
+
+    <datatouch.uikit.components.buttons.CActionButtonAccentNegativeRoundOutline
+        app:icon="@drawable/ic_close_dialog_white"
+        app:title="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
