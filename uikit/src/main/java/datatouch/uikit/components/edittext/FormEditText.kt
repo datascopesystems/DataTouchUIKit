@@ -104,6 +104,7 @@ class FormEditText : LinearLayout, IFormView {
         ivIcon?.setImageDrawable(iconDrawable)
         et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ivClear?.setOnClickListener { et?.setText("") }
     }
 
     private fun setupInputType() {

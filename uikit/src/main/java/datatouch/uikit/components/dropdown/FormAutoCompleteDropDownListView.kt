@@ -103,6 +103,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         ivIcon?.setImageDrawable(iconDrawable)
         actv?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         actv?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ivClear?.setOnClickListener { actv?.setText("") }
     }
 
     private fun afterTextChanged() {
