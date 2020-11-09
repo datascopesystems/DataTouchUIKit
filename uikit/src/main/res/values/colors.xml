@@ -42,6 +42,7 @@
     <color name="accent_negative_start_dark">#d4501c</color>
     <color name="accent_negative_end">#f20c51</color>
     <color name="accent_negative_end_dark">#d90b49</color>
+    <color name="accent_negative_end_light">#ff6767</color>
     <color name="transparent">#00000000</color>
     <color name="accent_start_light">#00ffff</color>
 

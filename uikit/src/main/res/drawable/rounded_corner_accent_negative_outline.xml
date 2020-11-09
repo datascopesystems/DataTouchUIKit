@@ -5,7 +5,7 @@
             <gradient
                 android:angle="0"
                 android:endColor="@color/accent_negative_start_light"
-                android:startColor="@color/accent_negative_end"
+                android:startColor="@color/accent_negative_end_light"
                 android:type="linear" />
             <corners android:radius="20dip" />
         </shape>
