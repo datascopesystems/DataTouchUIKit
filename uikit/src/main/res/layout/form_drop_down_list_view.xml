@@ -35,7 +35,7 @@
         android:fontFamily="@font/roboto_regular"
         android:inputType="none"
         android:maxLines="1"
-        android:popupBackground="@drawable/ellipsized_primary_half_transparent_background"
+        android:popupBackground="@drawable/drop_down_background"
         android:textColor="@color/primary_light"
         android:textCursorDrawable="@null"
         android:textSize="18sp"
