@@ -9,7 +9,11 @@ import datatouch.uikit.core.callbacks.UiCallback
 class CriteriaSearchEditTextAdapter<TCriterion> :
     DropDownListAdapter<SearchCriterionItemHolder<TCriterion>>(), ICriteriaSearchEditTextAdapter {
 
-    override var onItemClickCallback: UiCallback<ISearchCriterionDropDownListAdapterItem>? = null
+    var onItemClickCallback: UiCallback<ISearchCriterionDropDownListAdapterItem>? = null
+
+    override var onItemSelectionChangeCallback
+            : UiCallback<ISearchCriterionDropDownListAdapterItem>? = null
+
     var selectedItem: TCriterion? = null
         set(value) {
             val selectedCriterion = data.firstOrNull { it.criterion == value }
@@ -17,7 +21,7 @@ class CriteriaSearchEditTextAdapter<TCriterion> :
                 field = null
             else {
                 field = value
-                onItemClickCallback?.invoke(selectedCriterion)
+                onItemSelectionChangeCallback?.invoke(selectedCriterion)
             }
         }
 
@@ -40,6 +44,7 @@ class CriteriaSearchEditTextAdapter<TCriterion> :
     override fun onItemClick(clickedItem: SearchCriterionItemHolder<TCriterion>) {
         selectedItem = clickedItem.criterion
         onItemClickCallback?.invoke(clickedItem)
+        onItemSelectionChangeCallback?.invoke(clickedItem)
     }
 
 }

@@ -50,7 +50,7 @@ class CriteriaSearchEditText : RelativeLayout {
 
     private fun initResources(context: Context) {
         verticalOffsetPx =
-            context.resources.getDimensionPixelSize(R.dimen.autocompletetextview_vertical_offset)
+            context.resources.getDimensionPixelSize(R.dimen.search_drop_down_vertical_offset)
         notEmptyColor = ContextCompat.getColor(context, R.color.accent_start_light)
         emptyNormalColor = ContextCompat.getColor(context, R.color.white)
         emptyErrorColor = ContextCompat.getColor(context, R.color.accent_negative_start_light)
@@ -132,7 +132,7 @@ class CriteriaSearchEditText : RelativeLayout {
     fun setAdapter(adapter: ICriteriaSearchEditTextAdapter) {
         actv?.setAdapter(adapter)
         this.adapter = adapter
-        adapter.onItemClickCallback = { onItemClick(it) }
+        adapter.onItemSelectionChangeCallback = { onItemClick(it) }
     }
 
     private fun onItemClick(item: ISearchCriterionDropDownListAdapterItem) {
@@ -142,7 +142,7 @@ class CriteriaSearchEditText : RelativeLayout {
     }
 
     override fun onDetachedFromWindow() {
-        adapter?.onItemClickCallback = null
+        adapter?.onItemSelectionChangeCallback = null
         adapter = null
         actv?.setAdapter(null)
         super.onDetachedFromWindow()

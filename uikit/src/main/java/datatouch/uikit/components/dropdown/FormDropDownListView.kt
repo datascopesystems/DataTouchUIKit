@@ -52,7 +52,7 @@ class FormDropDownListView : LinearLayout, IFormView {
 
     private fun initResources(context: Context) {
         verticalOffsetPx =
-            context.resources.getDimensionPixelSize(R.dimen.autocompletetextview_vertical_offset)
+            context.resources.getDimensionPixelSize(R.dimen.drop_down_vertical_offset)
         selectedColor = ContextCompat.getColor(context, R.color.accent_start_light)
         unselectedNormalColor = ContextCompat.getColor(context, R.color.white)
         unselectedErrorColor = ContextCompat.getColor(context, R.color.accent_negative_start_light)

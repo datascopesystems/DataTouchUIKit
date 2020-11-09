@@ -1,6 +1,7 @@
 package datatouch.uikitapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
@@ -23,6 +24,7 @@ class TestActivity : AppCompatActivity() {
 
         adapter.selectedItem = C.C2
 
+        adapter.onItemClickCallback = { Toast.makeText(this, "Loh", Toast.LENGTH_LONG).show()}
 
     }
 

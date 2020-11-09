@@ -6,6 +6,6 @@ import datatouch.uikit.core.callbacks.UiCallback
 
 interface ICriteriaSearchEditTextAdapter : ListAdapter, Filterable {
 
-    var onItemClickCallback: UiCallback<ISearchCriterionDropDownListAdapterItem>?
+    var onItemSelectionChangeCallback: UiCallback<ISearchCriterionDropDownListAdapterItem>?
 
 }
