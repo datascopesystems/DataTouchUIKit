@@ -110,6 +110,7 @@ class FormEditText : LinearLayout, IFormView {
     private fun setupInputType() {
         if (!isEditable) {
             et.inputType = android.text.InputType.TYPE_NULL
+            ivClear?.visibility = GONE
             return
         }
 

@@ -142,6 +142,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
             }
         } else {
             actv?.hint = hint
+            ivIcon?.setColorFilter(unselectedNormalColor)
             actv?.setHintTextColor(normalHintTextColor)
             actv?.setTypeface(originalTypeface, Typeface.NORMAL)
         }
