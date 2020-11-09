@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.criteria_search_edit_text.view.*
 @SuppressLint("NonConstantResourceId")
 class CriteriaSearchEditText : RelativeLayout {
 
+    private var verticalOffsetPx = 0
     private var notEmptyColor = 0
     private var emptyNormalColor = 0
     private var emptyErrorColor = 0
@@ -48,6 +49,8 @@ class CriteriaSearchEditText : RelativeLayout {
     }
 
     private fun initResources(context: Context) {
+        verticalOffsetPx =
+            context.resources.getDimensionPixelSize(R.dimen.autocompletetextview_vertical_offset)
         notEmptyColor = ContextCompat.getColor(context, R.color.accent_start_light)
         emptyNormalColor = ContextCompat.getColor(context, R.color.white)
         emptyErrorColor = ContextCompat.getColor(context, R.color.accent_negative_start_light)
@@ -70,8 +73,10 @@ class CriteriaSearchEditText : RelativeLayout {
 
     private fun afterViews() {
         et?.hint = hint
+        actv?.dropDownVerticalOffset = verticalOffsetPx
         et?.setHintTextColor(normalHintTextColor)
         flIcon?.setOnClickListener { onDropDownIconClick() }
+        actv?.setOnDismissListener { ivArrowIcon?.setImageResource(R.drawable.ic_arrow_down_white) }
         et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
         ivClear?.setOnClickListener { et?.setText("") }

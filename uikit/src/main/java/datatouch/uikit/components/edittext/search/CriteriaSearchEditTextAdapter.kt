@@ -11,6 +11,15 @@ class CriteriaSearchEditTextAdapter<TCriterion> :
 
     override var onItemClickCallback: UiCallback<ISearchCriterionDropDownListAdapterItem>? = null
     var selectedItem: TCriterion? = null
+        set(value) {
+            val selectedCriterion = data.firstOrNull { it.criterion == value }
+            if (selectedCriterion == null)
+                field = null
+            else {
+                field = value
+                onItemClickCallback?.invoke(selectedCriterion)
+            }
+        }
 
     override fun onCreateView(parent: ViewGroup?): View {
         val view = SearchCriterionItemUi<TCriterion>(parent?.context)

@@ -12,26 +12,27 @@
     android:paddingEnd="15dp"
     android:paddingBottom="10dp">
 
+    <AutoCompleteTextView
+        android:id="@+id/actv"
+        style="@style/DropDownListViewStyle"
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/roboto_regular"
+        android:inputType="none"
+        android:maxLines="1"
+        android:popupBackground="@drawable/ellipsized_primary_half_transparent_background"
+        android:textColor="@color/primary_light"
+        android:textCursorDrawable="@null"
+        android:textSize="18sp"
+        tools:ignore="LabelFor" />
+
     <FrameLayout
         android:id="@+id/flIcon"
         android:layout_width="40dp"
         android:layout_height="25dp"
         android:layout_centerVertical="true">
-
-        <AutoCompleteTextView
-            android:id="@+id/actv"
-            style="@style/DropDownListViewStyle"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/transparent"
-            android:fontFamily="@font/roboto_regular"
-            android:inputType="none"
-            android:maxLines="1"
-            android:popupBackground="@drawable/ellipsized_primary_half_transparent_background"
-            android:textColor="@color/primary_light"
-            android:textCursorDrawable="@null"
-            android:textSize="18sp"
-            tools:ignore="LabelFor" />
 
         <ImageView
             android:id="@+id/ivIcon"

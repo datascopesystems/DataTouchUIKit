@@ -15,11 +15,14 @@ class TestActivity : AppCompatActivity() {
 
         val adapter = CriteriaSearchEditTextAdapter<C>()
 
+        csed?.setAdapter(adapter)
+
         adapter.data = mutableListOf(SearchCriterionItemHolder("C1", R.drawable.ic_edit_icon_white, C.C1),
             SearchCriterionItemHolder("C2", R.drawable.ic_accepted_white, C.C2),
             SearchCriterionItemHolder("C3", R.drawable.ic_add, C.C3))
 
-        csed?.setAdapter(adapter)
+        adapter.selectedItem = C.C2
+
 
     }
 
