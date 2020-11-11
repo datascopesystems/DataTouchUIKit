@@ -9,19 +9,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.annotation.StyleableRes
+import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.ConditionsExtensions.isNull
 import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_button_accent.view.*
 
 class CActionButtonAccent : RelativeLayout {
 
-    var defaultTextSize = 0
+    private var defaultTextSize = 0
     private var titleText: String? = null
     private var iconDrawable: Drawable? = null
-    var layoutWidth = 0
-    var layoutHeight = 0
+    private var layoutWidth = 0
+    private var layoutHeight = 0
     private var enabled = true
     private var textSize = 0f
+
+    private var defaultEnabledButtonBackground: Drawable? = null
+    private var defaultDisabledButtonBackground: Drawable? = null
+
+    private var enabledButtonBackground: Drawable? = null
+    private var disabledButtonBackground: Drawable? = null
 
     constructor(context: Context) : super(context) {
         inflateView()
@@ -51,6 +59,10 @@ class CActionButtonAccent : RelativeLayout {
     private fun initResources(context: Context) {
         val res = context.resources
         defaultTextSize = res.getDimensionPixelSize(R.dimen.action_button_text_size)
+        defaultEnabledButtonBackground =
+            ContextCompat.getDrawable(context, R.drawable.action_button_background_accent)
+        defaultDisabledButtonBackground =
+            ContextCompat.getDrawable(context, R.drawable.action_button_background_accent_gray)
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
@@ -80,7 +92,7 @@ class CActionButtonAccent : RelativeLayout {
         }
     }
 
-    protected fun inflateView() {
+    private fun inflateView() {
         View.inflate(context, R.layout.action_button_accent, this)
     }
 
@@ -97,6 +109,10 @@ class CActionButtonAccent : RelativeLayout {
             ).toFloat()
             iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
             enabled = typedArray.getBoolean(R.styleable.CActionButton_is_enabled, true)
+            enabledButtonBackground =
+                typedArray.getDrawable(R.styleable.CActionButton_active_background)
+            disabledButtonBackground =
+                typedArray.getDrawable(R.styleable.CActionButton_inactive_background)
         } finally {
             typedArray.recycle()
         }
@@ -106,6 +122,7 @@ class CActionButtonAccent : RelativeLayout {
         applyNativeAttributes()
         setupTitle()
         setupIcon()
+        setupBackground()
         isEnabled = enabled
     }
 
@@ -142,6 +159,16 @@ class CActionButtonAccent : RelativeLayout {
             ivIcon?.setImageDrawable(iconDrawable)
     }
 
+    private fun setupBackground() {
+        if (enabledButtonBackground.isNull())
+            enabledButtonBackground = defaultEnabledButtonBackground
+
+        if (disabledButtonBackground.isNull())
+            disabledButtonBackground = defaultDisabledButtonBackground
+
+        background = if (isEnabled) enabledButtonBackground else disabledButtonBackground
+    }
+
     fun setText(text: String?) {
         titleText = text.orEmpty()
         setupTitle()
@@ -149,7 +176,8 @@ class CActionButtonAccent : RelativeLayout {
 
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
-        buttonRootView?.setBackgroundResource(if (enabled) R.drawable.action_button_background_accent else R.drawable.action_button_background_accent_gray)
+        buttonRootView?.background =
+            if (enabled) enabledButtonBackground else disabledButtonBackground
 
     }
 

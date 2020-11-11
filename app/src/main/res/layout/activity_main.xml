@@ -19,4 +19,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <datatouch.uikit.components.buttons.CActionButtonAccent
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_settings_white"
+        app:title="@string/from"
+        app:active_background="@drawable/action_button_background_accent_end"
+        />
+
+    <datatouch.uikit.components.buttons.CActionButtonAccent
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_settings_white"
+        app:title="@string/from"
+        app:active_background="@drawable/action_button_background_accent_start"
+        />
+
 </LinearLayout>
