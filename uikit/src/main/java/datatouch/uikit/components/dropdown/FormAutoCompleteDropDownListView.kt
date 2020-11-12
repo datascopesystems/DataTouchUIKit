@@ -9,9 +9,13 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.*
+import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.ivClear
+import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.ivIcon
+import kotlinx.android.synthetic.main.form_edit_text.view.*
 
 private const val DefaultThreshold = 1
 
@@ -32,7 +36,6 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private var isMandatoryField = false
 
     private var adapter: ISelectableDropDownListAdapter? = null
-
     private var isInputFromUser = true
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -98,6 +101,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         actv?.threshold = DefaultThreshold
         actv?.dropDownVerticalOffset = verticalOffsetPx
         actv?.hint = hint
+        refreshClearButton()
         actv?.setHintTextColor(normalHintTextColor)
         actv?.setTypeface(originalTypeface, Typeface.NORMAL)
         ivIcon?.setImageDrawable(iconDrawable)
@@ -107,6 +111,8 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     }
 
     private fun afterTextChanged() {
+        refreshClearButton()
+
         if (isInputFromUser)
             adapter?.unSelectItem()
 
@@ -114,6 +120,10 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
             ivIcon?.setColorFilter(selectedColor)
         else
             ivIcon?.setColorFilter(unselectedNormalColor)
+    }
+
+    private fun refreshClearButton() {
+        ivClear?.isVisible = et?.text?.isNotEmpty() == true
     }
 
     private fun isItemSelected() = adapter?.isItemSelected == true

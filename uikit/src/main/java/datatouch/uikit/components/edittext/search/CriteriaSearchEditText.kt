@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.AfterTextChangedListener
 import datatouch.uikit.core.callbacks.UiJustCallback
@@ -80,6 +81,7 @@ class CriteriaSearchEditText : RelativeLayout {
         et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
         ivClear?.setOnClickListener { et?.setText("") }
+        refreshClearButton()
     }
 
     private fun onDropDownIconClick() {
@@ -93,12 +95,18 @@ class CriteriaSearchEditText : RelativeLayout {
     }
 
     private fun afterTextChanged() {
+        refreshClearButton()
+
         if (hasValidInput)
             showAsValidInput()
         else
             showAsNormalInput()
 
         onTextChangeCallback?.invoke()
+    }
+
+    private fun refreshClearButton() {
+        ivClear?.isVisible = et?.text?.isNotEmpty() == true
     }
 
     private fun onFocusChange(focused: Boolean) {

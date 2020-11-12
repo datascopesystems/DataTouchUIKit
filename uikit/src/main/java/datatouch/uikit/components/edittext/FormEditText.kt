@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.AfterTextChangedListener
 import datatouch.uikit.components.dropdown.IFormView
@@ -101,6 +102,7 @@ class FormEditText : LinearLayout, IFormView {
         et?.setHintTextColor(normalHintTextColor)
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
         setupInputType()
+        refreshClearButton()
         ivIcon?.setImageDrawable(iconDrawable)
         et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
@@ -110,7 +112,6 @@ class FormEditText : LinearLayout, IFormView {
     private fun setupInputType() {
         if (!isEditable) {
             et.inputType = android.text.InputType.TYPE_NULL
-            ivClear?.visibility = GONE
             return
         }
 
@@ -122,12 +123,18 @@ class FormEditText : LinearLayout, IFormView {
     }
 
     private fun afterTextChanged() {
+        refreshClearButton()
+
         if (hasValidInput)
             showAsValidInput()
         else
             showAsNormalInput()
 
         onTextChangeCallback?.invoke()
+    }
+
+    private fun refreshClearButton() {
+        ivClear?.isVisible = et?.text?.isNotEmpty() == true && isEditable
     }
 
     private fun onFocusChange(focused: Boolean) {

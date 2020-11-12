@@ -35,4 +35,14 @@
         app:active_background="@drawable/action_button_background_accent_start"
         />
 
+    <datatouch.uikit.components.edittext.FormEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:et_hint="this is edittext"/>
+
+    <datatouch.uikit.components.dropdown.FormAutoCompleteDropDownListView
+        android:id="@+id/facddkv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
