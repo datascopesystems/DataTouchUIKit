@@ -55,6 +55,7 @@
     <dimen name="item_margin">15dp</dimen>
     <dimen name="radius_circle_background">10dp</dimen>
     <dimen name="floating_circle_button_size">50dp</dimen>
+    <dimen name="accent_outline_image_button_size">40dp</dimen>
     <dimen name="size_background_circle">30dp</dimen>
     <dimen name="size_background_circle_pause">120dp</dimen>
     <dimen name="text_size_icon_large">70sp</dimen>
