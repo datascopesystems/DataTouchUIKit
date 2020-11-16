@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import datatouch.uikit.R
 import datatouch.uikit.core.utils.Conditions
-import datatouch.uikit.core.utils.ViewUtils
+import datatouch.uikit.core.utils.views.ViewUtils
 import kotlinx.android.synthetic.main.empty_state_view.view.*
 
 private const val DefaultTextColor = Int.MIN_VALUE

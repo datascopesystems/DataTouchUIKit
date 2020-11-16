@@ -10,7 +10,7 @@ import datatouch.uikit.R
 import datatouch.uikit.components.CCircleCheckBox
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.ResourceUtils.convertDpToPixel
-import datatouch.uikit.core.utils.ViewUtils.iterateOverMultipleChildViews
+import datatouch.uikit.core.utils.views.ViewUtils.iterateOverMultipleChildViews
 import kotlinx.android.synthetic.main.pin_pad.view.*
 import java.util.*
 

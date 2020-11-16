@@ -1,4 +1,4 @@
-package datatouch.uikit.core.utils
+package datatouch.uikit.core.utils.views
 
 import android.content.Context
 import android.graphics.Color
