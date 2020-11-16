@@ -149,14 +149,14 @@ class FormEditText : LinearLayout, IFormView {
             llFormEditTextRoot.performClick()
     }
 
-    private fun showAsValidInput() {
+    fun showAsValidInput() {
         ivIcon?.setColorFilter(notEmptyColor)
         et?.hint = hint
         et?.setHintTextColor(normalHintTextColor)
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
     }
 
-    private fun showAsNormalInput() {
+    fun showAsNormalInput() {
         ivIcon?.setColorFilter(emptyNormalColor)
         et?.hint = hint
         et?.setHintTextColor(normalHintTextColor)
@@ -167,7 +167,7 @@ class FormEditText : LinearLayout, IFormView {
         if (isMandatoryField && !hasValidInput) showAsErrorInput()
     }
 
-    private fun showAsErrorInput() {
+    fun showAsErrorInput() {
         ivIcon?.setColorFilter(emptyErrorColor)
         et?.hint = leftUnselectedHint
         et?.setHintTextColor(emptyErrorColor)
