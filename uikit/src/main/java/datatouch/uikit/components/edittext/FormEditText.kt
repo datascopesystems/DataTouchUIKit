@@ -193,4 +193,39 @@ class FormEditText : LinearLayout, IFormView {
 
     override fun showMandatoryFieldErrorIfRequired() = onUnfocused()
 
+    fun setHint(hint: String) {
+        this.hint = hint
+        et?.hint = hint
+    }
+
+    fun setLeftUnselectedHint(leftUnselectedHint: String) {
+        this.leftUnselectedHint = leftUnselectedHint
+        refreshIfUnfocused()
+    }
+
+    private fun refreshIfUnfocused() {
+        if (!isFocused)
+            onUnfocused()
+    }
+
+    fun setIconDrawable(iconDrawable: Drawable?) {
+        this.iconDrawable = iconDrawable
+        ivIcon?.setImageDrawable(iconDrawable)
+    }
+
+    fun setMandatory(isMandatory: Boolean) {
+        this.isMandatoryField = isMandatory
+        refreshIfUnfocused()
+    }
+
+    fun setInputType(type: InputType) {
+        inputType = type
+        setupInputType()
+    }
+
+    fun setIsEditable(isEditable: Boolean) {
+        this.isEditable = isEditable
+        setupInputType()
+    }
+
 }
