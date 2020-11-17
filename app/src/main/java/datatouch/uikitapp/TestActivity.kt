@@ -8,6 +8,7 @@ import datatouch.uikit.components.buttons.ImageButtonAccentOutline
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
 import datatouch.uikit.components.edittext.search.SearchCriterionItemHolder
+import datatouch.uikit.core.utils.views.ScreenshotUtils
 
 class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,12 @@ class TestActivity : AppCompatActivity() {
         adapter.selectedItem = C.C2
 
         adapter.onItemClickCallback = { Toast.makeText(this, "Loh", Toast.LENGTH_LONG).show()}
+
+        btnTest.setOnClickListener {
+            val screenShot = ScreenshotUtils.makeScreenshot(llRoot)
+            this.getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES)?.mkdirs()
+            screenShot.saveToFile("${this.getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES)?.path.orEmpty()}/TEST.jpg")
+        }
 
     }
 
