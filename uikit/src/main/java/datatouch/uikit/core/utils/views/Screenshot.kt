@@ -34,15 +34,13 @@ open class Screenshot(bitmap: Bitmap?, thumbSize: IntSize) {
         }
     }
 
-    fun drop() {
+    fun recycle() {
         bitmap?.recycle()
         bitmap = null
         paint = null
     }
 
-    fun isEmpty(): Boolean {
-        return bitmap == null
-    }
+    fun isEmpty() = bitmap == null
 
     fun draw(canvas: Canvas, offsetX: Int, offsetY: Int) {
         if (bitmap != null) {
@@ -53,4 +51,9 @@ open class Screenshot(bitmap: Bitmap?, thumbSize: IntSize) {
     fun saveToFile(fileName: String) = bitmap?.let {
             BitmapUtils.saveBitmapToFile(it, fileName)
     }
+
+    fun toBase64String(): String = bitmap?.run {
+        val base64Image = BitmapUtils.convertBitmapToStringNoWrap(this)
+        base64Image
+    } ?: ""
 }

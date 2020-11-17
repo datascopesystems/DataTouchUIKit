@@ -11,11 +11,10 @@ class ScreenshotFactory(thumbSize: IntSize, bitmapConfig: Bitmap.Config) {
     private val canvas = Canvas()
     private val matrix = Matrix()
     private val bitmapConfig: Bitmap.Config
-
-    private val thumbSize = IntSize()
+    private val size = IntSize()
 
     init {
-        this.thumbSize.set(thumbSize)
+        this.size.set(thumbSize)
         this.bitmapConfig = bitmapConfig
     }
 
@@ -46,9 +45,9 @@ class ScreenshotFactory(thumbSize: IntSize, bitmapConfig: Bitmap.Config) {
     fun fromView(view: View): Screenshot {
         val viewSize = FloatSize(view.width, view.height)
 
-        val bitmap = createScaledBitmap(thumbSize, viewSize) ?: return Screenshot.EmptyScreenshot
+        val bitmap = createScaledBitmap(size, viewSize) ?: return Screenshot.EmptyScreenshot
 
         drawViewToBitmap(view, viewSize, bitmap)
-        return Screenshot(bitmap, thumbSize)
+        return Screenshot(bitmap, size)
     }
 }

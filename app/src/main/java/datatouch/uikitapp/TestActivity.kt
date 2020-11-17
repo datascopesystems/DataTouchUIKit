@@ -1,8 +1,10 @@
 package datatouch.uikitapp
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import datatouch.uikit.components.buttons.ImageButtonAccentOutline
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
 import datatouch.uikit.components.edittext.search.SearchCriterionItemHolder
@@ -12,7 +14,10 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val llRoot = findViewById<View>(R.id.llRoot)
+
         val csed = findViewById<CriteriaSearchEditText>(R.id.cset)
+        val btnTest = findViewById<ImageButtonAccentOutline>(R.id.btnTest)
 
         val adapter = CriteriaSearchEditTextAdapter<C>()
 
