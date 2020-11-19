@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="25dp">
+
+        <datatouch.uikit.components.buttons.ImageButtonAccentOutline
+            android:id="@+id/btnShutter"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            app:icon="@drawable/ic_shutter_white" />
+
+        <datatouch.uikit.components.buttons.ImageButtonAccentOutline
+            android:id="@+id/btnSwitchCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnShutter"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            app:active_background="@drawable/floating_action_button_background_accent_gray"
+            app:icon="@drawable/ic_change_white" />
+    </RelativeLayout>
+
+
+</FrameLayout>

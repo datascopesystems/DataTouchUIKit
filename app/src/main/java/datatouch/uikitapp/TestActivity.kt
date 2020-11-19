@@ -1,15 +1,20 @@
 package datatouch.uikitapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import datatouch.uikit.components.buttons.ImageButtonAccentOutline
+import datatouch.uikit.components.camera.activities.CameraPhotoActivity
+import datatouch.uikit.components.camera.activities.CameraPhotoActivityParamsKey
+import datatouch.uikit.components.camera.activities.params.CameraPhotoActivityParams
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
 import datatouch.uikit.components.edittext.search.SearchCriterionItemHolder
-import datatouch.uikit.core.utils.views.ScreenshotUtils
+import java.io.File
 
 class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,9 +41,11 @@ class TestActivity : AppCompatActivity() {
         btnTest.isVisible = true
 
         btnTest.setOnClickListener {
-            val screenShot = ScreenshotUtils.makeScreenshot(llRoot)
-            this.getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES)?.mkdirs()
-            screenShot.saveToFile("${this.getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES)?.path.orEmpty()}/TEST.jpg")
+            val intent = Intent(this, CameraPhotoActivity::class.java)
+            intent.putExtra(CameraPhotoActivityParamsKey, CameraPhotoActivityParams(
+                File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.path.orEmpty())
+            ))
+            startActivity(intent)
         }
 
     }

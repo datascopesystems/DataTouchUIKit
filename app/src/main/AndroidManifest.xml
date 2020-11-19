@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -34,6 +35,18 @@
                     android:scheme="datatouch" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="datatouch.uikit.components.camera.activities.CameraPhotoActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/NoActionBarTheme"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+            <meta-data
+                android:name="androidx.camera.activity.FULL_SCREEN_ENABLED"
+                android:value="true" />
+        </activity>
+
     </application>
 
 </manifest>
