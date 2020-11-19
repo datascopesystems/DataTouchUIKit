@@ -163,10 +163,6 @@ class ImageButtonAccentOutline : RelativeLayout {
         rlRoot?.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
     }
 
-    override fun setVisibility(visibilityState: Int) {
-        rlRoot?.visibility = visibilityState
-    }
-
     fun setIcon(icon: Drawable?) {
         iconDrawable = icon
         ivIcon?.setImageDrawable(iconDrawable)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import datatouch.uikit.components.buttons.ImageButtonAccentOutline
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
@@ -31,6 +32,8 @@ class TestActivity : AppCompatActivity() {
         adapter.selectedItem = C.C2
 
         adapter.onItemClickCallback = { Toast.makeText(this, "Loh", Toast.LENGTH_LONG).show()}
+
+        btnTest.isVisible = true
 
         btnTest.setOnClickListener {
             val screenShot = ScreenshotUtils.makeScreenshot(llRoot)
