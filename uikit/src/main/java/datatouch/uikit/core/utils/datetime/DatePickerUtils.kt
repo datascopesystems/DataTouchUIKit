@@ -1,6 +1,5 @@
 package datatouch.uikit.core.utils.datetime
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -30,15 +29,12 @@ object DatePickerUtils {
         return listOf(*context.resources.getStringArray(R.array.months))
     }
 
-    @JvmStatic
-    @SuppressLint("NewApi")
     fun tryAccessibilityAnnounce(view: View?, text: CharSequence?) {
         if (view != null && text != null) {
             view.announceForAccessibility(text)
         }
     }
 
-    @JvmStatic
     fun trimToMidnight(calendar: Calendar): Calendar {
         calendar[Calendar.HOUR_OF_DAY] = 0
         calendar[Calendar.MINUTE] = 0
@@ -47,24 +43,35 @@ object DatePickerUtils {
         return calendar
     }
 
-    fun showDatePicker(fragmentActivity: FragmentActivity?,
-                       currentDate: Date?,
-                       callback: DatePickerCallback
+    fun showDatePicker(
+        fragmentActivity: FragmentActivity?,
+        currentDate: Date?,
+        callback: DatePickerCallback
     ) = fragmentActivity?.let {
         val calendar = DateTimeUtilsInternal.calendar()
         calendar.time = currentDate.default(DateTimeUtilsInternal.now())
         val dialog = DatePickerFragmentDialog.newInstance(
             object : DatePickerFragmentDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePickerFragmentDialog?,
-                                       year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                override fun onDateSet(
+                    view: DatePickerFragmentDialog?,
+                    year: Int, monthOfYear: Int, dayOfMonth: Int
+                ) {
                     callback.invoke(
                         DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth),
-                        DateTimeFormatUtils.format(DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth)))
+                        DateTimeFormatUtils.format(
+                            DateTimeUtilsInternal.getDate(
+                                year,
+                                monthOfYear,
+                                dayOfMonth
+                            )
+                        )
+                    )
                 }
             },
             calendar[Calendar.YEAR],
             calendar[Calendar.MONTH],
-            calendar[Calendar.DAY_OF_MONTH])
+            calendar[Calendar.DAY_OF_MONTH]
+        )
         dialog.isThemeDark = true
         dialog.setAccentColor(ContextCompat.getColor(it, R.color.accent_start_dark))
         dialog.setYearRange(StartDateRange, EndDateRange)
@@ -72,26 +79,38 @@ object DatePickerUtils {
     }
 
     @JvmStatic
-    fun showDatePickerInRange(fragmentActivity: FragmentActivity?,
-                              currentDate: Date?,
-                              callback: DatePickerCallback,
-                              minDate: Date?,
-                              maxDate: Date?,
-                              disableDates: List<Date>? = null) = fragmentActivity?.let {
+    fun showDatePickerInRange(
+        fragmentActivity: FragmentActivity?,
+        currentDate: Date?,
+        callback: DatePickerCallback,
+        minDate: Date?,
+        maxDate: Date?,
+        disableDates: List<Date>? = null
+    ) = fragmentActivity?.let {
         val calendar = DateTimeUtilsInternal.calendar()
         calendar.time = currentDate.default(DateTimeUtilsInternal.now())
         val dialog = DatePickerFragmentDialog.newInstance(
             object : DatePickerFragmentDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePickerFragmentDialog?,
-                                       year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                override fun onDateSet(
+                    view: DatePickerFragmentDialog?,
+                    year: Int, monthOfYear: Int, dayOfMonth: Int
+                ) {
                     callback.invoke(
                         DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth),
-                        DateTimeFormatUtils.format(DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth)))
+                        DateTimeFormatUtils.format(
+                            DateTimeUtilsInternal.getDate(
+                                year,
+                                monthOfYear,
+                                dayOfMonth
+                            )
+                        )
+                    )
                 }
             },
             calendar[Calendar.YEAR],
             calendar[Calendar.MONTH],
-            calendar[Calendar.DAY_OF_MONTH])
+            calendar[Calendar.DAY_OF_MONTH]
+        )
         dialog.isThemeDark = true
         dialog.setAccentColor(ContextCompat.getColor(it, R.color.accent_start_dark))
 
