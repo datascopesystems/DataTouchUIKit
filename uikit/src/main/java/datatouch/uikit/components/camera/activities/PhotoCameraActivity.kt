@@ -28,8 +28,6 @@ import datatouch.uikit.core.extensions.IntExtensions.orZero
 import java.io.File
 import kotlin.random.Random
 
-private const val ImmersiveFlagTimeout = 500L
-
 class PhotoCameraActivity : AppCompatActivity() {
 
     private var rootLayout: ViewGroup? = null

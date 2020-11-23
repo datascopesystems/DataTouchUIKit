@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import datatouch.uikit.components.buttons.ImageButtonAccentOutline
 import datatouch.uikit.components.camera.utils.CameraUtils
+import datatouch.uikit.components.dropdown.FormDropDownListView
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
 import datatouch.uikit.components.edittext.search.SearchCriterionItemHolder
+import datatouch.uikitapp.adapters.TestItemHolder
+import datatouch.uikitapp.adapters.TestSelectableDropDownListAdapter
 
 class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +24,7 @@ class TestActivity : AppCompatActivity() {
 
         val csed = findViewById<CriteriaSearchEditText>(R.id.cset)
         val btnTest = findViewById<ImageButtonAccentOutline>(R.id.btnTest)
+        val dropDown = findViewById<FormDropDownListView>(R.id.dropDown)
 
         val adapter = CriteriaSearchEditTextAdapter<C>()
 
@@ -46,6 +50,14 @@ class TestActivity : AppCompatActivity() {
                 Toast.makeText(this, "LOH" + it.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+
+        val dropDownAdapter = TestSelectableDropDownListAdapter()
+
+        dropDownAdapter.data = mutableListOf(TestItemHolder(), TestItemHolder(), TestItemHolder())
+
+        dropDown.setAdapter(dropDownAdapter)
+
+        dropDownAdapter.selectItem(dropDownAdapter.data[1])
     }
 
     enum class C {

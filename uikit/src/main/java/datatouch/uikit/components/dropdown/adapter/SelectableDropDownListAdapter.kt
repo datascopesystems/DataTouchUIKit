@@ -9,6 +9,8 @@ abstract class SelectableDropDownListAdapter<TItem : IDropDownListAdapterItem>
     : DropDownListAdapter<TItem>(), ISelectableDropDownListAdapter {
 
     var selectedItem: TItem? = null
+        private set
+
     var onItemSelectionChangeCallback: UiJustCallback? = null
 
     override val isItemSelected get() = selectedItem.isNotNull()
@@ -18,6 +20,10 @@ abstract class SelectableDropDownListAdapter<TItem : IDropDownListAdapterItem>
         selectedItem = clickedItem
         onItemClickCallback?.invoke(clickedItem)
         onItemSelectionChangeCallback?.invoke()
+    }
+
+    fun selectItem(item: TItem) {
+        onItemClick(item)
     }
 
     override fun unSelectItem() {
