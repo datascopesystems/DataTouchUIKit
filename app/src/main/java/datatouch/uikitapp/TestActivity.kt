@@ -53,6 +53,10 @@ class TestActivity : AppCompatActivity() {
 
         val dropDownAdapter = TestSelectableDropDownListAdapter()
 
+        dropDownAdapter.onItemClickCallback = {
+            Toast.makeText(this, "Clicked only", Toast.LENGTH_SHORT).show()
+        }
+
         dropDownAdapter.data = mutableListOf(TestItemHolder(), TestItemHolder(), TestItemHolder())
 
         dropDown.setAdapter(dropDownAdapter)

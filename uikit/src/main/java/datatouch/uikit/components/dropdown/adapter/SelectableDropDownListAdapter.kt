@@ -11,24 +11,24 @@ abstract class SelectableDropDownListAdapter<TItem : IDropDownListAdapterItem>
     var selectedItem: TItem? = null
         private set
 
-    var onItemSelectionChangeCallback: UiJustCallback? = null
-
     override val isItemSelected get() = selectedItem.isNotNull()
+    override var onViewInvalidateRequiredCallback: UiCallback<IDropDownListAdapterItem?>? = null
     override var onItemClickCallback: UiCallback<IDropDownListAdapterItem>? = null
 
     override fun onItemClick(clickedItem: TItem) {
         selectedItem = clickedItem
         onItemClickCallback?.invoke(clickedItem)
-        onItemSelectionChangeCallback?.invoke()
+        onViewInvalidateRequiredCallback?.invoke(selectedItem)
     }
 
     fun selectItem(item: TItem) {
-        onItemClick(item)
+        selectedItem = item
+        onViewInvalidateRequiredCallback?.invoke(selectedItem)
     }
 
     override fun unSelectItem() {
         selectedItem = null
-        onItemSelectionChangeCallback?.invoke()
+        onViewInvalidateRequiredCallback?.invoke(null)
     }
 
     // For plain dropdown we do not need a filter

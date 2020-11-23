@@ -10,6 +10,7 @@ import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import kotlinx.android.synthetic.main.form_drop_down_list_view.view.*
 
@@ -126,12 +127,21 @@ class FormDropDownListView : LinearLayout, IFormView {
     fun setAdapter(adapter: ISelectableDropDownListAdapter) {
         actv?.setAdapter(adapter)
         this.adapter = adapter
-        adapter.onItemClickCallback = { onItemClick(it.name) }
+        adapter.onViewInvalidateRequiredCallback =
+            { it?.let { onItemSelected(it) } ?: onItemUnSelected() }
     }
 
     private fun onItemClick(selectedText: String) {
         actv?.setText(selectedText)
         ivIcon?.setColorFilter(selectedColor)
+        actv?.dismissDropDown()
+    }
+
+    private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
+
+    private fun onItemUnSelected() {
+        actv?.setText("")
+        ivIcon?.setColorFilter(unselectedNormalColor)
         actv?.dismissDropDown()
     }
 
@@ -165,7 +175,7 @@ class FormDropDownListView : LinearLayout, IFormView {
     }
 
     override fun onDetachedFromWindow() {
-        adapter?.onItemClickCallback = null
+        adapter?.onViewInvalidateRequiredCallback = null
         adapter = null
         actv?.setAdapter(null)
         super.onDetachedFromWindow()

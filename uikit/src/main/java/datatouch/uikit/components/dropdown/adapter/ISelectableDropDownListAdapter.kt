@@ -10,6 +10,8 @@ interface ISelectableDropDownListAdapter : ListAdapter, Filterable {
 
     var onItemClickCallback : UiCallback<IDropDownListAdapterItem>?
 
+    var onViewInvalidateRequiredCallback : UiCallback<IDropDownListAdapterItem?>?
+
     fun unSelectItem()
 
 }
