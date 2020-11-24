@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ButtonGlow">
+
+        <attr name="bg_glow_color" format="boolean" />
+        <attr name="bg_glow_radius" format="boolean" />
+
+    </declare-styleable>
+
+    <color name="bg_default_glow_color">@color/accent_end</color>
+    <dimen name="bg_default_glow_radius">50dp</dimen>
+
+</resources>

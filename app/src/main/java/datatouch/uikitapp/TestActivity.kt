@@ -3,11 +3,11 @@ package datatouch.uikitapp
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import datatouch.uikit.components.buttons.ImageButtonAccentOutline
+import datatouch.uikit.components.buttons.ToggleButton
 import datatouch.uikit.components.camera.activities.CameraPhotoActivity
 import datatouch.uikit.components.camera.activities.CameraPhotoActivityParamsKey
 import datatouch.uikit.components.camera.activities.params.CameraPhotoActivityParams
@@ -20,8 +20,6 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val llRoot = findViewById<View>(R.id.llRoot)
 
         val csed = findViewById<CriteriaSearchEditText>(R.id.cset)
         val btnTest = findViewById<ImageButtonAccentOutline>(R.id.btnTest)
@@ -47,6 +45,10 @@ class TestActivity : AppCompatActivity() {
             ))
             startActivity(intent)
         }
+
+        val gtb = findViewById<ToggleButton>(R.id.gtb)
+
+        gtb.callback = { Toast.makeText(this, "Loh", Toast.LENGTH_LONG).show() }
 
     }
 

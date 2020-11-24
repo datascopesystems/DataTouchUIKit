@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ToggleButton">
+
+        <attr name="gtb_checked" format="boolean" />
+
+        <attr name="gtb_checked_text" format="string" />
+        <attr name="gtb_unchecked_text" format="string" />
+
+        <attr name="gtb_checked_background" format="reference" />
+        <attr name="gtb_unchecked_background" format="reference" />
+
+        <attr name="gtb_icon_checked" format="reference" />
+        <attr name="gtb_icon_unchecked" format="reference" />
+
+        <attr name="gtb_icon_size" format="dimension" />
+        <attr name="gtb_text_size" format="dimension" />
+
+        <attr name="gtb_glow_button" format="boolean" />
+        <attr name="gtb_glow_button_radius" format="dimension" />
+        <attr name="gtb_glow_color_checked" format="color" />
+        <attr name="gtb_glow_color_unchecked" format="color" />
+
+    </declare-styleable>
+
+    <dimen name="gtb_edge_margin">15dp</dimen>
+    <dimen name="gtb_edge_double_margin">40dp</dimen>
+
+    <dimen name="gtb_default_icon_size">20dp</dimen>
+    <dimen name="gtb_default_text_size">15sp</dimen>
+    <dimen name="gtb_default_glow_radius">50dip</dimen>
+
+</resources>

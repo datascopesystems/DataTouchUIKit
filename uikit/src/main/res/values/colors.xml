@@ -34,9 +34,11 @@
     <color name="color_hint">#a4a4a4</color>
     <color name="accent_start">#55aac1</color>
     <color name="accent_start_dark">#4a94a8</color>
+    <color name="accent_start_deep_dark">#316775</color>
     <color name="accent_end_light">#41ffcd</color>
     <color name="accent_end">#00cf99</color>
     <color name="accent_end_dark">#00b585</color>
+    <color name="accent_end_deep_dark">#018a66</color>
     <color name="accent_negative_start_light">#ffaa45</color>
     <color name="accent_negative_start">#ee5a1f</color>
     <color name="accent_negative_start_dark">#d4501c</color>

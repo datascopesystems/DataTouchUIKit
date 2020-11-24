@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.StyleableRes
+import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.utils.Conditions
@@ -62,15 +64,17 @@ class CActionToggleButton : RelativeLayout {
         )
         val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
         try {
-            layoutWidth = typedArray.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT)
-            layoutHeight = typedArray.getLayoutDimension(1, ViewGroup.LayoutParams.WRAP_CONTENT)
+            @StyleableRes val widthIndex = 0
+            @StyleableRes val heightIndex = 1
+            layoutWidth = typedArray.getLayoutDimension(widthIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutHeight = typedArray.getLayoutDimension(heightIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
         } finally {
             typedArray.recycle()
         }
     }
 
 
-    protected fun inflateView() {
+    private fun inflateView() {
         View.inflate(context, R.layout.action_toggle_button, this)
     }
 
@@ -81,8 +85,8 @@ class CActionToggleButton : RelativeLayout {
                         R.styleable.CActionButton, 0, 0
                 )
         try {
-            defaultActiveBackground = context.resources.getDrawable(R.drawable.toggle_button_background_active)
-            defaultInactiveBackground = context.resources.getDrawable(R.drawable.toggle_button_background_inactive)
+            defaultActiveBackground = ContextCompat.getDrawable(context, R.drawable.toggle_button_background_active)
+            defaultInactiveBackground = ContextCompat.getDrawable(context, R.drawable.toggle_button_background_inactive)
             checked = typedArray.getBoolean(R.styleable.CActionButton_checked, false)
             val checkedText = typedArray.getString(R.styleable.CActionButton_checkedLabel)
             checkedLabelText = if (Conditions.isNotNullOrEmpty(checkedText.orEmpty())) checkedText else context.getString(R.string.active)
