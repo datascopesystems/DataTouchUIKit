@@ -37,7 +37,7 @@
         </activity>
 
         <activity
-            android:name="datatouch.uikit.components.camera.activities.CameraPhotoActivity"
+            android:name="datatouch.uikit.components.camera.activities.PhotoCameraActivity"
             android:hardwareAccelerated="true"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/NoActionBarTheme"

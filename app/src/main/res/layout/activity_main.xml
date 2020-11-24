@@ -85,4 +85,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <datatouch.uikit.components.dropdown.FormDropDownListView
+        android:id="@+id/dropDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ddlv_hint="Test Hint"
+        app:ddlv_left_unselected_hint="Left unselected hint"
+        app:ddlv_icon="@drawable/ic_shutter_white"
+        app:ddlv_mandatory_field="false"/>
+
 </LinearLayout>
