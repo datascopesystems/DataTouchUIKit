@@ -146,12 +146,12 @@ class ToggleButton : LinearLayout {
 
             val checkedText = typedArray.getString(R.styleable.ToggleButton_gtb_checked_text)
             checkedLabelText =
-                if (checkedText.isNullOrEmpty()) checkedText else defaultCheckedLabelText
+                if (!checkedText.isNullOrEmpty()) checkedText else defaultCheckedLabelText
 
             val uncheckedText =
                 typedArray.getString(R.styleable.ToggleButton_gtb_unchecked_text)
             uncheckedLabelText =
-                if (uncheckedText.isNullOrEmpty()) uncheckedText else defaultUncheckedLabelText
+                if (!uncheckedText.isNullOrEmpty()) uncheckedText else defaultUncheckedLabelText
 
             checkedBackground =
                 typedArray.getDrawable(R.styleable.ToggleButton_gtb_checked_background)
