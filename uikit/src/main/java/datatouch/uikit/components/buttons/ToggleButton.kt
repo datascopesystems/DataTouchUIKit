@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
@@ -225,7 +226,10 @@ class ToggleButton : LinearLayout {
             buttonGlow?.setColor(if (isChecked) defaultGlowColorChecked else defaultGlowColorUnchecked)
             buttonGlow?.setRadius(glowRadiusPx)
         } else {
-            buttonGlow.visibility = INVISIBLE
+            buttonGlow.visibility = GONE
+            val layoutParams = llRoot?.layoutParams as RelativeLayout.LayoutParams
+            layoutParams.setMargins(0,0,0,0)
+            llRoot?.layoutParams = layoutParams
         }
     }
 
