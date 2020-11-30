@@ -22,6 +22,14 @@
         android:src="@drawable/ic_search_white"
         app:tint="@color/white" />
 
+    <LinearLayout
+        android:id="@+id/llFocusAttractionView"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal" />
+
     <EditText
         android:id="@+id/et"
         android:layout_toEndOf="@+id/ivIcon"
