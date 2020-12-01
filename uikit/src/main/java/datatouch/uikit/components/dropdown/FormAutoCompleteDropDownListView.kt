@@ -14,9 +14,6 @@ import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.*
-import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.ivClear
-import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.ivIcon
-import kotlinx.android.synthetic.main.form_edit_text.view.*
 
 private const val DefaultThreshold = 1
 
@@ -124,7 +121,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     }
 
     private fun refreshClearButton() {
-        ivClear?.isVisible = et?.text?.isNotEmpty() == true
+        ivClear?.isVisible = actv?.text?.isNotEmpty() == true
     }
 
     private fun isItemSelected() = adapter?.isItemSelected == true
@@ -133,22 +130,15 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         actv?.setAdapter(adapter)
         this.adapter = adapter
         adapter.onViewInvalidateRequiredCallback =
-            { it?.let { onItemSelected(it) } ?: onItemUnSelected() }
+            { it?.let { onItemSelected(it) } }
     }
 
     private fun onItemClick(selectedText: String) {
         setTextNotFromUser(selectedText)
         ivIcon?.setColorFilter(selectedColor)
-        actv?.dismissDropDown()
     }
 
     private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
-
-    private fun onItemUnSelected() {
-        setTextNotFromUser("")
-        ivIcon?.setColorFilter(unselectedNormalColor)
-        actv?.dismissDropDown()
-    }
 
     private fun onFocusChange(focused: Boolean) {
         if (isUserLeftUnselected(focused)) {

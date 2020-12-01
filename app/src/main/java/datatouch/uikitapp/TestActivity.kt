@@ -12,8 +12,10 @@ import datatouch.uikit.components.dropdown.FormDropDownListView
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
 import datatouch.uikit.components.edittext.search.SearchCriterionItemHolder
+import datatouch.uikitapp.adapters.TestAutocompleteDropDownListAdapter
 import datatouch.uikitapp.adapters.TestItemHolder
 import datatouch.uikitapp.adapters.TestSelectableDropDownListAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +62,12 @@ class TestActivity : AppCompatActivity() {
         dropDown.setAdapter(dropDownAdapter)
 
         dropDownAdapter.selectItem(dropDownAdapter.data[1])
+
+        val autocompleteAdapter = TestAutocompleteDropDownListAdapter()
+        autocompleteAdapter.data = mutableListOf(TestItemHolder(), TestItemHolder(), TestItemHolder())
+
+        facddkv?.setAdapter(autocompleteAdapter)
+
         val gtb = findViewById<ToggleButton>(R.id.gtb)
 
         gtb.callback = { Toast.makeText(this, "Loh", Toast.LENGTH_LONG).show() }
