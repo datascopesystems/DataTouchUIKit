@@ -136,6 +136,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private fun onItemClick(selectedText: String) {
         setTextNotFromUser(selectedText)
         ivIcon?.setColorFilter(selectedColor)
+        actv?.dismissDropDown()
     }
 
     private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
