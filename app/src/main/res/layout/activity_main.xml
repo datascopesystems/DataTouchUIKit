@@ -7,6 +7,16 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
+    <datatouch.uikit.components.dropdown.FormDropDownListView
+        android:id="@+id/dropDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ddlv_hint="Test Hint"
+        app:ddlv_left_unselected_hint="Left unselected hint"
+        app:ddlv_icon="@drawable/ic_shutter_white"
+        app:ddlv_mandatory_field="false"/>
+
     <datatouch.uikit.components.edittext.search.CriteriaSearchEditText
         android:id="@+id/cset"
         android:layout_width="match_parent"
@@ -17,8 +27,7 @@
         android:id="@+id/gtb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        app:gtb_glow_button="true"
+        app:gtb_glow_button="false"
         app:gtb_glow_button_radius="50dp"
         app:gtb_glow_color_checked="@color/accent_end"
         app:gtb_glow_color_unchecked="@color/accent_start"
@@ -85,13 +94,5 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <datatouch.uikit.components.dropdown.FormDropDownListView
-        android:id="@+id/dropDown"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ddlv_hint="Test Hint"
-        app:ddlv_left_unselected_hint="Left unselected hint"
-        app:ddlv_icon="@drawable/ic_shutter_white"
-        app:ddlv_mandatory_field="false"/>
 
 </LinearLayout>
