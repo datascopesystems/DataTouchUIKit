@@ -107,6 +107,7 @@ class FormEditText : LinearLayout, IFormView {
         et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
         ivClear?.setOnClickListener { et?.setText("") }
+        ivMandatoryIndicator?.isVisible = isMandatoryField
     }
 
     private fun setupInputType() {
@@ -123,14 +124,17 @@ class FormEditText : LinearLayout, IFormView {
     }
 
     private fun afterTextChanged() {
+        refreshViewsAfterTextChange()
+        onTextChangeCallback?.invoke()
+    }
+
+    private fun refreshViewsAfterTextChange() {
         refreshClearButton()
 
         if (hasValidInput)
             showAsValidInput()
         else
             showAsNormalInput()
-
-        onTextChangeCallback?.invoke()
     }
 
     private fun refreshClearButton() {
@@ -151,6 +155,7 @@ class FormEditText : LinearLayout, IFormView {
 
     fun showAsValidInput() {
         ivIcon?.setColorFilter(notEmptyColor)
+        ivMandatoryIndicator?.setColorFilter(notEmptyColor)
         et?.hint = hint
         et?.setHintTextColor(normalHintTextColor)
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
@@ -158,6 +163,7 @@ class FormEditText : LinearLayout, IFormView {
 
     fun showAsNormalInput() {
         ivIcon?.setColorFilter(emptyNormalColor)
+        ivMandatoryIndicator?.setColorFilter(emptyErrorColor)
         et?.hint = hint
         et?.setHintTextColor(normalHintTextColor)
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
@@ -180,6 +186,7 @@ class FormEditText : LinearLayout, IFormView {
         get() = et?.text.toString()
         set(value) {
             et?.setText(value)
+            refreshViewsAfterTextChange()
         }
 
     override fun setOnClickListener(l: OnClickListener?) {

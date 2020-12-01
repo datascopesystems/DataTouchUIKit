@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
@@ -98,6 +99,7 @@ class FormDropDownListView : LinearLayout, IFormView {
         setOnClickListener()
         actv?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         actv?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ivMandatoryIndicator?.isVisible = isMandatoryField
     }
 
     private fun setOnClickListener() {
@@ -116,10 +118,14 @@ class FormDropDownListView : LinearLayout, IFormView {
     }
 
     private fun afterTextChanged() {
-        if (isItemSelected())
+        if (isItemSelected()) {
             ivIcon?.setColorFilter(selectedColor)
-        else
+            ivMandatoryIndicator?.setColorFilter(selectedColor)
+        }
+        else {
             ivIcon?.setColorFilter(unselectedNormalColor)
+            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+        }
     }
 
     private fun isItemSelected() = adapter?.isItemSelected == true
@@ -134,6 +140,7 @@ class FormDropDownListView : LinearLayout, IFormView {
     private fun onItemClick(selectedText: String) {
         actv?.setText(selectedText)
         ivIcon?.setColorFilter(selectedColor)
+        ivMandatoryIndicator?.setColorFilter(selectedColor)
         actv?.dismissDropDown()
     }
 
@@ -142,6 +149,7 @@ class FormDropDownListView : LinearLayout, IFormView {
     private fun onItemUnSelected() {
         actv?.setText("")
         ivIcon?.setColorFilter(unselectedNormalColor)
+        ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
         actv?.dismissDropDown()
     }
 
@@ -161,16 +169,20 @@ class FormDropDownListView : LinearLayout, IFormView {
         if (!isItemSelected()) {
             actv?.setText("")
             ivIcon?.setColorFilter(unselectedNormalColor)
+            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
             if (isMandatoryField) {
                 actv?.hint = leftUnselectedHint
                 actv?.setHintTextColor(unselectedErrorColor)
                 actv?.setTypeface(originalTypeface, Typeface.BOLD)
                 ivIcon?.setColorFilter(unselectedErrorColor)
+                ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
             }
         } else {
             actv?.hint = hint
             actv?.setHintTextColor(normalHintTextColor)
             actv?.setTypeface(originalTypeface, Typeface.NORMAL)
+            ivIcon?.setColorFilter(unselectedNormalColor)
+            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
         }
     }
 

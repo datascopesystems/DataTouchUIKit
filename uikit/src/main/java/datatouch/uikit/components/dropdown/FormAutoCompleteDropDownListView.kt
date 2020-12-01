@@ -106,6 +106,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         actv?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         actv?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
         ivClear?.setOnClickListener { actv?.setText("") }
+        ivMandatoryIndicator?.isVisible = isMandatoryField
     }
 
     private fun afterTextChanged() {
@@ -114,10 +115,14 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         if (isInputFromUser)
             adapter?.unSelectItem()
 
-        if (isItemSelected())
+        if (isItemSelected()) {
             ivIcon?.setColorFilter(selectedColor)
-        else
+            ivMandatoryIndicator?.setColorFilter(selectedColor)
+        }
+        else {
             ivIcon?.setColorFilter(unselectedNormalColor)
+            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+        }
     }
 
     private fun refreshClearButton() {
@@ -136,6 +141,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private fun onItemClick(selectedText: String) {
         setTextNotFromUser(selectedText)
         ivIcon?.setColorFilter(selectedColor)
+        ivMandatoryIndicator?.setColorFilter(selectedColor)
         actv?.dismissDropDown()
     }
 
@@ -145,15 +151,18 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         if (isUserLeftUnselected(focused)) {
             setTextNotFromUser("")
             ivIcon?.setColorFilter(unselectedNormalColor)
+            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
             if (isMandatoryField) {
                 actv?.hint = leftUnselectedHint
                 actv?.setHintTextColor(unselectedErrorColor)
                 actv?.setTypeface(originalTypeface, Typeface.BOLD)
                 ivIcon?.setColorFilter(unselectedErrorColor)
+                ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
             }
         } else {
             actv?.hint = hint
             ivIcon?.setColorFilter(unselectedNormalColor)
+            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
             actv?.setHintTextColor(normalHintTextColor)
             actv?.setTypeface(originalTypeface, Typeface.NORMAL)
         }

@@ -69,8 +69,15 @@
         android:layout_height="wrap_content"
         app:et_hint="this is edittext" />
 
+    <datatouch.uikit.components.edittext.FormEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:et_hint="this is edittext"
+        app:et_mandatory_field="true"/>
+
     <datatouch.uikit.components.dropdown.FormAutoCompleteDropDownListView
         android:id="@+id/facddkv"
+        app:actv_mandatory_field="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

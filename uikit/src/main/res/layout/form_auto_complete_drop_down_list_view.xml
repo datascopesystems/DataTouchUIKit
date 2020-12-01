@@ -20,18 +20,35 @@
         android:layout_height="0dp"
         android:orientation="horizontal" />
 
-    <ImageView
-        android:layout_alignParentStart="true"
-        android:id="@+id/ivIcon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_search_white"
-        app:tint="@color/white" />
+    <FrameLayout
+        android:id="@+id/flIcon"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="start|center_vertical"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_search_white"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/ivMandatoryIndicator"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="top|end"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_asterisk_white"
+            android:visibility="visible"
+            app:tint="@color/accent_negative_start_light" />
+
+    </FrameLayout>
 
     <AutoCompleteTextView
         android:id="@+id/actv"
-        android:layout_toEndOf="@+id/ivIcon"
+        android:layout_toEndOf="@+id/flIcon"
         android:layout_toStartOf="@+id/ivClear"
         style="@style/DropDownListViewStyle"
         android:layout_width="match_parent"
