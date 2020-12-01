@@ -14,10 +14,8 @@ import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.*
-import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.actv
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.ivClear
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.ivIcon
-import kotlinx.android.synthetic.main.form_drop_down_list_view.view.*
 import kotlinx.android.synthetic.main.form_edit_text.view.*
 
 private const val DefaultThreshold = 1
@@ -147,7 +145,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
 
     private fun onItemUnSelected() {
-        actv?.setText("")
+        setTextNotFromUser("")
         ivIcon?.setColorFilter(unselectedNormalColor)
         actv?.dismissDropDown()
     }
