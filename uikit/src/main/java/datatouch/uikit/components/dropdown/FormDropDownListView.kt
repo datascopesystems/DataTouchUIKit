@@ -195,4 +195,13 @@ class FormDropDownListView : LinearLayout, IFormView {
 
     override fun showMandatoryFieldErrorIfRequired() = onFocusChange(false)
 
+    override fun setMandatory(isMandatory: Boolean) {
+        isMandatoryField = isMandatory
+        refreshIfUnfocused()
+    }
+
+    private fun refreshIfUnfocused() {
+        if (!isFocused)
+            onUnFocused()
+    }
 }

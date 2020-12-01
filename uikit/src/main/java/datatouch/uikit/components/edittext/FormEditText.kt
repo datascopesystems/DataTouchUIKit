@@ -220,7 +220,7 @@ class FormEditText : LinearLayout, IFormView {
         ivIcon?.setImageDrawable(iconDrawable)
     }
 
-    fun setMandatory(isMandatory: Boolean) {
+    override fun setMandatory(isMandatory: Boolean) {
         this.isMandatoryField = isMandatory
         refreshIfUnfocused()
     }
