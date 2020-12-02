@@ -181,8 +181,8 @@ class FormDropDownListView : LinearLayout, IFormView {
             actv?.hint = hint
             actv?.setHintTextColor(normalHintTextColor)
             actv?.setTypeface(originalTypeface, Typeface.NORMAL)
-            ivIcon?.setColorFilter(unselectedNormalColor)
-            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+            ivIcon?.setColorFilter(selectedColor)
+            ivMandatoryIndicator?.setColorFilter(selectedColor)
         }
     }
 

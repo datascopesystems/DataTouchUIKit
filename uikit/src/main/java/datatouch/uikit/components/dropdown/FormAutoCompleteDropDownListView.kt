@@ -118,8 +118,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         if (isItemSelected()) {
             ivIcon?.setColorFilter(selectedColor)
             ivMandatoryIndicator?.setColorFilter(selectedColor)
-        }
-        else {
+        } else {
             ivIcon?.setColorFilter(unselectedNormalColor)
             ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
         }
@@ -148,7 +147,20 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
 
     private fun onFocusChange(focused: Boolean) {
-        if (isUserLeftUnselected(focused)) {
+        if (focused)
+            onFocused()
+        else
+            onUnfocused()
+    }
+
+    private fun onUnfocused() {
+        if (isItemSelected()) {
+            ivIcon?.setColorFilter(selectedColor)
+            ivMandatoryIndicator?.setColorFilter(selectedColor)
+            actv?.hint = hint
+            actv?.setHintTextColor(normalHintTextColor)
+            actv?.setTypeface(originalTypeface, Typeface.NORMAL)
+        } else {
             setTextNotFromUser("")
             ivIcon?.setColorFilter(unselectedNormalColor)
             ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
@@ -159,13 +171,15 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
                 ivIcon?.setColorFilter(unselectedErrorColor)
                 ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
             }
-        } else {
-            actv?.hint = hint
-            ivIcon?.setColorFilter(unselectedNormalColor)
-            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
-            actv?.setHintTextColor(normalHintTextColor)
-            actv?.setTypeface(originalTypeface, Typeface.NORMAL)
         }
+    }
+
+    private fun onFocused() {
+        actv?.hint = hint
+        ivIcon?.setColorFilter(unselectedNormalColor)
+        ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+        actv?.setHintTextColor(normalHintTextColor)
+        actv?.setTypeface(originalTypeface, Typeface.NORMAL)
     }
 
     private fun setTextNotFromUser(text: String) {
@@ -173,8 +187,6 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         actv?.setText(text)
         isInputFromUser = true
     }
-
-    private fun isUserLeftUnselected(focused: Boolean) = !focused && !isItemSelected()
 
     override fun onDetachedFromWindow() {
         adapter?.onViewInvalidateRequiredCallback = null
