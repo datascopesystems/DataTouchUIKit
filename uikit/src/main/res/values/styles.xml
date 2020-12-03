@@ -67,17 +67,6 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-
-    <style name="DatascopeTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="droppyMenuSeparatorStyle">@style/Datascope.Droppy.DroppyMenuSeparator</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowIsTranslucent">false</item>
-    </style>
-
-    <style name="Datascope.Droppy.DroppyMenuSeparator" parent="Droppy.DroppyMenuSeparator">
-        <item name="android:layout_height">0dp</item>
-    </style>
-
     <style name="TreeNodeStyleCustom">
         <item name="android:paddingLeft">20dp</item>
     </style>
