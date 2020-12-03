@@ -198,8 +198,6 @@ class FormEditText : LinearLayout, IFormView {
         ivIcon?.setOnClickListener(l)
     }
 
-    override fun showMandatoryFieldErrorIfRequired() = onUnfocused()
-
     fun setHint(hint: String) {
         this.hint = hint
         et?.hint = hint
@@ -220,9 +218,17 @@ class FormEditText : LinearLayout, IFormView {
         ivIcon?.setImageDrawable(iconDrawable)
     }
 
+    override fun showMandatoryFieldErrorIfRequired() {
+        if (!isMandatoryField) return
+
+        setMandatory(true)
+        onUnfocused()
+    }
+
+
     override fun setMandatory(isMandatory: Boolean) {
         this.isMandatoryField = isMandatory
-        refreshIfUnfocused()
+        ivMandatoryIndicator?.isVisible = isMandatoryField
     }
 
     fun setInputType(type: InputType) {

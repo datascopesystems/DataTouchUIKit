@@ -70,7 +70,9 @@ class TestActivity : AppCompatActivity() {
 
         val gtb = findViewById<ToggleButton>(R.id.gtb)
 
-        gtb.callback = { Toast.makeText(this, "Loh", Toast.LENGTH_LONG).show() }
+        gtb.callback = { fetMan?.showMandatoryFieldErrorIfRequired() }
+
+        fetMan?.setMandatory(true)
 
     }
 

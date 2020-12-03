@@ -65,6 +65,7 @@
         app:title="@string/from" />
 
     <datatouch.uikit.components.edittext.FormEditText
+        android:id="@+id/fetMan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:et_hint="this is edittext" />
