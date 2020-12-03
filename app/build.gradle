@@ -2,18 +2,26 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+// App Details
+def PackageName = "datatouch.uikitapp"
+def TargetSdkVersion = 30
+def MinSdkVersion = 21
+def BuildToolsVersion = '30.0.2'
+
+// Versions
+def JavaVersion = JavaVersion.VERSION_1_8
+def JavaVersionString = JavaVersion.toString()
+
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion TargetSdkVersion
+    buildToolsVersion BuildToolsVersion
 
     defaultConfig {
-        applicationId "datatouch.uikitapp"
-        minSdkVersion 21
-        targetSdkVersion 30
+        applicationId PackageName
+        minSdkVersion MinSdkVersion
+        targetSdkVersion TargetSdkVersion
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -23,28 +31,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion
+        targetCompatibility JavaVersion
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersionString
     }
 
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Android X
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'com.beardedhen:androidbootstrap:1.2.3'
-    implementation 'com.shehabic.droppy:Droppy:0.6.0@aar'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    testImplementation 'junit:junit:4.13'
+
+    // UIKit
     implementation project(":uikit")
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
 }

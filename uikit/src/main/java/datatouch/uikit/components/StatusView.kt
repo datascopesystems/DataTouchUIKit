@@ -85,7 +85,7 @@ class StatusView @JvmOverloads constructor(
     @setparam:FloatRange(from = 0.0, to = 1.0)
     var currentStatusZoom: Float = 0.0f
         set(value) {
-            require(value in 0..1) { "Zoom should be in between 0 to 1, but was $value." }
+            require(value > 0 && value < 1) { "Zoom should be in between 0 to 1, but was $value." }
 
             currentStatusRadius = circleRadius * (1 + value)
         }

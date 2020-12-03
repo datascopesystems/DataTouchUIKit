@@ -42,5 +42,6 @@
     <string name="to">To</string>
     <string name="list_is_empty">List is empty</string>
     <string name="loading">Loading, please wait…</string>
+    <string name="ok">OK</string>
 
 </resources>

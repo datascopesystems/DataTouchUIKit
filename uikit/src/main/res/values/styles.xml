@@ -29,10 +29,6 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="BackToButtonTitle" parent="TextAppearance.ShowcaseView.Title">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">14sp</item>
-    </style>
     <!-- Due to https://issuetracker.google.com/issues/68454482 bug with Android O+, DO NOT set windowIsTranslucent=true -->
     <style name="RoutingActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">false</item>
@@ -74,47 +70,6 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="OkAcceptButtonStyle">
-        <item name="bb_icon_left">fa-thumbs-o-up</item>
-        <item name="bb_roundedCorners">false</item>
-        <item name="bb_type">success</item>
-        <item name="android:text">@string/ok</item>
-    </style>
-
-    <style name="DangerButtonExitCloseStyle">
-        <item name="bb_icon_left">fa-close</item>
-        <item name="bb_roundedCorners">false</item>
-        <item name="bb_type">danger</item>
-    </style>
-
-    <style name="DefaultBlueButtonStyle">
-        <item name="bb_roundedCorners">true</item>
-        <item name="bb_type">primary</item>
-    </style>
-
-    <style name="WarningButtonStyle">
-        <item name="bb_roundedCorners">false</item>
-        <item name="bb_type">warning</item>
-    </style>
-
-    <style name="WarningButtonStyle.ApplyForAllModules">
-        <item name="bb_icon_left">fa-exclamation</item>
-    </style>
-
-    <style name="CancelButtonStyle" parent="DangerButtonExitCloseStyle">
-        <item name="android:text">@string/cancel</item>
-    </style>
-
-
-    <style name="MenuLabelsStyle">
-        <item name="android:background">@drawable/background_rounded_cornerns_green</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:maxLines">2</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:ellipsize">end</item>
-    </style>
 
     <style name="NavigationPathTextStyle">
         <item name="android:textSize">14sp</item>
