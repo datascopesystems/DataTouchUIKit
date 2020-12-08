@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.core.util.Consumer
+import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.CCircleCheckBox
 import datatouch.uikit.core.utils.Conditions.isNotNull
@@ -78,6 +79,10 @@ class PinPadView :
     fun displayUserInput() {
         llCheckBoxesContainer?.visibility = View.GONE
         etAmount?.visibility = View.VISIBLE
+    }
+
+    fun showUserInput(show: Boolean) {
+        etAmount?.isVisible = show
     }
 
     fun setOnClickListeners() {
@@ -272,6 +277,10 @@ class PinPadView :
     fun setTitle(title: String?) {
         tvTitle?.visibility = View.VISIBLE
         tvTitle?.text = title
+    }
+
+    fun showTitle(show: Boolean) {
+        tvTitle?.isVisible = show
     }
 
     fun setOnEnteredNumberChangedCallback(numberChangedCallback: OnEnteredNumberChangedCallback?) {
