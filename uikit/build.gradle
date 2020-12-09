@@ -85,6 +85,7 @@ dependencies {
     implementation "androidx.camera:camera-core:${CameraXVersion}"
     implementation "androidx.camera:camera-lifecycle:${CameraXVersion}"
     implementation "androidx.camera:camera-view:1.0.0-alpha19"
+    implementation "androidx.camera:camera-camera2:${CameraXVersion}"
 
     // Animations
     implementation 'com.nineoldandroids:library:2.4.0'

@@ -95,7 +95,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="15dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:icon="@drawable/ic_check_white" />
 
         </RelativeLayout>
