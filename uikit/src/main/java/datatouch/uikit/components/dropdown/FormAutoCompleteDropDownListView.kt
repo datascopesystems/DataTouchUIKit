@@ -199,11 +199,14 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
 
     override fun setMandatory(isMandatory: Boolean) {
         isMandatoryField = isMandatory
-        refreshIfUnfocused()
+        ivMandatoryIndicator?.isVisible = isMandatoryField
     }
 
-    private fun refreshIfUnfocused() {
-        if (!isFocused)
-            onFocusChange(false)
+    fun setLeftUnselectedHint(leftUnselectedHint: String) {
+        this.leftUnselectedHint = leftUnselectedHint
+    }
+
+    fun getLeftUnselectedHint(): String {
+        return leftUnselectedHint
     }
 }

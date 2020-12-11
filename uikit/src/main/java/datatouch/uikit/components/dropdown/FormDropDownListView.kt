@@ -197,11 +197,14 @@ class FormDropDownListView : LinearLayout, IFormView {
 
     override fun setMandatory(isMandatory: Boolean) {
         isMandatoryField = isMandatory
-        refreshIfUnfocused()
+        ivMandatoryIndicator?.isVisible = isMandatoryField
     }
 
-    private fun refreshIfUnfocused() {
-        if (!isFocused)
-            onUnFocused()
+    fun setLeftUnselectedHint(leftUnselectedHint: String) {
+        this.leftUnselectedHint = leftUnselectedHint
+    }
+
+    fun getLeftUnselectedHint(): String {
+        return leftUnselectedHint
     }
 }

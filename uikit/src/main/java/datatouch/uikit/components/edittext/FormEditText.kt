@@ -208,6 +208,10 @@ class FormEditText : LinearLayout, IFormView {
         refreshIfUnfocused()
     }
 
+    fun getLeftUnselectedHint(): String {
+        return leftUnselectedHint
+    }
+
     private fun refreshIfUnfocused() {
         if (!isFocused)
             onUnfocused()
@@ -225,7 +229,6 @@ class FormEditText : LinearLayout, IFormView {
         onUnfocused()
     }
 
-
     override fun setMandatory(isMandatory: Boolean) {
         this.isMandatoryField = isMandatory
         ivMandatoryIndicator?.isVisible = isMandatoryField
@@ -240,5 +243,4 @@ class FormEditText : LinearLayout, IFormView {
         this.isEditable = isEditable
         setupInputType()
     }
-
 }
