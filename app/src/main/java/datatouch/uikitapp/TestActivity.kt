@@ -26,6 +26,9 @@ class TestActivity : AppCompatActivity() {
         val btnTest = findViewById<ImageButtonAccentOutline>(R.id.btnTest)
         val dropDown = findViewById<FormDropDownListView>(R.id.dropDown)
 
+        fet?.text = "Some Value"
+
+
         val adapter = CriteriaSearchEditTextAdapter<C>()
 
         csed?.setAdapter(adapter)
@@ -73,6 +76,7 @@ class TestActivity : AppCompatActivity() {
         gtb.callback = { fetMan?.showMandatoryFieldErrorIfRequired() }
 
         fetMan?.setMandatory(true)
+
 
     }
 

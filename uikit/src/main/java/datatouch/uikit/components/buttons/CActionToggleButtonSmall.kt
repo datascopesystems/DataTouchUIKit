@@ -6,20 +6,24 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.StyleableRes
 import datatouch.uikit.R
-import datatouch.uikit.core.utils.Conditions
+import datatouch.uikit.core.callbacks.UiCallback
 import kotlinx.android.synthetic.main.action_toggle_button_small.view.*
 
 class CActionToggleButtonSmall : RelativeLayout {
 
-    private var checked = false
     private var layoutWidth = 0
     private var layoutHeight = 0
-    private var callback: OnCheckChangedCallback =
-        object : OnCheckChangedCallback {
-            override fun onCheckChanged() {
 
-            }
+    var callback: UiCallback<Boolean>? = null
+
+    var checked = false
+        set(value) {
+            field = value
+            rlRoot?.setBackgroundResource(
+                if (value) R.drawable.toggle_button_background_active
+                else R.drawable.toggle_button_background_inactive)
         }
 
     constructor(context: Context) : super(context) {
@@ -56,8 +60,10 @@ class CActionToggleButtonSmall : RelativeLayout {
         )
         val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
         try {
-            layoutWidth = typedArray.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT)
-            layoutHeight = typedArray.getLayoutDimension(1, ViewGroup.LayoutParams.WRAP_CONTENT)
+            @StyleableRes val widthIndex = 0
+            @StyleableRes val heightIndex = 1
+            layoutWidth = typedArray.getLayoutDimension(widthIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutHeight = typedArray.getLayoutDimension(heightIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
         } finally {
             typedArray.recycle()
         }
@@ -79,33 +85,14 @@ class CActionToggleButtonSmall : RelativeLayout {
 
     fun initViews() {
         rlRoot.setOnClickListener { rootView() }
-        setChecked(checked)
+        checked = !checked
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.action_toggle_button_small, this)
-    }
-
-    fun setChecked(checked: Boolean) {
-        this.checked = checked
-        rlRoot?.setBackgroundResource(if (checked) R.drawable.toggle_button_background_active else R.drawable.toggle_button_background_inactive)
-    }
+    private fun inflateView() = View.inflate(context, R.layout.action_toggle_button_small, this)
 
     fun rootView() {
         checked = !checked
-        setChecked(checked)
-        callback.onCheckChanged()
+        callback?.invoke(checked)
     }
 
-    fun setCallback(callback: OnCheckChangedCallback) {
-        if (Conditions.isNotNull(callback)) this.callback = callback
-    }
-
-    fun isChecked(): Boolean {
-        return checked
-    }
-
-    interface OnCheckChangedCallback {
-        fun onCheckChanged()
-    }
 }
