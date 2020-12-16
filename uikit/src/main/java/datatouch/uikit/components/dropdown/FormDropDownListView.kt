@@ -90,6 +90,7 @@ class FormDropDownListView : LinearLayout, IFormView {
     fun afterViews() {
         originalTypeface = actv?.typeface
         actv?.inputType = android.text.InputType.TYPE_NULL
+        actv?.keyListener = null
         actv?.dropDownVerticalOffset = verticalOffsetPx
         actv?.hint = hint
         actv?.setHintTextColor(normalHintTextColor)
