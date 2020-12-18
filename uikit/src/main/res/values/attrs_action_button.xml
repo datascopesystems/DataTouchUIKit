@@ -13,6 +13,7 @@
         <attr name="background" format="reference" />
         <attr name="maxTextCharacters" format="integer" />
         <attr name="checked" format="boolean" />
+        <attr name="locked" format="boolean" />
         <attr name="active_background" format="reference" />
         <attr name="inactive_background" format="reference" />
         <attr name="is_enabled" format="boolean" />

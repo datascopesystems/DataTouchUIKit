@@ -77,6 +77,15 @@ class TestActivity : AppCompatActivity() {
 
         fetMan?.setMandatory(true)
 
+        tbSmall?.onCheckChangedCallback = {
+            Toast.makeText(this, "Check Changed", Toast.LENGTH_SHORT).show()
+        }
+
+        tbSmall?.onLockedCallback = {
+            tbSmall?.locked = false
+        }
+
+
 
     }
 
