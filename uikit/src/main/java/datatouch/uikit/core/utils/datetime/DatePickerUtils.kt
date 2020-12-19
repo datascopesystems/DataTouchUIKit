@@ -1,11 +1,9 @@
 package datatouch.uikit.core.utils.datetime
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import datatouch.uikit.R
-import datatouch.uikit.components.datapicker.date.DatePickerFragmentDialog
 import datatouch.uikit.core.extensions.GenericExtensions.default
 import datatouch.uikit.core.utils.datetime.internal.DateTimeUtilsInternal
 import java.util.*
@@ -14,15 +12,11 @@ typealias DatePickerCallback = (pickedDate: Date, pickedDateStr: String) -> Unit
 
 object DatePickerUtils {
 
-    private const val StartDateRange = 2015
-    private const val EndDateRange = 2025
+    private const val MinYear = 2015
+    private const val MaxYear = 2030
 
-    val yearsRange: ArrayList<String>
-        get() {
-            val years = ArrayList<String>()
-            for (i in StartDateRange until EndDateRange) years.add(i.toString())
-            return years
-        }
+    val defaultMinDate = createDate(MinYear, 1, 1)
+    val defaultMaxDate = createDate(MaxYear, 1, 1)
 
     @JvmStatic
     fun getMonthsAsStringArray(context: Context): List<String> {
@@ -43,88 +37,47 @@ object DatePickerUtils {
         return calendar
     }
 
-    fun showDatePicker(
-        fragmentActivity: FragmentActivity?,
-        currentDate: Date?,
-        callback: DatePickerCallback
-    ) = fragmentActivity?.let {
-        val calendar = DateTimeUtilsInternal.calendar()
-        calendar.time = currentDate.default(DateTimeUtilsInternal.now())
-        val dialog = DatePickerFragmentDialog.newInstance(
-            object : DatePickerFragmentDialog.OnDateSetListener {
-                override fun onDateSet(
-                    view: DatePickerFragmentDialog?,
-                    year: Int, monthOfYear: Int, dayOfMonth: Int
-                ) {
-                    callback.invoke(
-                        DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth),
-                        DateTimeFormatUtils.format(
-                            DateTimeUtilsInternal.getDate(
-                                year,
-                                monthOfYear,
-                                dayOfMonth
-                            )
-                        )
-                    )
-                }
-            },
-            calendar[Calendar.YEAR],
-            calendar[Calendar.MONTH],
-            calendar[Calendar.DAY_OF_MONTH]
-        )
-        dialog.isThemeDark = true
-        dialog.setAccentColor(ContextCompat.getColor(it, R.color.accent_start_dark))
-        dialog.setYearRange(StartDateRange, EndDateRange)
-        dialog.show(it.supportFragmentManager, DatePickerFragmentDialog::class.java.name)
+    fun createDate(year: Int, month: Int, day: Int): Date {
+        val cal = Calendar.getInstance()
+        cal[Calendar.YEAR] = year
+        cal[Calendar.MONTH] = month
+        cal[Calendar.DAY_OF_MONTH] = day
+        cal[Calendar.HOUR_OF_DAY] = 0
+        cal[Calendar.MINUTE] = 0
+        cal[Calendar.SECOND] = 0
+        cal[Calendar.MILLISECOND] = 0
+        return cal.time
     }
 
-    @JvmStatic
     fun showDatePickerInRange(
-        fragmentActivity: FragmentActivity?,
-        currentDate: Date?,
+        context: Context?,
+        selectedDate: Date?,
         callback: DatePickerCallback,
-        minDate: Date?,
-        maxDate: Date?,
-        disableDates: List<Date>? = null
-    ) = fragmentActivity?.let {
+        minDate: Date? = null,
+        maxDate: Date? = null) = context?.let {
+
         val calendar = DateTimeUtilsInternal.calendar()
-        calendar.time = currentDate.default(DateTimeUtilsInternal.now())
-        val dialog = DatePickerFragmentDialog.newInstance(
-            object : DatePickerFragmentDialog.OnDateSetListener {
-                override fun onDateSet(
-                    view: DatePickerFragmentDialog?,
-                    year: Int, monthOfYear: Int, dayOfMonth: Int
-                ) {
+        calendar.time = selectedDate.default(DateTimeUtilsInternal.now())
+
+        val dialog = DatePickerDialog(it,
+                { _, year, month, dayOfMonth ->
                     callback.invoke(
-                        DateTimeUtilsInternal.getDate(year, monthOfYear, dayOfMonth),
+                        DateTimeUtilsInternal.getDate(year, month, dayOfMonth),
                         DateTimeFormatUtils.format(
                             DateTimeUtilsInternal.getDate(
                                 year,
-                                monthOfYear,
-                                dayOfMonth
-                            )
-                        )
-                    )
-                }
-            },
-            calendar[Calendar.YEAR],
-            calendar[Calendar.MONTH],
-            calendar[Calendar.DAY_OF_MONTH]
-        )
-        dialog.isThemeDark = true
-        dialog.setAccentColor(ContextCompat.getColor(it, R.color.accent_start_dark))
+                                month,
+                                dayOfMonth)))
+                },
+                calendar[Calendar.YEAR],
+                calendar[Calendar.MONTH],
+                calendar[Calendar.DAY_OF_MONTH])
 
-        minDate?.apply { dialog.setMinDate(time) }
-        maxDate?.apply { dialog.setMaxDate(time) }
 
-        dialog.setYearRange(StartDateRange, EndDateRange)
-        dialog.setMonthYearPickersVisible(false)
-        dialog.setDisabledDays(disableDates?.map { date ->
-            val c = Calendar.getInstance()
-            c.timeInMillis = date.time
-            c
-        }?.toTypedArray())
-        dialog.show(it.supportFragmentManager, DatePickerFragmentDialog::class.java.name)
+        dialog.datePicker.minDate = minDate?.time.default(defaultMinDate.time)
+        dialog.datePicker.maxDate = maxDate?.time.default(defaultMaxDate.time)
+
+        dialog.show()
     }
 
 }

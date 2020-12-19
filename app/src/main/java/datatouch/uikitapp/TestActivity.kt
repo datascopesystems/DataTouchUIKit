@@ -12,6 +12,7 @@ import datatouch.uikit.components.dropdown.FormDropDownListView
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditText
 import datatouch.uikit.components.edittext.search.CriteriaSearchEditTextAdapter
 import datatouch.uikit.components.edittext.search.SearchCriterionItemHolder
+import datatouch.uikit.core.utils.datetime.DatePickerUtils
 import datatouch.uikitapp.adapters.TestAutocompleteDropDownListAdapter
 import datatouch.uikitapp.adapters.TestItemHolder
 import datatouch.uikitapp.adapters.TestSelectableDropDownListAdapter
@@ -67,7 +68,8 @@ class TestActivity : AppCompatActivity() {
         dropDownAdapter.selectItem(dropDownAdapter.data[1])
 
         val autocompleteAdapter = TestAutocompleteDropDownListAdapter()
-        autocompleteAdapter.data = mutableListOf(TestItemHolder(), TestItemHolder(), TestItemHolder())
+        autocompleteAdapter.data =
+            mutableListOf(TestItemHolder(), TestItemHolder(), TestItemHolder())
 
         facddkv?.setAdapter(autocompleteAdapter)
 
@@ -77,8 +79,15 @@ class TestActivity : AppCompatActivity() {
 
         fetMan?.setMandatory(true)
 
+        val selectedDate = DatePickerUtils.createDate(2016, 5, 13)
+
         tbSmall?.onCheckChangedCallback = {
-            Toast.makeText(this, "Check Changed", Toast.LENGTH_SHORT).show()
+            /*DatePickerUtils.showDatePickerInRange(
+                this, selectedDate, { pickedDate: Date, pickedDateStr: String -> {} },
+                null, null,)*/
+           /* TimePickerUtils.showTimePicker(this, TimePoint(10, 7),
+                { timePoint: TimePoint, pickedDateTimeStr: String -> })*/
+
         }
 
         tbSmall?.onLockedCallback = {
@@ -86,8 +95,8 @@ class TestActivity : AppCompatActivity() {
         }
 
 
-
     }
+
 
     enum class C {
         C1, C2, C3

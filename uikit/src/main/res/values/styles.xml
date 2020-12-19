@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
 
     <style name="NoActionBarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
@@ -11,17 +11,6 @@
     <style name="DropDownListViewStyle">
         <item name="android:divider">@drawable/line_divider_with_margins</item>
         <item name="android:dividerHeight">1dp</item>
-    </style>
-
-
-    <attr name="amdp_theme_dark" format="boolean">false</attr>
-
-
-    <style name="amdp_ActionButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/amdp_material_button_height</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:focusable">true</item>
     </style>
 
     <style name="StreamingDataTableSubHeaderAppearance" parent="@android:style/TextAppearance">
@@ -47,20 +36,6 @@
     <style name="StreamDataTableLabelAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">#fff</item>
         <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="amdp_ActionButton.Text" tools:ignore="NewApi">
-        <item name="android:textSize">@dimen/amdp_material_button_textsize</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:gravity">center</item>
-        <item name="android:stateListAnimator">@null</item>
-        <item name="android:background">@drawable/amdp_material_button_background</item>
-        <item name="android:minWidth">@dimen/amdp_material_button_minwidth</item>
-        <item name="android:paddingLeft">@dimen/amdp_material_button_textpadding_horizontal</item>
-        <item name="android:paddingRight">@dimen/amdp_material_button_textpadding_horizontal</item>
-        <item name="android:textColor">@color/amdp_button_color</item>
-        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="TreeNodeStyleCustom">

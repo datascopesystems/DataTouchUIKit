@@ -5,14 +5,6 @@ import android.os.Parcelable
 import androidx.annotation.IntRange
 import java.util.*
 
-/**
- * Simple utility class that represents a time in the day up to second precision
- * The time input is expected to use 24 hour mode.
- * Fields are modulo'd into their correct ranges.
- * It does not handle timezones.
- *
- * Created by wdullaer on 13/10/15.
- */
 class TimePoint : Parcelable, Comparable<TimePoint> {
     @get:IntRange(from = 0, to = 23)
     var hour: Int
@@ -67,8 +59,8 @@ class TimePoint : Parcelable, Comparable<TimePoint> {
         if (hour < 12) hour = (hour + 12) % 24
     }
 
-    fun add(type: TYPE, value: Int) {
-        var value = value
+    fun add(type: TYPE, addValue: Int) {
+        var value = addValue
         if (type == TYPE.MINUTE) value *= 60
         if (type == TYPE.HOUR) value *= 3600
         value += toSeconds()
@@ -126,7 +118,6 @@ class TimePoint : Parcelable, Comparable<TimePoint> {
             TYPE.SECOND -> second
             TYPE.MINUTE -> minute
             TYPE.HOUR -> hour
-            else -> hour
         }
     }
 
@@ -146,10 +137,10 @@ class TimePoint : Parcelable, Comparable<TimePoint> {
         return toSeconds()
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o == null || javaClass != o.javaClass) return false
-        val timepoint = o as TimePoint
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+        val timepoint = other as TimePoint
         return hashCode() == timepoint.hashCode()
     }
 
@@ -171,8 +162,8 @@ class TimePoint : Parcelable, Comparable<TimePoint> {
         return output
     }
 
-    override fun compareTo(t: TimePoint): Int {
-        return hashCode() - t.hashCode()
+    override fun compareTo(other: TimePoint): Int {
+        return hashCode() - other.hashCode()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
@@ -192,7 +183,7 @@ class TimePoint : Parcelable, Comparable<TimePoint> {
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<TimePoint> = object : Parcelable.Creator<TimePoint> {
-            override fun createFromParcel(`in`: Parcel): TimePoint? {
+            override fun createFromParcel(`in`: Parcel): TimePoint {
                 return TimePoint(`in`)
             }
 
