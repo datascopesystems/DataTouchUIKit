@@ -43,5 +43,6 @@
     <string name="list_is_empty">List is empty</string>
     <string name="loading">Loading, please wait…</string>
     <string name="ok">OK</string>
+    <string name="no_cameras_detected">No cameras detected</string>
 
 </resources>

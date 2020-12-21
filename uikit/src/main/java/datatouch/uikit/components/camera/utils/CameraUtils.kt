@@ -1,6 +1,9 @@
 package datatouch.uikit.components.camera.utils
 
+import android.content.Context
 import android.content.Intent
+import androidx.camera.core.CameraSelector
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.fragment.app.FragmentActivity
 import datatouch.uikit.components.camera.fragments.ProxyCameraLaunchFragment
 import datatouch.uikit.components.camera.models.CameraActivityParams
@@ -36,4 +39,22 @@ object CameraUtils {
             Intent(activity, params.cameraActivityClass), CameraActivityRequestCode)
     }
 
+    fun anyCameraAvailable(context: Context): Boolean {
+        val cameraProvider = ProcessCameraProvider.getInstance(context).get()
+        return hasBackCamera(cameraProvider) || hasFrontCamera(cameraProvider)
+    }
+
+    internal fun bothBackAndFrontCamerasAvailable(context: Context) : Boolean {
+        val cameraProvider = ProcessCameraProvider.getInstance(context).get()
+        return hasBackCamera(cameraProvider) && hasFrontCamera(cameraProvider)
+    }
+
+    internal fun hasBackCamera(cameraProvider: ProcessCameraProvider) =
+        cameraProvider.hasCamera(cameraSelectorWithLensFacing(CameraSelector.LENS_FACING_BACK))
+
+    internal fun cameraSelectorWithLensFacing(lensFacing: Int) =
+        CameraSelector.Builder().requireLensFacing(lensFacing).build()
+
+    internal fun hasFrontCamera(cameraProvider: ProcessCameraProvider) =
+        cameraProvider.hasCamera(cameraSelectorWithLensFacing(CameraSelector.LENS_FACING_FRONT))
 }
