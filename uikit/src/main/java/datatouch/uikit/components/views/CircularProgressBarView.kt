@@ -30,15 +30,14 @@ class CircularProgressBarView(
     private var startAngle = DEFAULT_START_ANGLE
     private var progressAnimator: ValueAnimator? = null
     private var indeterminateModeHandler: Handler? = null
-    private var rectF: RectF? = null
-    private var backgroundPaint: Paint? = null
-    private var foregroundPaint: Paint? = null
-    private var glowPaint: Paint? = null
+    private var rectF: RectF = RectF()
+    private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val foregroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val glowPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
     private fun init(
         context: Context,
         attrs: AttributeSet
     ) {
-        rectF = RectF()
         val typedArray = context.theme
             .obtainStyledAttributes(attrs, R.styleable.CircularProgressBarView, 0, 0)
         try {
@@ -73,22 +72,26 @@ class CircularProgressBarView(
         } finally {
             typedArray.recycle()
         }
-        backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        backgroundPaint?.color = backgroundColor
-        backgroundPaint?.style = Paint.Style.STROKE
-        backgroundPaint?.strokeWidth = backgroundStrokeWidth
-        foregroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        foregroundPaint?.color = color
-        foregroundPaint?.style = Paint.Style.STROKE
-        foregroundPaint?.strokeCap = Paint.Cap.ROUND
-        foregroundPaint?.strokeJoin = Paint.Join.ROUND
-        foregroundPaint?.strokeWidth = strokeWidth
+
+        initPaint()
+    }
+
+    private fun initPaint() {
+        backgroundPaint.color = backgroundColor
+        backgroundPaint.style = Paint.Style.STROKE
+        backgroundPaint.strokeWidth = backgroundStrokeWidth
+
+        foregroundPaint.color = color
+        foregroundPaint.style = Paint.Style.STROKE
+        foregroundPaint.strokeCap = Paint.Cap.ROUND
+        foregroundPaint.strokeJoin = Paint.Join.ROUND
+        foregroundPaint.strokeWidth = strokeWidth
+
         if (drawProgressGlow) {
-            glowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-            glowPaint?.color = color
-            glowPaint?.style = Paint.Style.STROKE
-            glowPaint?.strokeWidth = strokeWidth
-            glowPaint?.maskFilter = BlurMaskFilter(glowRadius, BlurMaskFilter.Blur.OUTER)
+            glowPaint.color = color
+            glowPaint.style = Paint.Style.STROKE
+            glowPaint.strokeWidth = strokeWidth
+            glowPaint.maskFilter = BlurMaskFilter(glowRadius, BlurMaskFilter.Blur.OUTER)
             setLayerType(LAYER_TYPE_SOFTWARE, null)
         }
     }
@@ -108,13 +111,14 @@ class CircularProgressBarView(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawOval(rectF!!, backgroundPaint!!)
+        canvas.drawOval(rectF, backgroundPaint)
         val realProgress =
             progress * DEFAULT_MAX_VALUE / progressMax
         val angle = (if (rightToLeft) 360 else -360) * realProgress / 100
-        canvas.drawArc(rectF!!, startAngle, angle, false, foregroundPaint!!)
+        canvas.drawArc(rectF, startAngle, angle, false, foregroundPaint)
+
         if (drawProgressGlow) {
-            canvas.drawArc(rectF!!, startAngle, angle, false, glowPaint!!)
+            canvas.drawArc(rectF, startAngle, angle, false, glowPaint)
         }
     }
 
@@ -130,11 +134,18 @@ class CircularProgressBarView(
             getDefaultSize(suggestedMinimumWidth, widthMeasureSpec)
         val min = Math.min(width, height)
         setMeasuredDimension(min, min)
+        calculateRect(min)
+    }
+
+    private fun calculateRect(minSize: Int) {
+        if (minSize <= 0) {
+            return
+        }
         var highStroke = Math.max(strokeWidth, backgroundStrokeWidth)
         if (drawProgressGlow) {
             highStroke += glowRadius * 1.4.toFloat()
         }
-        rectF!![0 + highStroke / 2, 0 + highStroke / 2, min - highStroke / 2] = min - highStroke / 2
+        rectF[0 + highStroke / 2, 0 + highStroke / 2, minSize - highStroke / 2] = minSize - highStroke / 2
     }
 
     fun getProgress(): Float {
@@ -160,7 +171,7 @@ class CircularProgressBarView(
 
     fun setColor(color: Int) {
         this.color = color
-        foregroundPaint?.color = color
+        foregroundPaint.color = color
         reDraw()
     }
 
@@ -170,7 +181,7 @@ class CircularProgressBarView(
 
     override fun setBackgroundColor(backgroundColor: Int) {
         this.backgroundColor = backgroundColor
-        backgroundPaint?.color = backgroundColor
+        backgroundPaint.color = backgroundColor
         reDraw()
     }
 
@@ -230,6 +241,20 @@ class CircularProgressBarView(
         } else {
             setProgress(0f, true)
         }
+    }
+
+    fun setStrokeWidth(width: Float) {
+        strokeWidth = width
+        initPaint()
+        val min = Math.min(measuredWidth, measuredHeight)
+        calculateRect(min)
+    }
+
+    fun setBackgroundStrokeWidth(width: Float) {
+        backgroundStrokeWidth = width
+        initPaint()
+        val min = Math.min(measuredWidth, measuredHeight)
+        calculateRect(min)
     }
 
     companion object {

@@ -95,6 +95,13 @@ class TestActivity : AppCompatActivity() {
         }
 
 
+        btnLoading?.setOnClickListener {
+            if (btnLoading?.isLoading() == true) {
+                btnLoading?.showLoading(false)
+            } else {
+                btnLoading?.showLoading(true)
+            }
+        }
     }
 
 

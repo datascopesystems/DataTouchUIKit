@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/action_button_background_accent_outline"
+    android:paddingBottom="7dp"
+    android:paddingLeft="13dp"
+    android:paddingRight="13dp"
+    android:paddingTop="7dp"
+    android:gravity="center">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="7dp">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_settings_white" />
+
+        <datatouch.uikit.components.views.CircularProgressBarView
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:cpb_background_progressbar_color="@color/secondary_light_transparent"
+            app:cpb_background_progressbar_width="2dp"
+            app:cpb_indeterminate_mode="true"
+            app:cpb_progressbar_color="@color/accent_start_light"
+            app:cpb_progressbar_width="2dp"
+            app:cpb_show_progressbar_glow="false" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
+</LinearLayout>
