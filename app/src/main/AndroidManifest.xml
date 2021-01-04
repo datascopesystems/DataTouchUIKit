@@ -18,7 +18,7 @@
             android:name="datatouch.uikitapp.TestActivity"
             android:hardwareAccelerated="true"
             android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateHidden|adjustPan">
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

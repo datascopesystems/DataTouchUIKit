@@ -86,4 +86,5 @@
     <dimen name="day_button_size">40dp</dimen>
     <dimen name="day_button_max_font_size">22sp</dimen>
 
+    <dimen name="rounded_corner_radius">20dp</dimen>
 </resources>

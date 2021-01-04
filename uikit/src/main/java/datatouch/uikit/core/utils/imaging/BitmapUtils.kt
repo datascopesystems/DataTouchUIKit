@@ -1,6 +1,7 @@
 package datatouch.uikit.core.utils.imaging
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Base64
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -36,6 +37,12 @@ object BitmapUtils {
             e.printStackTrace()
             null
         }
+    }
+
+    fun readBitmapFromFile(imagePath: String?): Bitmap {
+        val options = BitmapFactory.Options()
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888
+        return BitmapFactory.decodeFile(imagePath, options)
     }
 
 }
