@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rlRoot">
+    android:id="@+id/rlEsvRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true">
 
     <ScrollView
         android:id="@+id/svLoadingState"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:foregroundGravity="center"
@@ -57,7 +58,7 @@
                 app:cpb_indeterminate_mode="true"
                 app:cpb_progressbar_color="@color/accent_start_light"
                 app:cpb_progressbar_width="4dp"
-                app:cpb_show_progressbar_glow="true"/>
+                app:cpb_show_progressbar_glow="true" />
 
             <FrameLayout
                 android:id="@+id/flProgress"
@@ -95,9 +96,11 @@
     <!--Layout for list containing view (ListView, RecyclerView, GridView) etc-->
 
     <FrameLayout
+        android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/flContainer">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
         <LinearLayout
             android:id="@+id/llListContainer"
@@ -135,8 +138,8 @@
 
     <ScrollView
         android:id="@+id/svEmptyState"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone">

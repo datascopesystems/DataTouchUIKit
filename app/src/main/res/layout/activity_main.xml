@@ -4,26 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <datatouch.uikit.components.emptystateview.EmptyStateView
+        android:id="@+id/esv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/app_background_blur_london_thames" />
+        android:padding="15dp"
+        app:initial_state="loading"
+        app:detailed_loading_info="false"
+        app:empty_state_title="Test">
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <datatouch.uikit.components.edittext.FormEditText
-            android:id="@+id/fetMan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            app:et_hint="this is edittext" />
+    </datatouch.uikit.components.emptystateview.EmptyStateView>
 
-    </ScrollView>
 
 
 </RelativeLayout>

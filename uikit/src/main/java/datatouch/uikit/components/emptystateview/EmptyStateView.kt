@@ -7,9 +7,14 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.StyleableRes
+import androidx.core.view.isVisible
 import datatouch.uikit.R
+import datatouch.uikit.core.callbacks.UiCallback
+import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
 import datatouch.uikit.core.utils.Conditions
-import datatouch.uikit.core.utils.views.ViewUtils
+import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.empty_state_view.view.*
 
 private const val DefaultTextColor = Int.MIN_VALUE
@@ -38,22 +43,18 @@ class EmptyStateView : RelativeLayout {
     private var addedContainer: View? = null
 
     // Array of view ids added as part of this view
-    private val addedViewIds = intArrayOf(R.id.rlRoot)
+    private val addedViewIds = intArrayOf(R.id.rlEsvRoot)
+
+    private var layoutWidth = 0
+    private var layoutHeight = 0
 
     constructor(context: Context?, attrs: AttributeSet) : super(context, attrs) {
-        inflateView()
-        parseCustomAttributes(attrs)
-        afterView()
+        init(attrs)
     }
 
-    constructor(context: Context?, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        inflateView()
-        parseCustomAttributes(attrs)
-        afterView()
+    constructor(context: Context?, attrs: AttributeSet, defStyleAttr: Int)
+            : super(context, attrs, defStyleAttr) {
+        init(attrs)
     }
 
     constructor(
@@ -61,17 +62,47 @@ class EmptyStateView : RelativeLayout {
         attrs: AttributeSet,
         defStyleAttr: Int,
         @Suppress("UNUSED_PARAMETER") defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr) {
+    )
+            : super(context, attrs, defStyleAttr) {
+        init(attrs)
+    }
+
+    private fun init(attrs: AttributeSet?) {
         inflateView()
-        parseCustomAttributes(attrs)
+        parseAttributes(attrs)
         afterView()
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.empty_state_view, this)
+    private fun inflateView() = View.inflate(context, R.layout.empty_state_view, this)
+
+    private fun parseAttributes(attrs: AttributeSet?) {
+        parseNativeAttributes(attrs)
+        parseCustomAttributes(attrs)
     }
 
-    private fun parseCustomAttributes(attrs: AttributeSet) {
+    private fun parseNativeAttributes(attrs: AttributeSet?) {
+        val attrIndexes = intArrayOf(
+            android.R.attr.layout_width,
+            android.R.attr.layout_height,
+            android.R.attr.paddingLeft,
+            android.R.attr.paddingTop,
+            android.R.attr.paddingRight,
+            android.R.attr.paddingBottom
+        )
+        val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
+        try {
+            @StyleableRes val widthIndex = 0
+            @StyleableRes val heightIndex = 1
+            layoutWidth =
+                typedArray.getLayoutDimension(widthIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutHeight =
+                typedArray.getLayoutDimension(heightIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+        } finally {
+            typedArray.recycle()
+        }
+    }
+
+    private fun parseCustomAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(
             attrs,
             R.styleable.EmptyStateView, 0, 0
@@ -107,6 +138,7 @@ class EmptyStateView : RelativeLayout {
     }
 
     fun afterView() {
+        applyNativeAttributes()
         setupDimViewClickListener()
         setupInitialState()
         setupTextColor()
@@ -121,7 +153,20 @@ class EmptyStateView : RelativeLayout {
         setupDimTitle()
     }
 
-    private fun setupDimViewClickListener() = rlDim.setOnClickListener { }
+    private fun applyNativeAttributes() {
+        applyLayoutParams()
+    }
+
+    private fun applyLayoutParams() {
+        rlEsvRoot?.layoutParams?.width =
+            if (layoutWidth < 0) layoutWidth
+            else ResourceUtils.convertDpToPixel(context, layoutWidth.toFloat()).toInt()
+        rlEsvRoot?.layoutParams?.height =
+            if (layoutHeight < 0) layoutHeight
+            else ResourceUtils.convertDpToPixel(context, layoutHeight.toFloat()).toInt()
+    }
+
+    private fun setupDimViewClickListener() = rlDim?.setOnClickListener { }
 
     private fun setupInitialState() {
         when (State.fromValue(initialState)) {
@@ -132,30 +177,30 @@ class EmptyStateView : RelativeLayout {
     }
 
     val isLoadingState: Boolean
-        get() = svLoadingState.visibility == View.VISIBLE
+        get() = svLoadingState?.visibility == View.VISIBLE
 
     fun showLoading() {
-        svLoadingState.visibility = View.VISIBLE
-        flContainer.visibility = View.GONE
-        svEmptyState.visibility = View.GONE
+        svLoadingState?.visibility = View.VISIBLE
+        flContainer?.visibility = View.GONE
+        svEmptyState?.visibility = View.GONE
         if (!detailedLoadingInfo) {
-            circularProgressBar.visibility = View.GONE
-            tvLoadingStateSubTitle.visibility = View.GONE
-            tvLoadingStateTitle.visibility = View.GONE
-            flProgress.visibility = View.VISIBLE
+            circularProgressBar?.visibility = View.GONE
+            tvLoadingStateSubTitle?.visibility = View.GONE
+            tvLoadingStateTitle?.visibility = View.GONE
+            flProgress?.visibility = View.VISIBLE
         }
     }
 
     fun showEmpty() {
-        svLoadingState.visibility = View.GONE
-        flContainer.visibility = View.GONE
-        svEmptyState.visibility = View.VISIBLE
+        svLoadingState?.visibility = View.GONE
+        flContainer?.visibility = View.GONE
+        svEmptyState?.visibility = View.VISIBLE
     }
 
     fun showContainer() {
-        svLoadingState.visibility = View.GONE
-        flContainer.visibility = View.VISIBLE
-        svEmptyState.visibility = View.GONE
+        svLoadingState?.visibility = View.GONE
+        flContainer?.visibility = View.VISIBLE
+        svEmptyState?.visibility = View.GONE
     }
 
     fun setupTextColor() {
@@ -163,80 +208,79 @@ class EmptyStateView : RelativeLayout {
     }
 
     fun setTextColor(color: Int) {
-        tvEmptyStateSubTitle.setTextColor(color)
-        tvEmptyStateTitle.setTextColor(color)
-        tvLoadingStateSubTitle.setTextColor(color)
-        tvLoadingStateTitle.setTextColor(color)
+        tvEmptyStateSubTitle?.setTextColor(color)
+        tvEmptyStateTitle?.setTextColor(color)
+        tvLoadingStateSubTitle?.setTextColor(color)
+        tvLoadingStateTitle?.setTextColor(color)
     }
 
     private fun setupEmptyStateImage() = setEmptyStateImage(emptyStateDrawable)
 
     fun setEmptyStateImage(drawable: Drawable?) {
-        ivEmptyStatePicture.setImageDrawable(drawable)
-        ivEmptyStatePicture.visibility =
-            if (Conditions.isNotNull(drawable)) View.VISIBLE else View.GONE
+        ivEmptyStatePicture?.setImageDrawable(drawable)
+        ivEmptyStatePicture?.isVisible = Conditions.isNotNull(drawable)
     }
 
     fun setupEmptyStateTitle() = setEmptyStateTitle(emptyStateTitle)
 
     fun setEmptyStateTitle(title: String?) {
-        tvEmptyStateTitle.text = title
-        tvEmptyStateTitle.visibility = if (Conditions.isNotNull(title)) View.VISIBLE else View.GONE
+        tvEmptyStateTitle?.text = title
+        tvEmptyStateTitle?.isVisible = Conditions.isNotNull(title)
     }
 
     fun setupEmptyStateSubTitle() = setEmptyStateSubTitle(emptyStateSubTitle)
 
     fun setEmptyStateSubTitle(subTitle: String?) {
-        tvEmptyStateSubTitle.text = subTitle
-        tvEmptyStateSubTitle.visibility =
-            if (Conditions.isNotNull(subTitle)) View.VISIBLE else View.GONE
+        tvEmptyStateSubTitle?.text = subTitle
+        tvEmptyStateSubTitle?.isVisible = Conditions.isNotNull(subTitle)
     }
 
-    fun setEmptyStateActionButton(actionTitle: String?, clickListener: (View?) -> Unit) {
-        btnEmptyStateAction.setOnClickListener(clickListener)
-        btnEmptyStateAction.setText(actionTitle)
-        btnEmptyStateAction.visibility =
-            if (Conditions.isNotNull(actionTitle)) View.VISIBLE else View.GONE
+    fun setEmptyStateActionButton(actionTitle: String?, clickListener: UiCallback<View?>) {
+        btnEmptyStateAction?.setOnClickListener(clickListener)
+        btnEmptyStateAction?.setText(actionTitle)
+        btnEmptyStateAction?.isVisible = Conditions.isNotNull(actionTitle)
     }
 
     fun setupActionButtonText() = setEmptyStateActionButton(actionButtonText)
 
     fun setEmptyStateActionButton(actionTitle: String?) {
-        btnEmptyStateAction.setText(actionTitle)
+        btnEmptyStateAction?.setText(actionTitle)
     }
 
-    fun setEmptyStateActionButton(clickListener: OnClickListener?) {
-        btnEmptyStateAction.setOnClickListener(clickListener)
+    fun onActionButtonClick(onClick: UiJustCallback) {
+        btnEmptyStateAction?.setOnClickListener { onClick.invoke() }
     }
 
     private fun setupActionButtonVisibility() =
-        if (actionButtonVisible) showEmptyStateActionButton() else hideEmptyStateActionButton()
+        setEmptyStateActionButtonVisibility(actionButtonVisible)
 
     fun hideEmptyStateActionButton() {
-        btnEmptyStateAction.visibility = View.GONE
+        setEmptyStateActionButtonVisibility(false)
     }
 
     fun showEmptyStateActionButton() {
-        btnEmptyStateAction.visibility = View.VISIBLE
+        setEmptyStateActionButtonVisibility(true)
+    }
+
+    fun setEmptyStateActionButtonVisibility(isVisible: Boolean) {
+        btnEmptyStateAction?.isVisible = isVisible
     }
 
     fun setupLoadingStateTitle() = setLoadingStateTitle(loadingStateTitle)
 
     fun setLoadingStateTitle(title: String?) {
-        tvLoadingStateTitle.text = title
+        tvLoadingStateTitle?.text = title
         if (detailedLoadingInfo) {
-            tvLoadingStateTitle.visibility =
-                if (Conditions.isNotNull(title)) View.VISIBLE else View.GONE
+            tvLoadingStateTitle?.isVisible = title.isNotNull()
         }
     }
 
     fun setupLoadingStateSubTitle() = setLoadingStateSubTitle(loadingStateSubTitle)
 
     fun setLoadingStateSubTitle(subTitle: String?) {
-        tvLoadingStateSubTitle.text = subTitle
+        tvLoadingStateSubTitle?.text = subTitle
         if (detailedLoadingInfo) {
-            tvLoadingStateSubTitle.visibility =
-                if (Conditions.isNotNull(subTitle)) View.VISIBLE else View.GONE
+            tvLoadingStateSubTitle?.isVisible = subTitle.isNotNull()
         }
     }
 
@@ -247,21 +291,28 @@ class EmptyStateView : RelativeLayout {
 
 
     fun setContainerView(containerView: View?) {
-        llListContainer.removeAllViews()
+        llListContainer?.removeAllViews()
         try { // View may already exist in parent container or at leas view has a reference to the parent (memory leak btw)
-            if (ViewUtils.isViewAddedToParent(containerView!!, llListContainer)) {
-                ViewUtils.tryToRemoveViewFromParent(containerView)
-            }
-            llListContainer.addView(
-                containerView,
-                LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
+//            if (isViewAddedToParent(containerView, llListContainer))
+//                tryToRemoveViewFromParent(containerView)
+
+            llListContainer?.addView(
+                containerView, LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
                 )
             )
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
+    }
+
+    private fun isViewAddedToParent(view: View?, viewGroup: ViewGroup): Boolean {
+        val existing = viewGroup.findViewById<View>(view?.id ?: 0)
+        if (null == existing) {
+            val parent = view?.parent as ViewGroup
+            return Conditions.isNotNull(parent)
+        }
+        return true
     }
 
     fun show(isEmpty: Boolean) {
@@ -272,22 +323,21 @@ class EmptyStateView : RelativeLayout {
         if (hasContent) showContainer() else showLoading()
     }
 
-    val container: ViewGroup
+    val container: ViewGroup?
         get() = llListContainer
 
     private fun setupDimTitle() {
-        if (Conditions.isNotNullOrEmpty(dimTitle.toString())) {
+        if (Conditions.isNotNullOrEmpty(dimTitle.orEmpty()))
             setDimTitle(dimTitle)
-        }
     }
 
     fun setDimTitle(title: String?) {
-        tvDimStateTitle.text = title
-        tvDimStateTitle.visibility = if (Conditions.isNotNull(title)) View.VISIBLE else View.GONE
+        tvDimStateTitle?.text = title
+        tvDimStateTitle?.isVisible = Conditions.isNotNull(title)
     }
 
     fun dimContainer(dim: Boolean) {
-        rlDim.visibility = if (dim) View.VISIBLE else View.GONE
+        rlDim?.isVisible = dim
     }
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
