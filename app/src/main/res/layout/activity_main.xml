@@ -13,6 +13,10 @@
         app:detailed_loading_info="false"
         app:empty_state_title="Test">
 
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </datatouch.uikit.components.emptystateview.EmptyStateView>
 
