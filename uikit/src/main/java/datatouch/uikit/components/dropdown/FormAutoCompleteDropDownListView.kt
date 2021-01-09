@@ -36,6 +36,8 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     private var adapter: ISelectableDropDownListAdapter? = null
     private var isInputFromUser = true
 
+    private var releaseAdapterOnDetachedFromWindow = true
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(context, attrs)
     }
@@ -188,10 +190,18 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         isInputFromUser = true
     }
 
-    override fun onDetachedFromWindow() {
+    fun setReleaseAdapterOnDetachedFromWindow(release: Boolean) {
+        releaseAdapterOnDetachedFromWindow = release
+    }
+
+    fun releaseAdapter() {
         adapter?.onViewInvalidateRequiredCallback = null
         adapter = null
         actv?.setAdapter(null)
+    }
+
+    override fun onDetachedFromWindow() {
+        if (releaseAdapterOnDetachedFromWindow) releaseAdapter()
         super.onDetachedFromWindow()
     }
 

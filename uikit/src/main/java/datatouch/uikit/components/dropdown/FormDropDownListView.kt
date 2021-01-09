@@ -30,6 +30,8 @@ class FormDropDownListView : LinearLayout, IFormView {
     private var iconDrawable: Drawable? = null
     private var isMandatoryField = false
 
+    private var releaseAdapterOnDetachedFromWindow = true
+
     private var adapter: ISelectableDropDownListAdapter? = null
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -187,10 +189,18 @@ class FormDropDownListView : LinearLayout, IFormView {
         }
     }
 
-    override fun onDetachedFromWindow() {
+    fun setReleaseAdapterOnDetachedFromWindow(release: Boolean) {
+        releaseAdapterOnDetachedFromWindow = release
+    }
+
+    fun releaseAdapter() {
         adapter?.onViewInvalidateRequiredCallback = null
         adapter = null
         actv?.setAdapter(null)
+    }
+
+    override fun onDetachedFromWindow() {
+        if (releaseAdapterOnDetachedFromWindow) releaseAdapter()
         super.onDetachedFromWindow()
     }
 
