@@ -182,6 +182,12 @@ class FormEditText : LinearLayout, IFormView {
 
     val hasValidInput get() = et?.text?.isNotEmpty() == true
 
+    val hasValidInputWhenMandatory
+        get() = run {
+            if (isMandatoryField) hasValidInput
+            else true
+        }
+
     var text: String
         get() = et?.text.toString()
         set(value) {
@@ -232,6 +238,7 @@ class FormEditText : LinearLayout, IFormView {
     override fun setMandatory(isMandatory: Boolean) {
         this.isMandatoryField = isMandatory
         ivMandatoryIndicator?.isVisible = isMandatoryField
+        refreshViewsAfterTextChange()
     }
 
     fun setInputType(type: InputType) {
