@@ -9,8 +9,10 @@
         <attr name="et_inputType" format="enum">
             <enum name="text" value="0" />
             <enum name="number" value="1" />
+            <enum name="text_multiline" value="2" />
         </attr>
         <attr name="et_editable" format="boolean"/>
+        <attr name="et_max_lines" format="integer"/>
     </declare-styleable>
 
 </resources>

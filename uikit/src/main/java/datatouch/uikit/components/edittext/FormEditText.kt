@@ -32,6 +32,7 @@ class FormEditText : LinearLayout, IFormView {
     private var isMandatoryField = false
     private var inputType = InputType.Text
     private var isEditable = true
+    private var maxLines = 1
 
     private var enableClickOnFocus = false
     var onTextChangeCallback: UiJustCallback? = null
@@ -91,6 +92,8 @@ class FormEditText : LinearLayout, IFormView {
             inputType = InputType.fromInt(inputTypeInt)
 
             isEditable = typedArray.getBoolean(R.styleable.FormEditText_et_editable, true)
+
+            maxLines = typedArray.getInteger(R.styleable.FormEditText_et_max_lines, 1)
         } finally {
             typedArray.recycle()
         }
@@ -102,6 +105,7 @@ class FormEditText : LinearLayout, IFormView {
         et?.setHintTextColor(normalHintTextColor)
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
         setupInputType()
+        et?.maxLines = maxLines
         refreshClearButton()
         ivIcon?.setImageDrawable(iconDrawable)
         et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
@@ -120,6 +124,8 @@ class FormEditText : LinearLayout, IFormView {
             InputType.Text -> et.inputType = android.text.InputType.TYPE_CLASS_TEXT
 
             InputType.Number -> et.inputType = android.text.InputType.TYPE_CLASS_NUMBER
+
+            InputType.TextMultiline -> et.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
         }
     }
 
