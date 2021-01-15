@@ -4,22 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <datatouch.uikit.components.emptystateview.EmptyStateView
-        android:id="@+id/esv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"
-        app:initial_state="loading"
-        app:detailed_loading_info="false"
-        app:empty_state_title="Test">
-
-        <EditText
-            android:id="@+id/et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </datatouch.uikit.components.emptystateview.EmptyStateView>
-
-
+    <datatouch.uikit.components.edittext.FormEditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:et_max_text_length="5"/>
 
 </RelativeLayout>

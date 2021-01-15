@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.text.InputFilter
 import android.util.AttributeSet
 import android.view.View
 import android.view.View.OnFocusChangeListener
@@ -32,7 +33,8 @@ class FormEditText : LinearLayout, IFormView {
     private var isMandatoryField = false
     private var inputType = InputType.Text
     private var isEditable = true
-    private var maxLines = 1
+    private var maxLines = DefaultMaxLines
+    private var maxTextLength = DefaultMaxTextLength
 
     private var enableClickOnFocus = false
     var onTextChangeCallback: UiJustCallback? = null
@@ -93,7 +95,11 @@ class FormEditText : LinearLayout, IFormView {
 
             isEditable = typedArray.getBoolean(R.styleable.FormEditText_et_editable, true)
 
-            maxLines = typedArray.getInteger(R.styleable.FormEditText_et_max_lines, 1)
+            maxLines = typedArray.getInteger(R.styleable.FormEditText_et_max_lines, DefaultMaxLines)
+
+            maxTextLength = typedArray.getInt(R.styleable.FormEditText_et_max_text_length,
+                DefaultMaxTextLength)
+
         } finally {
             typedArray.recycle()
         }
@@ -102,6 +108,7 @@ class FormEditText : LinearLayout, IFormView {
     fun afterViews() {
         originalTypeface = et?.typeface
         et?.hint = hint
+        et?.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxTextLength))
         et?.setHintTextColor(normalHintTextColor)
         et?.setTypeface(originalTypeface, Typeface.NORMAL)
         setupInputType()
@@ -257,3 +264,6 @@ class FormEditText : LinearLayout, IFormView {
         setupInputType()
     }
 }
+
+const val DefaultMaxTextLength = 60
+const val DefaultMaxLines = 1

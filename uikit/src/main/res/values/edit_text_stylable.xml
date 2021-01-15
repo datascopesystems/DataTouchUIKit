@@ -2,6 +2,7 @@
 <resources>
 
     <declare-styleable name="FormEditText">
+        <attr name="et_max_text_length" format="integer"/>
         <attr name="et_hint" format="string" />
         <attr name="et_left_unselected_hint" format="string" />
         <attr name="et_icon" format="reference" />
