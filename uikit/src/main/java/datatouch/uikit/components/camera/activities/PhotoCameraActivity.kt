@@ -47,10 +47,6 @@ class PhotoCameraActivity : AppCompatActivity() {
 
     private val executor by lazy { ContextCompat.getMainExecutor(this) }
 
-    private val metadata by lazy {
-        packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA).metaData
-    }
-
     private val permissions by lazy { listOf(Manifest.permission.CAMERA) }
 
     private val permissionsRequestCode by lazy { Random.nextInt(0, 10000) }

@@ -5,7 +5,7 @@ apply plugin: "kotlin-kapt"
 
 // App Details
 def TargetSdkVersion = 30
-def MinSdkVersion = 21
+def MinSdkVersion = 16
 def BuildToolsVersion = '30.0.2'
 
 // Versions
@@ -96,7 +96,7 @@ dependencies {
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
 
     // Material Components
-    implementation 'com.google.android.material:material:1.3.0-beta01'
+    implementation 'com.google.android.material:material:1.3.0-rc01'
 
     // Toast Notifications
     implementation 'com.github.GrenderG:Toasty:1.3.0'
