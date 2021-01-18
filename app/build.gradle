@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 // App Details
 def PackageName = "datatouch.uikitapp"
 def TargetSdkVersion = 30
-def MinSdkVersion = 21
+def MinSdkVersion = 16
 def BuildToolsVersion = '30.0.2'
 
 // Versions
