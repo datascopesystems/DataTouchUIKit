@@ -25,7 +25,7 @@ import androidx.lifecycle.LifecycleOwner
 import datatouch.uikit.R
 import datatouch.uikit.components.camera.models.CameraActivityResult
 import datatouch.uikit.components.camera.models.PhotoCameraActivityParams
-import datatouch.uikit.components.camera.utils.CameraUtils
+import datatouch.uikit.components.camera.utils.CameraXUtils
 import datatouch.uikit.components.toast.ToastNotification
 import datatouch.uikit.core.extensions.IntExtensions.orZero
 import java.io.File
@@ -56,7 +56,7 @@ class PhotoCameraActivity : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
         injectActivityParams()
 
-        if (!CameraUtils.anyCameraAvailable(this)) {
+        if (!CameraXUtils.anyCameraAvailable(this)) {
             ToastNotification.showError(this, R.string.no_cameras_detected)
             cancelAndFinish()
             return
@@ -139,7 +139,7 @@ class PhotoCameraActivity : AppCompatActivity() {
     }
 
     private fun setupLensFacing() {
-        if (!CameraUtils.bothBackAndFrontCamerasAvailable(this)) {
+        if (!CameraXUtils.bothBackAndFrontCamerasAvailable(this)) {
             btnSwitchCamera?.isVisible = false
             return
         }
@@ -161,11 +161,15 @@ class PhotoCameraActivity : AppCompatActivity() {
         }
     }
 
-    private val hasBackCamera get() = cameraProvider.get().hasCamera(
-        CameraUtils.cameraSelectorWithLensFacing(LENS_FACING_BACK))
+    private val hasBackCamera
+        get() = cameraProvider.get().hasCamera(
+            CameraXUtils.cameraSelectorWithLensFacing(LENS_FACING_BACK)
+        )
 
-    private val hasFrontCamera get() = cameraProvider.get().hasCamera(
-        CameraUtils.cameraSelectorWithLensFacing(LENS_FACING_FRONT))
+    private val hasFrontCamera
+        get() = cameraProvider.get().hasCamera(
+            CameraXUtils.cameraSelectorWithLensFacing(LENS_FACING_FRONT)
+        )
 
     private fun cancelAndFinish() {
         setResult(Activity.RESULT_CANCELED)
@@ -173,24 +177,20 @@ class PhotoCameraActivity : AppCompatActivity() {
     }
 
     private fun bindCamera() {
-            cameraProvider.addListener({
-                    preview = Preview.Builder()
-                        .setTargetRotation(previewView?.display?.rotation.orZero())
-                        .build()
-                        .apply { setSurfaceProvider(previewView?.surfaceProvider) }
+        cameraProvider.addListener({
+            preview = Preview.Builder()
+                .setTargetRotation(previewView?.display?.rotation.orZero())
+                .build()
+                .apply { setSurfaceProvider(previewView?.surfaceProvider) }
 
-                    imageCapture = ImageCapture.Builder()
-                        .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                        .setTargetRotation(previewView?.display?.rotation.orZero())
-                        .build()
+            imageCapture = ImageCapture.Builder()
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .setTargetRotation(previewView?.display?.rotation.orZero())
+                .build()
 
-                    // Prevent 'Could not retrieve native window from surface' error on legacy API
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1)
-                        previewView?.post { tryBindCamera() }
-                    else
-                        previewView?.postDelayed({ tryBindCamera() }, LegacyCameraStartDelayMs)
+            previewView?.post { tryBindCamera() }
 
-            }, executor)
+        }, executor)
     }
 
     private fun tryBindCamera() {
@@ -199,10 +199,10 @@ class PhotoCameraActivity : AppCompatActivity() {
             cameraProvider.unbindAll()
             cameraProvider.bindToLifecycle(
                 this as LifecycleOwner,
-                CameraUtils.cameraSelectorWithLensFacing(lensFacing),
+                CameraXUtils.cameraSelectorWithLensFacing(lensFacing),
                 preview, imageCapture
             )
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             cancelAndFinish()
         }
     }
@@ -239,5 +239,3 @@ class PhotoCameraActivity : AppCompatActivity() {
     }
 
 }
-
-private const val LegacyCameraStartDelayMs = 500L

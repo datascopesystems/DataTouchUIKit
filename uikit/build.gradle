@@ -5,7 +5,7 @@ apply plugin: "kotlin-kapt"
 
 // App Details
 def TargetSdkVersion = 30
-def MinSdkVersion = 16
+def MinSdkVersion = 19
 def BuildToolsVersion = '30.0.2'
 
 // Versions
@@ -29,6 +29,10 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
         vectorDrawables.useSupportLibrary = true
     }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+    }
+
     repositories {
         google()
         maven {
@@ -86,6 +90,9 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:${CameraXVersion}"
     implementation "androidx.camera:camera-view:1.0.0-alpha20"
     implementation "androidx.camera:camera-camera2:${CameraXVersion}"
+
+    // Legacy camera (API < 23)
+    implementation 'com.github.jkwiecien:EasyImage:2.1.1'
 
     // Animations
     implementation 'com.nineoldandroids:library:2.4.0'

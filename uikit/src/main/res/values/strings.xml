@@ -44,5 +44,6 @@
     <string name="loading">Loading, please wait…</string>
     <string name="ok">OK</string>
     <string name="no_cameras_detected">No cameras detected</string>
+    <string name="error_capturing_image">Error capturing image</string>
 
 </resources>

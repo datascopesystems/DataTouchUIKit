@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 // App Details
 def PackageName = "datatouch.uikitapp"
 def TargetSdkVersion = 30
-def MinSdkVersion = 16
+def MinSdkVersion = 19
 def BuildToolsVersion = '30.0.2'
 
 // Versions
@@ -22,6 +22,11 @@ android {
         targetSdkVersion TargetSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
     }
 
     buildTypes {
