@@ -216,7 +216,8 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         this.leftUnselectedHint = leftUnselectedHint
     }
 
-    fun getLeftUnselectedHint(): String {
-        return leftUnselectedHint
+    fun setHint(hint: String) {
+        this.hint = hint
+        onFocusChange(isFocused)
     }
 }
