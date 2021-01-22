@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlRoot"
     android:layout_width="@dimen/pinpad_button_size"
     android:layout_height="@dimen/pinpad_button_size"
@@ -14,5 +15,13 @@
         android:text="@string/ok"
         android:textColor="@color/white"
         android:textSize="@dimen/pinpad_text_size" />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
 
 </merge>

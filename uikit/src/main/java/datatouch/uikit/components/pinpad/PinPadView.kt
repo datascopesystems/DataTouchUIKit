@@ -309,6 +309,14 @@ class PinPadView :
         isReadOnly = true
     }
 
+    fun setOkButtonAppearanceDefault() {
+        btnOk?.setAppearanceDefault()
+    }
+
+    fun setOkButtonAppearanceArrowRight() {
+        btnOk?.setAppearanceArrowRight()
+    }
+
     interface OnOkClickListener {
         fun onOkClicked(input: String?)
     }
