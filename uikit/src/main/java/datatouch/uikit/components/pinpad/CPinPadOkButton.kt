@@ -51,7 +51,7 @@ open class CPinPadOkButton : RelativeLayout, IResizeable {
     fun setAppearanceArrowRight() {
         tvText?.isVisible = false
         ivIcon?.isVisible = true
-        ivIcon?.setImageResource(R.drawable.ic_pinpad_ok_button_arrow_right)
+        ivIcon?.setImageResource(R.drawable.ic_arrow_thin_right_white)
         setBackgroundResource(R.drawable.pinpad_cancel_button_background)
     }
 }
