@@ -1,6 +1,6 @@
 package datatouch.uikit.components.dropdown.adapter
 
-import datatouch.uikit.components.recyclerview.IListAdapterFilterable
+import datatouch.uikit.components.recyclerview.filterable.IListAdapterFilterable
 
 data class DropDownListFilterItem<TItem: IDropDownListAdapterItem>(val item : TItem)
     : IListAdapterFilterable<DefaultDropDownListCriterion> {

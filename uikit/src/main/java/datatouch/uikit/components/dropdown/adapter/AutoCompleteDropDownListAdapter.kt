@@ -1,7 +1,7 @@
 package datatouch.uikit.components.dropdown.adapter
 
 import android.widget.Filter
-import datatouch.uikit.components.recyclerview.ListFilter
+import datatouch.uikit.components.recyclerview.filterable.ListFilter
 
 abstract class AutoCompleteDropDownListAdapter<TItem : IDropDownListAdapterItem>
     : SelectableDropDownListAdapter<TItem>() {

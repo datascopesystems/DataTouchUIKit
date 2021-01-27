@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
 
-abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
+abstract class RecyclerViewListAdapter<TData, TView : View>
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var headerViewHolder: RecyclerView.ViewHolder? = null
@@ -26,7 +26,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
             }
         }
 
-    open var data: List<T> = listOf()
+    open var data: List<TData> = listOf()
         set(data) {
             field = data
             notifyDataSetChanged()
@@ -34,7 +34,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
 
     open val isEmpty get() = dataItemCount == 0
 
-    var selectedItem: T? = null
+    var selectedItem: TData? = null
         set(value) {
             val index = data.indexOf(field)
             field = null
@@ -92,7 +92,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
     }
 
 
-    fun addData(position: Int, item: T) {
+    fun addData(position: Int, item: TData) {
         if (position <= data.size) {
             val mutableData = data.toMutableList()
             mutableData.add(position, item)
@@ -101,7 +101,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
         }
     }
 
-    fun appendData(item: T) = addData(dataItemCount, item)
+    fun appendData(item: TData) = addData(dataItemCount, item)
 
     fun removeData(position: Int) {
         if (position < data.size) {
@@ -112,7 +112,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
         }
     }
 
-    fun removeData(item: T) {
+    fun removeData(item: TData) {
         val index = data.indexOf(item)
         if (index != -1) {
             removeData(index)
@@ -140,7 +140,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
         notifyItemChanged(position)
     }
 
-    fun notifyMyItemChanged(item: T) {
+    fun notifyMyItemChanged(item: TData) {
         val index = data.indexOf(item)
 
         if (-1 != index) {
@@ -164,7 +164,7 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         @Suppress("UNCHECKED_CAST")
         if (!isHeader(position) && !isFooter(position))
-            onBindDataItemViewHolder(holder as VH, itemPositionInData(position))
+            onBindDataItemViewHolder(holder as ViewHolder<TView>, itemPositionInData(position))
 
         if (isHeader(position)) {
             onBindHeaderItemViewHolder(holder, position)
@@ -208,9 +208,9 @@ abstract class RecyclerViewListAdapter<T, VH : RecyclerView.ViewHolder>
 
     private fun hasFooter() = footerViewHolder != null
 
-    abstract fun onCreateDataItemViewHolder(parent: ViewGroup, viewType: Int): VH
+    abstract fun onCreateDataItemViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<TView>
 
-    abstract fun onBindDataItemViewHolder(holder: VH, position: Int)
+    abstract fun onBindDataItemViewHolder(holder: ViewHolder<TView>, position: Int)
 
     private fun onBindHeaderItemViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
 

@@ -2,21 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
-    <datatouch.uikit.components.dropdown.FormAutoCompleteDropDownListView
-        android:id="@+id/acdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:actv_icon="@drawable/ic_shutter_white"
-        app:actv_hint="initial hint"
-        app:actv_left_unselected_hint="initial left unselected hint"
-        app:actv_mandatory_field="true"
-        />
 
-    <datatouch.uikit.components.edittext.FormEditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

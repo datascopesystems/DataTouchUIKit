@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.View
-import android.widget.LinearLayout
+import datatouch.uikit.components.recyclerview.movable.MovableItemView
 import datatouch.uikitapp.R
 import kotlinx.android.synthetic.main.test_drop_down_item_view.view.*
 
 @SuppressLint("NonConstantResourceId", "ViewConstructor")
-class TestDropDownItemViewUi(context: Context?) : LinearLayout(context) {
+class TestDropDownItemViewUi(context: Context?) : MovableItemView(context) {
+
+    override val moveAnchorView: View? get() = iv
 
     init {
         View.inflate(context, R.layout.test_drop_down_item_view, this)
