@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="ToolBar">
         <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_icon" format="reference" />
     </declare-styleable>
 
 </resources>
