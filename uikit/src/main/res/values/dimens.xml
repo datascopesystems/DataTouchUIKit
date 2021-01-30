@@ -1,90 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- Text Sizes -->
+    <dimen name="text_l">24sp</dimen>
+    <dimen name="text_m">18sp</dimen>
+    <dimen name="text_s">15sp</dimen>
+    <dimen name="text_xs">13sp</dimen>
 
-    <!-- Standard dimens for the bars -->
-    <dimen name="height_header_dialog">60dp</dimen>
-    <dimen name="hotspot_company_icon">30dp</dimen>
-    <dimen name="width_pin_button">100dp</dimen>
-    <dimen name="height_pin_button">75dp</dimen>
-    <dimen name="text_size_settings_tab">16sp</dimen>
-    <dimen name="list_item_company_padding">5dp</dimen>
-    <dimen name="default_title_text_size">18sp</dimen>
-    <dimen name="dimension_item_email_group_icon">40dp</dimen>
-    <dimen name="default_text_size_description">16sp</dimen>
-    <dimen name="vertical_padding">5dp</dimen>
-    <dimen name="padding_item_asset_date">7dp</dimen>
-    <dimen name="text_size_button_icon">25sp</dimen>
-    <dimen name="text_size_scroll_button_icon">20sp</dimen>
-    <dimen name="icon_size_question_item">50dp</dimen>
-    <dimen name="size_path_marker_button">30dp</dimen>
-    <!--
-    <dimen description="icon_size_top_menu">30dp</dimen>
--->
-    <dimen name="icon_size_small">22dp</dimen>
-    <dimen name="icon_arrow_size">30dp</dimen>
-    <dimen name="icon_size_comment_item">30dp</dimen>
-    <dimen name="default_title_small_text_size">14sp</dimen>
+    <!-- Margins -->
+    <dimen name="margin_xs">5dp</dimen>
+    <dimen name="margin_s">10dp</dimen>
+    <dimen name="margin_m">15dp</dimen>
+    <dimen name="margin_l">25dp</dimen>
+    <dimen name="margin_xl">30dp</dimen>
 
-    <dimen name="expand_size">30dp</dimen>
-    <dimen name="item_margin">15dp</dimen>
-    <dimen name="radius_circle_background">10dp</dimen>
+    <!-- Icon Sizes -->
+    <dimen name="icon_xxxs">10dp</dimen>
+    <dimen name="icon_xxs">20dp</dimen>
+    <dimen name="icon_xs">30dp</dimen>
+    <dimen name="icon_s">40dp</dimen>
+    <dimen name="icon_m">50dp</dimen>
+    <dimen name="icon_l">110dp</dimen>
+
+    <!-- Paddings -->
+    <dimen name="padding_xs">5dp</dimen>
+    <dimen name="padding_s">10dp</dimen>
+    <dimen name="padding_m">15dp</dimen>
+    <dimen name="padding_l">25dp</dimen>
+    <dimen name="padding_xl">30dp</dimen>
+
+    <!-- List Items -->
+    <dimen name="list_item_height_m">70dp</dimen>
+
+    <!-- Buttons -->
+    <dimen name="list_item_button_size">45dp</dimen>
+    <dimen name="list_item_button_padding">3dp</dimen>
+    <dimen name="navigation_button_height">70dp</dimen>
+    <dimen name="navigation_button_arrow_height">30dp</dimen>
     <dimen name="floating_circle_button_size">50dp</dimen>
     <dimen name="accent_outline_image_button_size">40dp</dimen>
-    <dimen name="size_background_circle">30dp</dimen>
-    <dimen name="size_background_circle_pause">120dp</dimen>
-    <dimen name="text_size_icon_large">70sp</dimen>
-    <dimen name="default_large_text_size">32sp</dimen>
-    <dimen name="text_size_medium">18sp</dimen>
-    <dimen name="size_hotspot_icon">50dp</dimen>
 
-    <!--
-    <dimen description="size_hotspot_navigation_button">52dp</dimen>
--->
-    <dimen name="size_icon_item_tree_list_brush">40dp</dimen>
-    <dimen name="size_icon_item_tree_list_nav">30dp</dimen>
-    <dimen name="size_item_delivery">30dp</dimen>
-    <dimen name="default_view_padding">5dp</dimen>
-    <dimen name="size_checkbox_list_item">25dp</dimen>
-    <!--
-    <dimen description="size_height_hotspot_item">70dp</dimen>
--->
-    <dimen name="size_width_hotspot_item">60dp</dimen>
-    <dimen name="size_text_hotspot_item">9sp</dimen>
-    <dimen name="size_hotspot_icon_small">25dp</dimen>
-    <dimen name="circle_button_diamert">70dp</dimen>
-    <dimen name="min_text_size">8sp</dimen>
-    <dimen name="badge_icon">14sp</dimen>
-    <dimen name="size_badge_icon">20dp</dimen>
-    <dimen name="size_badge_icon_touchwall">25dp</dimen>
-    <dimen name="size_badge_icon_company">15dp</dimen>
-    <dimen name="height_drawing_check_controls">75dp</dimen>
-    <dimen name="width_border_icon_text_button">10dp</dimen>
-    <dimen name="margin_icon_button_image">16dp</dimen>
-    <dimen name="progress_readius">120dp</dimen>
-    <dimen name="text_size_progress">26sp</dimen>
-    <dimen name="text_size_material_edit_text">16sp</dimen>
-    <dimen name="size_icon_dialog_top_left">45dp</dimen>
-    <dimen name="size_navigation_action_button">50dp</dimen>
-    <dimen name="size_navigation_action_button_segment">35dp</dimen>
-    <dimen name="padding_right_item">20dp</dimen>
-    <dimen name="size_icon_text">20dp</dimen>
-    <dimen name="size_control">32dp</dimen>
-
-    <dimen name="color_selector_circle_size">35dp</dimen>
-    <dimen name="color_selector_circle_margin">10dp</dimen>
-
-    <dimen name="default_stroke_width">7dp</dimen>
-    <dimen name="default_background_stroke_width">3dp</dimen>
-    <dimen name="min_height_side_toggles">120dp</dimen>
-    <dimen name="text_size_circle_view">12sp</dimen>
-    <dimen name="action_button_text_size">15sp</dimen>
-
-    <dimen name="day_small_button_size">20dp</dimen>
-    <dimen name="day_button_small_font_size">11sp</dimen>
-    <dimen name="day_button_size">40dp</dimen>
-    <dimen name="day_button_max_font_size">22sp</dimen>
-
-    <dimen name="rounded_corner_radius">20dp</dimen>
 </resources>
