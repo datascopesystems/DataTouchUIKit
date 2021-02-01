@@ -3,10 +3,11 @@ package datatouch.uikit.core.utils.views
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
+import androidx.annotation.StyleableRes
 import androidx.core.util.Consumer
 import datatouch.uikit.core.utils.Conditions.isNotNull
 
@@ -62,29 +63,42 @@ object ViewUtils {
         return color
     }
 
-    fun convertDp2Px(context: Context, dp: Int): Int {
+    fun convertDp2Px(context: Context, dp: Float): Int {
         val r = context.resources
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            dp.toFloat(),
+            dp,
             r.displayMetrics
         ).toInt()
     }
 
-    fun setViewMarginEnd(v: View, marginEndDP: Int) {
-        if (isNotNull(v)) {
-            val layoutParams = v.layoutParams
-            if (layoutParams is MarginLayoutParams) {
-                val context = v.context
-                val margin =
-                    if (isNotNull(context)) convertDp2Px(
-                        context,
-                        marginEndDP
-                    ) else marginEndDP
-                val lp = layoutParams
-                lp.marginEnd = margin
-                v.layoutParams = lp
-            }
+    fun parseNativeAttributes(context: Context, attrs: AttributeSet?): ParsedNativeAttributes {
+        val attrIndexes = intArrayOf(
+            android.R.attr.layout_width,
+            android.R.attr.layout_height,
+            android.R.attr.paddingLeft,
+            android.R.attr.paddingTop,
+            android.R.attr.paddingRight,
+            android.R.attr.paddingBottom
+        )
+        val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
+        val parsedNativeAttributes = ParsedNativeAttributes()
+        try {
+            @StyleableRes val widthIndex = 0
+            @StyleableRes val heightIndex = 1
+            parsedNativeAttributes.layoutWidth =
+                typedArray.getLayoutDimension(widthIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+            parsedNativeAttributes.layoutHeight =
+                typedArray.getLayoutDimension(heightIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+        } finally {
+            typedArray.recycle()
         }
+
+        return parsedNativeAttributes
     }
+
+    fun spToPx(context: Context, sp: Float) =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, context.resources.displayMetrics)
+            .toInt()
+
 }

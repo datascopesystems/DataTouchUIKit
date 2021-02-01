@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TextView">
+        <attr name="tv_max_lines" format="integer" />
+
+        <attr name="tv_start_icon" format="reference" />
+        <attr name="tv_start_icon_size" format="dimension" />
+        <attr name="tv_start_icon_margin" format="dimension" />
+        <attr name="tv_start_icon_tint" format="color" />
+
+        <attr name="tv_end_icon" format="reference" />
+        <attr name="tv_end_icon_size" format="dimension" />
+        <attr name="tv_end_icon_margin" format="dimension" />
+        <attr name="tv_end_icon_tint" format="color" />
+
+        <attr name="tv_font_color" format="color" />
+
+        <attr name="tv_font" format="enum">
+            <enum name="regular" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
+
+        <attr name="tv_text" format="string" />
+
+        <attr name="tv_text_gravity" format="flags">
+            <flag name="center" value="0x11" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
+
+        <attr name="tv_font_size" format="dimension"/>
+
+    </declare-styleable>
+
+</resources>

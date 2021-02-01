@@ -1,13 +1,11 @@
 package datatouch.uikit.components.buttons
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.utils.views.ViewUtils
 import datatouch.uikit.databinding.NavigationButtonBinding
 
 class NavigationButton : RelativeLayout {
@@ -43,41 +41,15 @@ class NavigationButton : RelativeLayout {
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
-        parseNativeAttributes(attrs)
+        val parsedNativeAttributes = ViewUtils.parseNativeAttributes(context, attrs)
+        layoutHeight = parsedNativeAttributes.layoutHeight
+        layoutWidth = parsedNativeAttributes.layoutWidth
         parseCustomAttributes(attrs)
     }
 
-    @SuppressLint("ResourceType")
-    private fun parseNativeAttributes(attrs: AttributeSet) {
-        val attrIndexes = intArrayOf(
-            android.R.attr.layout_width,
-            android.R.attr.layout_height,
-            android.R.attr.paddingLeft,
-            android.R.attr.paddingTop,
-            android.R.attr.paddingRight,
-            android.R.attr.paddingBottom
-        )
-        val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
-        try {
-            layoutWidth = typedArray.getLayoutDimension(
-                0,
-                MATCH_PARENT
-            )
-
-            layoutHeight = typedArray.getLayoutDimension(
-                1,
-                WRAP_CONTENT
-            )
-        } finally {
-            typedArray.recycle()
-        }
-    }
-
-    private fun parseCustomAttributes(attrs: AttributeSet) {
+    private fun parseCustomAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.NavigationButton, 0, 0
-        )
+            attrs,R.styleable.NavigationButton, 0, 0)
         try {
             title = typedArray.getString(R.styleable.NavigationButton_nb_title).orEmpty()
         } finally {

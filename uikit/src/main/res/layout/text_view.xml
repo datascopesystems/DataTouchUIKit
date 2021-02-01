@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/primary_transparent_clickable_background"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/ivStartIcon"
+        android:layout_width="@dimen/navigation_button_arrow_height"
+        android:layout_height="@dimen/navigation_button_arrow_height"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@null"
+        android:layout_marginEnd="@dimen/margin_s"
+        app:srcCompat="@drawable/ic_delivery_car_white" />
+
+    <TextView
+        android:id="@+id/tvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivStartIcon"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/ivEndIcon"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:fontFamily="@font/roboto_regular"
+        android:maxLines="2"
+        android:text="dsfsdfsdfd"
+        android:textColor="@color/white" />
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/margin_s"
+        android:layout_centerVertical="true"
+        android:id="@+id/ivEndIcon"
+        android:layout_width="@dimen/navigation_button_arrow_height"
+        android:layout_height="@dimen/navigation_button_arrow_height"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_delivery_car_white" />
+
+</RelativeLayout>

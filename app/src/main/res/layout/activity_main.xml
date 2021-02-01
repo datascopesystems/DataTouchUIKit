@@ -11,5 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <datatouch.uikit.components.textview.TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tv_start_icon="@drawable/ic_delivery_car_white"
+        app:tv_start_icon_size="@dimen/icon_xs"
+        app:tv_start_icon_tint="@color/accent_negative_start_light"
+        app:tv_font_color="@color/accent_negative_start"
+        app:tv_max_lines="1"
+        app:tv_font_size="15sp"
+        app:tv_text="Test textTest textTest textTest textTest textTest textTest textTest textTest textTest textTest textTest textTest textTest textTest text"/>
+
+    <ImageView
+        android:layout_width="@dimen/icon_m"
+        android:layout_height="@dimen/icon_m"
+        app:srcCompat="@drawable/ic_delivery_car_white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Test text"/>
+
 
 </LinearLayout>
