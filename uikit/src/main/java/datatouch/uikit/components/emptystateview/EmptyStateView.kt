@@ -70,6 +70,10 @@ class EmptyStateView : RelativeLayout {
     private fun init(attrs: AttributeSet?) {
         inflateView()
         parseAttributes(attrs)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         afterView()
     }
 
