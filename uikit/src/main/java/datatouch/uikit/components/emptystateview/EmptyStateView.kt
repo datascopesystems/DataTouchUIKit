@@ -39,11 +39,7 @@ class EmptyStateView : RelativeLayout {
     private var actionButtonText: String = ""
 
     private var initialState = State.Loading
-
     private var addedContainer: View? = null
-
-    // Array of view ids added as part of this view
-    private val addedViewIds = intArrayOf(R.id.rlEsvRoot)
 
     private var layoutWidth = 0
     private var layoutHeight = 0
@@ -63,7 +59,19 @@ class EmptyStateView : RelativeLayout {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        afterView()
+        applyNativeAttributes()
+        setupDimViewClickListener()
+        setupInitialState()
+        setupTextColor()
+        setupEmptyStateTitle()
+        setupEmptyStateSubTitle()
+        setupEmptyStateImage()
+        setupLoadingStateTitle()
+        setupLoadingStateSubTitle()
+        setupActionButtonVisibility()
+        setupActionButtonText()
+        setupContainerView()
+        setupDimTitle()
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
@@ -76,8 +84,7 @@ class EmptyStateView : RelativeLayout {
     private fun parseCustomAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(
             attrs,
-            R.styleable.EmptyStateView, 0, 0
-        )
+            R.styleable.EmptyStateView, 0, 0)
         try {
             detailedLoadingInfo =
                 typedArray.getBoolean(R.styleable.EmptyStateView_detailed_loading_info, true)
@@ -109,22 +116,6 @@ class EmptyStateView : RelativeLayout {
         }
     }
 
-    fun afterView() {
-        applyNativeAttributes()
-        setupDimViewClickListener()
-        setupInitialState()
-        setupTextColor()
-        setupEmptyStateTitle()
-        setupEmptyStateSubTitle()
-        setupEmptyStateImage()
-        setupLoadingStateTitle()
-        setupLoadingStateSubTitle()
-        setupActionButtonVisibility()
-        setupActionButtonText()
-        setupContainerView()
-        setupDimTitle()
-    }
-
     private fun applyNativeAttributes() {
         applyLayoutParams()
     }
@@ -148,8 +139,7 @@ class EmptyStateView : RelativeLayout {
         }
     }
 
-    val isLoadingState: Boolean
-        get() = ui.svLoadingState.visibility == View.VISIBLE
+    val isLoadingState get() = ui.svLoadingState.visibility == View.VISIBLE
 
     fun showLoading() {
         ui.svLoadingState.visibility = View.VISIBLE
@@ -314,7 +304,7 @@ class EmptyStateView : RelativeLayout {
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
         val id = child?.id ?: 0
-        if (addedViewIds.contains(id))
+        if (R.id.rlEsvRoot == id)
             super.addView(child, index, params)
         else
             addedContainer = child

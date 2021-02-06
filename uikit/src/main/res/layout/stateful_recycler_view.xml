@@ -2,9 +2,7 @@
 <datatouch.uikit.components.emptystateview.EmptyStateView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/esv"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/toolbar"
-    android:padding="@dimen/padding_m">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
