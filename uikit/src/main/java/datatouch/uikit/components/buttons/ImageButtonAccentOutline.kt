@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.utils.Conditions
-import kotlinx.android.synthetic.main.floating_action_button_accent.view.*
+import datatouch.uikit.databinding.ImageButtonAccentOutlineBinding
 
 class ImageButtonAccentOutline : RelativeLayout {
+
+    private val ui = ImageButtonAccentOutlineBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var iconDrawable: Drawable? = null
     private var disabledButtonBackground: Drawable? = null
@@ -21,7 +25,6 @@ class ImageButtonAccentOutline : RelativeLayout {
     private var iconPadding = 0
 
     constructor(context: Context?) : super(context) {
-        inflateView()
         initViews()
     }
 
@@ -29,7 +32,6 @@ class ImageButtonAccentOutline : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
         initViews()
     }
@@ -40,7 +42,6 @@ class ImageButtonAccentOutline : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
         initViews()
     }
@@ -75,10 +76,6 @@ class ImageButtonAccentOutline : RelativeLayout {
         }
     }
 
-    private fun inflateView() {
-        View.inflate(context, R.layout.image_button_accent_outline, this)
-    }
-
     private fun parseCustomAttributes(attrs: AttributeSet) {
         @SuppressLint("CustomViewStyleable") val typedArray =
             context.obtainStyledAttributes(
@@ -107,11 +104,17 @@ class ImageButtonAccentOutline : RelativeLayout {
     private fun setupBackground() {
         if (Conditions.isNull(enabledButtonBackground)) {
             enabledButtonBackground =
-                ContextCompat.getDrawable(context, R.drawable.image_button_background_accent_outline)
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.image_button_background_accent_outline
+                )
         }
         if (Conditions.isNull(disabledButtonBackground)) {
             disabledButtonBackground =
-                ContextCompat.getDrawable(context, R.drawable.floating_action_button_background_accent_gray)
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.floating_action_button_background_accent_gray
+                )
         }
         background = (if (isEnabled) enabledButtonBackground else disabledButtonBackground)!!
     }
@@ -124,13 +127,13 @@ class ImageButtonAccentOutline : RelativeLayout {
         val defaultButtonSizePx =
             resources.getDimensionPixelSize(R.dimen.floating_circle_button_size)
         if (layoutWidth < 0) {
-            if (LayoutParams.WRAP_CONTENT == layoutWidth) rlRoot!!.layoutParams.width =
+            if (LayoutParams.WRAP_CONTENT == layoutWidth) ui.rlRoot.layoutParams.width =
                 defaultButtonSizePx
-        } else rlRoot!!.layoutParams.width = layoutWidth
+        } else ui.rlRoot.layoutParams.width = layoutWidth
         if (layoutHeight < 0) {
-            if (LayoutParams.WRAP_CONTENT == layoutHeight) rlRoot!!.layoutParams.height =
+            if (LayoutParams.WRAP_CONTENT == layoutHeight) ui.rlRoot.layoutParams.height =
                 defaultButtonSizePx
-        } else rlRoot!!.layoutParams.height = layoutHeight
+        } else ui.rlRoot.layoutParams.height = layoutHeight
     }
 
     fun setLayoutWidth(layoutWidth: Int) {
@@ -145,27 +148,27 @@ class ImageButtonAccentOutline : RelativeLayout {
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
-            ivIcon?.setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
+            ui.ivIcon.setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
         }
     }
 
     override fun setBackground(drawable: Drawable) {
         if (Conditions.isNull(drawable)) return
-        val paddingStart = rlRoot!!.paddingStart
-        val paddingTop = rlRoot!!.paddingTop
-        val paddingEnd = rlRoot!!.paddingEnd
-        val paddingBottom = rlRoot!!.paddingBottom
-        rlRoot?.background = drawable
-        rlRoot?.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
+        val paddingStart = ui.rlRoot.paddingStart
+        val paddingTop = ui.rlRoot.paddingTop
+        val paddingEnd = ui.rlRoot.paddingEnd
+        val paddingBottom = ui.rlRoot.paddingBottom
+        ui.rlRoot.background = drawable
+        ui.rlRoot.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
     }
 
     fun setIcon(icon: Drawable?) {
         iconDrawable = icon
-        ivIcon?.setImageDrawable(iconDrawable)
+        ui.ivIcon.setImageDrawable(iconDrawable)
         setupIcon()
     }
 

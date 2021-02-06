@@ -4,10 +4,13 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
 
 abstract class RecyclerViewListAdapter<TData, TView : View>
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    internal var onDataItemsCountChangedCallback: UiCallback<Int>? = null
 
     private var headerViewHolder: RecyclerView.ViewHolder? = null
     private var footerViewHolder: RecyclerView.ViewHolder? = null
@@ -30,6 +33,7 @@ abstract class RecyclerViewListAdapter<TData, TView : View>
         set(data) {
             field = data
             notifyDataSetChanged()
+            notifyDataItemsCountChanged()
         }
 
     open val isEmpty get() = dataItemCount == 0
@@ -122,18 +126,24 @@ abstract class RecyclerViewListAdapter<TData, TView : View>
     open fun clearData() {
         data = listOf()
         notifyDataSetChanged()
+        notifyDataItemsCountChanged()
     }
 
     protected open fun notifyMyItemInserted(position: Int) {
         notifyItemInserted(position)
+        notifyDataItemsCountChanged()
     }
+
+    private fun notifyDataItemsCountChanged() = onDataItemsCountChangedCallback?.invoke(dataItemCount)
 
     protected open fun notifyMyItemRemoved(position: Int) {
         notifyItemRemoved(position)
+        notifyDataItemsCountChanged()
     }
 
     protected open fun notifyMyItemRangeRemoved(from: Int, to: Int) {
         notifyItemRangeRemoved(from, to)
+        notifyDataItemsCountChanged()
     }
 
     protected open fun notifyMyItemChanged(position: Int) {
