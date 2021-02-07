@@ -295,9 +295,9 @@ class StatefulRecyclerView : RelativeLayout {
     var adapter : RecyclerViewListAdapter<*, *>
     get() = ui.rv.adapter as RecyclerViewListAdapter<*, *>
         set(value) {
-            addEmptyListFooterIfRequired(value)
             value.onDataItemsCountChangedCallback = ::onListDataItemsCountChanged
             ui.rv.adapter = value
+            addEmptyListFooterIfRequired(value)
             onListDataItemsCountChanged(adapter.dataItemCount)
         }
 

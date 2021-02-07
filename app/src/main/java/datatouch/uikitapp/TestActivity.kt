@@ -2,7 +2,6 @@ package datatouch.uikitapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import datatouch.uikitapp.adapters.TestItemHolder
 import datatouch.uikitapp.adapters.TestItemMovableRecyclerViewListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +17,7 @@ class TestActivity : AppCompatActivity() {
 
         srv.adapter = adapter
 
-        adapter.data = listOf(TestItemHolder(), TestItemHolder(), TestItemHolder(), TestItemHolder())
+        adapter.data = listOf()
 
     }
 
