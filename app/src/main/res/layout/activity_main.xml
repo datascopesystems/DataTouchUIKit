@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srv_layout_type="linear_vertical"
+        app:srv_initial_state="empty"
+        app:srv_empty_state_drawable="@drawable/ic_project_planning_white"
+        app:srv_empty_state_title="No items found"
         />
 
 </LinearLayout>

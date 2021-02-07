@@ -1,6 +1,7 @@
 package datatouch.uikit.components.statefulrecyclerview
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -306,10 +307,10 @@ class StatefulRecyclerView : RelativeLayout {
         }
 
     private fun onListDataItemsCountChanged(dataItemsCount: Int) {
-        ui.esv.show(dataItemsCount > 0)
+        ui.esv.show(dataItemsCount < 1)
     }
 
 }
 
-private const val DefaultTextColor = Int.MIN_VALUE
+private const val DefaultTextColor = Color.WHITE
 private const val DefaultGridLayoutColumnsType = 2
