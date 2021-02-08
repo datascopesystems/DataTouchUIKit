@@ -13,7 +13,9 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
@@ -193,6 +195,30 @@ class TextView : LinearLayout {
         val lp = iv.layoutParams as RelativeLayout.LayoutParams
         lp.marginEnd = marginPx
     }
+
+    fun setStartIconColor(color: Int) {
+        startIconColor = color
+        setupIconColor(ui.ivStartIcon, startIconColor)
+    }
+
+    fun setEndIconColor(color: Int) {
+        endIconColor = color
+        setupIconColor(ui.ivStartIcon, endIconColor)
+    }
+
+    fun setStartIconColorRes(@ColorRes resId: Int) =
+        setStartIconColor(ContextCompat.getColor(context, resId))
+
+    fun setEndIconColorRes(@ColorRes resId: Int) =
+        setEndIconColor(ContextCompat.getColor(context, resId))
+
+    fun setFontColor(color: Int) {
+        fontColor = color
+        setupFontColor()
+    }
+
+    fun setFontColorRes(@ColorRes resId: Int) =
+        setFontColor(ContextCompat.getColor(context, resId))
 
 }
 
