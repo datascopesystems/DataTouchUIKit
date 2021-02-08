@@ -11,7 +11,6 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
@@ -23,10 +22,10 @@ import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
 import datatouch.uikit.core.utils.views.ViewUtils
 import datatouch.uikit.databinding.TextViewBinding
 
-class TextView : LinearLayout {
+class TextView : RelativeLayout {
 
     private val ui = TextViewBinding
-        .inflate(LayoutInflater.from(context), this, true)
+        .inflate(LayoutInflater.from(context), this)
 
     private var layoutWidth = 0
     private var layoutHeight = 0

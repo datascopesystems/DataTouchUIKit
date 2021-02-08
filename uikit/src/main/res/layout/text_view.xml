@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rlRoot"
     android:layout_width="wrap_content"
@@ -41,4 +41,4 @@
         android:contentDescription="@null"
         app:srcCompat="@drawable/ic_delivery_car_white" />
 
-</RelativeLayout>
+</merge>
