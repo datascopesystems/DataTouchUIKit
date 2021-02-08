@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/rounded_corner_accent_start_outline_dark" android:state_focused="true" />
+
+    <item android:drawable="@drawable/rounded_corner_accent_start_outline_dark" android:state_pressed="true" />
+
+    <item android:drawable="@drawable/rounded_corner_accent_start_outline" android:state_pressed="false" />
+
+    <item android:drawable="@drawable/rounded_corner_accent_start_outline" android:state_focused="false" />
+
+    <item android:layout_height="wrap_content" android:drawable="@drawable/rounded_corner_accent_start_outline" />
+
+
+</selector>

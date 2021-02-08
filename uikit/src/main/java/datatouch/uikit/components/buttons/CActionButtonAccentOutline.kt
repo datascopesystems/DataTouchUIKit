@@ -2,6 +2,7 @@ package datatouch.uikit.components.buttons
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
@@ -18,8 +19,11 @@ class CActionButtonAccentOutline : RelativeLayout {
     private var titleText: String? = null
     private var iconDrawable: Drawable? = null
     private var outline: Drawable? = null
+    private var textColor = Color.WHITE
+    private var iconColor = Color.WHITE
 
-    constructor(context: Context?) : super(context) {}
+    constructor(context: Context?) : super(context)
+
     constructor(
         context: Context?,
         attrs: AttributeSet
@@ -50,9 +54,16 @@ class CActionButtonAccentOutline : RelativeLayout {
                 R.styleable.CActionButton_maxTextCharacters,
                 NO_CHARACTERS_LIMIT
             )
+
             titleText = typedArray.getString(R.styleable.CActionButton_title)
+
             iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
+
             outline = typedArray.getDrawable(R.styleable.CActionButton_outline)
+
+            textColor = typedArray.getColor(R.styleable.CActionButton_title_color, Color.WHITE)
+
+            iconColor = typedArray.getColor(R.styleable.CActionButton_icon_colour, Color.WHITE)
         } finally {
             typedArray.recycle()
         }
@@ -70,6 +81,7 @@ class CActionButtonAccentOutline : RelativeLayout {
 
     private fun setupTitle() {
         tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        tvTitle?.setTextColor(textColor)
         if (isCharacterLimitValid) tvTitle?.filters = arrayOf<InputFilter>(
             LengthFilter(
                 characterLimit
@@ -97,8 +109,11 @@ class CActionButtonAccentOutline : RelativeLayout {
         } else {
             ivIcon?.visibility = View.VISIBLE
             ivIcon?.setImageDrawable(iconDrawable)
+            setIconColor(iconColor)
         }
     }
+
+    fun setIconColor(color: Int) = ivIcon?.setColorFilter(color)
 
     companion object {
         private const val NO_CHARACTERS_LIMIT = -1
