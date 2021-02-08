@@ -21,4 +21,7 @@ object StringExtensions {
     }
 
     inline fun String?.or(value: String): String = if (this.isNullOrEmpty()) value else this
+
+    inline fun String?.defValue(def: () -> String) = this.orEmpty().ifEmpty { def() }
+
 }

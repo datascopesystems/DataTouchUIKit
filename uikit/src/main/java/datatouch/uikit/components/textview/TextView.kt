@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import datatouch.uikit.R
@@ -57,21 +58,31 @@ class TextView : LinearLayout {
 
     private var typeface: Typeface? = null
 
-    constructor(context: Context?) : super(context) { init() }
+    constructor(context: Context?) : super(context) {
+        init()
+    }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) { init(attrs) }
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+        init(attrs)
+    }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr) { init(attrs) }
+        defStyleAttr
+    ) {
+        init(attrs)
+    }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(
         context: Context?,
         attrs: AttributeSet?,
         defStyleAttr: Int,
-        defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) { init(attrs) }
+        defStyleRes: Int
+    ) : super(context, attrs, defStyleAttr, defStyleRes) {
+        init(attrs)
+    }
 
     private fun init(attrs: AttributeSet? = null) {
         parseAttributes(attrs)
@@ -87,7 +98,8 @@ class TextView : LinearLayout {
 
     private fun parseCustomAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.TextView, 0, 0)
+            attrs, R.styleable.TextView, 0, 0
+        )
 
         try {
             startIconDrawable = typedArray.getDrawable(R.styleable.TextView_tv_start_icon)
@@ -106,19 +118,23 @@ class TextView : LinearLayout {
 
             startIconSizePx = typedArray.getDimensionPixelSize(
                 R.styleable.TextView_tv_start_icon_size,
-                ViewUtils.convertDp2Px(context, DefaultIconSizeDp))
+                ViewUtils.convertDp2Px(context, DefaultIconSizeDp)
+            )
 
             endIconSizePx = typedArray.getDimensionPixelSize(
                 R.styleable.TextView_tv_end_icon_size,
-                ViewUtils.convertDp2Px(context, DefaultIconSizeDp))
+                ViewUtils.convertDp2Px(context, DefaultIconSizeDp)
+            )
 
             startIconMarginPx = typedArray.getDimensionPixelSize(
                 R.styleable.TextView_tv_start_icon_margin,
-                ViewUtils.convertDp2Px(context, DefaultIconMarginDp))
+                ViewUtils.convertDp2Px(context, DefaultIconMarginDp)
+            )
 
             endIconMarginPx = typedArray.getDimensionPixelSize(
                 R.styleable.TextView_tv_end_icon_margin,
-                ViewUtils.convertDp2Px(context, DefaultIconMarginDp))
+                ViewUtils.convertDp2Px(context, DefaultIconMarginDp)
+            )
 
             text = typedArray.getString(R.styleable.TextView_tv_text).orEmpty()
 
@@ -127,7 +143,8 @@ class TextView : LinearLayout {
 
             fontSizePx = typedArray.getDimensionPixelSize(
                 R.styleable.TextView_tv_font_size,
-                ViewUtils.spToPx(context, DefaultTextSizeSp))
+                ViewUtils.spToPx(context, DefaultTextSizeSp)
+            )
 
             maxLines = typedArray.getInt(R.styleable.TextView_tv_max_lines, DefaultMaxLines)
 
@@ -162,7 +179,7 @@ class TextView : LinearLayout {
         iv.setImageDrawable(iconDrawable)
     }
 
-    private fun setupIconColor(iv : ImageView, iconColor: Int) {
+    private fun setupIconColor(iv: ImageView, iconColor: Int) {
         if (iconColor != InvalidColor)
             iv.setColorFilter(iconColor)
     }
@@ -180,7 +197,9 @@ class TextView : LinearLayout {
     private fun setupFontColor() = ui.tvTextView.setTextColor(fontColor)
 
 
-    private fun setupTextGravity() { ui.tvTextView.gravity = textGravity }
+    private fun setupTextGravity() {
+        ui.tvTextView.gravity = textGravity
+    }
 
     private fun setupTextSize() {
         ui.tvTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSizePx.toFloat())
@@ -219,6 +238,25 @@ class TextView : LinearLayout {
 
     fun setFontColorRes(@ColorRes resId: Int) =
         setFontColor(ContextCompat.getColor(context, resId))
+
+    fun setText(text: String?, textEmptyCase: String? = null) {
+        if (text.isNullOrEmpty())
+            this.text = textEmptyCase.orEmpty()
+        else
+            this.text = text.orEmpty()
+
+    }
+
+    fun setText(text: String?, @StringRes textEmptyCaseRes: Int) {
+        if (text.isNullOrEmpty())
+            this.text = resources.getString(textEmptyCaseRes)
+        else
+            this.text = text.orEmpty()
+    }
+
+    fun setText(textRes: Int) {
+        this.text = resources.getString(textRes)
+    }
 
 }
 
