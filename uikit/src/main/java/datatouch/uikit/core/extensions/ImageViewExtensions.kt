@@ -30,11 +30,8 @@ object ImageViewExtensions {
         ImageUtils.loadImageFile(context, imageUrl, this, errorResId)
 
     fun ImageView.showImageBase64(imageBase64: String?) {
-        kotlin.runCatching {
-            imageBase64?.let {
-                val bitmap = BitmapUtils.convertBase64ToBitmap(it)
-                ImageUtils.loadBitmap(bitmap, this)
-            }
+        imageBase64?.let {
+            kotlin.runCatching { this.setImageBitmap(BitmapUtils.convertBase64ToBitmap(it)) }
         }
     }
 
