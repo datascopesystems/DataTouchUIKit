@@ -5,6 +5,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.utils.imaging.BitmapUtils
 import datatouch.uikit.core.utils.imaging.ImageUtils
 import java.io.File
 
@@ -27,5 +28,14 @@ object ImageViewExtensions {
 
     fun ImageView.showRemoteImage(imageUrl: String?, errorResId: Int = R.drawable.image_not_found) =
         ImageUtils.loadImageFile(context, imageUrl, this, errorResId)
+
+    fun ImageView.showImageBase64(imageBase64: String?) {
+        kotlin.runCatching {
+            imageBase64?.let {
+                val bitmap = BitmapUtils.convertBase64ToBitmap(it)
+                ImageUtils.loadBitmap(bitmap, this)
+            }
+        }
+    }
 
 }

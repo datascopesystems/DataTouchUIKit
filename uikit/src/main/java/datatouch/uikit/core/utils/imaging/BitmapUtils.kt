@@ -45,4 +45,10 @@ object BitmapUtils {
         return BitmapFactory.decodeFile(imagePath, options)
     }
 
+    fun convertBase64ToBitmap(string: String): Bitmap {
+        val imageBytes = Base64.decode(string, 0)
+        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+    }
+
+
 }

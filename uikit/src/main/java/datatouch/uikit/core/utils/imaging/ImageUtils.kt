@@ -124,4 +124,12 @@ object ImageUtils {
             .load(resId)
             .into(imageView)
     }
+
+    fun <T : ImageView> loadBitmap(bitmap: Bitmap?, imageView: T) {
+        Glide.with(imageView.context.applicationContext)
+            .load(bitmap)
+            .into(imageView)
+    }
+
+
 }
