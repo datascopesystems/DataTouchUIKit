@@ -7,12 +7,7 @@ private const val LegacyCameraActivityRequestType = 86450
 
 object LegacyCameraUtils {
 
-    // Use this camera for Android API < 23
-    // Because of some CameraX issues on older Android
-    fun openPhotoCamera(
-        activity: FragmentActivity,
-        callback: CameraContentSavedCallback? = null
-    ) {
+    fun openPhotoCamera(activity: FragmentActivity, callback: CameraContentSavedCallback? = null) {
         val fm = activity.supportFragmentManager
         val proxyFragment =
             ProxyLegacyCameraLaunchFragment.new(LegacyCameraActivityRequestType, callback)
