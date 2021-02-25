@@ -3,9 +3,12 @@ package datatouch.uikit.core.utils.views
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import datatouch.uikit.core.extensions.IntExtensions.orZero
 import datatouch.uikit.core.utils.imaging.BitmapUtils
 
 open class Screenshot(bitmap: Bitmap?, thumbSize: IntSize) {
+
+    constructor(bitmap : Bitmap?) : this(bitmap, IntSize(bitmap?.width.orZero(), bitmap?.height.orZero()))
 
     object EmptyScreenshot : Screenshot(null, IntSize())
 

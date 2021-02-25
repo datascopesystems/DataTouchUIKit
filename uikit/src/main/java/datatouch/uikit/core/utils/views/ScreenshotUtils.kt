@@ -9,7 +9,7 @@ object ScreenshotUtils {
         val screenshotFactory = ScreenshotFactory(
             IntSize.ofDP(view.context, view.width, view.height), Bitmap.Config.RGB_565)
 
-        val thumb = screenshotFactory.fromView(view)
+        val thumb = screenshotFactory.from(view)
         screenshotFactory.drop()
         return thumb
     }

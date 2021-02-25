@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector.LENS_FACING_BACK
 import androidx.camera.core.CameraSelector.LENS_FACING_FRONT
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -28,6 +28,7 @@ import datatouch.uikit.components.camera.models.PhotoCameraActivityParams
 import datatouch.uikit.components.camera.utils.CameraXUtils
 import datatouch.uikit.components.toast.ToastNotification
 import datatouch.uikit.core.extensions.IntExtensions.orZero
+import datatouch.uikit.core.utils.views.Screenshot
 import java.io.File
 import kotlin.random.Random
 
@@ -92,41 +93,11 @@ class PhotoCameraActivity : AppCompatActivity() {
 
     private fun setupShutterListener() {
         btnShutter?.setOnClickListener {
-
-            // Disable all camera controls
-            btnShutter?.isEnabled = false
-            btnSwitchCamera?.isEnabled = false
-
-            // Get a stable reference of the modifiable image capture use case
-            imageCapture?.let { imageCapture ->
-
-                // Create output file to hold the image
-                // Setup image capture metadata
-                val metadata = ImageCapture.Metadata().apply {
-                    // Mirror image when using the front camera
-                    isReversedHorizontal = lensFacing == LENS_FACING_FRONT
-                }
-
-                val newPhotoJpgFile = activityParams.newPhotoJpgFile()
-
-                // Create output options object which contains file + metadata
-                val outputOptions = ImageCapture.OutputFileOptions.Builder(newPhotoJpgFile)
-                    .setMetadata(metadata)
-                    .build()
-
-                // Setup image capture listener which is triggered after photo has been taken
-                imageCapture.takePicture(
-                    outputOptions, executor, object : ImageCapture.OnImageSavedCallback {
-
-                        override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                            onImageSaved(newPhotoJpgFile)
-                        }
-
-                        override fun onError(exc: ImageCaptureException) {
-                            cancelAndFinish()
-                        }
-                    })
-            }
+            MediaPlayer.create(applicationContext, R.raw.camera_click).start()
+            val screenshot = Screenshot(previewView?.bitmap)
+            val screenshotFile = activityParams.newPhotoJpgFile()
+            screenshot.saveToFile(screenshotFile.path)
+            onImageSaved(screenshotFile)
         }
     }
 
@@ -163,12 +134,12 @@ class PhotoCameraActivity : AppCompatActivity() {
 
     private val hasBackCamera
         get() = cameraProvider.get().hasCamera(
-            CameraXUtils.cameraSelectorWithLensFacing(LENS_FACING_BACK)
+            CameraXUtils.cameraSelectorWith(LENS_FACING_BACK)
         )
 
     private val hasFrontCamera
         get() = cameraProvider.get().hasCamera(
-            CameraXUtils.cameraSelectorWithLensFacing(LENS_FACING_FRONT)
+            CameraXUtils.cameraSelectorWith(LENS_FACING_FRONT)
         )
 
     private fun cancelAndFinish() {
@@ -199,7 +170,7 @@ class PhotoCameraActivity : AppCompatActivity() {
             cameraProvider.unbindAll()
             cameraProvider.bindToLifecycle(
                 this as LifecycleOwner,
-                CameraXUtils.cameraSelectorWithLensFacing(lensFacing),
+                CameraXUtils.cameraSelectorWith(lensFacing),
                 preview, imageCapture
             )
         } catch (e: Exception) {

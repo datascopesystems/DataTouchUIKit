@@ -11,7 +11,7 @@ def BuildToolsVersion = '30.0.3'
 // Versions
 def JavaVersion = JavaVersion.VERSION_1_8
 def JavaVersionString = JavaVersion.toString()
-def CameraXVersion = "1.1.0-alpha01"
+def CameraXVersion = "1.1.0-alpha02"
 
 android {
     compileSdkVersion TargetSdkVersion
@@ -88,7 +88,7 @@ dependencies {
     // Camera X
     implementation "androidx.camera:camera-core:${CameraXVersion}"
     implementation "androidx.camera:camera-lifecycle:${CameraXVersion}"
-    implementation "androidx.camera:camera-view:1.0.0-alpha21"
+    implementation "androidx.camera:camera-view:1.0.0-alpha22"
     implementation "androidx.camera:camera-camera2:${CameraXVersion}"
 
     // Legacy camera (API < 23)

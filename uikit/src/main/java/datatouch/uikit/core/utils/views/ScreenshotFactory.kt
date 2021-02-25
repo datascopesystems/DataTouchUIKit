@@ -42,7 +42,7 @@ class ScreenshotFactory(thumbSize: IntSize, bitmapConfig: Bitmap.Config) {
         view.draw(canvas)
     }
 
-    fun fromView(view: View): Screenshot {
+    fun from(view: View): Screenshot {
         val viewSize = FloatSize(view.width, view.height)
 
         val bitmap = createScaledBitmap(size, viewSize) ?: return Screenshot.EmptyScreenshot

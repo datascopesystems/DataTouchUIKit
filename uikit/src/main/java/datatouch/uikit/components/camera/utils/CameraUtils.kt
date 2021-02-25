@@ -1,5 +1,6 @@
 package datatouch.uikit.components.camera.utils
 
+import android.os.Build
 import androidx.fragment.app.FragmentActivity
 
 object CameraUtils {
@@ -9,10 +10,13 @@ object CameraUtils {
         photoDirPath: String? = null,
         callback: CameraContentSavedCallback? = null) {
 
-        // While CameraX is still alpha and unstable, using legacy utils
-        LegacyCameraUtils.openPhotoCamera(activity, callback)
+        // Prevent compatibility issues on API < 23 (Marshmallow)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            LegacyCameraUtils.openPhotoCamera(activity, callback)
+        else {
+            CameraXUtils.openPhotoCamera(activity, photoDirPath, callback)
+        }
 
-        //CameraXUtils.openPhotoCamera(activity, photoDirPath, callback)
     }
 
 }

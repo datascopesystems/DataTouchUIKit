@@ -45,19 +45,19 @@ class ProxyLegacyCameraLaunchFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        fragmentManager?.beginTransaction()?.remove(this)?.commit()
-
         EasyImage.handleActivityResult(requestCode, resultCode, data, activity,
             object : DefaultCallback() {
 
                 override fun onImagePickerError(e: Exception, source: EasyImage.ImageSource, type: Int) {
                     ToastNotification.showError(activity, R.string.error_capturing_image)
+                    fragmentManager?.beginTransaction()?.remove(this@ProxyLegacyCameraLaunchFragment)?.commit()
                 }
 
                 override fun onImagesPicked(imageFiles: MutableList<File>, source: EasyImage.ImageSource?, type: Int) {
                     if (requestType == type)
                         imageFiles.firstOrNull()
                             ?.let { callback?.invoke(CameraSavedContent(it)) }
+                    fragmentManager?.beginTransaction()?.remove(this@ProxyLegacyCameraLaunchFragment)?.commit()
                 }
 
             }

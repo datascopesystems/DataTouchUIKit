@@ -50,11 +50,11 @@ object CameraXUtils {
     }
 
     internal fun hasBackCamera(cameraProvider: ProcessCameraProvider) =
-        cameraProvider.hasCamera(cameraSelectorWithLensFacing(CameraSelector.LENS_FACING_BACK))
+        cameraProvider.hasCamera(cameraSelectorWith(CameraSelector.LENS_FACING_BACK))
 
-    internal fun cameraSelectorWithLensFacing(lensFacing: Int) =
+    internal fun cameraSelectorWith(lensFacing: Int) =
         CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
     internal fun hasFrontCamera(cameraProvider: ProcessCameraProvider) =
-        cameraProvider.hasCamera(cameraSelectorWithLensFacing(CameraSelector.LENS_FACING_FRONT))
+        cameraProvider.hasCamera(cameraSelectorWith(CameraSelector.LENS_FACING_FRONT))
 }
