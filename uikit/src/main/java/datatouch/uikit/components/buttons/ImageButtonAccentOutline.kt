@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.ConditionsExtensions.isNull
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.databinding.ImageButtonAccentOutlineBinding
 
@@ -17,6 +18,26 @@ class ImageButtonAccentOutline : RelativeLayout {
     private val ui = ImageButtonAccentOutlineBinding
         .inflate(LayoutInflater.from(context), this, true)
 
+    private val defaultPositiveEnabledBackground by lazy {
+        ContextCompat.getDrawable(
+            context,
+            R.drawable.image_button_background_accent_outline
+        )
+    }
+    private val defaultNegativeEnabledBackground by lazy {
+        ContextCompat.getDrawable(
+            context,
+            R.drawable.image_button_background_accent_negative_outline
+        )
+    }
+    private val defaultDisabledBackground by lazy {
+        ContextCompat.getDrawable(
+            context,
+            R.drawable.image_button_background_accent_negative_outline
+        )
+    }
+
+    private var buttonType = ButtonType.Positive
     private var iconDrawable: Drawable? = null
     private var disabledButtonBackground: Drawable? = null
     private var enabledButtonBackground: Drawable? = null
@@ -84,12 +105,18 @@ class ImageButtonAccentOutline : RelativeLayout {
             )
         try {
             iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
+
             iconPadding =
                 typedArray.getDimensionPixelSize(R.styleable.CActionButton_icon_padding, 0)
+
             enabledButtonBackground =
                 typedArray.getDrawable(R.styleable.CActionButton_active_background)
+
             disabledButtonBackground =
                 typedArray.getDrawable(R.styleable.CActionButton_inactive_background)
+
+            buttonType =
+                ButtonType.fromInt(typedArray.getInt(R.styleable.CActionButton_button_type, 0))
         } finally {
             typedArray.recycle()
         }
@@ -102,22 +129,20 @@ class ImageButtonAccentOutline : RelativeLayout {
     }
 
     private fun setupBackground() {
-        if (Conditions.isNull(enabledButtonBackground)) {
-            enabledButtonBackground =
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.image_button_background_accent_outline
-                )
-        }
-        if (Conditions.isNull(disabledButtonBackground)) {
-            disabledButtonBackground =
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.floating_action_button_background_accent_gray
-                )
-        }
+        if (enabledButtonBackground.isNull())
+            enabledButtonBackground = backgroundByButtonType
+
+        if (disabledButtonBackground.isNull())
+            disabledButtonBackground = defaultDisabledBackground
+
         background = (if (isEnabled) enabledButtonBackground else disabledButtonBackground)!!
     }
+
+    private val backgroundByButtonType
+        get() = when (buttonType) {
+                ButtonType.Positive -> defaultPositiveEnabledBackground
+                ButtonType.Negative -> defaultNegativeEnabledBackground
+            }
 
     private fun applyNativeAttributes() {
         applyLayoutParams()

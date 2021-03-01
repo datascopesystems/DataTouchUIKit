@@ -17,8 +17,12 @@
         <attr name="active_background" format="reference" />
         <attr name="inactive_background" format="reference" />
         <attr name="is_enabled" format="boolean" />
-        <attr name="icon_padding" format="dimension"/>
-        <attr name="disable_bottom_divider" format="boolean"/>
+        <attr name="icon_padding" format="dimension" />
+        <attr name="disable_bottom_divider" format="boolean" />
         <attr name="maxLines" format="integer" />
+        <attr name="button_type" format="enum">
+            <enum name="positive" value="0" />
+            <enum name="negative" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

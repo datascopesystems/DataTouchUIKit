@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn"
+    <datatouch.uikit.components.buttons.ImageButtonAccentOutline
+        android:id="@+id/btnDeleteComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        />
-
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@color/accent_start" />
+        android:layout_marginEnd="@dimen/margin_m"
+        app:button_type="negative"
+        app:icon="@drawable/ic_delete_white" />
 
 
 </LinearLayout>
