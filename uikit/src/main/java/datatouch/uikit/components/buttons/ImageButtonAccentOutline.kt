@@ -44,6 +44,7 @@ class ImageButtonAccentOutline : RelativeLayout {
     private var layoutWidth = 0
     private var layoutHeight = 0
     private var iconPadding = 0
+    private var iconTintColor = InvalidColor
 
     constructor(context: Context?) : super(context) {
         initViews()
@@ -117,6 +118,9 @@ class ImageButtonAccentOutline : RelativeLayout {
 
             buttonType =
                 ButtonType.fromInt(typedArray.getInt(R.styleable.CActionButton_button_type, 0))
+
+            iconTintColor = typedArray.getColor(R.styleable.CActionButton_tint_color, InvalidColor)
+
         } finally {
             typedArray.recycle()
         }
@@ -126,6 +130,7 @@ class ImageButtonAccentOutline : RelativeLayout {
         applyNativeAttributes()
         setupIcon()
         setupBackground()
+        setupIconTintColor()
     }
 
     private fun setupBackground() {
@@ -201,4 +206,13 @@ class ImageButtonAccentOutline : RelativeLayout {
         super.setEnabled(enabled)
         background = (if (enabled) enabledButtonBackground else disabledButtonBackground)!!
     }
+
+    private fun setupIconTintColor() {
+        if (iconTintColor == InvalidColor) return
+
+        ui.ivIcon.setColorFilter(iconTintColor)
+    }
+
 }
+
+private const val InvalidColor = -666

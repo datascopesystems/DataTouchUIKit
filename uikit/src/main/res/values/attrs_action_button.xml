@@ -24,5 +24,6 @@
             <enum name="positive" value="0" />
             <enum name="negative" value="1" />
         </attr>
+        <attr name="tint_color" format="color"/>
     </declare-styleable>
 </resources>
