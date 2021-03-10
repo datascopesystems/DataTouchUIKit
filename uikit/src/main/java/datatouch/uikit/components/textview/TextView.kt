@@ -48,11 +48,12 @@ class TextView : RelativeLayout {
     private var textGravity = Gravity.NO_GRAVITY
 
     private var maxLines = DefaultMaxLines
+    private var maxLength = InvalidMaxLength
 
     var text = ""
         set(value) {
             field = value
-            ui.tvTextView.text = value
+            ui.tvTextView.text = getTrimmedString(value)
         }
 
     private var typeface: Typeface? = null
@@ -147,6 +148,8 @@ class TextView : RelativeLayout {
 
             maxLines = typedArray.getInt(R.styleable.TextView_tv_max_lines, DefaultMaxLines)
 
+            maxLength = typedArray.getInt(R.styleable.TextView_tv_max_length, InvalidMaxLength)
+
         } finally {
             typedArray.recycle()
         }
@@ -171,6 +174,9 @@ class TextView : RelativeLayout {
 
         setupIconMargin(ui.ivStartIcon, startIconMarginPx)
         setupIconMargin(ui.ivEndIcon, endIconMarginPx)
+
+        setupMaxLines()
+        setMaxLength()
     }
 
     private fun setupIconDrawable(iv: ImageView, iconDrawable: Drawable?) {
@@ -257,10 +263,40 @@ class TextView : RelativeLayout {
         this.text = resources.getString(textRes)
     }
 
+    fun setMaxLines(maxLines: Int) {
+        this.maxLines = maxLines
+        setupMaxLines()
+    }
+
+    private fun setupMaxLines() {
+        ui.tvTextView.maxLines = maxLines
+    }
+
+    fun setMaxLength(maxLength: Int) {
+        this.maxLength = maxLength
+        setMaxLength()
+    }
+
+    private fun setMaxLength() {
+        text = getTrimmedString(text);
+    }
+
+    private fun getTrimmedString(src: String): String {
+        if (maxLength == InvalidMaxLength) return src
+
+        if (src.length > maxLength) {
+            val trimmedString = src.substring(0, maxLength)
+            return "$trimmedString…"
+        }
+
+        return src
+    }
+
 }
 
 private const val InvalidColor = -666
 private const val DefaultTextSizeSp = 16f
 private const val DefaultMaxLines = 1
+private const val InvalidMaxLength = -1
 private const val DefaultIconSizeDp = 15f
 private const val DefaultIconMarginDp = 5f

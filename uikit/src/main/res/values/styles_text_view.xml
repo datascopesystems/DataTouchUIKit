@@ -3,6 +3,7 @@
 
     <declare-styleable name="TextView">
         <attr name="tv_max_lines" format="integer" />
+        <attr name="tv_max_length" format="integer" />
 
         <attr name="tv_start_icon" format="reference" />
         <attr name="tv_start_icon_size" format="dimension" />

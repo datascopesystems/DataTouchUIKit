@@ -15,4 +15,12 @@
         app:icon="@drawable/ic_inc_size" />
 
 
+    <datatouch.uikit.components.textview.TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tv_max_length="5"
+        app:tv_text="fdfsdfsfncvhcxkjvhxkxcjvhxkcvdfsdfsdf"/>
+
+
 </LinearLayout>
