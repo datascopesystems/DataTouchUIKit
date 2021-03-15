@@ -110,9 +110,9 @@ class ToggleButton : LinearLayout {
 
     private fun initResources() {
         defaultCheckedBackground =
-            ContextCompat.getDrawable(context, R.drawable.toggle_button_background_arrival)
+            ContextCompat.getDrawable(context, R.drawable.toggle_button_background_checked)
         defaultUncheckedBackground =
-            ContextCompat.getDrawable(context, R.drawable.toggle_button_background_departure)
+            ContextCompat.getDrawable(context, R.drawable.toggle_button_background_unchecked)
 
         defaultCheckedIcon =
             ContextCompat.getDrawable(context, R.drawable.ic_check_white)
