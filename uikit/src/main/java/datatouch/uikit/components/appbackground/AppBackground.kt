@@ -34,6 +34,10 @@ class AppBackground private constructor(
             fun createFromAll(): List {
                 val list = List()
 
+                list.add(AppBackground(AppBackgroundEnum.RiverThames, "City Of London",
+                        R.drawable.app_background_city_of_london,
+                        R.drawable.app_background_blur_city_of_london))
+
                 list.add(AppBackground(AppBackgroundEnum.RiverThames, "River Thames",
                         R.drawable.app_background_london_thames,
                         R.drawable.app_background_blur_london_thames))
