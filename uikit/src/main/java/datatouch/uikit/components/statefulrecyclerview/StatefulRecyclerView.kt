@@ -310,6 +310,8 @@ class StatefulRecyclerView : RelativeLayout {
         ui.esv.show(dataItemsCount < 1)
     }
 
+    fun scrollToPosition(position: Int) = ui.rv.scrollToPosition(position)
+
 }
 
 private const val DefaultTextColor = Color.WHITE
