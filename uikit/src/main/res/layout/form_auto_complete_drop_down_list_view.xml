@@ -31,7 +31,7 @@
             android:layout_height="25dp"
             android:layout_gravity="start|center_vertical"
             android:contentDescription="@null"
-            android:src="@drawable/ic_search_white"
+            app:srcCompat="@drawable/ic_search_white"
             app:tint="@color/white" />
 
         <ImageView
@@ -40,7 +40,7 @@
             android:layout_height="10dp"
             android:layout_gravity="top|end"
             android:contentDescription="@null"
-            android:src="@drawable/ic_asterisk_white"
+            app:srcCompat="@drawable/ic_asterisk_white"
             android:visibility="visible"
             app:tint="@color/accent_negative_start_light" />
 
@@ -48,6 +48,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/actv"
+        android:imeOptions="flagNoExtractUi"
         android:layout_toEndOf="@+id/flIcon"
         android:layout_toStartOf="@+id/ivClear"
         style="@style/DropDownListViewStyle"
@@ -72,7 +73,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:contentDescription="@null"
-        android:src="@drawable/ic_clear_white"
+        app:srcCompat="@drawable/ic_clear_white"
         app:tint="@color/white" />
 
 

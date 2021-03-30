@@ -49,6 +49,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/actv"
+        android:imeOptions="flagNoExtractUi"
         style="@style/DropDownListViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
