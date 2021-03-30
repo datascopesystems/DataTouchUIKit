@@ -124,6 +124,7 @@ class FormEditText : LinearLayout, IFormView {
     private fun setupInputType() {
         if (!isEditable) {
             et.inputType = android.text.InputType.TYPE_NULL
+            et.keyListener = null
             return
         }
 
