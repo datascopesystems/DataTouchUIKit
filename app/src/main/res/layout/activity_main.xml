@@ -23,4 +23,11 @@
         app:tv_text="fdfsdfsfncvhcxkjvhxkxcjvhxkcvdfsdfsdf"/>
 
 
+    <datatouch.uikit.components.buttons.CActionToggleButton
+        android:id="@+id/tbActive"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_button_size"
+        app:checked="false"
+        android:layout_marginTop="@dimen/margin_m" />
+
 </LinearLayout>

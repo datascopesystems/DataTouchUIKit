@@ -33,19 +33,16 @@ class CActionToggleButton : RelativeLayout {
     constructor(context: Context) : super(context) {
         inflateView()
         parseAttributes(null)
-        initViews()
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle ) {
         inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
@@ -100,16 +97,24 @@ class CActionToggleButton : RelativeLayout {
         }
     }
 
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        initViews()
+    }
+
     fun initViews() {
         applyNativeAttributes()
-        setChecked(checked)
         rlRoot.setOnClickListener { rlRoot() }
+
         if (Conditions.isNull(activeBackground)) {
             activeBackground = defaultActiveBackground
         }
+
         if (Conditions.isNull(inactiveBackground)) {
             inactiveBackground = defaultInactiveBackground
         }
+
+        setChecked(checked)
     }
 
     private fun applyNativeAttributes() {
