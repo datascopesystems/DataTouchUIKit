@@ -194,7 +194,7 @@ class FormEditText : LinearLayout, IFormView {
         et?.setTypeface(originalTypeface, Typeface.BOLD)
     }
 
-    val hasValidInput get() = et?.text?.isNotEmpty() == true
+    val hasValidInput get() = et?.text?.trim()?.isNotEmpty() == true
 
     val hasValidInputWhenMandatory
         get() = run {
