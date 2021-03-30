@@ -2,6 +2,7 @@ package datatouch.uikitapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import datatouch.uikit.components.buttons.ButtonType
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -13,6 +14,10 @@ class TestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tv.setText("Testik Testik Testik")
+
+        btnDeleteComment?.setOnClickListener { btnDeleteComment?.setButtonType(ButtonType.Positive) }
+
+
 
     }
 

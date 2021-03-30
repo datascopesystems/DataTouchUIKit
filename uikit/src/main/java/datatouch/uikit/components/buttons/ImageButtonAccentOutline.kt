@@ -213,6 +213,13 @@ class ImageButtonAccentOutline : RelativeLayout {
         ui.ivIcon.setColorFilter(iconTintColor)
     }
 
+    fun setButtonType(buttonType: ButtonType) {
+        this.buttonType = buttonType
+        enabledButtonBackground = null
+        disabledButtonBackground = null
+        setupBackground()
+    }
+
 }
 
 private const val InvalidColor = -666
