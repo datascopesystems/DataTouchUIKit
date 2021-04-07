@@ -2,7 +2,7 @@ package datatouch.uikitapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import datatouch.uikit.components.buttons.ButtonType
+import datatouch.uikit.components.camera.utils.CameraUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -15,9 +15,7 @@ class TestActivity : AppCompatActivity() {
 
         tv.setText("Testik Testik Testik")
 
-        btnDeleteComment?.setOnClickListener { btnDeleteComment?.setButtonType(ButtonType.Positive) }
-
-
+        btnDeleteComment?.setOnClickListener { CameraUtils.openPhotoCamera(this) }
 
     }
 
