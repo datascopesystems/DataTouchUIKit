@@ -14,7 +14,9 @@ class TestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tv.setText("Testik Testik Testik")
-
+        blSample.setOnClickListener {
+            blSample.showLoadingState()
+        }
         btnDeleteComment?.setOnClickListener { CameraUtils.openPhotoCamera(this) }
 
     }

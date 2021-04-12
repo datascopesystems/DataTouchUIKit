@@ -15,7 +15,7 @@ import datatouch.uikit.databinding.ActionButtonLoadingBinding
 class CActionButtonLoading : FrameLayout {
 
     private val ui = ActionButtonLoadingBinding
-            .inflate(LayoutInflater.from(context), this, true)
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var titleText: String = ""
     private var iconDrawable: Drawable? = null
@@ -39,27 +39,48 @@ class CActionButtonLoading : FrameLayout {
         parseAttributes(attrs)
         setupViews()
     }
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         parseAttributes(attrs)
         setupViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CActionButtonLoading, 0, 0)
+        val typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.CActionButtonLoading, 0, 0)
         try {
             titleText = typedArray.getString(R.styleable.CActionButtonLoading_btn_title).default("")
-            titleTextSize = typedArray.getDimensionPixelSize(R.styleable.CActionButtonLoading_btn_title_size, 16)
+            titleTextSize = typedArray.getDimensionPixelSize(
+                R.styleable.CActionButtonLoading_btn_title_size,
+                16
+            )
             iconDrawable = typedArray.getDrawable(R.styleable.CActionButtonLoading_btn_icon)
             outline = typedArray.getDrawable(R.styleable.CActionButtonLoading_btn_outline)
-            iconSize = typedArray.getDimensionPixelSize(R.styleable.CActionButtonLoading_btn_icon_size, 20)
+            iconSize =
+                typedArray.getDimensionPixelSize(R.styleable.CActionButtonLoading_btn_icon_size, 20)
 
-            indicatorColor = typedArray.getColor(R.styleable.CActionButtonLoading_indicator_color, Color.WHITE)
-            indicatorBackgroundColor = typedArray.getColor(R.styleable.CActionButtonLoading_indicator_background_color, Color.WHITE)
+            indicatorColor =
+                typedArray.getColor(R.styleable.CActionButtonLoading_indicator_color, Color.WHITE)
+            indicatorBackgroundColor = typedArray.getColor(
+                R.styleable.CActionButtonLoading_indicator_background_color,
+                Color.WHITE
+            )
 
-            indicatorStrokeWidth = typedArray.getDimension(R.styleable.CActionButtonLoading_indicator_stroke_width, 1f)
-            indicatorBackgroundStrokeWidth = typedArray.getDimension(R.styleable.CActionButtonLoading_indicator_background_stroke_width, 1f)
+            indicatorStrokeWidth =
+                typedArray.getDimension(R.styleable.CActionButtonLoading_indicator_stroke_width, 1f)
+            indicatorBackgroundStrokeWidth = typedArray.getDimension(
+                R.styleable.CActionButtonLoading_indicator_background_stroke_width,
+                1f
+            )
 
-            indicatorSize = typedArray.getDimensionPixelSize(R.styleable.CActionButtonLoading_indicator_size, 30)
+            indicatorSize = typedArray.getDimensionPixelSize(
+                R.styleable.CActionButtonLoading_indicator_size,
+                30
+            )
         } finally {
             typedArray.recycle()
         }
@@ -70,7 +91,9 @@ class CActionButtonLoading : FrameLayout {
         setIcon(iconDrawable)
         setTextSize(titleTextSize)
         setIconSize(iconSize)
-
+        outline?.let {
+            setOutline(it)
+        }
         setIndicatorColor(indicatorColor)
         setIndicatorBackgroundColor(indicatorBackgroundColor)
 
@@ -136,7 +159,16 @@ class CActionButtonLoading : FrameLayout {
         }
     }
 
+    fun showLoadingState() {
+        this.showLoading(true)
+    }
+
+    fun hideLoadingState() {
+        this.showLoading(false)
+    }
+
     fun showLoading(loading: Boolean) {
+        ui.llBtnContainer.isEnabled = !loading
         ui.ivIcon.isVisible = !loading
         ui.progressBar.isVisible = loading
     }
