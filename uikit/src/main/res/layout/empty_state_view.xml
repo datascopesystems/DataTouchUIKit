@@ -155,7 +155,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_smile"
+                app:srcCompat="@drawable/ic_smile"
                 android:visibility="gone" />
 
             <TextView

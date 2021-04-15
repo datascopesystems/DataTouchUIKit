@@ -39,17 +39,17 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:contentDescription="@null"
-            android:src="@drawable/ic_search_white"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/ic_search_white"
+            android:tint="@color/white" />
 
         <ImageView
             android:id="@+id/ivArrowIcon"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:contentDescription="@null"
-            android:src="@drawable/ic_arrow_down_white"
+            app:srcCompat="@drawable/ic_arrow_down_white"
             android:layout_gravity="end|bottom"
-            app:tint="@color/white" />
+            android:tint="@color/white" />
 
 
     </FrameLayout>
@@ -80,7 +80,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:contentDescription="@null"
-        android:src="@drawable/ic_clear_white"
-        app:tint="@color/white" />
+        app:srcCompat="@drawable/ic_clear_white"
+        android:tint="@color/white" />
 
 </RelativeLayout>

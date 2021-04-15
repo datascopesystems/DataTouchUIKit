@@ -32,8 +32,8 @@
             android:layout_height="25dp"
             android:layout_gravity="start|center_vertical"
             android:contentDescription="@null"
-            android:src="@drawable/ic_list_white"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/ic_list_white"
+            android:tint="@color/white" />
 
         <ImageView
             android:id="@+id/ivMandatoryIndicator"
@@ -41,9 +41,9 @@
             android:layout_height="10dp"
             android:layout_gravity="top|end"
             android:contentDescription="@null"
-            android:src="@drawable/ic_asterisk_white"
+            app:srcCompat="@drawable/ic_asterisk_white"
             android:visibility="visible"
-            app:tint="@color/accent_negative_start_light" />
+            android:tint="@color/accent_negative_start_light" />
 
     </FrameLayout>
 
@@ -73,7 +73,7 @@
         android:layout_height="25dp"
         android:layout_alignParentEnd="true"
         android:contentDescription="@null"
-        android:src="@drawable/ic_arrow_down_white"
-        app:tint="@color/white" />
+        app:srcCompat="@drawable/ic_arrow_down_white"
+        android:tint="@color/white" />
 
 </RelativeLayout>
