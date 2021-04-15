@@ -12,6 +12,7 @@ import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNull
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_button_accent.view.*
 
@@ -107,12 +108,12 @@ class CActionButtonAccent : RelativeLayout {
                 R.styleable.CActionButton_text_size,
                 defaultTextSize
             ).toFloat()
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
             enabled = typedArray.getBoolean(R.styleable.CActionButton_is_enabled, true)
             enabledButtonBackground =
-                typedArray.getDrawable(R.styleable.CActionButton_active_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_active_background)
             disabledButtonBackground =
-                typedArray.getDrawable(R.styleable.CActionButton_inactive_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_inactive_background)
         } finally {
             typedArray.recycle()
         }

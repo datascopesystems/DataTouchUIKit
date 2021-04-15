@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.action_button_accent_outline.view.*
 
@@ -57,9 +58,9 @@ class CActionButtonAccentOutline : RelativeLayout {
 
             titleText = typedArray.getString(R.styleable.CActionButton_title)
 
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
 
-            outline = typedArray.getDrawable(R.styleable.CActionButton_outline)
+            outline = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_outline)
 
             textColor = typedArray.getColor(R.styleable.CActionButton_title_color, Color.WHITE)
 

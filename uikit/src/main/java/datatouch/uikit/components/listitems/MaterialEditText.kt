@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.Conditions.isNullOrEmpty
 import kotlinx.android.synthetic.main.material_edit_text_view.view.*
@@ -82,7 +83,7 @@ class MaterialEditText : RelativeLayout {
             rightActionButton =
                 typedArray.getBoolean(R.styleable.MaterialEditText_rightActionButton, false)
             rightActionButtonBackground =
-                typedArray.getDrawable(R.styleable.MaterialEditText_rightActionButtonBackground)
+                typedArray.getAppCompatDrawable(context, R.styleable.MaterialEditText_rightActionButtonBackground)
             hint = typedArray.getString(R.styleable.MaterialEditText_hint)
             text = typedArray.getString(R.styleable.MaterialEditText_text)
             maxTextLength = typedArray.getInteger(

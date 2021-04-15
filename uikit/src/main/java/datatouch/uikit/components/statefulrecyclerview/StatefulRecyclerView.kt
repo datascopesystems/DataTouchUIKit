@@ -18,6 +18,7 @@ import datatouch.uikit.components.recyclerview.VerticalLineDivider
 import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.BooleanExtensions.ifYes
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
 import datatouch.uikit.core.utils.views.ViewUtils
@@ -96,7 +97,7 @@ class StatefulRecyclerView : RelativeLayout {
                 typedArray.getString(R.styleable.StatefulRecyclerView_srv_empty_state_subtitle)
 
             emptyStateDrawable =
-                typedArray.getDrawable(R.styleable.StatefulRecyclerView_srv_empty_state_drawable)
+                typedArray.getAppCompatDrawable(context, R.styleable.StatefulRecyclerView_srv_empty_state_drawable)
 
             loadingStateTitle =
                 typedArray.getString(R.styleable.StatefulRecyclerView_srv_loading_state_title)

@@ -12,6 +12,7 @@ import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import kotlinx.android.synthetic.main.toggle_button.view.*
 
 class ToggleButton : LinearLayout {
@@ -155,15 +156,15 @@ class ToggleButton : LinearLayout {
                 if (!uncheckedText.isNullOrEmpty()) uncheckedText else defaultUncheckedLabelText
 
             checkedBackground =
-                typedArray.getDrawable(R.styleable.ToggleButton_gtb_checked_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.ToggleButton_gtb_checked_background)
                     ?: defaultCheckedBackground
             uncheckedBackground =
-                typedArray.getDrawable(R.styleable.ToggleButton_gtb_unchecked_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.ToggleButton_gtb_unchecked_background)
                     ?: defaultUncheckedBackground
 
-            checkedIcon = typedArray.getDrawable(R.styleable.ToggleButton_gtb_icon_checked)
+            checkedIcon = typedArray.getAppCompatDrawable(context, R.styleable.ToggleButton_gtb_icon_checked)
                 ?: defaultCheckedIcon
-            uncheckedIcon = typedArray.getDrawable(R.styleable.ToggleButton_gtb_icon_unchecked)
+            uncheckedIcon = typedArray.getAppCompatDrawable(context, R.styleable.ToggleButton_gtb_icon_unchecked)
                 ?: defaultUncheckedIcon
 
             iconSizeDp =

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.labeled_action_button.view.*
@@ -94,8 +95,8 @@ class CLabeledActionButton : RelativeLayout {
                 R.styleable.CActionButton_title_color,
                 Color.WHITE
             )
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
-            backgroundDrawableImg = typedArray.getDrawable(R.styleable.CActionButton_background)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
+            backgroundDrawableImg = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_background)
         } finally {
             typedArray.recycle()
         }

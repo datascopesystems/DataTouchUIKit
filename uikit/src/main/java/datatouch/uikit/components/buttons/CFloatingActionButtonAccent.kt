@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.floating_action_button_accent.view.*
 
@@ -85,13 +86,13 @@ class CFloatingActionButtonAccent : RelativeLayout {
                 R.styleable.CActionButton, 0, 0
             )
         try {
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
             iconPadding =
                 typedArray.getDimensionPixelSize(R.styleable.CActionButton_icon_padding, 0)
             enabledButtonBackground =
-                typedArray.getDrawable(R.styleable.CActionButton_active_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_active_background)
             disabledButtonBackground =
-                typedArray.getDrawable(R.styleable.CActionButton_inactive_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_inactive_background)
         } finally {
             typedArray.recycle()
         }

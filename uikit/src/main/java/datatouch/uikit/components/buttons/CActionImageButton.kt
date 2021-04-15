@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.action_image_button.view.*
 
@@ -41,10 +42,10 @@ class CActionImageButton : RelativeLayout {
             R.styleable.CActionImageButton, 0, 0
         )
         try {
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionImageButton_iconDrawable)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionImageButton_iconDrawable)
             iconColor = typedArray.getColor(R.styleable.CActionImageButton_iconColor, Color.WHITE)
             backgroundViewDrawable =
-                typedArray.getDrawable(R.styleable.CActionImageButton_iconBackground)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionImageButton_iconBackground)
         } finally {
             typedArray.recycle()
         }

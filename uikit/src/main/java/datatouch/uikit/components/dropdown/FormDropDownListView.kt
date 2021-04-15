@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import kotlinx.android.synthetic.main.form_drop_down_list_view.view.*
 
 @SuppressLint("NonConstantResourceId")
@@ -77,7 +78,7 @@ class FormDropDownListView : LinearLayout, IFormView {
                 R.styleable.FormDropDownListView_ddlv_left_unselected_hint
             ).orEmpty()
 
-            iconDrawable = typedArray.getDrawable(
+            iconDrawable = typedArray.getAppCompatDrawable(context,
                 R.styleable.FormDropDownListView_ddlv_icon
             )
                 ?: defaultIconDrawable

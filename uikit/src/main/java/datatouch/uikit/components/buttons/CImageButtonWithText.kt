@@ -11,6 +11,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.animation.AnimationUtils
 import kotlinx.android.synthetic.main.image_button_with_text.view.*
@@ -44,7 +45,7 @@ class CImageButtonWithText : RelativeLayout {
         )
         try {
             title = typedArray.getString(R.styleable.CImageButtonWithText_CIBText)
-            iconDrawable = typedArray.getDrawable(R.styleable.CImageButtonWithText_CIBIcon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CImageButtonWithText_CIBIcon)
         } finally {
             typedArray.recycle()
         }

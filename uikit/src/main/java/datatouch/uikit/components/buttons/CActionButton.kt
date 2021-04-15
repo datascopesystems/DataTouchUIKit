@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.Conditions.isNotNullOrEmpty
 import datatouch.uikit.core.utils.Conditions.isNull
@@ -83,8 +84,8 @@ class CActionButton : RelativeLayout {
                 R.styleable.CActionButton_icon_colour,
                 Color.WHITE
             )
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
-            backgroundDrawableImg = typedArray.getDrawable(R.styleable.CActionButton_background)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
+            backgroundDrawableImg = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_background)
             maxLines = typedArray.getInt(R.styleable.CActionButton_maxLines, 1)
         } finally {
             typedArray.recycle()

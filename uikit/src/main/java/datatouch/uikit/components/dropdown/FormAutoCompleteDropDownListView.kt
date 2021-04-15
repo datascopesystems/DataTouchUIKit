@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.*
 
 private const val DefaultThreshold = 1
@@ -82,7 +83,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
                 R.styleable.FormAutoCompleteDropDownListView_actv_left_unselected_hint
             ).orEmpty()
 
-            iconDrawable = typedArray.getDrawable(
+            iconDrawable = typedArray.getAppCompatDrawable(context,
                 R.styleable.FormAutoCompleteDropDownListView_actv_icon
             )
                 ?: defaultIconDrawable

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNull
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.databinding.ImageButtonAccentOutlineBinding
 
@@ -105,16 +106,16 @@ class ImageButtonAccentOutline : RelativeLayout {
                 R.styleable.CActionButton, 0, 0
             )
         try {
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
 
             iconPadding =
                 typedArray.getDimensionPixelSize(R.styleable.CActionButton_icon_padding, 0)
 
             enabledButtonBackground =
-                typedArray.getDrawable(R.styleable.CActionButton_active_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_active_background)
 
             disabledButtonBackground =
-                typedArray.getDrawable(R.styleable.CActionButton_inactive_background)
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_inactive_background)
 
             buttonType =
                 ButtonType.fromInt(typedArray.getInt(R.styleable.CActionButton_button_type, 0))

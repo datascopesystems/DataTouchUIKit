@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.action_button_accent_negative_round.view.ivIcon
 import kotlinx.android.synthetic.main.action_button_accent_negative_round.view.tvTitle
@@ -52,8 +53,8 @@ open class CActionButtonAccentNegativeRoundOutline : RelativeLayout {
                 NO_CHARACTERS_LIMIT
             )
             titleText = typedArray.getString(R.styleable.CActionButton_title)
-            iconDrawable = typedArray.getDrawable(R.styleable.CActionButton_icon)
-            outline = typedArray.getDrawable(R.styleable.CActionButton_outline)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
+            outline = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_outline)
         } finally {
             typedArray.recycle()
         }

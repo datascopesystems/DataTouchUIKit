@@ -12,6 +12,7 @@ import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
 import datatouch.uikit.core.utils.views.ViewUtils
@@ -102,7 +103,7 @@ class EmptyStateView : RelativeLayout {
                 typedArray.getString(R.styleable.EmptyStateView_empty_state_subtitle).orEmpty()
 
             emptyStateDrawable =
-                typedArray.getDrawable(R.styleable.EmptyStateView_empty_state_drawable)
+                typedArray.getAppCompatDrawable(context, R.styleable.EmptyStateView_empty_state_drawable)
 
             loadingStateTitle = typedArray.getString(R.styleable.EmptyStateView_loading_state_title).orEmpty()
             loadingStateSubTitle =

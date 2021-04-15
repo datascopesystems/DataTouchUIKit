@@ -10,6 +10,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.settings_button_menu.view.*
@@ -49,7 +50,7 @@ class CSettingsButtonMenu : RelativeLayout {
         )
         try {
             title = typedArray.getString(R.styleable.CSettingsButtonCheck_CCTitle)
-            iconDrawable = typedArray.getDrawable(R.styleable.CSettingsButtonCheck_CCIcon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonCheck_CCIcon)
             iconColor = typedArray.getColor(
                 R.styleable.CSettingsButtonCheck_CCIconColor,
                 ContextCompat.getColor(context, R.color.primary)

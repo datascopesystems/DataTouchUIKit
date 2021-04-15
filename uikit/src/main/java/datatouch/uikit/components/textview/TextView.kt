@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.views.ViewUtils
 import datatouch.uikit.databinding.TextViewBinding
 
@@ -102,9 +103,9 @@ class TextView : RelativeLayout {
         )
 
         try {
-            startIconDrawable = typedArray.getDrawable(R.styleable.TextView_tv_start_icon)
+            startIconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.TextView_tv_start_icon)
 
-            endIconDrawable = typedArray.getDrawable(R.styleable.TextView_tv_end_icon)
+            endIconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.TextView_tv_end_icon)
 
             startIconColor =
                 typedArray.getColor(R.styleable.TextView_tv_start_icon_tint, InvalidColor)

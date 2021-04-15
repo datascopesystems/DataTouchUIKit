@@ -11,6 +11,7 @@ import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
 import kotlinx.android.synthetic.main.action_toggle_button.view.*
@@ -89,8 +90,8 @@ class CActionToggleButton : RelativeLayout {
             checkedLabelText = if (Conditions.isNotNullOrEmpty(checkedText.orEmpty())) checkedText else context.getString(R.string.active)
             val uncheckedText = typedArray.getString(R.styleable.CActionButton_uncheckedLabel)
             uncheckedLabelText = if (Conditions.isNotNullOrEmpty(uncheckedText.orEmpty())) uncheckedText else context.getString(R.string.inactive)
-            activeBackground = typedArray.getDrawable(R.styleable.CActionButton_active_background)
-            inactiveBackground = typedArray.getDrawable(R.styleable.CActionButton_inactive_background)
+            activeBackground = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_active_background)
+            inactiveBackground = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_inactive_background)
 
         } finally {
             typedArray.recycle()

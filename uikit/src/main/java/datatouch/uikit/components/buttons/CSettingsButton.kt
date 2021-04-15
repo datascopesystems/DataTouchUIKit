@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import kotlinx.android.synthetic.main.settings_button.view.*
 
@@ -100,9 +101,9 @@ class CSettingsButton : FrameLayout {
                 R.styleable.CSettingsButton_icon_color,
                 Color.WHITE
             )
-            iconDrawable = typedArray.getDrawable(R.styleable.CSettingsButton_settings_icon)
+            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButton_settings_icon)
             colorBackground =
-                typedArray.getDrawable(R.styleable.CSettingsButton_background_drawable)
+                typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButton_background_drawable)
             textColor = typedArray.getColor(
                 R.styleable.CSettingsButton_text_color,
                 Color.WHITE

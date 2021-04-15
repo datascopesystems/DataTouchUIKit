@@ -61,4 +61,8 @@
         app:et_left_unselected_hint="some unselected hint"
         app:et_mandatory_field="true" />
 
+    <datatouch.uikit.components.emptystateview.EmptyStateView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

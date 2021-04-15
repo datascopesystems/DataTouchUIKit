@@ -15,6 +15,7 @@ import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.AfterTextChangedListener
 import datatouch.uikit.components.dropdown.IFormView
 import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import kotlinx.android.synthetic.main.form_edit_text.view.*
 
 @SuppressLint("NonConstantResourceId")
@@ -80,7 +81,7 @@ class FormEditText : LinearLayout, IFormView {
                 R.styleable.FormEditText_et_left_unselected_hint
             ).orEmpty()
 
-            iconDrawable = typedArray.getDrawable(
+            iconDrawable = typedArray.getAppCompatDrawable(context,
                 R.styleable.FormEditText_et_icon
             )
                 ?: defaultIconDrawable

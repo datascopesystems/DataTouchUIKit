@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 // App Details
 def PackageName = "datatouch.uikitapp"
 def TargetSdkVersion = 30
-def MinSdkVersion = 19 // TODO : Andrii, We do NOT support drawables in custom components for API 19! Add support or get rid of legacy SDK support!!!
+def MinSdkVersion = 19
 def BuildToolsVersion = '30.0.3'
 
 // Versions

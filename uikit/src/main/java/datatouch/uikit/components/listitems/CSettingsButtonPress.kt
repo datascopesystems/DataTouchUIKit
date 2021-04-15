@@ -9,6 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
+import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import kotlinx.android.synthetic.main.settings_button_press.view.*
 
@@ -41,8 +42,8 @@ class CSettingsButtonPress : RelativeLayout {
         )
         try {
             title = typedArray.getString(R.styleable.CSettingsButtonPress_CPTitle)
-            icon = typedArray.getDrawable(R.styleable.CSettingsButtonPress_CPIcon)
-            iconRight = typedArray.getDrawable(R.styleable.CSettingsButtonPress_CPIconRight)
+            icon = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonPress_CPIcon)
+            iconRight = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonPress_CPIconRight)
             iconColor = typedArray.getColor(
                 R.styleable.CSettingsButtonPress_CPIconColor,
                 ContextCompat.getColor(context, R.color.primary)
