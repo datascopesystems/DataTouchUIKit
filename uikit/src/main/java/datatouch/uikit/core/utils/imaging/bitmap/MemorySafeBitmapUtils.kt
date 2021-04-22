@@ -34,7 +34,9 @@ object MemorySafeBitmapUtils {
             backgroundThread.start()
             backgroundThread.join()
 
-            return bitmapToBase64(bitmap, q)
+            val base64String = bitmapToBase64(bitmap, q)
+            bitmap?.recycle()
+            return base64String
         }.onFailure { exception -> exception.printStackTrace() }.getOrDefault("")
 
     // Do not expose this method - no bitmap size check!!!
