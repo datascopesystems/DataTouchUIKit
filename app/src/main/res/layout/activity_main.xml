@@ -1,68 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <datatouch.uikit.components.buttons.ImageButtonAccentOutline
-        android:id="@+id/btnDeleteComment"
+    <Button
+        android:text="@string/ok"
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_m"
-        app:button_type="negative"
-        app:icon="@drawable/ic_inc_size"
-        app:tint_color="@color/accent_end_light" />
-
-
-    <datatouch.uikit.components.textview.TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tv_max_length="5"
-        app:tv_text="fdfsdfsfncvhcxkjvhxkxcjvhxkcvdfsdfsdf" />
-
-
-    <datatouch.uikit.components.buttons.CActionToggleButton
-        android:id="@+id/tbActive"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/list_item_button_size"
-        android:layout_marginTop="@dimen/margin_m"
-        app:checked="false" />
-
-    <datatouch.uikit.components.buttons.CActionButtonLoading
-        android:id="@+id/blSample"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/list_item_button_size"
-        android:layout_marginTop="@dimen/margin_m"
-        app:btn_outline="@drawable/rounded_corner_warning_outline"
-        app:btn_icon="@drawable/ic_redo"
-        app:btn_title="Legacy APK" />
-
-    <datatouch.uikit.components.edittext.FormEditText
-        android:id="@+id/et1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        app:et_editable="true"
-        app:et_hint="some hint"
-        app:et_icon="@drawable/ic_exclusion_zone_white"
-        app:et_left_unselected_hint="some unselected hint"
-        app:et_mandatory_field="true" />
-
-    <datatouch.uikit.components.edittext.FormEditText
-        android:id="@+id/et2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        app:et_editable="false"
-        app:et_hint="some hint"
-        app:et_icon="@drawable/ic_exclusion_zone_white"
-        app:et_left_unselected_hint="some unselected hint"
-        app:et_mandatory_field="true" />
-
-    <datatouch.uikit.components.emptystateview.EmptyStateView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

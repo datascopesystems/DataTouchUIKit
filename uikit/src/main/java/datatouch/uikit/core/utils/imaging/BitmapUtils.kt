@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
+@Deprecated("Use MemorySafeBitmapUtils instead")
 object BitmapUtils {
 
     fun convertBitmapToStringNoWrap(source: Bitmap): String {
