@@ -5,9 +5,9 @@ import android.view.View
 
 object ScreenshotUtils {
 
-    fun makeScreenshot(view: View): Screenshot {
+    fun makeScreenshot(view: View, width: Int = view.width, height: Int = view.height): Screenshot {
         val screenshotFactory = ScreenshotFactory(
-            IntSize.ofDP(view.context, view.width, view.height), Bitmap.Config.RGB_565)
+            IntSize.ofDP(view.context, width, height), Bitmap.Config.RGB_565)
 
         val thumb = screenshotFactory.from(view)
         screenshotFactory.drop()
