@@ -1,10 +1,12 @@
 package datatouch.uikit.core.utils.imaging.bitmap
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Base64
 import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
 import java.io.File
+import kotlin.math.min
 
 object MemorySafeBitmapUtils {
 
@@ -18,13 +20,15 @@ object MemorySafeBitmapUtils {
     @JvmStatic
     fun compressImageToBase64(file: File, q: BitmapQuality = BitmapQuality.Medium): String =
         runCatching {
-            val size = getBitmapSize(q)
+            val originalImageWidth = getOriginalBitmapWidth(file)
+            val resizedBitmapWidth = getBitmapSize(q)
+            val targetBitmapWidth = min(originalImageWidth, resizedBitmapWidth) // Should be resized to suggested size OR remaining same if original is smaller
             var bitmap: Bitmap? = null
 
             // Picasso requires this to run in background
             val backgroundThread = Thread {
                 // Height is automatically calculated by passing 0
-                bitmap = Picasso.get().load(file).resize(size, 0).get()
+                bitmap = Picasso.get().load(file).resize(targetBitmapWidth, 0).get()
             }
 
             backgroundThread.start()
@@ -40,11 +44,25 @@ object MemorySafeBitmapUtils {
         return Base64.encodeToString(bao.toByteArray(), Base64.DEFAULT)
     } ?: ""
 
+    private fun getOriginalBitmapWidth(file: File) : Int {
+        val options = readBitmapDimensions(file)
+        return options.outWidth
+    }
+
+    private fun readBitmapDimensions(file: File) : BitmapFactory.Options {
+        val options = BitmapFactory.Options().apply {
+            // This means NOT allocating space for this bitmap, just reading very basic information
+            inJustDecodeBounds = true
+        }
+        BitmapFactory.decodeFile(file.path, options)
+        return options
+    }
+
     private fun getBitmapSize(q: BitmapQuality): Int {
         return when (q) {
-            BitmapQuality.Poor -> LowBitmapSizePx
-            BitmapQuality.Medium -> MediumBitmapSizePx
-            BitmapQuality.High -> HighBitmapSizePx
+            BitmapQuality.Poor -> LowBitmapWidthPx
+            BitmapQuality.Medium -> MediumBitmapWidthPx
+            BitmapQuality.High -> HighBitmapWidthPx
         }
     }
 
@@ -58,10 +76,10 @@ object MemorySafeBitmapUtils {
 
 }
 
-private const val LowBitmapSizePx = 640
-private const val MediumBitmapSizePx = 800
-private const val HighBitmapSizePx = 1024
+private const val LowBitmapWidthPx = 640
+private const val MediumBitmapWidthPx = 800
+private const val HighBitmapWidthPx = 1024
 
 private const val LowBitmapCompressQuality = 50
-private const val MediumBitmapCompressQuality = 90
-private const val HighBitmapCompressQuality = 100
+private const val MediumBitmapCompressQuality = 85
+private const val HighBitmapCompressQuality = 95
