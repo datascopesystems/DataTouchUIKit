@@ -58,10 +58,10 @@ object MemorySafeBitmapUtils {
 
 }
 
-private const val LowBitmapSizePx = 150
-private const val MediumBitmapSizePx = 300
-private const val HighBitmapSizePx = 450
+private const val LowBitmapSizePx = 300
+private const val MediumBitmapSizePx = 450
+private const val HighBitmapSizePx = 600
 
-private const val LowBitmapCompressQuality = 20
-private const val MediumBitmapCompressQuality = 50
-private const val HighBitmapCompressQuality = 70
+private const val LowBitmapCompressQuality = 40
+private const val MediumBitmapCompressQuality = 70
+private const val HighBitmapCompressQuality = 90
