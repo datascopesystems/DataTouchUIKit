@@ -93,11 +93,17 @@ class PhotoCameraActivity : AppCompatActivity() {
 
     private fun setupShutterListener() {
         btnShutter?.setOnClickListener {
-            MediaPlayer.create(applicationContext, R.raw.camera_click).start()
+            playClickSound()
             val screenshot = Screenshot(previewView?.bitmap)
             val screenshotFile = activityParams.newPhotoJpgFile()
             screenshot.saveToFile(screenshotFile.path)
             onImageSaved(screenshotFile)
+        }
+    }
+
+    private fun playClickSound() {
+        kotlin.runCatching {
+            MediaPlayer.create(applicationContext, R.raw.camera_click).start()
         }
     }
 
