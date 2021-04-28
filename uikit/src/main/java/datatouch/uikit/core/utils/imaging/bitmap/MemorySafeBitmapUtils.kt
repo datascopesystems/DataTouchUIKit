@@ -27,8 +27,10 @@ object MemorySafeBitmapUtils {
 
             // Picasso requires this to run in background
             val backgroundThread = Thread {
-                // Height is automatically calculated by passing 0
-                bitmap = Picasso.get().load(file).resize(targetBitmapWidth, 0).get()
+                kotlin.runCatching { // Catch in separate thread
+                    // Height is automatically calculated by passing 0
+                    bitmap = Picasso.get().load(file).resize(targetBitmapWidth, 0).get()
+                }
             }
 
             backgroundThread.start()
