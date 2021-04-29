@@ -5,14 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <datatouch.uikit.components.edittext.FormEditText
-        android:id="@+id/etClientName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_m"
-        app:et_theme="light"
-        app:et_hint="Test hint"
-        app:et_icon="@drawable/ic_database_white"
-        app:et_mandatory_field="true" />
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@null"
+        app:layout_collapseMode="pin"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
