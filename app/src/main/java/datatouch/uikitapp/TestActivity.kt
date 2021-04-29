@@ -11,6 +11,13 @@ class TestActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+      /*  btn?.setOnClickListener {
+            ivIcon?.showGifAnimation(R.drawable.an_guide_arrow, loopsCount = 1
+            ) {
+                ivIcon?.setImageDrawable(null)
+            }
+        }*/
+
     }
 
 

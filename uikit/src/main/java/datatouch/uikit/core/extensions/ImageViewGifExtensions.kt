@@ -12,12 +12,15 @@ import com.bumptech.glide.load.resource.gif.GifDrawable.LOOP_FOREVER
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.ConditionsExtensions.isNotNull
 
 object ImageViewGifExtensions {
 
-    fun ImageView.showGifAnimation(@DrawableRes resId: Int,
-                                   loopsCount: Int = LOOP_FOREVER,
-                                   animationEndCallback : UiJustCallback = {}) {
+    fun ImageView.showGifAnimation(
+        @DrawableRes resId: Int,
+        loopsCount: Int = LOOP_FOREVER,
+        animationEndCallback: UiJustCallback? = null
+    ) {
         Glide.with(context.applicationContext)
             .asGif()
             .load(resId)
@@ -39,13 +42,16 @@ object ImageViewGifExtensions {
                     isFirstResource: Boolean
                 ): Boolean {
                     resource?.setLoopCount(loopsCount)
-                    resource?.registerAnimationCallback(object :
-                        Animatable2Compat.AnimationCallback() {
-                        override fun onAnimationEnd(drawable: Drawable?) {
-                            super.onAnimationEnd(drawable)
-                            animationEndCallback()
-                        }
-                    })
+
+                    if (animationEndCallback.isNotNull()) {
+                        resource?.registerAnimationCallback(object :
+                            Animatable2Compat.AnimationCallback() {
+                            override fun onAnimationEnd(drawable: Drawable?) {
+                                super.onAnimationEnd(drawable)
+                                animationEndCallback?.invoke()
+                            }
+                        })
+                    }
 
                     return false
                 }

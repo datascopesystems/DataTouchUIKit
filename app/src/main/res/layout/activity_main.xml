@@ -13,4 +13,11 @@
         app:layout_collapseMode="pin"
         android:layout_gravity="center"/>
 
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"/>
+
 </LinearLayout>
