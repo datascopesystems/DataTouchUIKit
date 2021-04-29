@@ -13,7 +13,10 @@ object TextViewExtensions {
         if (Conditions.isNotNullOrEmpty(text)) this.text = text
         else setText(defaultResId)
 
-    inline fun TextView.setTextColorResource(@ColorRes colorRes: Int) =
+    inline fun TextView.setTextColorRes(@ColorRes colorRes: Int) =
         setTextColor(ContextCompat.getColor(context, colorRes))
+
+    inline fun TextView.setHintTextColorRes(@ColorRes colorRes: Int) =
+        setHintTextColor(ContextCompat.getColor(context, colorRes))
 
 }

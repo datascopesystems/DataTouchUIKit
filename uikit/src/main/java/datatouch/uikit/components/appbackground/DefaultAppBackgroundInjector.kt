@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import datatouch.uikit.components.appbackground.interfaces.IAppBackgroundInjector
-import datatouch.uikit.core.extensions.ImageViewExtensions.showImageResource
+import datatouch.uikit.core.extensions.ImageViewExtensions.showImageRes
 
 
 abstract class DefaultAppBackgroundInjector : IAppBackgroundInjector {
@@ -14,7 +14,7 @@ abstract class DefaultAppBackgroundInjector : IAppBackgroundInjector {
 
     protected fun setBackground(view: View, resourceId: Int, defaultColor: Int = Color.DKGRAY) {
         if (view is ImageView) {
-            view.showImageResource(resourceId)
+            view.showImageRes(resourceId)
             return
         }
 

@@ -11,10 +11,10 @@ import java.io.File
 
 object ImageViewExtensions {
 
-    fun ImageView.setColorFilterResource(@ColorRes resId: Int) =
+    fun ImageView.setColorFilterRes(@ColorRes resId: Int) =
         this.setColorFilter(ContextCompat.getColor(context, resId))
 
-    fun ImageView.showImageResource(@DrawableRes resId: Int) =
+    fun ImageView.showImageRes(@DrawableRes resId: Int) =
         ImageUtils.setImageResource(resId, this)
 
     fun ImageView.showLocalImage(imagePath: String?, errorResId: Int = R.drawable.image_not_found) =

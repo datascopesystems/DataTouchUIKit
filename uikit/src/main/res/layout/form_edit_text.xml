@@ -8,10 +8,10 @@
     android:layout_weight="1"
     android:background="@drawable/ellipsized_primary_half_transparent_background"
     android:gravity="center_vertical"
-    android:paddingStart="15dp"
-    android:paddingTop="10dp"
-    android:paddingEnd="15dp"
-    android:paddingBottom="10dp">
+    android:paddingStart="@dimen/padding_m"
+    android:paddingTop="@dimen/padding_s"
+    android:paddingEnd="@dimen/padding_m"
+    android:paddingBottom="@dimen/padding_s">
 
     <FrameLayout
         android:layout_centerVertical="true"

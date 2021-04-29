@@ -14,6 +14,10 @@
         </attr>
         <attr name="et_editable" format="boolean"/>
         <attr name="et_max_lines" format="integer"/>
+        <attr name="et_theme" format="enum">
+            <enum name="dark" value="0" />
+            <enum name="light" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>

@@ -6,7 +6,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -15,16 +15,24 @@ import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.AfterTextChangedListener
 import datatouch.uikit.components.dropdown.IFormView
 import datatouch.uikit.core.callbacks.UiJustCallback
+import datatouch.uikit.core.extensions.ImageViewExtensions.setColorFilterRes
+import datatouch.uikit.core.extensions.TextViewExtensions.setHintTextColorRes
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
-import kotlinx.android.synthetic.main.form_edit_text.view.*
+import datatouch.uikit.databinding.FormEditTextBinding
 
 @SuppressLint("NonConstantResourceId")
 class FormEditText : LinearLayout, IFormView {
 
-    private var notEmptyColor = 0
-    private var emptyNormalColor = 0
-    private var emptyErrorColor = 0
-    private var normalHintTextColor = 0
+    private val ui = FormEditTextBinding
+        .inflate(LayoutInflater.from(context), this, true)
+
+    private val darkThemeBackgroundRes = R.drawable.ellipsized_primary_half_transparent_background
+    private val lightThemeBackgroundRes = R.drawable.primary_light_edit_text_rounded_corner
+
+    private val notEmptyColorRes = R.color.accent_start_light
+    private val emptyNormalColorRes = R.color.white
+    private val emptyErrorColorRes = R.color.accent_negative_start_light
+    private val normalHintTextColorRes = R.color.secondary_light
     private var defaultIconDrawable: Drawable? = null
 
     private var originalTypeface: Typeface? = null
@@ -36,6 +44,7 @@ class FormEditText : LinearLayout, IFormView {
     private var isEditable = true
     private var maxLines = DefaultMaxLines
     private var maxTextLength = DefaultMaxTextLength
+    private var theme = Theme.Dark
 
     private var enableClickOnFocus = false
     var onTextChangeCallback: UiJustCallback? = null
@@ -50,21 +59,12 @@ class FormEditText : LinearLayout, IFormView {
     }
 
     private fun init(context: Context, attrs: AttributeSet) {
-        inflateView()
         initResources(context)
         parseCustomAttributes(attrs)
         afterViews()
     }
 
-    private fun inflateView() {
-        View.inflate(context, R.layout.form_edit_text, this)
-    }
-
     private fun initResources(context: Context) {
-        notEmptyColor = ContextCompat.getColor(context, R.color.accent_start_light)
-        emptyNormalColor = ContextCompat.getColor(context, R.color.white)
-        emptyErrorColor = ContextCompat.getColor(context, R.color.accent_negative_start_light)
-        normalHintTextColor = ContextCompat.getColor(context, R.color.secondary_light)
         defaultIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_search_white)
     }
 
@@ -81,7 +81,8 @@ class FormEditText : LinearLayout, IFormView {
                 R.styleable.FormEditText_et_left_unselected_hint
             ).orEmpty()
 
-            iconDrawable = typedArray.getAppCompatDrawable(context,
+            iconDrawable = typedArray.getAppCompatDrawable(
+                context,
                 R.styleable.FormEditText_et_icon
             )
                 ?: defaultIconDrawable
@@ -98,35 +99,41 @@ class FormEditText : LinearLayout, IFormView {
 
             maxLines = typedArray.getInteger(R.styleable.FormEditText_et_max_lines, DefaultMaxLines)
 
-            maxTextLength = typedArray.getInt(R.styleable.FormEditText_et_max_text_length,
-                DefaultMaxTextLength)
+            maxTextLength = typedArray.getInt(
+                R.styleable.FormEditText_et_max_text_length,
+                DefaultMaxTextLength
+            )
+
+            val themeInt = typedArray.getInt(R.styleable.FormEditText_et_theme, 0)
+            theme = Theme.fromInt(themeInt)
 
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun afterViews() {
-        originalTypeface = et?.typeface
-        et?.hint = hint
-        et?.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxTextLength))
-        et?.setHintTextColor(normalHintTextColor)
-        et?.setTypeface(originalTypeface, Typeface.NORMAL)
+    fun afterViews() = ui.apply {
+        originalTypeface = et.typeface
+        et.hint = hint
+        et.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxTextLength))
+        et.setHintTextColorRes(normalHintTextColorRes)
+        et.setTypeface(originalTypeface, Typeface.NORMAL)
         setupInputType()
-        et?.maxLines = maxLines
+        et.maxLines = maxLines
         refreshClearButton()
-        ivIcon?.setImageDrawable(iconDrawable)
-        et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
-        et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
-        ivClear?.setOnClickListener { et?.setText("") }
-        ivMandatoryIndicator?.isVisible = isMandatoryField
+        ivIcon.setImageDrawable(iconDrawable)
+        et.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
+        et.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ivClear.setOnClickListener { et.setText("") }
+        ivMandatoryIndicator.isVisible = isMandatoryField
+        setupTheme()
     }
 
-    private fun setupInputType() {
+    private fun setupInputType() = ui.apply {
         if (!isEditable) {
             et.inputType = android.text.InputType.TYPE_NULL
             et.keyListener = null
-            return
+            return@apply
         }
 
         when (inputType) {
@@ -134,7 +141,8 @@ class FormEditText : LinearLayout, IFormView {
 
             InputType.Number -> et.inputType = android.text.InputType.TYPE_CLASS_NUMBER
 
-            InputType.TextMultiline -> et.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            InputType.TextMultiline -> et.inputType =
+                android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
         }
     }
 
@@ -152,8 +160,8 @@ class FormEditText : LinearLayout, IFormView {
             showAsNormalInput()
     }
 
-    private fun refreshClearButton() {
-        ivClear?.isVisible = et?.text?.isNotEmpty() == true && isEditable
+    private fun refreshClearButton() = ui.apply {
+        ivClear.isVisible = et.text?.isNotEmpty() == true && isEditable
     }
 
     private fun onFocusChange(focused: Boolean) {
@@ -165,37 +173,37 @@ class FormEditText : LinearLayout, IFormView {
         afterTextChanged()
 
         if (enableClickOnFocus)
-            llFormEditTextRoot.performClick()
+            ui.llFormEditTextRoot.performClick()
     }
 
-    fun showAsValidInput() {
-        ivIcon?.setColorFilter(notEmptyColor)
-        ivMandatoryIndicator?.setColorFilter(notEmptyColor)
-        et?.hint = hint
-        et?.setHintTextColor(normalHintTextColor)
-        et?.setTypeface(originalTypeface, Typeface.NORMAL)
+    fun showAsValidInput() = ui.apply {
+        ivIcon.setColorFilterRes(notEmptyColorRes)
+        ivMandatoryIndicator.setColorFilter(notEmptyColorRes)
+        et.hint = hint
+        et.setHintTextColorRes(normalHintTextColorRes)
+        et.setTypeface(originalTypeface, Typeface.NORMAL)
     }
 
-    fun showAsNormalInput() {
-        ivIcon?.setColorFilter(emptyNormalColor)
-        ivMandatoryIndicator?.setColorFilter(emptyErrorColor)
-        et?.hint = hint
-        et?.setHintTextColor(normalHintTextColor)
-        et?.setTypeface(originalTypeface, Typeface.NORMAL)
+    fun showAsNormalInput() = ui.apply {
+        ivIcon.setColorFilterRes(emptyNormalColorRes)
+        ivMandatoryIndicator.setColorFilterRes(emptyErrorColorRes)
+        et.hint = hint
+        et.setHintTextColorRes(normalHintTextColorRes)
+        et.setTypeface(originalTypeface, Typeface.NORMAL)
     }
 
     private fun onUnfocused() {
         if (isMandatoryField && !hasValidInput) showAsErrorInput()
     }
 
-    fun showAsErrorInput() {
-        ivIcon?.setColorFilter(emptyErrorColor)
-        et?.hint = leftUnselectedHint
-        et?.setHintTextColor(emptyErrorColor)
-        et?.setTypeface(originalTypeface, Typeface.BOLD)
+    fun showAsErrorInput() = ui.apply {
+        ivIcon.setColorFilterRes(emptyErrorColorRes)
+        et.hint = leftUnselectedHint
+        et.setHintTextColorRes(emptyErrorColorRes)
+        et.setTypeface(originalTypeface, Typeface.BOLD)
     }
 
-    val hasValidInput get() = et?.text?.trim()?.isNotEmpty() == true
+    val hasValidInput get() = ui.et.text?.trim()?.isNotEmpty() == true
 
     val hasValidInputWhenMandatory
         get() = run {
@@ -204,24 +212,24 @@ class FormEditText : LinearLayout, IFormView {
         }
 
     var text: String
-        get() = et?.text.toString()
+        get() = ui.et.text.toString()
         set(value) {
-            et?.setText(value)
+            ui.et.setText(value)
             refreshViewsAfterTextChange()
         }
 
     override fun setOnClickListener(l: OnClickListener?) {
         super.setOnClickListener(l)
         enableClickOnFocus = true
-        et?.isFocusableInTouchMode = false
-        llFormEditTextRoot?.setOnClickListener(l)
-        et?.setOnClickListener(l)
-        ivIcon?.setOnClickListener(l)
+        ui.et.isFocusableInTouchMode = false
+        ui.llFormEditTextRoot?.setOnClickListener(l)
+        ui.et.setOnClickListener(l)
+        ui.ivIcon.setOnClickListener(l)
     }
 
     fun setHint(hint: String) {
         this.hint = hint
-        et?.hint = hint
+        ui.et.hint = hint
     }
 
     fun setLeftUnselectedHint(leftUnselectedHint: String) {
@@ -240,7 +248,7 @@ class FormEditText : LinearLayout, IFormView {
 
     fun setIconDrawable(iconDrawable: Drawable?) {
         this.iconDrawable = iconDrawable
-        ivIcon?.setImageDrawable(iconDrawable)
+        ui.ivIcon.setImageDrawable(iconDrawable)
     }
 
     override fun showMandatoryFieldErrorIfRequired() {
@@ -252,7 +260,7 @@ class FormEditText : LinearLayout, IFormView {
 
     override fun setMandatory(isMandatory: Boolean) {
         this.isMandatoryField = isMandatory
-        ivMandatoryIndicator?.isVisible = isMandatoryField
+        ui.ivMandatoryIndicator.isVisible = isMandatoryField
         refreshViewsAfterTextChange()
     }
 
@@ -265,6 +273,27 @@ class FormEditText : LinearLayout, IFormView {
         this.isEditable = isEditable
         setupInputType()
     }
+
+    fun setTheme(theme: Theme) {
+        this.theme = theme
+        setupTheme()
+    }
+
+    private fun setupTheme() {
+        // Save and restore padding
+        val paddingBottom = ui.llFormEditTextRoot.paddingBottom
+        val paddingTop = ui.llFormEditTextRoot.paddingTop
+        val paddingStart = ui.llFormEditTextRoot.paddingStart
+        val paddingEnd = ui.llFormEditTextRoot.paddingEnd
+
+        when (theme) {
+            Theme.Dark -> ui.llFormEditTextRoot.setBackgroundResource(darkThemeBackgroundRes)
+            Theme.Light -> ui.llFormEditTextRoot.setBackgroundResource(lightThemeBackgroundRes)
+        }
+
+        ui.llFormEditTextRoot.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
+    }
+
 }
 
 const val DefaultMaxTextLength = 60
