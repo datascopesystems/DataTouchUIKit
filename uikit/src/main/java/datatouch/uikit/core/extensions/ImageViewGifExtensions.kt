@@ -1,7 +1,9 @@
 package datatouch.uikit.core.extensions
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -9,10 +11,13 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.load.resource.gif.GifDrawable.LOOP_FOREVER
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import datatouch.uikit.core.callbacks.UiJustCallback
 
 object ImageViewGifExtensions {
 
-    fun ImageView.showGifAnimation(@DrawableRes resId: Int, loopsCount: Int = LOOP_FOREVER) {
+    fun ImageView.showGifAnimation(@DrawableRes resId: Int,
+                                   loopsCount: Int = LOOP_FOREVER,
+                                   animationEndCallback : UiJustCallback = {}) {
         Glide.with(context.applicationContext)
             .asGif()
             .load(resId)
@@ -34,6 +39,14 @@ object ImageViewGifExtensions {
                     isFirstResource: Boolean
                 ): Boolean {
                     resource?.setLoopCount(loopsCount)
+                    resource?.registerAnimationCallback(object :
+                        Animatable2Compat.AnimationCallback() {
+                        override fun onAnimationEnd(drawable: Drawable?) {
+                            super.onAnimationEnd(drawable)
+                            animationEndCallback()
+                        }
+                    })
+
                     return false
                 }
 
