@@ -23,6 +23,7 @@
         <attr name="button_type" format="enum">
             <enum name="positive" value="0" />
             <enum name="negative" value="1" />
+            <enum name="neutral" value="2" />
         </attr>
         <attr name="tint_color" format="color"/>
     </declare-styleable>

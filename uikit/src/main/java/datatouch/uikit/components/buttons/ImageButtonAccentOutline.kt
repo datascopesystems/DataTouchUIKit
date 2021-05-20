@@ -37,6 +37,12 @@ class ImageButtonAccentOutline : RelativeLayout {
             R.drawable.image_button_background_accent_negative_outline
         )
     }
+    private val defaultNeutralEnabledBackground by lazy {
+        ContextCompat.getDrawable(
+            context,
+            R.drawable.image_button_background_accent_neutral_outline
+        )
+    }
 
     private var buttonType = ButtonType.Positive
     private var iconDrawable: Drawable? = null
@@ -148,6 +154,7 @@ class ImageButtonAccentOutline : RelativeLayout {
         get() = when (buttonType) {
                 ButtonType.Positive -> defaultPositiveEnabledBackground
                 ButtonType.Negative -> defaultNegativeEnabledBackground
+                ButtonType.Neutral -> defaultNeutralEnabledBackground
             }
 
     private fun applyNativeAttributes() {

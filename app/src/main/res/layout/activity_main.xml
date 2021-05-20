@@ -5,19 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/ivIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="@null"
-        app:layout_collapseMode="pin"
-        android:layout_gravity="center"/>
-
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ok"/>
-
+    <datatouch.uikit.components.buttons.ImageButtonAccentOutline
+        android:id="@+id/btnCommit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="visible"
+        app:button_type="neutral"
+        app:icon="@drawable/ic_commit"
+        />
 </LinearLayout>
