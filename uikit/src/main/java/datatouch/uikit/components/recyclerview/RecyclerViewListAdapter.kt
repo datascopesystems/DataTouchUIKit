@@ -107,6 +107,18 @@ abstract class RecyclerViewListAdapter<TData, TView : View>
 
     fun appendData(item: TData) = addData(dataItemCount, item)
 
+    fun updateData(item: TData) {
+        data.firstOrNull { it?.equals(item) == true }?.apply {
+            val mutableData = data.toMutableList()
+            val i = mutableData.indexOf(this)
+            kotlin.runCatching {
+                mutableData[i] = item
+                data = mutableData
+                notifyMyItemChanged(i)
+            }
+        }
+    }
+
     fun removeData(position: Int) {
         if (position < data.size) {
             val mutableData = data.toMutableList()
