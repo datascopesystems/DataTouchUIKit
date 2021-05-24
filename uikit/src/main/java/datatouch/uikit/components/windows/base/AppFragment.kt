@@ -15,6 +15,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
+@Deprecated("Inherit from AppFragmentUiBind instead")
 abstract class AppFragment : Fragment() {
 
     private var scope: CoroutineScope? = null
@@ -40,6 +41,7 @@ abstract class AppFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        inject()
         getLogic()?.apply {
             onEvents(this) { handleBaseUiEvent(it) }
             onStates(this) { handleUiState(it) }
