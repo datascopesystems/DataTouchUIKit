@@ -15,7 +15,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-open class AppFragment : Fragment() {
+abstract class AppFragment : Fragment() {
 
     private var scope: CoroutineScope? = null
 
@@ -83,5 +83,7 @@ open class AppFragment : Fragment() {
         ft.commit()
         currentFragment = null
     }
+
+    protected abstract fun inject()
 
 }
