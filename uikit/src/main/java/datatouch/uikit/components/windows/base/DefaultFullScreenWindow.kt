@@ -7,6 +7,7 @@ import datatouch.uikit.components.windows.base.toolbars.DefaultFullScreenWindowT
 
 
 @SuppressLint("InflateParams")
+@Deprecated("Inherit from DefaultFullScreenWindowUiBind instead")
 abstract class DefaultFullScreenWindow : FullScreenWindow<DefaultFullScreenWindowToolbar>() {
 
     override fun provideToolbar() : DefaultFullScreenWindowToolbar {

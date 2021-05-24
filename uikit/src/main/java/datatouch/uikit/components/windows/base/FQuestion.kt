@@ -15,6 +15,8 @@ class FQuestion : PopUpWindowUiBind<FragmentQuestionBinding>() {
         ui?.btnOk?.setOnClickListener { btnOk() }
     }
 
+    override fun inject() {}
+
     override fun getWindowTitle() = R.string.conformation_required
 
     private fun btnOk() {

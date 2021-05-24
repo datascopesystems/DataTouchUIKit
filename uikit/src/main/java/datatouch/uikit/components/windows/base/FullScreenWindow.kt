@@ -15,6 +15,7 @@ import datatouch.uikit.core.utils.ScreenUtils
 
 
 @SuppressLint("InflateParams")
+@Deprecated("Inherit from FullScreenWindowUiBind instead")
 abstract class FullScreenWindow<TToolbar : View> : FragmentWindow() {
 
     private var llToolbarContainer: LinearLayout? = null

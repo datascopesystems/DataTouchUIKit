@@ -14,7 +14,7 @@ import datatouch.uikit.components.windows.base.toolbars.PopUpWindowToolbar
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.GenericExtensions.default
 
-
+@Deprecated("Inherit from PopUpWindowUiBind instead")
 abstract class PopUpWindow : FragmentWindow() {
 
     override val rootView: View? by lazy {

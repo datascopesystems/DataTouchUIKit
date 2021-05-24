@@ -5,7 +5,7 @@ import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
 
-class Logger {
+object Logger {
 
     private val isLoggingDisabled = !Environment.isDebug
 

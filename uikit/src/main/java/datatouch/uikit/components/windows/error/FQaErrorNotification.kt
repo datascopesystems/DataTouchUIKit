@@ -19,4 +19,6 @@ class FQaErrorNotification : PopUpWindowUiBind<QaFragmentErrorBinding>() {
         dismiss()
     }
 
+    override fun inject() {}
+
 }

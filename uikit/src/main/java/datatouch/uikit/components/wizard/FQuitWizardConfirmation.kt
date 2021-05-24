@@ -20,4 +20,6 @@ class FQuitWizardConfirmation : PopUpWindowUiBind<FragmentQuitWizardBinding>() {
         onQuitConfirmedCallback?.invoke()
     }
 
+    override fun inject() {}
+
 }

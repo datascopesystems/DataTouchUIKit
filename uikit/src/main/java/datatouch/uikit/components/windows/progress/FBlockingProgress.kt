@@ -66,4 +66,6 @@ class FBlockingProgress() : PopUpWindowUiBind<DialogBlockingProgressBinding>() {
         ui?.tvSubMessage?.visibility = if (subMessageText.isEmpty()) View.GONE else View.VISIBLE
         ui?.tvSubMessage?.text = subMessageText
     }
+
+    override fun inject() {}
 }
