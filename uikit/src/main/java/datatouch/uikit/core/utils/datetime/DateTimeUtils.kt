@@ -6,6 +6,9 @@ import java.util.*
 object DateTimeUtils  {
 
     @JvmStatic
+    fun now() = Date()
+
+    @JvmStatic
     fun currentSystemTimeMillis() = System.currentTimeMillis()
 
     fun isDateInPast(dateToCheck: Date?) : Boolean = DateTimeUtilsInternal.now().runCatching {

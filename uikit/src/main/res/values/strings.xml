@@ -46,5 +46,12 @@
     <string name="no_cameras_detected">No cameras detected</string>
     <string name="error_capturing_image">Error capturing image</string>
     <string name="attach_photo">Attach Photo</string>
+    <string name="close">Close</string>
+    <string name="error">Error</string>
+    <string name="continue_question">Continue?</string>
+    <string name="filled_data_will_not_be_saved">Filled data will NOT be saved</string>
+    <string name="quit_wizard">Quit Wizard</string>
+    <string name="you_will_not_be_able_to_change_filled_data">You will not be able to change filled data</string>
+    <string name="conformation_required">Conformation Required</string>
 
 </resources>

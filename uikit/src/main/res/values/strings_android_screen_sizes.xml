@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ldpi">LDPI</string>
+    <string name="mdpi">MDPI</string>
+    <string name="hdpi">HDPI</string>
+    <string name="xhdpi">XHDPI</string>
+    <string name="xxhdpi">XXHDPI</string>
+    <string name="xxxhdpi">XXXHDPI</string>
+</resources>

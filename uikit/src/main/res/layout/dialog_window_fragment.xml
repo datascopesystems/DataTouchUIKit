@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <datatouch.uikit.components.windows.base.toolbars.DialogWindowToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:toolbar_title="Title" />
+
+    <LinearLayout
+        android:id="@+id/llContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/popup_window_background"
+        android:orientation="vertical" />
+
+
+</RelativeLayout>

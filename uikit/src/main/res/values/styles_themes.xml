@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Global theme used by all app activities -->
+    <style name="AppNoActionBarTheme" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimations</item>
+    </style>
+    <style name="ActivityAnimations" parent="@android:style/Animation.Activity">
+
+        <!-- Close -->
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter_slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_exit_fade_out</item>
+
+        <!-- Open -->
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter_slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_exit_fade_out</item>
+
+    </style>
+
+    <style name="FullScreenWindowAnimations" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/full_screen_window_enter_slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/full_screen_window_exit_slide_in_left</item>
+    </style>
+
+    <style name="PopUpWindowAnimations" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+</resources>

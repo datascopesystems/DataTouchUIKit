@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootToolbar"
+    style="@style/MarginlessToolbar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <datatouch.uikit.components.buttons.CActionImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_m"
+            android:layout_marginTop="@dimen/margin_s"
+            android:layout_marginBottom="@dimen/margin_s"
+            app:iconColor="@color/white"
+            app:iconDrawable="@drawable/ic_back_white" />
+
+        <datatouch.uikit.components.wizard.WizardStepperView
+            android:id="@+id/ws"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/llButtonsContainer"
+            android:layout_toEndOf="@+id/btnBack"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/llButtonsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_m">
+
+            <datatouch.uikit.components.buttons.CActionImageButton
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:iconColor="@color/white"
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginBottom="@dimen/margin_s"
+                app:iconDrawable="@drawable/ic_next_white" />
+
+            <datatouch.uikit.components.buttons.ImageButtonAccentOutline
+                android:id="@+id/btnAccept"
+                android:layout_width="40dp"
+                android:visibility="gone"
+                android:layout_height="40dp"
+                app:icon="@drawable/ic_check_white" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

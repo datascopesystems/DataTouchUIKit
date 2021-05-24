@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llBlockingProgressRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <datatouch.uikit.components.views.CircularProgressBarView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            app:cpb_background_progressbar_color="@color/secondary_light_transparent"
+            app:cpb_background_progressbar_width="2dp"
+            app:cpb_indeterminate_mode="true"
+            app:cpb_progressbar_color="@color/accent_start_light"
+            app:cpb_progressbar_width="5dp"
+            app:cpb_show_progressbar_glow="true" />
+
+        <TextView
+            android:id="@+id/tvIndeterminateProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/working"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvSubMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_light"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="visible" />
+
+</LinearLayout>
+
