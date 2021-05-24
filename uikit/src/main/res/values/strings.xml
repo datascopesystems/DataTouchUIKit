@@ -53,5 +53,6 @@
     <string name="quit_wizard">Quit Wizard</string>
     <string name="you_will_not_be_able_to_change_filled_data">You will not be able to change filled data</string>
     <string name="conformation_required">Conformation Required</string>
+    <string name="no_title">No Title</string>
 
 </resources>

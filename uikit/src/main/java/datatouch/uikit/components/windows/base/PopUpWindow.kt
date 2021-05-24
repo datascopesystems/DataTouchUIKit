@@ -10,7 +10,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import datatouch.uikit.R
-import datatouch.uikit.components.windows.base.toolbars.DialogWindowToolbar
+import datatouch.uikit.components.windows.base.toolbars.PopUpWindowToolbar
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.GenericExtensions.default
 
@@ -88,7 +88,7 @@ abstract class PopUpWindow : FragmentWindow() {
         super.onCancel(dialog)
     }
 
-    private val toolBar: DialogWindowToolbar?
+    private val toolBar: PopUpWindowToolbar?
         get() = rootView?.findViewById(R.id.toolbar)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

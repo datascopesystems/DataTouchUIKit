@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.core.view.isInvisible
 import datatouch.uikit.R
-import datatouch.uikit.databinding.DialogWindowToolbarBinding
+import datatouch.uikit.databinding.PopupWindowToolbarBinding
 
-class DialogWindowToolbar @JvmOverloads constructor(
+class PopUpWindowToolbar @JvmOverloads constructor(
     context: Context? = null,
     attrs: AttributeSet? = null, defStyle: Int = 0
 ) : RelativeLayout(context, attrs, defStyle) {
 
     private val ui by lazy {
-        DialogWindowToolbarBinding.inflate(LayoutInflater.from(context), this, true)
+        PopupWindowToolbarBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
     private var titleText: String? = null

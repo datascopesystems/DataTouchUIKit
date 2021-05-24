@@ -9,8 +9,8 @@ import datatouch.uikit.core.extensions.ViewBindingExtensions.getViewBindingClass
 import net.matsudamper.viewbindingutil.ViewBindingUtil
 
 
-abstract class DefaultFullScreenWindowUiBind<TFragmentLayout : ViewBinding, TToolbar : View>
-    : FullScreenWindow<TToolbar>() {
+abstract class DefaultFullScreenWindowUiBind<TFragmentLayout : ViewBinding>
+    : DefaultFullScreenWindow() {
 
     var ui: TFragmentLayout? = null
         private set
@@ -18,9 +18,11 @@ abstract class DefaultFullScreenWindowUiBind<TFragmentLayout : ViewBinding, TToo
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         ui = ViewBindingUtil.inflate(
-            inflater, container, false, getViewBindingClass(javaClass))
+            inflater, container, false, getViewBindingClass(javaClass)
+        )
         return ui?.root
     }
 
