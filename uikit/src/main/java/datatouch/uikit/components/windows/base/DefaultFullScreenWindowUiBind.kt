@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import datatouch.uikit.core.extensions.ViewBindingExtensions.getViewBindingClass
-import net.matsudamper.viewbindingutil.ViewBindingUtil
+import datatouch.uikit.core.utils.views.ViewBindingUtil
 
 
 abstract class DefaultFullScreenWindowUiBind<TFragmentLayout : ViewBinding>

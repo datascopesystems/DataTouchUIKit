@@ -8,6 +8,7 @@ import datatouch.uikit.components.logic.*
 import datatouch.uikit.components.windows.error.FQaErrorNotification
 import datatouch.uikit.components.windows.progress.FBlockingProgress
 import datatouch.uikit.core.extensions.ViewBindingExtensions.getViewBindingClass
+import datatouch.uikit.core.utils.views.ViewBindingUtil
 import io.uniflow.androidx.flow.onEvents
 import io.uniflow.androidx.flow.onStates
 import io.uniflow.core.flow.data.UIEvent
@@ -16,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import net.matsudamper.viewbindingutil.ViewBindingUtil
 
 abstract class WindowActivity<TActivityLayout : ViewBinding> : AppCompatActivity(), CoroutineScope {
 
@@ -60,7 +60,7 @@ abstract class WindowActivity<TActivityLayout : ViewBinding> : AppCompatActivity
     abstract fun handleUiState(uiState: UIState)
     abstract fun getLogic(): ViewLogic?
 
-    private fun displayError(event: Event) {
+    protected fun displayError(event: Event) {
         FQaErrorNotification().also { it.errorMessage = event.payload?.toString().orEmpty() }
             .show(supportFragmentManager)
     }

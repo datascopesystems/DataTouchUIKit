@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import net.matsudamper.viewbindingutil.ViewBindingUtil
+import datatouch.uikit.core.utils.views.ViewBindingUtil
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty
 import kotlin.reflect.jvm.javaField

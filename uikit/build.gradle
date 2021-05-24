@@ -123,8 +123,4 @@ dependencies {
     // Local Date in Calendar
     implementation 'org.threeten:threetenbp:1.4.4'
 
-    // View Binding
-    implementation 'com.github.matsudamper:ViewBindingUtil:0.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.github.matsudamper:ViewBindingUtil:0.1'
 }
