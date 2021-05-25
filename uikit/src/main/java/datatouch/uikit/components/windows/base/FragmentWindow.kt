@@ -8,7 +8,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import datatouch.uikit.components.logic.ViewLogic
-import datatouch.uikit.core.extensions.ContextExtensions.toWindowActivity
 import datatouch.uikit.core.utils.Conditions
 import io.uniflow.androidx.flow.onEvents
 import io.uniflow.androidx.flow.onStates
@@ -134,8 +133,7 @@ abstract class FragmentWindow : DialogFragment() {
 
     protected open fun onClose() {}
 
-    protected val windowActivity: WindowActivity<*>?
-        get() = windowActivity.toWindowActivity()
+    protected val windowActivity: WindowActivity<*>? get() = activity as WindowActivity<*>?
 
     open fun hideKeyboard() {
         val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
