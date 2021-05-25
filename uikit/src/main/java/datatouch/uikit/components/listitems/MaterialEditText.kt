@@ -8,8 +8,8 @@ import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
@@ -17,9 +17,12 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.Conditions.isNullOrEmpty
-import kotlinx.android.synthetic.main.material_edit_text_view.view.*
+import datatouch.uikit.databinding.MaterialEditTextViewBinding
 
 class MaterialEditText : RelativeLayout {
+
+    private val ui = MaterialEditTextViewBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var rightActionButton = false
     private var rightActionButtonBackground: Drawable? = null
@@ -38,19 +41,13 @@ class MaterialEditText : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.material_edit_text_view, this)
     }
 
     fun fullyDisable() {
-        editText?.isEnabled = false
-        editText?.isClickable = false
-        editText?.isFocusable = false
+        editText.isEnabled = false
+        editText.isClickable = false
+        editText.isFocusable = false
     }
 
     private enum class InputType(val value: Int) {
@@ -71,7 +68,7 @@ class MaterialEditText : RelativeLayout {
     }
 
     fun clearText() {
-        etText?.setText("")
+        ui.etText.setText("")
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -125,45 +122,46 @@ class MaterialEditText : RelativeLayout {
     constructor(context: Context?) : super(context) {}
 
     fun setError(errorMessage: String?) {
-        tilText?.error = errorMessage
+        ui.tilText.error = errorMessage
     }
 
     fun hideError() {
-        tilText?.error = null
+        ui.tilText.error = null
     }
 
     override fun hasFocus(): Boolean {
-        return isNotNull(etText) && etText!!.hasFocus()
+        return isNotNull(ui.etText) && ui.etText.hasFocus()
     }
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyAttributes()
     }
 
     private fun applyAttributes() {
-        btnAction?.visibility = if (rightActionButton) View.VISIBLE else View.GONE
-        btnAction?.background = rightActionButtonBackground
-        tilText?.hint = hint
-        etText?.setText(text)
-        etText?.background?.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
-        etText?.isSingleLine = singleLine
-        etText?.textSize = textSize
-        etText?.filters = arrayOf<InputFilter>(LengthFilter(maxTextLength))
-        etText?.setTextColor(textColor)
+        ui.btnAction.visibility = if (rightActionButton) View.VISIBLE else View.GONE
+        ui.btnAction.background = rightActionButtonBackground
+        ui.tilText.hint = hint
+        ui.etText.setText(text)
+        ui.etText.background?.setColorFilter(accentColor, PorterDuff.Mode.SRC_IN)
+        ui.etText.isSingleLine = singleLine
+        ui.etText.textSize = textSize
+        ui.etText.filters = arrayOf<InputFilter>(LengthFilter(maxTextLength))
+        ui.etText.setTextColor(textColor)
         setupInputType()
-        tilText?.setHintTextAppearance(hintAppearance)
-        if (1 == linesCount) etText?.setSingleLine() else if (linesCount > 1) etText?.setLines(
+        ui.tilText.setHintTextAppearance(hintAppearance)
+        if (1 == linesCount) ui.etText.setSingleLine() else if (linesCount > 1) ui.etText.setLines(
             linesCount
         )
         setDefaultActionButtonCallback()
     }
 
     private fun setDefaultActionButtonCallback() {
-        setOnActionButtonListener(OnClickListener { v: View? -> clearText() })
+        setOnActionButtonListener { clearText() }
     }
 
     fun afterTextChanged(callback: AfterTextChangedCallback?) {
-        etText?.addTextChangedListener(object : TextWatcher {
+        ui.etText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 charSequence: CharSequence,
                 i: Int,
@@ -181,7 +179,7 @@ class MaterialEditText : RelativeLayout {
             }
 
             override fun afterTextChanged(editable: Editable) {
-                callback?.afterChanged(etText!!.text.toString())
+                callback?.afterChanged(ui.etText.text.toString())
             }
         })
     }
@@ -194,74 +192,74 @@ class MaterialEditText : RelativeLayout {
         when (InputType.fromValue(
             inputType
         )) {
-            InputType.TEXT -> etText?.inputType = android.text.InputType.TYPE_CLASS_TEXT
-            InputType.TEXT_MULTILINE -> etText?.inputType =
+            InputType.TEXT -> ui.etText.inputType = android.text.InputType.TYPE_CLASS_TEXT
+            InputType.TEXT_MULTILINE -> ui.etText.inputType =
                 android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
-            InputType.NUMBER -> etText?.inputType = android.text.InputType.TYPE_CLASS_NUMBER
-            InputType.PASSWORD -> etText?.inputType =
+            InputType.NUMBER -> ui.etText.inputType = android.text.InputType.TYPE_CLASS_NUMBER
+            InputType.PASSWORD -> ui.etText.inputType =
                 android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
     }
 
-    val editText: EditText?
-        get() = etText
+    val editText: EditText
+        get() = ui.etText
 
     fun setTextSize(size: Float) {
-        etText?.textSize = size
+        ui.etText.textSize = size
     }
 
     fun setTextMoveCaretEnd(text: String?) {
-        etText?.setText(text)
-        etText?.setSelection(etText!!.text!!.length)
+        ui.etText.setText(text)
+        ui.etText.setSelection(ui.etText.text!!.length)
     }
 
     fun setText(text: String?) {
-        etText?.setText(text)
+        ui.etText.setText(text)
     }
 
     val trimmedString: String
-        get() = etText?.text.toString().trim { it <= ' ' }
+        get() = ui.etText.text.toString().trim { it <= ' ' }
 
     val trimmedText: CharSequence
-        get() = etText?.text.toString().trim { it <= ' ' }
+        get() = ui.etText.text.toString().trim { it <= ' ' }
 
     fun getText(): Editable? {
-        return etText?.text
+        return ui.etText.text
     }
 
     val textStyle: Int
-        get() = etText?.typeface?.style ?: 0
+        get() = ui.etText.typeface?.style ?: 0
 
     fun getTextColor(): Int {
-        return etText?.currentTextColor ?: 0
+        return ui.etText.currentTextColor
     }
 
     fun setSelection(index: Int) {
-        etText?.setSelection(index)
+        ui.etText.setSelection(index)
     }
 
     val isEmpty: Boolean
         get() = isNullOrEmpty(trimmedText)
 
     fun setOnActionButtonListener(onActionButtonListener: OnClickListener?) {
-        btnAction?.setOnClickListener(onActionButtonListener)
+        ui.btnAction.setOnClickListener(onActionButtonListener)
     }
 
     fun addTextChangedListener(watcher: TextWatcher?) {
-        etText?.addTextChangedListener(watcher)
+        ui.etText.addTextChangedListener(watcher)
     }
 
     fun removeTextChangedListener(watcher: TextWatcher?) {
-        etText?.removeTextChangedListener(watcher)
+        ui.etText.removeTextChangedListener(watcher)
     }
 
     fun setEditable(editable: Boolean) {
-        etText?.isEnabled = editable
+        ui.etText.isEnabled = editable
     }
 
     @get:Throws(NumberFormatException::class)
     val currentInputAsInteger: Int
-        get() = Integer.valueOf(etText!!.text.toString())
+        get() = Integer.valueOf(ui.etText.text.toString())
 
     companion object {
         private const val DEFAULT_TEXT_LENGTH = 60

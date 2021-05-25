@@ -1,10 +1,9 @@
 package datatouch.uikit.components.buttons
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
@@ -13,9 +12,12 @@ import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiCallback
 import datatouch.uikit.core.callbacks.UiJustCallback
-import kotlinx.android.synthetic.main.action_toggle_button_small.view.*
+import datatouch.uikit.databinding.ActionToggleButtonSmallBinding
 
 class ToggleButtonSmall : RelativeLayout {
+
+    private val ui = ActionToggleButtonSmallBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var layoutWidth = 0
     private var layoutHeight = 0
@@ -26,7 +28,7 @@ class ToggleButtonSmall : RelativeLayout {
     var checked = false
         set(value) {
             field = value
-            flRoot?.setBackgroundResource(
+            ui.flRoot.setBackgroundResource(
                 if (value) R.drawable.toggle_button_background_active
                 else R.drawable.toggle_button_background_inactive
             )
@@ -56,9 +58,7 @@ class ToggleButtonSmall : RelativeLayout {
     }
 
     private fun init(attrs: AttributeSet?) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
@@ -103,13 +103,12 @@ class ToggleButtonSmall : RelativeLayout {
         }
     }
 
-    fun afterViews() {
-        flRoot.setOnClickListener { onButtonClick() }
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ui.flRoot.setOnClickListener { onButtonClick() }
         checked = checked
         refreshLockView()
     }
-
-    private fun inflateView() = View.inflate(context, R.layout.action_toggle_button_small, this)
 
     private fun onButtonClick() {
         if (locked) {
@@ -123,12 +122,12 @@ class ToggleButtonSmall : RelativeLayout {
 
     private fun refreshLockView() {
         if (!locked) {
-            ivLocked?.isVisible = false
+            ui.ivLocked.isVisible = false
             return
         }
 
-        ivLocked?.isVisible = true
-        val lp = ivLocked.layoutParams as FrameLayout.LayoutParams
+        ui.ivLocked.isVisible = true
+        val lp = ui.ivLocked.layoutParams as FrameLayout.LayoutParams
         lp.gravity = Gravity.CENTER_VERTICAL or if (checked) Gravity.END else Gravity.START
     }
 

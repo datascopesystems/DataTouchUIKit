@@ -2,12 +2,12 @@ package datatouch.uikit.components.buttons
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.LinearLayout
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.GenericExtensions.default
-import kotlinx.android.synthetic.main.duration_bar_view.view.*
+import datatouch.uikit.databinding.DurationBarViewBinding
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,17 +15,17 @@ import java.util.concurrent.TimeUnit
 
 class DurationBarView : LinearLayout {
 
+    private val ui = DurationBarViewBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     var onDateFromClickCallback: UiJustCallback? = null
     var onDateToClickCallback: UiJustCallback? = null
     var onDurationClickCallback: UiJustCallback? = null
 
     constructor(context: Context) : super(context) {
-        inflateView()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        inflateView()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
@@ -33,49 +33,45 @@ class DurationBarView : LinearLayout {
         attrs,
         defStyle
     ) {
-        inflateView()
     }
 
     var dateFrom: String
-        get() = tvDateFrom?.text.toString()
+        get() = ui.tvDateFrom.text.toString()
         set(value) {
-            tvDateFrom?.text = value
+            ui.tvDateFrom.text = value
             updateDurationDays()
         }
 
     var dateTo: String
-        get() = tvDateTo?.text.toString()
+        get() = ui.tvDateTo.text.toString()
         set(value) {
-            tvDateTo?.text = value
+            ui.tvDateTo.text = value
             updateDurationDays()
         }
 
-    fun afterViews() {
-        tvDateFrom.setOnClickListener { onDateFromClick() }
-        tvDateFromLabel.setOnClickListener { onDateFromClick() }
-        ivDateFrom.setOnClickListener { onDateFromClick() }
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ui.tvDateFrom.setOnClickListener { onDateFromClick() }
+        ui.tvDateFromLabel.setOnClickListener { onDateFromClick() }
+        ui.ivDateFrom.setOnClickListener { onDateFromClick() }
 
-        tvDateTo.setOnClickListener { onDateToClick() }
-        tvDateToLabel.setOnClickListener { onDateToClick() }
-        ivDateTo.setOnClickListener { onDateToClick() }
+        ui.tvDateTo.setOnClickListener { onDateToClick() }
+        ui.tvDateToLabel.setOnClickListener { onDateToClick() }
+        ui.ivDateTo.setOnClickListener { onDateToClick() }
 
-        tvDuration.setOnClickListener { onDurationClick() }
+        ui.tvDuration.setOnClickListener { onDurationClick() }
     }
 
     private fun updateDurationDays() {
         val dayDifference =
-            dateDiffInDays(tvDateFrom?.text.toString(), tvDateTo?.text.toString())
+            dateDiffInDays(ui.tvDateFrom.text.toString(), ui.tvDateTo.text.toString())
         val durationString =
             resources.getQuantityString(R.plurals.duration_days, dayDifference, dayDifference)
-        tvDuration?.text = durationString
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.duration_bar_view, this)
+        ui.tvDuration.text = durationString
     }
 
     fun setTextToDurationDays(text: String) {
-        tvDuration?.text = text
+        ui.tvDuration.text = text
     }
 
 

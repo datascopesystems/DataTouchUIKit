@@ -7,14 +7,18 @@ import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
-import kotlinx.android.synthetic.main.action_button_accent_outline.view.*
+import datatouch.uikit.databinding.ActionButtonAccentOutlineBinding
 
 class CActionButtonAccentOutline : RelativeLayout {
+
+    private val ui = ActionButtonAccentOutlineBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var characterLimit = NO_CHARACTERS_LIMIT
     private var titleText: String? = null
@@ -29,9 +33,7 @@ class CActionButtonAccentOutline : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -39,9 +41,7 @@ class CActionButtonAccentOutline : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -70,20 +70,17 @@ class CActionButtonAccentOutline : RelativeLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setupOutline()
         setupTitle()
         setupIcon()
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.action_button_accent_outline, this)
-    }
-
     private fun setupTitle() {
-        tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
-        tvTitle?.setTextColor(textColor)
-        if (isCharacterLimitValid) tvTitle?.filters = arrayOf<InputFilter>(
+        ui.tvTitle.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        ui.tvTitle.setTextColor(textColor)
+        if (isCharacterLimitValid) ui.tvTitle.filters = arrayOf<InputFilter>(
             LengthFilter(
                 characterLimit
             )
@@ -91,7 +88,7 @@ class CActionButtonAccentOutline : RelativeLayout {
     }
 
     private val isCharacterLimitValid: Boolean
-        private get() = NO_CHARACTERS_LIMIT != characterLimit && characterLimit >= 0
+        get() = NO_CHARACTERS_LIMIT != characterLimit && characterLimit >= 0
 
     fun setText(text: String?) {
         titleText = text
@@ -100,21 +97,21 @@ class CActionButtonAccentOutline : RelativeLayout {
 
     private fun setupOutline() {
         if (Conditions.isNotNull(outline)) {
-            rlRoot?.background = outline
+            ui.rlRoot.background = outline
         }
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
             setIconColor(iconColor)
         }
     }
 
-    fun setIconColor(color: Int) = ivIcon?.setColorFilter(color)
+    fun setIconColor(color: Int) = ui.ivIcon.setColorFilter(color)
 
     companion object {
         private const val NO_CHARACTERS_LIMIT = -1

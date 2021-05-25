@@ -5,16 +5,18 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
-import kotlinx.android.synthetic.main.action_button_accent_negative_round.view.ivIcon
-import kotlinx.android.synthetic.main.action_button_accent_negative_round.view.tvTitle
-import kotlinx.android.synthetic.main.action_button_accent_outline.view.*
+import datatouch.uikit.databinding.ActionButtonNegativeAccentOutlineBinding
 
 open class CActionButtonAccentNegativeRoundOutline : RelativeLayout {
+
+    private val ui = ActionButtonNegativeAccentOutlineBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var characterLimit = NO_CHARACTERS_LIMIT
     private var titleText: String? = null
@@ -26,9 +28,7 @@ open class CActionButtonAccentNegativeRoundOutline : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -36,9 +36,7 @@ open class CActionButtonAccentNegativeRoundOutline : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -60,19 +58,16 @@ open class CActionButtonAccentNegativeRoundOutline : RelativeLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setupOutline()
         setupTitle()
         setupIcon()
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.action_button_negative_accent_outline, this)
-    }
-
     private fun setupTitle() {
-        tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
-        if (isCharacterLimitValid) tvTitle?.filters = arrayOf<InputFilter>(
+        ui.tvTitle.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        if (isCharacterLimitValid) ui.tvTitle.filters = arrayOf<InputFilter>(
             InputFilter.LengthFilter(
                 characterLimit
             )
@@ -89,16 +84,16 @@ open class CActionButtonAccentNegativeRoundOutline : RelativeLayout {
 
     private fun setupOutline() {
         if (Conditions.isNotNull(outline)) {
-            rlRoot?.background = outline
+            ui.rlRoot.background = outline
         }
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
         }
     }
 

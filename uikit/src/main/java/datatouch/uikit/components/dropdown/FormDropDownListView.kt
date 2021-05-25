@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -14,10 +14,14 @@ import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
-import kotlinx.android.synthetic.main.form_drop_down_list_view.view.*
+import datatouch.uikit.databinding.FormDropDownListViewBinding
 
 @SuppressLint("NonConstantResourceId")
 class FormDropDownListView : LinearLayout, IFormView {
+
+    private val ui = FormDropDownListViewBinding
+        .inflate(LayoutInflater.from(context), this, true)
+
     private var verticalOffsetPx = 0
     private var selectedColor = 0
     private var unselectedNormalColor = 0
@@ -45,14 +49,8 @@ class FormDropDownListView : LinearLayout, IFormView {
     }
 
     private fun init(context: Context, attrs: AttributeSet) {
-        inflateView()
         initResources(context)
         parseCustomAttributes(attrs)
-        afterViews()
-    }
-
-    private fun inflateView() {
-        View.inflate(context, R.layout.form_drop_down_list_view, this)
     }
 
     private fun initResources(context: Context) {
@@ -90,71 +88,72 @@ class FormDropDownListView : LinearLayout, IFormView {
         }
     }
 
-    fun afterViews() {
-        originalTypeface = actv?.typeface
-        actv?.inputType = android.text.InputType.TYPE_NULL
-        actv?.keyListener = null
-        actv?.dropDownVerticalOffset = verticalOffsetPx
-        actv?.hint = hint
-        actv?.setHintTextColor(normalHintTextColor)
-        actv?.setTypeface(originalTypeface, Typeface.NORMAL)
-        ivIcon?.setImageDrawable(iconDrawable)
-        actv?.setOnDismissListener { ivArrowIcon?.setImageResource(R.drawable.ic_arrow_down_white) }
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        originalTypeface = ui.actv.typeface
+        ui.actv.inputType = android.text.InputType.TYPE_NULL
+        ui.actv.keyListener = null
+        ui.actv.dropDownVerticalOffset = verticalOffsetPx
+        ui.actv.hint = hint
+        ui.actv.setHintTextColor(normalHintTextColor)
+        ui.actv.setTypeface(originalTypeface, Typeface.NORMAL)
+        ui.ivIcon.setImageDrawable(iconDrawable)
+        ui.actv.setOnDismissListener { ui.ivArrowIcon?.setImageResource(R.drawable.ic_arrow_down_white) }
         setOnClickListener()
-        actv?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
-        actv?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
-        ivMandatoryIndicator?.isVisible = isMandatoryField
+        ui.actv.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
+        ui.actv.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ui.ivMandatoryIndicator.isVisible = isMandatoryField
     }
 
     private fun setOnClickListener() {
-        llDropDownRoot?.setOnClickListener { onViewClick() }
-        actv?.setOnClickListener { onViewClick() }
+        ui.llDropDownRoot.setOnClickListener { onViewClick() }
+        ui.actv.setOnClickListener { onViewClick() }
     }
 
     private fun onViewClick() {
-        if (actv?.isPopupShowing == true) {
-            ivArrowIcon?.setImageResource(R.drawable.ic_arrow_down_white)
-            actv?.dismissDropDown()
+        if (ui.actv.isPopupShowing) {
+            ui.ivArrowIcon.setImageResource(R.drawable.ic_arrow_down_white)
+            ui.actv.dismissDropDown()
         } else {
-            ivArrowIcon?.setImageResource(R.drawable.ic_arrow_up_white)
-            actv?.showDropDown()
+            ui.ivArrowIcon.setImageResource(R.drawable.ic_arrow_up_white)
+            ui.actv.showDropDown()
         }
     }
 
     private fun afterTextChanged() {
         if (isItemSelected()) {
-            ivIcon?.setColorFilter(selectedColor)
-            ivMandatoryIndicator?.setColorFilter(selectedColor)
+            ui.ivIcon.setColorFilter(selectedColor)
+            ui.ivMandatoryIndicator.setColorFilter(selectedColor)
         }
         else {
-            ivIcon?.setColorFilter(unselectedNormalColor)
-            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+            ui.ivIcon.setColorFilter(unselectedNormalColor)
+            ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
         }
     }
 
     private fun isItemSelected() = adapter?.isItemSelected == true
 
     fun setAdapter(adapter: ISelectableDropDownListAdapter) {
-        actv?.setAdapter(adapter)
+        ui.actv.setAdapter(adapter)
         this.adapter = adapter
         adapter.onViewInvalidateRequiredCallback =
             { it?.let { onItemSelected(it) } ?: onItemUnSelected() }
     }
 
     private fun onItemClick(selectedText: String) {
-        actv?.setText(selectedText)
-        ivIcon?.setColorFilter(selectedColor)
-        ivMandatoryIndicator?.setColorFilter(selectedColor)
-        actv?.dismissDropDown()
+        ui.actv.setText(selectedText)
+        ui.ivIcon.setColorFilter(selectedColor)
+        ui.ivMandatoryIndicator.setColorFilter(selectedColor)
+        ui.actv.dismissDropDown()
     }
 
     private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
 
     private fun onItemUnSelected() {
-        actv?.setText("")
-        ivIcon?.setColorFilter(unselectedNormalColor)
-        ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
-        actv?.dismissDropDown()
+        ui.actv.setText("")
+        ui.ivIcon.setColorFilter(unselectedNormalColor)
+        ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
+        ui.actv.dismissDropDown()
     }
 
     private fun onFocusChange(focused: Boolean) {
@@ -171,22 +170,22 @@ class FormDropDownListView : LinearLayout, IFormView {
 
     private fun onUnFocused() {
         if (!isItemSelected()) {
-            actv?.setText("")
-            ivIcon?.setColorFilter(unselectedNormalColor)
-            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+            ui.actv.setText("")
+            ui.ivIcon.setColorFilter(unselectedNormalColor)
+            ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
             if (isMandatoryField) {
-                actv?.hint = leftUnselectedHint
-                actv?.setHintTextColor(unselectedErrorColor)
-                actv?.setTypeface(originalTypeface, Typeface.BOLD)
-                ivIcon?.setColorFilter(unselectedErrorColor)
-                ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+                ui.actv.hint = leftUnselectedHint
+                ui.actv.setHintTextColor(unselectedErrorColor)
+                ui.actv.setTypeface(originalTypeface, Typeface.BOLD)
+                ui.ivIcon.setColorFilter(unselectedErrorColor)
+                ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
             }
         } else {
-            actv?.hint = hint
-            actv?.setHintTextColor(normalHintTextColor)
-            actv?.setTypeface(originalTypeface, Typeface.NORMAL)
-            ivIcon?.setColorFilter(selectedColor)
-            ivMandatoryIndicator?.setColorFilter(selectedColor)
+            ui.actv.hint = hint
+            ui.actv.setHintTextColor(normalHintTextColor)
+            ui.actv.setTypeface(originalTypeface, Typeface.NORMAL)
+            ui.ivIcon.setColorFilter(selectedColor)
+            ui.ivMandatoryIndicator.setColorFilter(selectedColor)
         }
     }
 
@@ -197,7 +196,7 @@ class FormDropDownListView : LinearLayout, IFormView {
     fun releaseAdapter() {
         adapter?.onViewInvalidateRequiredCallback = null
         adapter = null
-        actv?.setAdapter(null)
+        ui.actv.setAdapter(null)
     }
 
     override fun onDetachedFromWindow() {
@@ -209,7 +208,7 @@ class FormDropDownListView : LinearLayout, IFormView {
 
     override fun setMandatory(isMandatory: Boolean) {
         isMandatoryField = isMandatory
-        ivMandatoryIndicator?.isVisible = isMandatoryField
+        ui.ivMandatoryIndicator.isVisible = isMandatoryField
     }
 
     fun setLeftUnselectedHint(leftUnselectedHint: String) {

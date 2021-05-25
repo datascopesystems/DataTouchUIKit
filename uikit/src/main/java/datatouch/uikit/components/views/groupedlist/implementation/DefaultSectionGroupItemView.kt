@@ -2,16 +2,21 @@ package datatouch.uikit.components.views.groupedlist.implementation
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.components.views.groupedlist.SectionGroupItemView
 import datatouch.uikit.components.views.groupedlist.SectionGroupItemView.OnSectionItemClickCallback
 import datatouch.uikit.components.views.groupedlist.viewmodels.SectionGroupItemViewModel
 import datatouch.uikit.core.utils.Conditions
-import kotlinx.android.synthetic.main.section_group_item_view.view.*
+import datatouch.uikit.databinding.SectionGroupItemViewBinding
 
 class DefaultSectionGroupItemView : RelativeLayout, SectionGroupItemView {
+
+    private val ui = SectionGroupItemViewBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     var callback: OnSectionItemClickCallback? = null
         private set
@@ -39,21 +44,18 @@ class DefaultSectionGroupItemView : RelativeLayout, SectionGroupItemView {
 
     fun setupItem(viewModel: SectionGroupItemViewModel) {
         this.viewModel = viewModel
-        tvName?.text = viewModel.name
-        tvDescription?.text = viewModel.description
-        ivIcon?.setImageResource(viewModel.iconResourceId)
+        ui.tvName.text = viewModel.name
+        ui.tvDescription.text = viewModel.description
+        ui.ivIcon.setImageResource(viewModel.iconResourceId)
         setChecked(false)
     }
 
     fun setChecked(checked: Boolean) {
         isSelectedItem = checked
-        tvName?.setTextColor(
-            if (isSelectedItem) context.resources.getColor(R.color.accent_end) else context.resources.getColor(
-                R.color.white
-            )
-        )
-        ivIcon?.setBackgroundResource(if (isSelectedItem) R.drawable.image_background_circle_accent else 0)
-        vPolygon?.visibility = if (isSelectedItem) View.VISIBLE else View.INVISIBLE
+        ui.tvName.setTextColor(
+            if (isSelectedItem) ContextCompat.getColor(context, R.color.accent_end) else ContextCompat.getColor(context, R.color.white))
+        ui.ivIcon.setBackgroundResource(if (isSelectedItem) R.drawable.image_background_circle_accent else 0)
+        ui.vPolygon.visibility = if (isSelectedItem) View.VISIBLE else View.INVISIBLE
     }
 
     fun rlRoot() {
@@ -63,7 +65,7 @@ class DefaultSectionGroupItemView : RelativeLayout, SectionGroupItemView {
     }
 
     fun afterViews() {
-        rlRoot?.setOnClickListener { rlRoot() }
+        ui.rlRoot.setOnClickListener { rlRoot() }
     }
 
     override fun setSelectedState() {

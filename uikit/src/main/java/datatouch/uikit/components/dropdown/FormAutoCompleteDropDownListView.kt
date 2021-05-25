@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -14,12 +14,15 @@ import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
-import kotlinx.android.synthetic.main.form_auto_complete_drop_down_list_view.view.*
+import datatouch.uikit.databinding.FormAutoCompleteDropDownListViewBinding
 
 private const val DefaultThreshold = 1
 
 @SuppressLint("NonConstantResourceId")
 class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
+
+    private val ui = FormAutoCompleteDropDownListViewBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var verticalOffsetPx = 0
     private var selectedColor = 0
@@ -49,14 +52,8 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     }
 
     private fun init(context: Context, attrs: AttributeSet) {
-        inflateView()
         initResources(context)
         parseCustomAttributes(attrs)
-        afterViews()
-    }
-
-    private fun inflateView() {
-        View.inflate(context, R.layout.form_auto_complete_drop_down_list_view, this)
     }
 
     private fun initResources(context: Context) {
@@ -97,19 +94,20 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
         }
     }
 
-    fun afterViews() {
-        originalTypeface = actv?.typeface
-        actv?.threshold = DefaultThreshold
-        actv?.dropDownVerticalOffset = verticalOffsetPx
-        actv?.hint = hint
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        originalTypeface = ui.actv.typeface
+        ui.actv.threshold = DefaultThreshold
+        ui.actv.dropDownVerticalOffset = verticalOffsetPx
+        ui.actv.hint = hint
         refreshClearButton()
-        actv?.setHintTextColor(normalHintTextColor)
-        actv?.setTypeface(originalTypeface, Typeface.NORMAL)
-        ivIcon?.setImageDrawable(iconDrawable)
-        actv?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
-        actv?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
-        ivClear?.setOnClickListener { actv?.setText("") }
-        ivMandatoryIndicator?.isVisible = isMandatoryField
+        ui.actv.setHintTextColor(normalHintTextColor)
+        ui.actv.setTypeface(originalTypeface, Typeface.NORMAL)
+        ui.ivIcon.setImageDrawable(iconDrawable)
+        ui.actv.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
+        ui.actv.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ui.ivClear.setOnClickListener { ui.actv.setText("") }
+        ui.ivMandatoryIndicator.isVisible = isMandatoryField
     }
 
     private fun afterTextChanged() {
@@ -119,22 +117,22 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
             adapter?.unSelectItem()
 
         if (isItemSelected()) {
-            ivIcon?.setColorFilter(selectedColor)
-            ivMandatoryIndicator?.setColorFilter(selectedColor)
+            ui.ivIcon.setColorFilter(selectedColor)
+            ui.ivMandatoryIndicator.setColorFilter(selectedColor)
         } else {
-            ivIcon?.setColorFilter(unselectedNormalColor)
-            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+            ui.ivIcon.setColorFilter(unselectedNormalColor)
+            ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
         }
     }
 
     private fun refreshClearButton() {
-        ivClear?.isVisible = actv?.text?.isNotEmpty() == true
+        ui.ivClear.isVisible = ui.actv.text?.isNotEmpty() == true
     }
 
     private fun isItemSelected() = adapter?.isItemSelected == true
 
     fun setAdapter(adapter: ISelectableDropDownListAdapter) {
-        actv?.setAdapter(adapter)
+        ui.actv.setAdapter(adapter)
         this.adapter = adapter
         adapter.onViewInvalidateRequiredCallback =
             { it?.let { onItemSelected(it) } }
@@ -142,9 +140,9 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
 
     private fun onItemClick(selectedText: String) {
         setTextNotFromUser(selectedText)
-        ivIcon?.setColorFilter(selectedColor)
-        ivMandatoryIndicator?.setColorFilter(selectedColor)
-        actv?.dismissDropDown()
+        ui.ivIcon.setColorFilter(selectedColor)
+        ui.ivMandatoryIndicator.setColorFilter(selectedColor)
+        ui.actv.dismissDropDown()
     }
 
     private fun onItemSelected(item: IDropDownListAdapterItem) = onItemClick(item.name)
@@ -158,36 +156,36 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
 
     private fun onUnfocused() {
         if (isItemSelected()) {
-            ivIcon?.setColorFilter(selectedColor)
-            ivMandatoryIndicator?.setColorFilter(selectedColor)
-            actv?.hint = hint
-            actv?.setHintTextColor(normalHintTextColor)
-            actv?.setTypeface(originalTypeface, Typeface.NORMAL)
+            ui.ivIcon.setColorFilter(selectedColor)
+            ui.ivMandatoryIndicator.setColorFilter(selectedColor)
+            ui.actv.hint = hint
+            ui.actv.setHintTextColor(normalHintTextColor)
+            ui.actv.setTypeface(originalTypeface, Typeface.NORMAL)
         } else {
             setTextNotFromUser("")
-            ivIcon?.setColorFilter(unselectedNormalColor)
-            ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+            ui.ivIcon.setColorFilter(unselectedNormalColor)
+            ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
             if (isMandatoryField) {
-                actv?.hint = leftUnselectedHint
-                actv?.setHintTextColor(unselectedErrorColor)
-                actv?.setTypeface(originalTypeface, Typeface.BOLD)
-                ivIcon?.setColorFilter(unselectedErrorColor)
-                ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
+                ui.actv.hint = leftUnselectedHint
+                ui.actv.setHintTextColor(unselectedErrorColor)
+                ui.actv.setTypeface(originalTypeface, Typeface.BOLD)
+                ui.ivIcon.setColorFilter(unselectedErrorColor)
+                ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
             }
         }
     }
 
     private fun onFocused() {
-        actv?.hint = hint
-        ivIcon?.setColorFilter(unselectedNormalColor)
-        ivMandatoryIndicator?.setColorFilter(unselectedErrorColor)
-        actv?.setHintTextColor(normalHintTextColor)
-        actv?.setTypeface(originalTypeface, Typeface.NORMAL)
+        ui.actv.hint = hint
+        ui.ivIcon.setColorFilter(unselectedNormalColor)
+        ui.ivMandatoryIndicator.setColorFilter(unselectedErrorColor)
+        ui.actv.setHintTextColor(normalHintTextColor)
+        ui.actv.setTypeface(originalTypeface, Typeface.NORMAL)
     }
 
     private fun setTextNotFromUser(text: String) {
         isInputFromUser = false
-        actv?.setText(text)
+        ui.actv.setText(text)
         isInputFromUser = true
     }
 
@@ -198,7 +196,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
     fun releaseAdapter() {
         adapter?.onViewInvalidateRequiredCallback = null
         adapter = null
-        actv?.setAdapter(null)
+        ui.actv.setAdapter(null)
     }
 
     override fun onDetachedFromWindow() {
@@ -210,7 +208,7 @@ class FormAutoCompleteDropDownListView : LinearLayout, IFormView {
 
     override fun setMandatory(isMandatory: Boolean) {
         isMandatoryField = isMandatory
-        ivMandatoryIndicator?.isVisible = isMandatoryField
+        ui.ivMandatoryIndicator.isVisible = isMandatoryField
     }
 
     fun setLeftUnselectedHint(leftUnselectedHint: String) {

@@ -3,20 +3,20 @@ package datatouch.uikit.components.pinpad
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue.COMPLEX_UNIT_PX
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import kotlinx.android.synthetic.main.pinpad_cancel_button.view.*
+import datatouch.uikit.databinding.PinpadCancelButtonBinding
 
 class CPinPadCancelButton : RelativeLayout, IResizeable {
+
+    private val ui = PinpadCancelButtonBinding
+        .inflate(LayoutInflater.from(context), this)
+
     constructor(context: Context?) : super(context) {
-        inflateView()
-        afterViews()
     }
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        inflateView()
-        afterViews()
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -24,19 +24,14 @@ class CPinPadCancelButton : RelativeLayout, IResizeable {
         attrs,
         defStyleAttr
     ) {
-        inflateView()
-        afterViews()
     }
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setBackgroundResource(R.drawable.pinpad_cancel_button_background)
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.pinpad_cancel_button, this)
-    }
-
     override fun setSize(size: Float) {
-        tvText?.setTextSize(COMPLEX_UNIT_PX, size)
+        ui.tvText.setTextSize(COMPLEX_UNIT_PX, size)
     }
 }

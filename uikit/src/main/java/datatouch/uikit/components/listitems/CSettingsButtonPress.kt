@@ -3,6 +3,7 @@ package datatouch.uikit.components.listitems
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
@@ -11,9 +12,13 @@ import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions.isNotNull
-import kotlinx.android.synthetic.main.settings_button_press.view.*
+import datatouch.uikit.databinding.SettingsButtonPressBinding
 
 class CSettingsButtonPress : RelativeLayout {
+
+    private val ui = SettingsButtonPressBinding
+        .inflate(LayoutInflater.from(context), this, true)
+
     private var title: String? = null
     private var icon: Drawable? = null
     private var iconRight: Drawable? = null
@@ -22,17 +27,13 @@ class CSettingsButtonPress : RelativeLayout {
     private var isRightIconVisible = false
 
     constructor(context: Context?) : super(context) {
-        inflateView()
-        afterViews()
     }
 
     constructor(
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -43,7 +44,10 @@ class CSettingsButtonPress : RelativeLayout {
         try {
             title = typedArray.getString(R.styleable.CSettingsButtonPress_CPTitle)
             icon = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonPress_CPIcon)
-            iconRight = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonPress_CPIconRight)
+            iconRight = typedArray.getAppCompatDrawable(
+                context,
+                R.styleable.CSettingsButtonPress_CPIconRight
+            )
             iconColor = typedArray.getColor(
                 R.styleable.CSettingsButtonPress_CPIconColor,
                 ContextCompat.getColor(context, R.color.primary)
@@ -64,12 +68,11 @@ class CSettingsButtonPress : RelativeLayout {
         attrs: AttributeSet,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
     }
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setTitle(if (isNotNull(title)) title else "")
         setIcon(icon)
         setRightIcon(iconRight)
@@ -79,15 +82,15 @@ class CSettingsButtonPress : RelativeLayout {
     }
 
     fun setTitle(title: String?) {
-        tvContent?.text = title
+        ui.tvContent.text = title
     }
 
     fun setTitle(@StringRes resId: Int?) {
-        tvContent?.setText(resId!!)
+        ui.tvContent.setText(resId!!)
     }
 
     fun setIcon(drawable: Drawable?) {
-        if (isNotNull(drawable)) ivIcon!!.setImageDrawable(drawable)
+        if (isNotNull(drawable)) ui.ivIcon.setImageDrawable(drawable)
     }
 
     protected fun inflateView() {
@@ -95,34 +98,34 @@ class CSettingsButtonPress : RelativeLayout {
     }
 
     fun setIcon(@DrawableRes resId: Int?) {
-        ivIcon?.setImageDrawable(ContextCompat.getDrawable(context, resId!!))
+        ui.ivIcon.setImageDrawable(ContextCompat.getDrawable(context, resId!!))
     }
 
     fun setRightIconVisible(visible: Boolean) {
-        ivIconRight?.visibility = if (visible) View.VISIBLE else View.GONE
+        ui.ivIconRight.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     fun setRightIcon(drawable: Drawable?) {
-        if (isNotNull(drawable)) ivIconRight!!.setImageDrawable(drawable)
+        if (isNotNull(drawable)) ui.ivIconRight.setImageDrawable(drawable)
     }
 
     fun setTextColor(color: Int) {
-        tvContent?.setTextColor(color)
+        ui.tvContent.setTextColor(color)
     }
 
     fun setIconRightColor(color: Int) {
-        ivIconRight?.setColorFilter(color)
+        ui.ivIconRight.setColorFilter(color)
     }
 
     fun setRightIcon(@DrawableRes resId: Int?) {
-        ivIconRight?.setImageDrawable(ContextCompat.getDrawable(context, resId!!))
+        ui.ivIconRight.setImageDrawable(ContextCompat.getDrawable(context, resId!!))
     }
 
     fun setIconColor(color: Int) {
-        ivIcon?.setColorFilter(color)
+        ui.ivIcon.setColorFilter(color)
     }
 
     fun setRitghIconColor(color: Int) {
-        ivIconRight?.setColorFilter(color)
+        ui.ivIconRight.setColorFilter(color)
     }
 }

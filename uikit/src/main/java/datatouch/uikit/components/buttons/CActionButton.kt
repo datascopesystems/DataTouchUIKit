@@ -5,16 +5,18 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.StyleableRes
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.Conditions.isNotNullOrEmpty
 import datatouch.uikit.core.utils.Conditions.isNull
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.action_button.view.*
+import datatouch.uikit.databinding.ActionButtonBinding
 
 class CActionButton : RelativeLayout {
     private var titleText: String? = null
@@ -26,13 +28,14 @@ class CActionButton : RelativeLayout {
     private var iconColor = 0
     private var maxLines = 0
 
+    private val ui = ActionButtonBinding
+        .inflate(LayoutInflater.from(context), this, true)
+
     constructor(
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -40,9 +43,7 @@ class CActionButton : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -59,10 +60,12 @@ class CActionButton : RelativeLayout {
             android.R.attr.paddingRight,
             android.R.attr.paddingBottom
         )
+        @StyleableRes val widthIndex = 0
+        @StyleableRes val heightIndex = 1
         val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
         try {
-            layoutWidth = typedArray.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT)
-            layoutHeight = typedArray.getLayoutDimension(1, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutWidth = typedArray.getLayoutDimension(widthIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutHeight = typedArray.getLayoutDimension(heightIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
         } finally {
             typedArray.recycle()
         }
@@ -85,27 +88,24 @@ class CActionButton : RelativeLayout {
                 Color.WHITE
             )
             iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
-            backgroundDrawableImg = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_background)
+            backgroundDrawableImg =
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_background)
             maxLines = typedArray.getInt(R.styleable.CActionButton_maxLines, 1)
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyNativeAttributes()
         setupTitle()
         setupIcon()
         setupBackground()
     }
 
-    private fun inflateView() {
-        View.inflate(context, R.layout.action_button, this)
-    }
-
     private fun applyNativeAttributes() {
         applyLayoutParams()
-
     }
 
     private fun applyLayoutParams() {
@@ -121,29 +121,29 @@ class CActionButton : RelativeLayout {
             ).toInt()
     }
 
-    private fun setupTitle() {
+    private fun setupTitle() = ui.apply {
         if (isNotNullOrEmpty(titleText!!)) {
-            tvTitle?.visibility = View.VISIBLE
-            vDivider?.visibility =
-                if (ivIcon?.visibility != View.GONE) View.VISIBLE else View.GONE
-            tvTitle?.text = if (isNotNull(titleText)) titleText else ""
-            tvTitle?.setTextColor(textColor)
-            tvTitle?.maxLines = maxLines
+            tvTitle.visibility = View.VISIBLE
+            vDivider.visibility =
+                if (ivIcon.visibility != View.GONE) View.VISIBLE else View.GONE
+            tvTitle.text = if (isNotNull(titleText)) titleText else ""
+            tvTitle.setTextColor(textColor)
+            tvTitle.maxLines = maxLines
         } else {
-            tvTitle?.visibility = View.GONE
-            vDivider?.visibility = View.GONE
+            tvTitle.visibility = View.GONE
+            vDivider.visibility = View.GONE
         }
     }
 
-    private fun setupIcon() {
+    private fun setupIcon() = ui.apply {
         if (isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
-            vDivider?.visibility = View.GONE
+            ivIcon.visibility = View.GONE
+            vDivider.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            vDivider?.visibility =
-                if (tvTitle?.visibility != View.GONE) View.VISIBLE else View.GONE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ivIcon.visibility = View.VISIBLE
+            vDivider.visibility =
+                if (tvTitle.visibility != View.GONE) View.VISIBLE else View.GONE
+            ivIcon.setImageDrawable(iconDrawable)
             setIconColor(iconColor)
         }
     }
@@ -167,12 +167,12 @@ class CActionButton : RelativeLayout {
 
     fun setIcon(icon: Drawable?) {
         iconDrawable = icon
-        ivIcon?.setImageDrawable(iconDrawable)
+        ui.ivIcon.setImageDrawable(iconDrawable)
         setupIcon()
     }
 
     fun setIconColor(color: Int) {
-        ivIcon?.setColorFilter(color)
+        ui.ivIcon.setColorFilter(color)
     }
 
     fun setBackgroundColour(backgroundDrawable: Drawable?) {

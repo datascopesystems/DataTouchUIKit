@@ -1,24 +1,22 @@
 package datatouch.uikit.components.edittext.search
 
 import android.content.Context
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
-import kotlinx.android.synthetic.main.search_criterion_item.view.*
+import datatouch.uikit.databinding.SearchCriterionItemBinding
 
 class SearchCriterionItemUi<TCriterion>(context: Context?) : RelativeLayout(context) {
+
+    private val ui = SearchCriterionItemBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var selectedColor = 0
     private var unselectedColor = 0
 
     init {
-        inflateView()
         context?.let { initResources(it) }
-    }
-
-    private fun inflateView() {
-        View.inflate(context, R.layout.search_criterion_item, this)
     }
 
     private fun initResources(context: Context) {
@@ -31,17 +29,17 @@ class SearchCriterionItemUi<TCriterion>(context: Context?) : RelativeLayout(cont
     fun setItem(searchCriterionItemHolder: SearchCriterionItemHolder<TCriterion>) {
         this.searchCriterionItemHolder = searchCriterionItemHolder
 
-        ivIcon?.setImageResource(searchCriterionItemHolder.iconResId)
-        tvName?.text = searchCriterionItemHolder.name
+        ui.ivIcon.setImageResource(searchCriterionItemHolder.iconResId)
+        ui.tvName.text = searchCriterionItemHolder.name
     }
 
     fun setItemSelected(selected: Boolean) {
         if (selected) {
-            ivIcon?.setBackgroundResource(R.drawable.image_background_circle_accent)
-            tvName?.setTextColor(selectedColor)
+            ui.ivIcon.setBackgroundResource(R.drawable.image_background_circle_accent)
+            ui.tvName.setTextColor(selectedColor)
         } else {
-            ivIcon?.background = null
-            tvName?.setTextColor(unselectedColor)
+            ui.ivIcon.background = null
+            ui.tvName.setTextColor(unselectedColor)
         }
     }
 

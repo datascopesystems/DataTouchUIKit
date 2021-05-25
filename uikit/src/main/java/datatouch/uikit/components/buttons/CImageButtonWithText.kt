@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -14,9 +14,12 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.animation.AnimationUtils
-import kotlinx.android.synthetic.main.image_button_with_text.view.*
+import datatouch.uikit.databinding.ImageButtonWithTextBinding
 
 class CImageButtonWithText : RelativeLayout {
+
+    private val ui = ImageButtonWithTextBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var title: String? = null
     private var iconDrawable: Drawable? = null
@@ -45,14 +48,16 @@ class CImageButtonWithText : RelativeLayout {
         )
         try {
             title = typedArray.getString(R.styleable.CImageButtonWithText_CIBText)
-            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CImageButtonWithText_CIBIcon)
+            iconDrawable =
+                typedArray.getAppCompatDrawable(context, R.styleable.CImageButtonWithText_CIBIcon)
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun afterViews() {
-        rlRoot?.setOnClickListener { rlRoot() }
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ui.rlRoot.setOnClickListener { rlRoot() }
         setTitle(if (Conditions.isNotNull(title)) title else "")
         setIconDrawable(iconDrawable)
         setSelected(isSelected)
@@ -60,24 +65,24 @@ class CImageButtonWithText : RelativeLayout {
 
     fun setTitle(title: String?) {
         this.title = title
-        tvButtonText?.text = title
+        ui.tvButtonText.text = title
     }
 
     fun setTitle(@StringRes resId: Int?) {
         title = context.getString(resId!!)
-        tvButtonText?.text = title
+        ui.tvButtonText.text = title
     }
 
     fun setIconDrawable(drawable: Drawable?) {
         if (Conditions.isNotNull(drawable)) {
             iconDrawable = drawable
-            ivButtonIcon?.setImageDrawable(drawable)
+            ui.ivButtonIcon.setImageDrawable(drawable)
         }
     }
 
     fun setIcon(@DrawableRes resId: Int?) {
         iconDrawable = ContextCompat.getDrawable(context, resId!!)
-        ivButtonIcon?.setImageDrawable(iconDrawable)
+        ui.ivButtonIcon.setImageDrawable(iconDrawable)
     }
 
     fun rlRoot() {
@@ -90,19 +95,13 @@ class CImageButtonWithText : RelativeLayout {
         refreshSelection()
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.image_button_with_text, this)
-    }
-
     private fun refreshSelection() {
-        vHighlight?.setBackgroundColor(
-            if (isSelected) context.resources.getColor(R.color.accent_end) else context.resources.getColor(
-                R.color.accent
-            )
+        ui.vHighlight.setBackgroundColor(
+            if (isSelected) ContextCompat.getColor(context, R.color.accent_end) else ContextCompat.getColor(context, R.color.accent)
         )
-        tvButtonText?.setTextColor(if (isSelected) context.resources.getColor(R.color.accent_end) else Color.WHITE)
+        ui.tvButtonText.setTextColor(if (isSelected) ContextCompat.getColor(context, R.color.accent_end) else Color.WHITE)
         AnimationUtils.animate(
-            vHighlight,
+            ui.vHighlight,
             if (isSelected) AnimationUtils.AnimationTechniques.FADE_IN else AnimationUtils.AnimationTechniques.FADE_OUT,
             400
         )

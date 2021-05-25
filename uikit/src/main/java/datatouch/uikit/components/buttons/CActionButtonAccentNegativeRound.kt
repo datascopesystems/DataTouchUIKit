@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -11,9 +12,12 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.action_button_accent_negative_round.view.*
+import datatouch.uikit.databinding.ActionButtonAccentNegativeRoundBinding
 
 class CActionButtonAccentNegativeRound : RelativeLayout {
+
+    private val ui = ActionButtonAccentNegativeRoundBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var titleText: String? = null
     private var iconDrawable: Drawable? = null
@@ -21,17 +25,13 @@ class CActionButtonAccentNegativeRound : RelativeLayout {
     private var layoutHeight = 0
 
     constructor(context: Context?) : super(context) {
-        inflateView()
-        initViews()
     }
 
     constructor(
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -39,9 +39,7 @@ class CActionButtonAccentNegativeRound : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -82,7 +80,8 @@ class CActionButtonAccentNegativeRound : RelativeLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyNativeAttributes()
         setupTitle()
         setupIcon()
@@ -105,20 +104,16 @@ class CActionButtonAccentNegativeRound : RelativeLayout {
             ).toInt()
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.action_button_accent_negative_round, this)
-    }
-
     private fun setupTitle() {
-        tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        ui.tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
         }
     }
 

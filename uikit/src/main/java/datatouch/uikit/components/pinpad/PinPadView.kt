@@ -2,6 +2,7 @@ package datatouch.uikit.components.pinpad
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -12,11 +13,14 @@ import datatouch.uikit.components.CCircleCheckBox
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.ResourceUtils.convertDpToPixel
 import datatouch.uikit.core.utils.views.ViewUtils.iterateOverMultipleChildViews
-import kotlinx.android.synthetic.main.pin_pad.view.*
+import datatouch.uikit.databinding.PinPadBinding
 import java.util.*
 
 class PinPadView :
     RelativeLayout {
+
+    private val ui = PinPadBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     var currentInput = ""
     private val buttonViewClasses =
@@ -53,17 +57,13 @@ class PinPadView :
     }
 
     constructor(context: Context?) : super(context) {
-        inflateView()
-        afterView()
     }
 
     constructor(
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        afterView()
     }
 
     constructor(
@@ -71,36 +71,35 @@ class PinPadView :
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        afterView()
     }
 
     fun displayUserInput() {
-        llCheckBoxesContainer?.visibility = View.GONE
-        etAmount?.visibility = View.VISIBLE
+        ui.llCheckBoxesContainer.visibility = View.GONE
+        ui.etAmount.visibility = View.VISIBLE
     }
 
     fun showUserInput(show: Boolean) {
-        etAmount?.isVisible = show
+        ui.etAmount.isVisible = show
     }
 
     fun setOnClickListeners() {
-        btn1.setOnClickListener { onPadButtonClick(it) }
-        btn2.setOnClickListener { onPadButtonClick(it) }
-        btn3.setOnClickListener { onPadButtonClick(it) }
-        btn4.setOnClickListener { onPadButtonClick(it) }
-        btn5.setOnClickListener { onPadButtonClick(it) }
-        btn6.setOnClickListener { onPadButtonClick(it) }
-        btn7.setOnClickListener { onPadButtonClick(it) }
-        btn8.setOnClickListener { onPadButtonClick(it) }
-        btn9.setOnClickListener { onPadButtonClick(it) }
-        btn0.setOnClickListener { onPadButtonClick(it) }
-        btnOk?.setOnClickListener { btnOk() }
-        btnCancel?.setOnClickListener { btnCancel() }
+        ui.btn1.setOnClickListener { onPadButtonClick(it) }
+        ui.btn2.setOnClickListener { onPadButtonClick(it) }
+        ui.btn3.setOnClickListener { onPadButtonClick(it) }
+        ui.btn4.setOnClickListener { onPadButtonClick(it) }
+        ui.btn5.setOnClickListener { onPadButtonClick(it) }
+        ui.btn6.setOnClickListener { onPadButtonClick(it) }
+        ui.btn7.setOnClickListener { onPadButtonClick(it) }
+        ui.btn8.setOnClickListener { onPadButtonClick(it) }
+        ui.btn9.setOnClickListener { onPadButtonClick(it) }
+        ui.btn0.setOnClickListener { onPadButtonClick(it) }
+        ui.btnOk.setOnClickListener { btnOk() }
+        ui.btnCancel.setOnClickListener { btnCancel() }
     }
 
-    fun afterView() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setOnClickListeners()
         setupCheckboxes()
         setButtonSize()
@@ -111,16 +110,12 @@ class PinPadView :
             this,
             buttonViewClasses,
             Consumer { button ->
-                val layoutParams: ViewGroup.LayoutParams? = button?.getLayoutParams()
+                val layoutParams: ViewGroup.LayoutParams? = button?.layoutParams
                 layoutParams?.height = buttonSize.toInt()
                 layoutParams?.width = buttonSize.toInt()
                 button?.layoutParams = layoutParams
             }
         )
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.pin_pad, this)
     }
 
     fun resize(newSize: Int) {
@@ -146,7 +141,7 @@ class PinPadView :
         require(circleCheckBoxesCount >= 1) { "Circle check boxes count should be greater than 0" }
         for (i in 1..circleCheckBoxesCount) {
             val cCircleCheckBox = CCircleCheckBox(context)
-            llCheckBoxesContainer?.addView(cCircleCheckBox)
+            ui.llCheckBoxesContainer.addView(cCircleCheckBox)
             circleCheckBoxes.add(cCircleCheckBox)
             if (i != circleCheckBoxesCount) {
                 val vlp =
@@ -160,7 +155,7 @@ class PinPadView :
     }
 
     fun hideOkButton() {
-        btnOk?.visibility = View.INVISIBLE
+        ui.btnOk.visibility = View.INVISIBLE
     }
 
     fun btnOk() {
@@ -180,7 +175,7 @@ class PinPadView :
         if (!isInEditingState) return
         if (isReadOnly) return
         appendNumberToPinCode((clickedButton as CPinPadNumberButton).buttonNumber)
-        etAmount?.setText(currentInput)
+        ui.etAmount.setText(currentInput)
         appendCheckedCircle()
         notifyNumberChanged()
     }
@@ -206,7 +201,7 @@ class PinPadView :
     }
 
     private val nextUncheckedCircle: CCircleCheckBox?
-        private get() {
+        get() {
             for (cb in circleCheckBoxes) if (!cb.isChecked()) return cb
             return null
         }
@@ -220,7 +215,7 @@ class PinPadView :
         if (isReadOnly) return
         deleteLastInputLastCharacter()
         uncheckLastCircle()
-        etAmount?.setText(currentInput)
+        ui.etAmount.setText(currentInput)
         notifyNumberChanged()
     }
 
@@ -241,7 +236,7 @@ class PinPadView :
     }
 
     private val lastCheckedCircle: CCircleCheckBox?
-        private get() {
+        get() {
             for (i in circleCheckBoxesCount - 1 downTo 0) {
                 val lastCircle = circleCheckBoxes[i]
                 if (lastCircle.isChecked()) return lastCircle
@@ -264,23 +259,23 @@ class PinPadView :
 
     fun showEditingState() {
         isInEditingState = true
-        btnOk?.visibility = View.VISIBLE
-        pbLoading?.visibility = View.GONE
+        ui.btnOk.visibility = View.VISIBLE
+        ui.pbLoading.visibility = View.GONE
     }
 
     fun showLoadingState() {
         isInEditingState = false
-        btnOk?.visibility = View.INVISIBLE
-        pbLoading?.visibility = View.VISIBLE
+        ui.btnOk.visibility = View.INVISIBLE
+        ui.pbLoading.visibility = View.VISIBLE
     }
 
     fun setTitle(title: String?) {
-        tvTitle?.visibility = View.VISIBLE
-        tvTitle?.text = title
+        ui.tvTitle.visibility = View.VISIBLE
+        ui.tvTitle.text = title
     }
 
     fun showTitle(show: Boolean) {
-        tvTitle?.isVisible = show
+        ui.tvTitle.isVisible = show
     }
 
     fun setOnEnteredNumberChangedCallback(numberChangedCallback: OnEnteredNumberChangedCallback?) {
@@ -294,14 +289,14 @@ class PinPadView :
                 return
             }
             currentInput = initValue.toString()
-            etAmount?.setText(currentInput)
+            ui.etAmount.setText(currentInput)
         } catch (ex: Exception) {
             emptyfy()
         }
     }
 
     private fun emptyfy() {
-        etAmount?.setText("")
+        ui.etAmount.setText("")
         currentInput = ""
     }
 
@@ -310,11 +305,11 @@ class PinPadView :
     }
 
     fun setOkButtonAppearanceDefault() {
-        btnOk?.setAppearanceDefault()
+        ui.btnOk.setAppearanceDefault()
     }
 
     fun setOkButtonAppearanceArrowRight() {
-        btnOk?.setAppearanceArrowRight()
+        ui.btnOk.setAppearanceArrowRight()
     }
 
     interface OnOkClickListener {

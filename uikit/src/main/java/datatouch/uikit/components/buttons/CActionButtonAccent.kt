@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -14,9 +15,12 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.ConditionsExtensions.isNull
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.action_button_accent.view.*
+import datatouch.uikit.databinding.ActionButtonAccentBinding
 
 class CActionButtonAccent : RelativeLayout {
+
+    private val ui = ActionButtonAccentBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var defaultTextSize = 0
     private var titleText: String? = null
@@ -33,17 +37,13 @@ class CActionButtonAccent : RelativeLayout {
     private var disabledButtonBackground: Drawable? = null
 
     constructor(context: Context) : super(context) {
-        inflateView()
         initResources(context)
         parseAttributes(null)
-        initViews()
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        inflateView()
         initResources(context)
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
@@ -51,10 +51,8 @@ class CActionButtonAccent : RelativeLayout {
         attrs,
         defStyle
     ) {
-        inflateView()
         initResources(context)
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun initResources(context: Context) {
@@ -93,10 +91,6 @@ class CActionButtonAccent : RelativeLayout {
         }
     }
 
-    private fun inflateView() {
-        View.inflate(context, R.layout.action_button_accent, this)
-    }
-
     private fun parseCustomAttributes(attrs: AttributeSet?) {
         @SuppressLint("CustomViewStyleable") val typedArray = context.obtainStyledAttributes(
             attrs,
@@ -119,7 +113,8 @@ class CActionButtonAccent : RelativeLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyNativeAttributes()
         setupTitle()
         setupIcon()
@@ -132,12 +127,12 @@ class CActionButtonAccent : RelativeLayout {
     }
 
     private fun applyLayoutParams() {
-        buttonRootView?.layoutParams?.width =
+        ui.buttonRootView.layoutParams?.width =
             if (layoutWidth < 0) layoutWidth else ResourceUtils.convertDpToPixel(
                 context,
                 layoutWidth.toFloat()
             ).toInt()
-        buttonRootView?.layoutParams?.height =
+        ui.buttonRootView.layoutParams?.height =
             if (layoutHeight < 0) layoutHeight else ResourceUtils.convertDpToPixel(
                 context,
                 layoutHeight.toFloat()
@@ -146,18 +141,18 @@ class CActionButtonAccent : RelativeLayout {
 
     private fun setupTitle() {
         if (textSize > 0) {
-            tvTitle?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+            ui.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         }
-        tvTitle?.text = titleText.orEmpty()
+        ui.tvTitle.text = titleText.orEmpty()
     }
 
     private val hasIcon: Boolean
         get() = null != iconDrawable
 
     private fun setupIcon() {
-        ivIcon?.visibility = if (hasIcon) View.VISIBLE else View.GONE
+        ui.ivIcon.visibility = if (hasIcon) View.VISIBLE else View.GONE
         if (hasIcon)
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.setImageDrawable(iconDrawable)
     }
 
     private fun setupBackground() {
@@ -177,7 +172,7 @@ class CActionButtonAccent : RelativeLayout {
 
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
-        buttonRootView?.background =
+        ui.buttonRootView.background =
             if (enabled) enabledButtonBackground else disabledButtonBackground
 
     }

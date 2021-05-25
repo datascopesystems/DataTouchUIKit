@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
@@ -12,10 +12,13 @@ import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.AfterTextChangedListener
 import datatouch.uikit.core.callbacks.UiJustCallback
-import kotlinx.android.synthetic.main.criteria_search_edit_text.view.*
+import datatouch.uikit.databinding.CriteriaSearchEditTextBinding
 
 @SuppressLint("NonConstantResourceId")
 class CriteriaSearchEditText : RelativeLayout {
+
+    private val ui = CriteriaSearchEditTextBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var verticalOffsetPx = 0
     private var notEmptyColor = 0
@@ -39,14 +42,8 @@ class CriteriaSearchEditText : RelativeLayout {
     }
 
     private fun init(context: Context, attrs: AttributeSet) {
-        inflateView()
         initResources(context)
         parseCustomAttributes(attrs)
-        afterViews()
-    }
-
-    private fun inflateView() {
-        View.inflate(context, R.layout.criteria_search_edit_text, this)
     }
 
     private fun initResources(context: Context) {
@@ -72,25 +69,26 @@ class CriteriaSearchEditText : RelativeLayout {
         }
     }
 
-    private fun afterViews() {
-        et?.hint = hint
-        actv?.dropDownVerticalOffset = verticalOffsetPx
-        et?.setHintTextColor(normalHintTextColor)
-        flIcon?.setOnClickListener { onDropDownIconClick() }
-        actv?.setOnDismissListener { ivArrowIcon?.setImageResource(R.drawable.ic_arrow_down_white) }
-        et?.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
-        et?.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
-        ivClear?.setOnClickListener { et?.setText("") }
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ui.et.hint = hint
+        ui.actv.dropDownVerticalOffset = verticalOffsetPx
+        ui.et.setHintTextColor(normalHintTextColor)
+        ui.flIcon.setOnClickListener { onDropDownIconClick() }
+        ui.actv.setOnDismissListener { ui.ivArrowIcon.setImageResource(R.drawable.ic_arrow_down_white) }
+        ui.et.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
+        ui.et.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+        ui.ivClear.setOnClickListener { ui.et.setText("") }
         refreshClearButton()
     }
 
     private fun onDropDownIconClick() {
-        if (actv?.isPopupShowing == true) {
-            ivArrowIcon?.setImageResource(R.drawable.ic_arrow_down_white)
-            actv?.dismissDropDown()
+        if (ui.actv.isPopupShowing) {
+            ui.ivArrowIcon.setImageResource(R.drawable.ic_arrow_down_white)
+            ui.actv.dismissDropDown()
         } else {
-            ivArrowIcon?.setImageResource(R.drawable.ic_arrow_up_white)
-            actv?.showDropDown()
+            ui.ivArrowIcon.setImageResource(R.drawable.ic_arrow_up_white)
+            ui.actv.showDropDown()
         }
     }
 
@@ -106,7 +104,7 @@ class CriteriaSearchEditText : RelativeLayout {
     }
 
     private fun refreshClearButton() {
-        ivClear?.isVisible = et?.text?.isNotEmpty() == true
+        ui.ivClear.isVisible = ui.et.text?.isNotEmpty() == true
     }
 
     private fun onFocusChange(focused: Boolean) {
@@ -118,41 +116,41 @@ class CriteriaSearchEditText : RelativeLayout {
     }
 
     private fun showAsValidInput() {
-        ivIcon?.setColorFilter(notEmptyColor)
-        et?.hint = hint
-        et?.setHintTextColor(normalHintTextColor)
+        ui.ivIcon.setColorFilter(notEmptyColor)
+        ui.et.hint = hint
+        ui.et.setHintTextColor(normalHintTextColor)
     }
 
     private fun showAsNormalInput() {
-        ivIcon?.setColorFilter(emptyNormalColor)
-        et?.hint = hint
-        et?.setHintTextColor(normalHintTextColor)
+        ui.ivIcon.setColorFilter(emptyNormalColor)
+        ui.et.hint = hint
+        ui.et.setHintTextColor(normalHintTextColor)
     }
 
-    private val hasValidInput get() = et?.text?.isNotEmpty() == true
+    private val hasValidInput get() = ui.et.text?.isNotEmpty() == true
 
     var text: String
-        get() = et?.text.toString()
+        get() = ui.et.text.toString()
         set(value) {
-            et?.setText(value)
+            ui.et.setText(value)
         }
 
     fun setAdapter(adapter: ICriteriaSearchEditTextAdapter) {
-        actv?.setAdapter(adapter)
+        ui.actv.setAdapter(adapter)
         this.adapter = adapter
         adapter.onItemSelectionChangeCallback = { onItemClick(it) }
     }
 
     private fun onItemClick(item: ISearchCriterionDropDownListAdapterItem) {
-        ivIcon?.setImageResource(item.iconResId)
-        actv?.dismissDropDown()
-        et?.setText("")
+        ui.ivIcon.setImageResource(item.iconResId)
+        ui.actv.dismissDropDown()
+        ui.et.setText("")
     }
 
     override fun onDetachedFromWindow() {
         adapter?.onItemSelectionChangeCallback = null
         adapter = null
-        actv?.setAdapter(null)
+        ui.actv.setAdapter(null)
         super.onDetachedFromWindow()
     }
 }

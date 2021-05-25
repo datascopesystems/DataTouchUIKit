@@ -4,17 +4,21 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import datatouch.uikit.R
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.animation.AnimationUtils
-import kotlinx.android.synthetic.main.drawing_color_selector.view.*
+import datatouch.uikit.databinding.DrawingColorSelectorBinding
 import yuku.ambilwarna.AmbilWarnaDialog
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener
 
 class DrawingColorSelector : RelativeLayout {
+
+    private val ui = DrawingColorSelectorBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var selectedColor = 0
     private var callback: DrawingColorSelectorCallback =
@@ -28,8 +32,6 @@ class DrawingColorSelector : RelativeLayout {
         context,
         attrs
     ) {
-        inflateView()
-        afterView()
     }
 
     constructor(
@@ -37,27 +39,26 @@ class DrawingColorSelector : RelativeLayout {
         attrs: AttributeSet?,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
-        inflateView()
-        afterView()
     }
 
-    fun afterView() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setupColors()
-        btnPickColor.setOnClickListener { btnPickColor() }
-        ivColour0.setOnClickListener { onColorClicked(it) }
-        ivColour1.setOnClickListener { onColorClicked(it) }
-        ivColour2.setOnClickListener { onColorClicked(it) }
-        ivColour3.setOnClickListener { onColorClicked(it) }
-        ivColour4.setOnClickListener { onColorClicked(it) }
-        ivColour5.setOnClickListener { onColorClicked(it) }
-        ivColour6.setOnClickListener { onColorClicked(it) }
-        ivColour7.setOnClickListener { onColorClicked(it) }
-        ivColour8.setOnClickListener { onColorClicked(it) }
+        ui.btnPickColor.setOnClickListener { btnPickColor() }
+        ui.ivColour0.setOnClickListener { onColorClicked(it) }
+        ui.ivColour1.setOnClickListener { onColorClicked(it) }
+        ui.ivColour2.setOnClickListener { onColorClicked(it) }
+        ui.ivColour3.setOnClickListener { onColorClicked(it) }
+        ui.ivColour4.setOnClickListener { onColorClicked(it) }
+        ui.ivColour5.setOnClickListener { onColorClicked(it) }
+        ui.ivColour6.setOnClickListener { onColorClicked(it) }
+        ui.ivColour7.setOnClickListener { onColorClicked(it) }
+        ui.ivColour8.setOnClickListener { onColorClicked(it) }
     }
 
     private fun setupColors() {
-        for (i in 0 until llColorsContainer!!.childCount) {
-            val v = llColorsContainer!!.getChildAt(i)
+        for (i in 0 until ui.llColorsContainer.childCount) {
+            val v = ui.llColorsContainer.getChildAt(i)
             val color = Color.parseColor(v.tag.toString())
             v.background.setColorFilter(color, PorterDuff.Mode.SRC)
         }
@@ -87,9 +88,9 @@ class DrawingColorSelector : RelativeLayout {
     }
 
     private fun resetSelectionOfColors() {
-        for (i in 0 until llColorsContainer!!.childCount) {
+        for (i in 0 until ui.llColorsContainer.childCount) {
             val currentView =
-                llColorsContainer!!.getChildAt(i) as ImageView
+                ui.llColorsContainer.getChildAt(i) as ImageView
             currentView.setImageDrawable(null)
         }
     }
@@ -113,19 +114,15 @@ class DrawingColorSelector : RelativeLayout {
     }
 
     private fun findColorImageViewByColor(colour: Int): ImageView? {
-        val childCount = llColorsContainer!!.childCount
+        val childCount = ui.llColorsContainer.childCount
         for (i in 0 until childCount) {
             val currentView =
-                llColorsContainer!!.getChildAt(i) as ImageView
+                ui.llColorsContainer.getChildAt(i) as ImageView
             if (Color.parseColor(currentView.tag as String) == colour) {
                 return currentView
             }
         }
         return null
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.drawing_color_selector, this)
     }
 
     fun setCallback(callback: DrawingColorSelectorCallback) {

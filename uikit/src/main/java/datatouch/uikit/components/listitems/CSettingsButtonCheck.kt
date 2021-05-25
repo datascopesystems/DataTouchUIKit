@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -14,9 +14,12 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.settings_button_check.view.*
+import datatouch.uikit.databinding.SettingsButtonCheckBinding
 
 class CSettingsButtonCheck : RelativeLayout {
+
+    private val ui = SettingsButtonCheckBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var title: String? = null
     private var iconDrawable: Drawable? = null
@@ -31,9 +34,7 @@ class CSettingsButtonCheck : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
     }
 
     constructor(
@@ -41,13 +42,7 @@ class CSettingsButtonCheck : RelativeLayout {
         attrs: AttributeSet,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.settings_button_check, this)
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -57,7 +52,8 @@ class CSettingsButtonCheck : RelativeLayout {
         )
         try {
             title = typedArray.getString(R.styleable.CSettingsButtonCheck_CCTitle)
-            iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonCheck_CCIcon)
+            iconDrawable =
+                typedArray.getAppCompatDrawable(context, R.styleable.CSettingsButtonCheck_CCIcon)
             iconColor = typedArray.getColor(
                 R.styleable.CSettingsButtonCheck_CCIconColor,
                 ContextCompat.getColor(context, R.color.primary)
@@ -75,14 +71,15 @@ class CSettingsButtonCheck : RelativeLayout {
                 ResourceUtils.convertDpToPixel(
                     context,
                     DEFAULT_TEXT_SIZE
-                ) as Int
+                ).toInt()
             )
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setTitle(if (Conditions.isNotNull(title)) title else "")
         setIconDrawable(iconDrawable)
         setIconColor(iconColor)
@@ -98,12 +95,12 @@ class CSettingsButtonCheck : RelativeLayout {
 
     fun setTextSize(textSize: Int) {
         this.textSize = textSize
-        tvContent?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
+        ui.tvContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
     }
 
     fun setTextColor(textColor: Int) {
         this.textColor = textColor
-        tvContent?.setTextColor(textColor)
+        ui.tvContent.setTextColor(textColor)
     }
 
     fun getIconSize(): Float {
@@ -112,39 +109,39 @@ class CSettingsButtonCheck : RelativeLayout {
 
     fun setIconSize(iconSize: Int) {
         this.iconSize = iconSize
-        if (Conditions.isNotNull(ivIcon?.layoutParams)) {
-            ivIcon?.layoutParams?.height = iconSize
-            ivIcon?.layoutParams?.width = iconSize
+        if (Conditions.isNotNull(ui.ivIcon.layoutParams)) {
+            ui.ivIcon.layoutParams?.height = iconSize
+            ui.ivIcon.layoutParams?.width = iconSize
         } else {
-            ivIcon?.layoutParams = LayoutParams(iconSize, iconSize)
+            ui.ivIcon.layoutParams = LayoutParams(iconSize, iconSize)
         }
     }
 
     fun setTitle(title: String?) {
         this.title = title
-        tvContent?.text = title
+        ui.tvContent.text = title
     }
 
     fun setTitle(@StringRes resId: Int?) {
         title = context.getString(resId!!)
-        tvContent?.text = title
+        ui.tvContent.text = title
     }
 
     fun setIconDrawable(drawable: Drawable?) {
         if (Conditions.isNotNull(drawable)) {
             iconDrawable = drawable
-            ivIcon?.setImageDrawable(drawable)
+            ui.ivIcon.setImageDrawable(drawable)
         }
     }
 
     fun setIcon(@DrawableRes resId: Int?) {
         iconDrawable = ContextCompat.getDrawable(context, resId!!)
-        ivIcon?.setImageDrawable(iconDrawable)
+        ui.ivIcon.setImageDrawable(iconDrawable)
     }
 
     fun setIconColor(color: Int) {
         iconColor = color
-        ivIcon?.setColorFilter(iconColor)
+        ui.ivIcon.setColorFilter(iconColor)
     }
 
     fun rlRoot() {
@@ -158,7 +155,7 @@ class CSettingsButtonCheck : RelativeLayout {
     }
 
     private fun refreshCheckBox() {
-        ivChecked?.setImageResource(if (isChecked) R.drawable.ic_check_box_checked_green else R.drawable.ic_check_box_unchecked_green)
+        ui.ivChecked.setImageResource(if (isChecked) R.drawable.ic_check_box_checked_green else R.drawable.ic_check_box_unchecked_green)
     }
 
     fun isChecked(): Boolean {

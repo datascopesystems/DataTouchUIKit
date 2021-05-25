@@ -5,17 +5,22 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.annotation.StyleableRes
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.labeled_action_button.view.*
+import datatouch.uikit.databinding.LabeledActionButtonBinding
 
 
 class CLabeledActionButton : RelativeLayout {
+
+    private val ui = LabeledActionButtonBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     var titleText: String? = null
         private set
@@ -27,17 +32,13 @@ class CLabeledActionButton : RelativeLayout {
     private var textColor = 0
 
     constructor(context: Context?) : super(context) {
-        inflateView()
-        initViews()
     }
 
     constructor(
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -45,9 +46,7 @@ class CLabeledActionButton : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -56,8 +55,8 @@ class CLabeledActionButton : RelativeLayout {
     }
 
     fun setSingleLine() {
-        tvTitle?.maxLines = 1
-        tvLabel?.maxLines = 1
+        ui.tvTitle.maxLines = 1
+        ui.tvLabel.maxLines = 1
     }
 
     private fun parseNativeAttributes(attrs: AttributeSet) {
@@ -71,15 +70,15 @@ class CLabeledActionButton : RelativeLayout {
         )
         val typedArray = context.obtainStyledAttributes(attrs, attrIndexes, 0, 0)
         try {
-            layoutWidth = typedArray.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT)
-            layoutHeight = typedArray.getLayoutDimension(1, ViewGroup.LayoutParams.WRAP_CONTENT)
+            @StyleableRes val widthIndex = 0
+            @StyleableRes val heightIndex = 1
+            layoutWidth =
+                typedArray.getLayoutDimension(widthIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutHeight =
+                typedArray.getLayoutDimension(heightIndex, ViewGroup.LayoutParams.WRAP_CONTENT)
         } finally {
             typedArray.recycle()
         }
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.labeled_action_button, this)
     }
 
     private fun parseCustomAttributes(attrs: AttributeSet) {
@@ -96,13 +95,15 @@ class CLabeledActionButton : RelativeLayout {
                 Color.WHITE
             )
             iconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_icon)
-            backgroundDrawableImg = typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_background)
+            backgroundDrawableImg =
+                typedArray.getAppCompatDrawable(context, R.styleable.CActionButton_background)
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyNativeAttributes()
         setupTitle()
         setupLabel()
@@ -128,20 +129,20 @@ class CLabeledActionButton : RelativeLayout {
     }
 
     private fun setupTitle() {
-        tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
-        tvTitle?.setTextColor(textColor)
+        ui.tvTitle.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        ui.tvTitle.setTextColor(textColor)
     }
 
     private fun setupLabel() {
-        tvLabel?.text = if (Conditions.isNotNull(labelText)) labelText else ""
+        ui.tvLabel.text = if (Conditions.isNotNull(labelText)) labelText else ""
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
         }
     }
 

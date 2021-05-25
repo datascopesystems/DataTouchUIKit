@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
-import kotlinx.android.synthetic.main.selectable_action_button.view.*
+import datatouch.uikit.databinding.SelectableActionButtonBinding
 
 class CSelectableActionButton : RelativeLayout {
+
+    private val ui = SelectableActionButtonBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var titleText: String? = null
     private var iconDrawable: Drawable? = null
@@ -21,9 +25,7 @@ class CSelectableActionButton : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -31,9 +33,7 @@ class CSelectableActionButton : RelativeLayout {
         attrs: AttributeSet,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet) {
@@ -50,26 +50,23 @@ class CSelectableActionButton : RelativeLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setupTitle()
         setupIcon()
         setupBackground(false)
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.selectable_action_button, this)
-    }
-
     private fun setupTitle() {
-        tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        ui.tvTitle.text = if (Conditions.isNotNull(titleText)) titleText else ""
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
         }
     }
 
@@ -78,7 +75,7 @@ class CSelectableActionButton : RelativeLayout {
     }
 
     private fun setupBackground(checked: Boolean) {
-        rlRoot?.also {
+        ui.rlRoot.also {
             val paddingStart = it.paddingStart
             val paddingTop = it.paddingTop
             val paddingEnd = it.paddingEnd

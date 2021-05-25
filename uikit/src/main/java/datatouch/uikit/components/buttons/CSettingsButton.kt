@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -13,10 +14,13 @@ import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
-import kotlinx.android.synthetic.main.settings_button.view.*
+import datatouch.uikit.databinding.SettingsButtonBinding
 
 
 class CSettingsButton : FrameLayout {
+
+    private val ui = SettingsButtonBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var titleText: String? = null
     private var descriptionText: String? = null
@@ -37,17 +41,13 @@ class CSettingsButton : FrameLayout {
         }
 
     constructor(context: Context) : super(context) {
-        inflateView()
-        initViews()
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(
         context,
         attrs
     ) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     constructor(
@@ -55,18 +55,12 @@ class CSettingsButton : FrameLayout {
         attrs: AttributeSet?,
         defStyle: Int
     ) : super(context, attrs, defStyle) {
-        inflateView()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
         parseNativeAttributes(attrs)
         parseCustomAttributes(attrs)
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.settings_button, this)
     }
 
     @SuppressLint("ResourceType")
@@ -121,7 +115,8 @@ class CSettingsButton : FrameLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setupLayoutSize()
         setupTitles()
         setupTextSize()
@@ -132,40 +127,40 @@ class CSettingsButton : FrameLayout {
     }
 
     private fun setUpDrawableColor() {
-        rlRoot?.background = colorBackground
-        tvName?.setTextColor(textColor)
+        ui.rlRoot.background = colorBackground
+        ui.tvName.setTextColor(textColor)
     }
 
     private fun setUpDescriptionVisibility(visible: Boolean) {
-        tvDescription?.visibility = if (visible) View.VISIBLE else View.GONE
+        ui.tvDescription.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     private fun setupTitles() {
-        tvName?.text = if (Conditions.isNotNull(titleText)) titleText else ""
-        tvDescription?.text = if (Conditions.isNotNull(descriptionText)) descriptionText else ""
+        ui.tvName.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        ui.tvDescription.text = if (Conditions.isNotNull(descriptionText)) descriptionText else ""
     }
 
     private fun setupTextSize() {
         if (titleTextSize > 0) {
-            tvName?.textSize = titleTextSize.toFloat()
+            ui.tvName.textSize = titleTextSize.toFloat()
         }
         if (titleDescriptionSize > 0) {
-            tvDescription?.textSize = titleDescriptionSize.toFloat()
+            ui.tvDescription.textSize = titleDescriptionSize.toFloat()
         }
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
         }
     }
 
     private fun setupColors() {
-        ivIcon?.setColorFilter(color)
-        vArcWithGlow?.setColor(color)
+        ui.ivIcon.setColorFilter(color)
+        ui.vArcWithGlow.setColor(color)
     }
 
     private fun setupLayoutSize() {
@@ -175,12 +170,12 @@ class CSettingsButton : FrameLayout {
         if (layoutHeight == ViewGroup.LayoutParams.MATCH_PARENT) {
             return
         }
-        val rootLayoutParams = rlRoot!!.layoutParams
+        val rootLayoutParams = ui.rlRoot.layoutParams
         rootLayoutParams.height = layoutHeight
-        rlRoot?.layoutParams = rootLayoutParams
-        val arcLayoutParams: ViewGroup.LayoutParams = vArcWithGlow.getLayoutParams()
+        ui.rlRoot.layoutParams = rootLayoutParams
+        val arcLayoutParams: ViewGroup.LayoutParams = ui.vArcWithGlow.layoutParams
         arcLayoutParams.height = layoutHeight
-        vArcWithGlow.layoutParams = arcLayoutParams
+        ui.vArcWithGlow.layoutParams = arcLayoutParams
     }
 
     fun setText(text: String?) {
@@ -194,7 +189,7 @@ class CSettingsButton : FrameLayout {
     }
 
     fun setDescriptionVisibility(visibility: Int) {
-        tvDescription?.visibility = visibility
+        ui.tvDescription.visibility = visibility
     }
 
     fun setSettingsIcon(iconDrawable: Drawable?) {

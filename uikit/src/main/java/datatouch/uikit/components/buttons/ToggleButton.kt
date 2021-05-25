@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -13,9 +14,12 @@ import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
-import kotlinx.android.synthetic.main.toggle_button.view.*
+import datatouch.uikit.databinding.ToggleButtonBinding
 
 class ToggleButton : LinearLayout {
+
+    private val ui = ToggleButtonBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     var isChecked = false
         private set
@@ -74,10 +78,8 @@ class ToggleButton : LinearLayout {
     }
 
     private fun init(attrs: AttributeSet?) {
-        inflateView()
         initResources()
         parseAttributes(attrs)
-        initViews()
     }
 
     private fun parseAttributes(attrs: AttributeSet?) {
@@ -106,8 +108,6 @@ class ToggleButton : LinearLayout {
             typedArray.recycle()
         }
     }
-
-    private fun inflateView() = inflate(context, R.layout.toggle_button, this)
 
     private fun initResources() {
         defaultCheckedBackground =
@@ -191,11 +191,12 @@ class ToggleButton : LinearLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyNativeAttributes()
         setSizes()
         setChecked(isChecked)
-        llRoot.setOnClickListener { rlRoot() }
+        ui.llRoot.setOnClickListener { rlRoot() }
     }
 
     private fun applyNativeAttributes() {
@@ -203,40 +204,40 @@ class ToggleButton : LinearLayout {
     }
 
     private fun applyLayoutParams() {
-        llRoot?.layoutParams?.width = layoutWidth
-        llRoot?.layoutParams?.height = layoutHeight
+        ui.llRoot.layoutParams?.width = layoutWidth
+        ui.llRoot.layoutParams?.height = layoutHeight
     }
 
     private fun setSizes() {
-        ivIcon?.layoutParams?.width = iconSizeDp.toInt()
-        ivIcon?.layoutParams?.height = iconSizeDp.toInt()
-        tvTitle?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx)
+        ui.ivIcon.layoutParams?.width = iconSizeDp.toInt()
+        ui.ivIcon.layoutParams?.height = iconSizeDp.toInt()
+        ui.tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx)
     }
 
     fun setChecked(checked: Boolean) {
         this.isChecked = checked
-        tvTitle?.text = if (checked) checkedLabelText else uncheckedLabelText
-        llRoot?.background = if (checked) checkedBackground else uncheckedBackground
-        ivIcon?.setImageDrawable(if (checked) checkedIcon else uncheckedIcon)
+        ui.tvTitle.text = if (checked) checkedLabelText else uncheckedLabelText
+        ui.llRoot.background = if (checked) checkedBackground else uncheckedBackground
+        ui.ivIcon.setImageDrawable(if (checked) checkedIcon else uncheckedIcon)
         setupGlow()
         setupTitleMargins()
     }
 
     private fun setupGlow() {
         if (glowButton) {
-            buttonGlow?.setColor(if (isChecked) defaultGlowColorChecked else defaultGlowColorUnchecked)
-            buttonGlow?.setRadius(glowRadiusPx)
+            ui.buttonGlow.setColor(if (isChecked) defaultGlowColorChecked else defaultGlowColorUnchecked)
+            ui.buttonGlow.setRadius(glowRadiusPx)
         } else {
-            buttonGlow.visibility = GONE
-            val layoutParams = llRoot?.layoutParams as RelativeLayout.LayoutParams
+            ui.buttonGlow.visibility = GONE
+            val layoutParams = ui.llRoot.layoutParams as RelativeLayout.LayoutParams
             layoutParams.setMargins(0,0,0,0)
-            llRoot?.layoutParams = layoutParams
+            ui.llRoot.layoutParams = layoutParams
         }
     }
 
     private fun setupTitleMargins() {
-        val titleLp = tvTitle?.layoutParams as LayoutParams
-        val iconLp = ivIcon?.layoutParams as LayoutParams
+        val titleLp = ui.tvTitle.layoutParams as LayoutParams
+        val iconLp = ui.ivIcon.layoutParams as LayoutParams
         if (isChecked) {
             iconLp.setMargins(edgeDoubleMarginPx, 0, 0, 0)
             titleLp.setMargins(0, 0, edgeMarginPx, 0)

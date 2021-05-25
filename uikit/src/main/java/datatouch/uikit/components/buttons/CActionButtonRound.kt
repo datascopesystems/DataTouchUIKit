@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -12,10 +13,13 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.action_button_round.view.*
+import datatouch.uikit.databinding.ActionButtonRoundBinding
 
 
 class CActionButtonRound : RelativeLayout {
+
+    private val ui = ActionButtonRoundBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var titleText: String? = null
     private var iconDrawable: Drawable? = null
@@ -29,7 +33,6 @@ class CActionButtonRound : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
     }
 
@@ -84,15 +87,12 @@ class CActionButtonRound : RelativeLayout {
         }
     }
 
-    fun initViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         applyNativeAttributes()
         setupTitle()
         setupIcon()
         setupBackground()
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.action_button_round, this)
     }
 
     private fun applyNativeAttributes() {
@@ -113,16 +113,16 @@ class CActionButtonRound : RelativeLayout {
     }
 
     private fun setupTitle() {
-        tvTitle?.text = if (Conditions.isNotNull(titleText)) titleText else ""
-        tvTitle?.setTextColor(textColor)
+        ui.tvTitle.text = if (Conditions.isNotNull(titleText)) titleText else ""
+        ui.tvTitle.setTextColor(textColor)
     }
 
     private fun setupIcon() {
         if (Conditions.isNull(iconDrawable)) {
-            ivIcon?.visibility = View.GONE
+            ui.ivIcon.visibility = View.GONE
         } else {
-            ivIcon?.visibility = View.VISIBLE
-            ivIcon?.setImageDrawable(iconDrawable)
+            ui.ivIcon.visibility = View.VISIBLE
+            ui.ivIcon.setImageDrawable(iconDrawable)
         }
     }
 
@@ -146,7 +146,7 @@ class CActionButtonRound : RelativeLayout {
 
     fun setIcon(icon: Drawable?) {
         iconDrawable = icon
-        ivIcon!!.setImageDrawable(iconDrawable)
+        ui.ivIcon.setImageDrawable(iconDrawable)
         setupIcon()
     }
 }

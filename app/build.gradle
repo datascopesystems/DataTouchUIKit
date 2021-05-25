@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 // App Details
 def PackageName = "datatouch.uikitapp"
@@ -13,6 +12,10 @@ def JavaVersion = JavaVersion.VERSION_1_8
 def JavaVersionString = JavaVersion.toString()
 
 android {
+    buildFeatures {
+        viewBinding true
+    }
+
     compileSdkVersion TargetSdkVersion
     buildToolsVersion BuildToolsVersion
 

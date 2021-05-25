@@ -2,39 +2,33 @@ package datatouch.uikit.components
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import datatouch.uikit.R
-import kotlinx.android.synthetic.main.circle_check_box.view.*
-
+import datatouch.uikit.databinding.CircleCheckBoxBinding
 
 class CCircleCheckBox : RelativeLayout {
 
+    private val ui = CircleCheckBoxBinding
+        .inflate(LayoutInflater.from(context), this, true)
+
     private var checked = false
 
-    constructor(context: Context?) : super(context) {
-        inflateView()
-        afterViews()
-    }
+    constructor(context: Context?) : super(context)
 
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context,
         attrs
-    ) {
-        inflateView()
-        afterViews()
-    }
+    )
 
     constructor(
         context: Context?,
         attrs: AttributeSet?,
         defStyleAttr: Int
-    ) : super(context, attrs, defStyleAttr) {
-        inflateView()
-        afterViews()
-    }
+    ) : super(context, attrs, defStyleAttr)
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setupBackground()
     }
 
@@ -47,12 +41,8 @@ class CCircleCheckBox : RelativeLayout {
         setupBackground()
     }
 
-    protected fun inflateView() {
-        View.inflate(context, R.layout.circle_check_box, this)
-    }
-
     private fun setupBackground() {
-        vCircleCheckBox?.apply {
+        ui.vCircleCheckBox.apply {
             val paddingStart = this.paddingStart
             val paddingTop = this.paddingTop
             val paddingEnd = this.paddingEnd

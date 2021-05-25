@@ -4,16 +4,20 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import datatouch.uikit.R
 import datatouch.uikit.core.utils.Conditions.isNotNull
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.action_checkbox_small.view.*
+import datatouch.uikit.databinding.ActionCheckboxSmallBinding
 
 class ActionCheckboxSmall : RelativeLayout {
+
+    private val ui = ActionCheckboxSmallBinding
+        .inflate(LayoutInflater.from(context), this, true)
+
     private var title: String? = null
     private var textColor = 0
     private var textSize = 0
@@ -53,14 +57,15 @@ class ActionCheckboxSmall : RelativeLayout {
                 ResourceUtils.convertDpToPixel(
                     context,
                     DEFAULT_TEXT_SIZE.toFloat()
-                ) as Int
+                ).toInt()
             )
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         rootView.setOnClickListener { rootView() }
         setTitle(if (isNotNull(title)) title else "")
         setChecked(isChecked)
@@ -74,26 +79,22 @@ class ActionCheckboxSmall : RelativeLayout {
 
     fun setTextSize(textSize: Int) {
         this.textSize = textSize
-        tvName?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
+        ui.tvName.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
     }
 
     fun setTextColor(textColor: Int) {
         this.textColor = textColor
-        tvName?.setTextColor(textColor)
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.action_checkbox_small, this)
+        ui.tvName.setTextColor(textColor)
     }
 
     fun setTitle(title: String?) {
         this.title = title
-        tvName?.text = title
+        ui.tvName.text = title
     }
 
     fun setTitle(@StringRes resId: Int?) {
         title = context.getString(resId!!)
-        tvName?.text = title
+        ui.tvName.text = title
     }
 
     override fun isEnabled(): Boolean {
@@ -117,7 +118,7 @@ class ActionCheckboxSmall : RelativeLayout {
     }
 
     private fun refreshCheckBox() {
-        ivChecked?.setImageResource(if (isChecked) R.drawable.ic_checkbox_checked_small else R.drawable.ic_checkbox_unchecked_small)
+        ui.ivChecked.setImageResource(if (isChecked) R.drawable.ic_checkbox_checked_small else R.drawable.ic_checkbox_unchecked_small)
     }
 
     fun isChecked(): Boolean {

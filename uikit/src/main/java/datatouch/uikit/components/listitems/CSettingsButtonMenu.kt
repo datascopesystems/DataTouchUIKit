@@ -1,10 +1,11 @@
 package datatouch.uikit.components.listitems
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -13,9 +14,12 @@ import datatouch.uikit.R
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.core.utils.Conditions
 import datatouch.uikit.core.utils.ResourceUtils
-import kotlinx.android.synthetic.main.settings_button_menu.view.*
+import datatouch.uikit.databinding.SettingsButtonMenuBinding
 
 class CSettingsButtonMenu : RelativeLayout {
+
+    private val ui = SettingsButtonMenuBinding
+        .inflate(LayoutInflater.from(context), this, true)
 
     private var title: String? = null
     private var iconDrawable: Drawable? = null
@@ -28,9 +32,7 @@ class CSettingsButtonMenu : RelativeLayout {
         context: Context?,
         attrs: AttributeSet
     ) : super(context, attrs) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
     }
 
     constructor(
@@ -38,11 +40,10 @@ class CSettingsButtonMenu : RelativeLayout {
         attrs: AttributeSet,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
-        inflateView()
         parseAttributes(attrs)
-        afterViews()
     }
 
+    @SuppressLint("CustomViewStyleable")
     private fun parseAttributes(attrs: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(
             attrs,
@@ -71,16 +72,13 @@ class CSettingsButtonMenu : RelativeLayout {
         }
     }
 
-    fun afterViews() {
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         setTitle(if (Conditions.isNotNull(title)) title else "")
         setIconDrawable(iconDrawable)
         setIconColor(iconColor)
         setIconSize(iconSize)
         setTextSize(textSize)
-    }
-
-    protected fun inflateView() {
-        View.inflate(context, R.layout.settings_button_menu, this)
     }
 
     fun getTextSize(): Float {
@@ -89,7 +87,7 @@ class CSettingsButtonMenu : RelativeLayout {
 
     fun setTextSize(textSize: Int) {
         this.textSize = textSize
-        tvContent?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
+        ui.tvContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
     }
 
     fun getIconSize(): Float {
@@ -98,39 +96,39 @@ class CSettingsButtonMenu : RelativeLayout {
 
     fun setIconSize(iconSize: Int) {
         this.iconSize = iconSize
-        if (Conditions.isNotNull(ivIcon?.layoutParams)) {
-            ivIcon?.layoutParams?.height = iconSize
-            ivIcon?.layoutParams?.width = iconSize
+        if (Conditions.isNotNull(ui.ivIcon.layoutParams)) {
+            ui.ivIcon.layoutParams?.height = iconSize
+            ui.ivIcon.layoutParams?.width = iconSize
         } else {
-            ivIcon?.layoutParams = LayoutParams(iconSize, iconSize)
+            ui.ivIcon.layoutParams = LayoutParams(iconSize, iconSize)
         }
     }
 
     fun setTitle(title: String?) {
         this.title = title
-        tvContent?.text = title
+        ui.tvContent.text = title
     }
 
     fun setTitle(@StringRes resId: Int?) {
         title = context.getString(resId!!)
-        tvContent?.text = title
+        ui.tvContent.text = title
     }
 
     fun setIconDrawable(drawable: Drawable?) {
         if (Conditions.isNotNull(drawable)) {
             iconDrawable = drawable
-            ivIcon?.setImageDrawable(drawable)
+            ui.ivIcon.setImageDrawable(drawable)
         }
     }
 
     fun setIcon(@DrawableRes resId: Int?) {
         iconDrawable = ContextCompat.getDrawable(context, resId!!)
-        ivIcon?.setImageDrawable(iconDrawable)
+        ui.ivIcon.setImageDrawable(iconDrawable)
     }
 
     fun setIconColor(color: Int) {
         iconColor = color
-        ivIcon?.setColorFilter(iconColor)
+        ui.ivIcon.setColorFilter(iconColor)
     }
 
 
