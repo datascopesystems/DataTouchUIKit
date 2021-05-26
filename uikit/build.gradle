@@ -11,6 +11,7 @@ def BuildToolsVersion = '30.0.3'
 def JavaVersion = JavaVersion.VERSION_1_8
 def JavaVersionString = JavaVersion.toString()
 def CameraXVersion = "1.1.0-alpha04"
+def UniFlowVersion = "1.0.6"
 
 android {
     compileSdkVersion TargetSdkVersion
@@ -37,9 +38,7 @@ android {
         maven {
             url "https://maven.google.com"
         }
-        jcenter {
-            url "https://jcenter.bintray.com/"
-        }
+
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven {
@@ -81,7 +80,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
 
     // Events
-    implementation "io.uniflow:uniflow-androidx:0.11.6"
+    implementation "org.uniflow-kt:uniflow-core:$UniFlowVersion"
+    implementation "org.uniflow-kt:uniflow-android:$UniFlowVersion"
     implementation 'de.greenrobot:eventbus:2.4.0'
 
     // Android X

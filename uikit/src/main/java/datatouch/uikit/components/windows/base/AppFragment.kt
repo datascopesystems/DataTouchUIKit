@@ -6,8 +6,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import datatouch.uikit.components.logic.ViewLogic
 import datatouch.uikit.core.utils.Conditions
-import io.uniflow.androidx.flow.onEvents
-import io.uniflow.androidx.flow.onStates
+import io.uniflow.android.livedata.onEvents
+import io.uniflow.android.livedata.onStates
 import io.uniflow.core.flow.data.UIEvent
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.CoroutineScope
@@ -43,7 +43,7 @@ abstract class AppFragment : Fragment() {
         super.onCreate(savedInstanceState)
         inject()
         getLogic()?.apply {
-            onEvents(this) { handleBaseUiEvent(it) }
+            onEvents(this) { handleUiEvent(it) }
             onStates(this) { handleUiState(it) }
         }
     }
@@ -59,9 +59,6 @@ abstract class AppFragment : Fragment() {
 
     protected open fun handleUiEvent(event: UIEvent?) {}
     protected open fun handleUiState(state: UIState?) {}
-
-    private fun handleBaseUiEvent(event: io.uniflow.core.flow.data.Event<*>) =
-        event.take()?.let { handleUiEvent(it) }
 
     protected val windowActivity get() = activity as WindowActivity<*>?
 

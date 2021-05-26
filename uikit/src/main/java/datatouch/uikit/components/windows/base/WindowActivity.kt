@@ -9,8 +9,8 @@ import datatouch.uikit.components.windows.error.FQaErrorNotification
 import datatouch.uikit.components.windows.progress.FBlockingProgress
 import datatouch.uikit.core.extensions.ViewBindingExtensions.getViewBindingClass
 import datatouch.uikit.core.utils.views.ViewBindingUtil
-import io.uniflow.androidx.flow.onEvents
-import io.uniflow.androidx.flow.onStates
+import io.uniflow.android.livedata.onEvents
+import io.uniflow.android.livedata.onStates
 import io.uniflow.core.flow.data.UIEvent
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.CoroutineScope
@@ -48,12 +48,13 @@ abstract class WindowActivity<TActivityLayout : ViewBinding> : AppCompatActivity
 
     private val progressDialog by lazy { createProgressDialog() }
 
-    private fun handleBaseEvents(event: io.uniflow.core.flow.data.Event<*>) = event.take()?.let {
-        when (it) {
+    private fun handleBaseEvents(event: UIEvent?) {
+        when (event) {
             is StartLoading -> showProgress()
             is StopLoading -> hideProgress()
         }
-        handleUiEvent(it)
+
+        handleUiEvent(event)
     }
 
     abstract fun handleUiEvent(event: UIEvent?)

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import datatouch.uikit.components.windows.base.UiBindingInjector
 import datatouch.uikit.components.windows.base.UiBindingProperty
-import io.uniflow.androidx.flow.onEvents
+import io.uniflow.android.livedata.onEvents
 import kotlinx.coroutines.*
 
 
@@ -41,12 +41,8 @@ abstract class WizardCompletableFragment<TStepResult> : SuperWizardFragment<TSte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getLogic()?.apply {
-            onEvents(this) { handleBaseUiEvent(it) }
+            onEvents(this) { handleUiEvent(it) }
         }
-    }
-
-    private fun handleBaseUiEvent(event: io.uniflow.core.flow.data.Event<*>) = event.take()?.let {
-        handleUiEvent(it)
     }
 
     protected open fun provideRootView(viewBinding: ViewBinding?): View? {

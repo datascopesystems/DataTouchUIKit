@@ -9,8 +9,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import datatouch.uikit.components.logic.ViewLogic
 import datatouch.uikit.core.utils.Conditions
-import io.uniflow.androidx.flow.onEvents
-import io.uniflow.androidx.flow.onStates
+import io.uniflow.android.livedata.onEvents
+import io.uniflow.android.livedata.onStates
 import io.uniflow.core.flow.data.UIEvent
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.*
@@ -44,7 +44,7 @@ abstract class FragmentWindow : DialogFragment() {
         super.onCreate(savedInstanceState)
         inject()
         getLogic()?.apply {
-            onEvents(this) { handleBaseUiEvent(it) }
+            onEvents(this) { handleUiEvent(it) }
             onStates(this) { handleUiState(it) }
         }
     }
@@ -60,11 +60,6 @@ abstract class FragmentWindow : DialogFragment() {
 
     protected open fun handleUiEvent(event: UIEvent?) {}
     protected open fun handleUiState(state: UIState?) {}
-
-
-    private fun handleBaseUiEvent(event: io.uniflow.core.flow.data.Event<*>) = event.take()?.let {
-        handleUiEvent(it)
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
