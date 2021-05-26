@@ -77,7 +77,7 @@ abstract class WindowActivity<TActivityLayout : ViewBinding> : AppCompatActivity
         Events.register(this)
     }
 
-    private fun injectAppBackgrounds() = appBackground?.let {
+    protected fun injectAppBackgrounds() = appBackground?.let {
         launch {
             it.clear()
             addDecorators(it)
