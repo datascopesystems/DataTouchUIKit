@@ -95,4 +95,16 @@ abstract class WindowActivity<TActivityLayout : ViewBinding> : AppCompatActivity
 
     protected open fun onBackButtonClickedClicked() {}
     open fun addDecorators(bundle: AppBackgroundBundle) {}
+
+
+    fun showProgressDialogWithMessage(resId: Int) {
+        showProgressDialogWithMessage(getString(resId))
+    }
+
+    fun showProgressDialogWithMessage(s: String) {
+        progressDialog.showSubMessage(s)
+        progressDialog.show(supportFragmentManager, progressDialog::javaClass.name)
+    }
+
+
 }
