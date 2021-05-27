@@ -10,7 +10,7 @@ import androidx.core.view.isInvisible
 import datatouch.uikit.R
 import datatouch.uikit.databinding.PopupWindowToolbarBinding
 
-class PopUpWindowToolbar @JvmOverloads constructor(
+open class PopUpWindowToolbar @JvmOverloads constructor(
     context: Context? = null,
     attrs: AttributeSet? = null, defStyle: Int = 0
 ) : RelativeLayout(context, attrs, defStyle) {
