@@ -313,6 +313,10 @@ class StatefulRecyclerView : RelativeLayout {
 
     fun scrollToPosition(position: Int) = ui.rv.scrollToPosition(position)
 
+    fun smoothScrollToPosition(position: Int) = ui.rv.smoothScrollToPosition(position)
+
+    val recyclerView get() = ui.rv
+
 }
 
 private const val DefaultTextColor = Color.WHITE
