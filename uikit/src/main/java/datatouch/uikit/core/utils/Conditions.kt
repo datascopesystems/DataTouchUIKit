@@ -12,6 +12,8 @@ object Conditions {
         return list != null && !list.isEmpty()
     }
 
+
+
     @JvmStatic
     fun isNullOrZero(integer: Int?): Boolean {
         return isNull(integer) || integer == 0
