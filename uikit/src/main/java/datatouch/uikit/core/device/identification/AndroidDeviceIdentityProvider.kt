@@ -12,7 +12,7 @@ class AndroidDeviceIdentityProvider(
     private val cache: CacheProvider
 ) : IDeviceIdentityProvider {
 
-    override fun getDeviceIdAsync(): String {
+    override fun getDeviceId(): String {
         val idFromStorage = cache.getString(DEVICE_ID_CACHE_KEY, "")
         if (Conditions.isNotNullOrEmpty(idFromStorage))
             return idFromStorage
