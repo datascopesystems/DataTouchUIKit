@@ -10,11 +10,11 @@ class SharedPrefsCacheProvider(
         context.getSharedPreferences("default", Context.MODE_PRIVATE)
     }
 
-    override suspend fun setString(key: String, value: String) {
+    override fun setString(key: String, value: String) {
         sharedPreference.edit().putString(key, value).apply()
     }
 
-    override suspend fun getString(key: String, default: String): String {
+    override fun getString(key: String, default: String): String {
         return sharedPreference.getString(key, default).orEmpty()
     }
 }
