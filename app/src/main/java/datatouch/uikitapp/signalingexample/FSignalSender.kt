@@ -5,13 +5,13 @@ import datatouch.uikit.R
 import datatouch.uikit.components.appbackground.AppBackgroundBundle
 import datatouch.uikit.components.windows.base.DefaultFullScreenWindowUiBind
 import datatouch.uikit.core.extensions.GenericExtensions.default
+import datatouch.uikit.core.fragmentargs.FragmentArgs
 import datatouch.uikit.core.fragmentargs.extension.putArg
 import datatouch.uikit.core.fragmentsignaling.SigFactory
 import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall0
 import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall2
 import datatouch.uikit.core.fragmentsignaling.variation.extension.putSignal
 import datatouch.uikitapp.databinding.FragmentSignalSenderBinding
-import datatouch.utils.fragmentargs.FragmentArgs
 
 class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>() {
 

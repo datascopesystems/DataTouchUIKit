@@ -1,4 +1,4 @@
-package datatouch.utils.fragmentargs
+package datatouch.uikit.core.fragmentargs
 
 import datatouch.uikit.core.fragmentargs.interfaces.IFragmentArgProperty
 import datatouch.uikit.core.fragmentargs.property.ArgProperty
