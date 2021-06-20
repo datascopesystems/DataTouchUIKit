@@ -8,6 +8,7 @@ import datatouch.uikit.core.fragmentsignaling.interfaces.ISignal
 
 
 abstract class SlotExecutableContainer : IDropableSignal {
+
     private var slots: MutableList<ISigSlotExecutable>? = null
 
     protected var consumerName = ""
@@ -25,7 +26,7 @@ abstract class SlotExecutableContainer : IDropableSignal {
         slots?.add(executable)
     }
 
-    fun <T: ISigSlotExecutable> addExecutable(invokable: T): T {
+    protected fun <T: ISigSlotExecutable> addExecutable(invokable: T): T {
         addExecutableInternal(invokable)
         return invokable
     }
@@ -35,10 +36,9 @@ abstract class SlotExecutableContainer : IDropableSignal {
             return
         }
 
-        slots?.forEach {
-            if (it.isSlotNumberEquals(signal.slotId)) {
-                executeSignalSlot(it, signal)
-            }
+        val slot = getSlotForSignal(signal)
+        if (slot != null) {
+            executeSignalSlot(slot, signal)
         }
     }
 
@@ -48,6 +48,10 @@ abstract class SlotExecutableContainer : IDropableSignal {
             runCatching { signal.execRetValAction(retValResult.value) }
         }
         retValResult.drop()
+    }
+
+    private fun getSlotForSignal(signal: ISignal): ISigSlotExecutable? {
+        return slots?.firstOrNull { it.isSlotNumberEquals(signal.slotId) }
     }
 
     override fun drop() {

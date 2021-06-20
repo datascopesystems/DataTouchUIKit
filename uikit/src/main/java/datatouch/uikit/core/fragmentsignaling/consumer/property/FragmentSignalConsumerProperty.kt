@@ -6,11 +6,16 @@ import datatouch.uikit.core.fragmentsignaling.variation.slotcontainer.SlotCreati
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-internal class FragmentSignalConsumerProperty<T : Fragment> : ReadOnlyProperty<T, SlotCreationContainer> {
-    private val signalConsumer = FragmentSignalConsumer()
+internal class FragmentSignalConsumerProperty<T : Fragment>
+    : ReadOnlyProperty<T, SlotCreationContainer> {
+
+    private var signalConsumer: FragmentSignalConsumer? = null
 
     override fun getValue(thisRef: T, property: KProperty<*>): SlotCreationContainer {
-        signalConsumer.configure(thisRef)
-        return signalConsumer
+        if (signalConsumer == null) {
+            signalConsumer = FragmentSignalConsumer()
+            signalConsumer!!.configure(thisRef)
+        }
+        return signalConsumer!!
     }
 }

@@ -7,11 +7,16 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 
-internal class ActivitySignalConsumerProperty<T : AppCompatActivity> : ReadOnlyProperty<T, SlotCreationContainer> {
-    private val signalConsumer = ActivitySignalConsumer()
+internal class ActivitySignalConsumerProperty<T : AppCompatActivity>
+    : ReadOnlyProperty<T, SlotCreationContainer> {
+
+    private var signalConsumer: ActivitySignalConsumer? = null
 
     override fun getValue(thisRef: T, property: KProperty<*>): SlotCreationContainer {
-        signalConsumer.configure(thisRef)
-        return signalConsumer
+        if (signalConsumer == null) {
+            signalConsumer = ActivitySignalConsumer()
+            signalConsumer!!.configure(thisRef)
+        }
+        return signalConsumer!!
     }
 }

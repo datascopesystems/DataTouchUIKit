@@ -6,7 +6,7 @@ import datatouch.uikit.components.toast.ToastNotification
 import datatouch.uikit.components.windows.base.DefaultFullScreenWindowUiBind
 import datatouch.uikit.core.fragmentargs.FragmentArgs
 import datatouch.uikit.core.fragmentsignaling.SigFactory
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall1
+import datatouch.uikit.core.fragmentsignaling.variation.sigfun.SigFun1
 import datatouch.uikitapp.databinding.FragmentSignalParentBinding
 
 class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>() {
@@ -15,14 +15,14 @@ class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>
 
     private var argFromActivity by FragmentArgs.of("Default value")
 
-    private var valueToActivityCallback by SigFactory.sigCall<String, String>()
+    private var valueToActivityCallback by SigFactory.retVal<String>().sigFun<String>()
 
     fun withArg(arg: String) = apply {
         // Assign argument from parent fragment
         argFromActivity = arg
     }
 
-    fun withCallback(callback: SigCall1<String, String>) = apply {
+    fun withCallback(callback: SigFun1<String, String>) = apply {
         // Assing callback with 1 String parameter and 1 String return value
         valueToActivityCallback = callback
     }
@@ -72,12 +72,14 @@ class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>
 
     // Slots - callbacks from child fragment
     // Callback with no parameters and no return value
-    private val onChildCallback = sc.slot<Unit> {
+    private val onChildCallback by sc.slot {
         ToastNotification.showSuccess(context,"Parent fragment Slot OK")
     }
 
-    // Callback with 2 Int parameters and 1 Float return value
-    private val onCalculateSum = sc.slot<Int, Int, Float> { a, b ->
+    // Slot with 2 Int parameters and Float return value
+    private val onCalculateSum by sc.retVal<Float>()
+        .slot<Int, Int> { a, b ->
+
         ToastNotification.showSuccess(context,"Parent fragment Slot onCalculateSum OK")
         return@slot (a + b).toFloat()
     }

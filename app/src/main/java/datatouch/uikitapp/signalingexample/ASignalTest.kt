@@ -1,15 +1,20 @@
 package datatouch.uikitapp.signalingexample
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import datatouch.uikit.components.toast.ToastNotification
+import datatouch.uikit.core.activityargs.ActivityArgs
+import datatouch.uikit.core.activityargs.extension.putArg
 import datatouch.uikit.core.fragmentsignaling.SigFactory
 import datatouch.uikitapp.R
 
 class ASignalTest : AppCompatActivity() {
 
     private val sc by SigFactory.slotContainerActivity()
+
+    private var arg by ActivityArgs.of("default qwerty")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +30,16 @@ class ASignalTest : AppCompatActivity() {
         }
     }
 
-    // Callback with 1 String parameter and 1 String return value
-    private val onFragmentValue = sc.slot<String, String> {
+    // Slot with 1 String parameter and 1 String return value
+    private val onFragmentValue by sc.retVal<String>().slot<String> {
         ToastNotification.showSuccess(this,"Activity Slot param: $it")
-        return@slot "Activity slot OK"
+        return@slot "Activity Slot OK!!!!!"
     }
+
+    companion object {
+        fun setArgs(intent: Intent, arg: String): Intent {
+            return intent.putArg(ASignalTest::arg, arg)
+        }
+    }
+
 }

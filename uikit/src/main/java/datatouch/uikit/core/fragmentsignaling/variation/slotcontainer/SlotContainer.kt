@@ -1,9 +1,8 @@
 package datatouch.uikit.core.fragmentsignaling.variation.slotcontainer
 
+import datatouch.uikit.core.fragmentsignaling.base.SigSlotProperty
 import datatouch.uikit.core.fragmentsignaling.consumer.SlotExecutableContainer
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall0
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall1
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall2
+import datatouch.uikit.core.fragmentsignaling.variation.sigfun.*
 import datatouch.uikit.core.fragmentsignaling.variation.slots.*
 import datatouch.uikit.core.fragmentsignaling.variation.slots.SigSlot0
 import datatouch.uikit.core.fragmentsignaling.variation.slots.SigSlot1
@@ -11,21 +10,27 @@ import datatouch.uikit.core.fragmentsignaling.variation.slots.SigSlot1
 
 abstract class SlotContainer : SlotExecutableContainer() {
 
-    fun <R> addSlot(action: ISigSlotAction0<R>): SigCall0<R> {
-        val s = SigSlot0(createSlotId(), action)
-        return addExecutable(s)
+    @Suppress("UNCHECKED_CAST")
+    internal fun <R, F : ISignalFunction0> addSlot(action: ISigSlotAction0<R>)
+    : SigSlotProperty<F> {
+
+        val s = addExecutable(SigSlot0(createSlotId(), action))
+        return SigSlotProperty(s as F)
     }
 
-    fun <A, R> addSlot(action: ISigSlotAction1<A, R>, isNullableA: Boolean): SigCall1<A, R> {
-        val s = SigSlot1(createSlotId(), action, isNullableA)
-        return addExecutable(s)
+    @Suppress("UNCHECKED_CAST")
+    internal fun <A, R, F : ISignalFunction1> addSlot(action: ISigSlotAction1<A, R>)
+    : SigSlotProperty<F> {
+
+        val s = addExecutable(SigSlot1(createSlotId(), action))
+        return SigSlotProperty(s as F)
     }
 
-    fun <A, B, R> addSlot(action: ISigSlotAction2<A, B, R>,
-                          isNullableA: Boolean,
-                          isNullableB: Boolean): SigCall2<A, B, R> {
+    @Suppress("UNCHECKED_CAST")
+    internal fun <A, B, R, F : ISignalFunction2> addSlot(action: ISigSlotAction2<A, B, R>)
+    : SigSlotProperty<F> {
 
-        val s = SigSlot2(createSlotId(), action, isNullableA, isNullableB)
-        return addExecutable(s)
+        val s = addExecutable(SigSlot2(createSlotId(), action))
+        return SigSlotProperty(s as F)
     }
 }

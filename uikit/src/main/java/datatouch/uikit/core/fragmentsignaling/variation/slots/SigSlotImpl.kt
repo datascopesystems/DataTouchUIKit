@@ -5,14 +5,12 @@ import datatouch.uikit.core.fragmentsignaling.base.SigSlot
 import datatouch.uikit.core.fragmentsignaling.base.SigSlotId
 import datatouch.uikit.core.fragmentsignaling.base.SlotExecResult
 import datatouch.uikit.core.fragmentsignaling.exceptions.SlotExecArgsException
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall0
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall1
-import datatouch.uikit.core.fragmentsignaling.variation.call.SigCall2
 import datatouch.uikit.core.fragmentsignaling.interfaces.ISlotRetValAction
+import datatouch.uikit.core.fragmentsignaling.variation.sigfun.*
 
 
 internal class SigSlot0<R>(slotId: SigSlotId, act: ISigSlotAction0<R>)
-    : SigSlot<ISigSlotAction0<R>>(slotId, act) , SigCall0<R> {
+    : SigSlot<ISigSlotAction0<R>>(slotId, act), SigFun0<R>, SigFunVoid0 {
 
     override fun execute(args: Array<Any?>?): SlotExecResult {
         return runCatching { action?.invoke() }
@@ -21,16 +19,19 @@ internal class SigSlot0<R>(slotId: SigSlotId, act: ISigSlotAction0<R>)
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun invoke(act: ISlotRetValAction<R>?) {
+    override fun invoke(act: ISlotRetValAction<R>) {
         val result = action?.invoke()
-        runCatching { act?.invoke(result as R) }
+        runCatching { act.invoke(result as R) }
+    }
+
+    override fun invoke() {
+        action?.invoke()
     }
 }
 
 
-internal class SigSlot1<A, R>(slotId: SigSlotId, act: ISigSlotAction1<A, R>,
-                              private val isNullableA: Boolean)
-    : SigSlot<ISigSlotAction1<A, R>>(slotId, act) , SigCall1<A, R> {
+internal class SigSlot1<A, R>(slotId: SigSlotId, act: ISigSlotAction1<A, R>)
+    : SigSlot<ISigSlotAction1<A, R>>(slotId, act), SigFun1<A, R>, SigFunVoid1<A> {
 
     @Suppress("UNCHECKED_CAST")
     override fun execute(args: Array<Any?>?): SlotExecResult {
@@ -39,7 +40,7 @@ internal class SigSlot1<A, R>(slotId: SigSlotId, act: ISigSlotAction1<A, R>,
         }
 
         return runCatching {
-            val a = checkIsNullParam(args.component1(), isNullableA)
+            val a = args.component1()
             action?.invoke(a as A)
         }.map {
             SlotExecResult.success(it)
@@ -47,17 +48,19 @@ internal class SigSlot1<A, R>(slotId: SigSlotId, act: ISigSlotAction1<A, R>,
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun invoke(a: A, act: ISlotRetValAction<R>?) {
+    override fun invoke(a: A, act: ISlotRetValAction<R>) {
         val result = action?.invoke(a)
-        runCatching { act?.invoke(result as R) }
+        runCatching { act.invoke(result as R) }
+    }
+
+    override fun invoke(a: A) {
+        action?.invoke(a)
     }
 }
 
 
-internal class SigSlot2<A, B, R>(slotId: SigSlotId, act: ISigSlotAction2<A, B, R>,
-                                 private val isNullableA: Boolean,
-                                 private val isNullableB: Boolean)
-    : SigSlot<ISigSlotAction2<A, B, R>>(slotId, act) , SigCall2<A, B, R> {
+internal class SigSlot2<A, B, R>(slotId: SigSlotId, act: ISigSlotAction2<A, B, R>)
+    : SigSlot<ISigSlotAction2<A, B, R>>(slotId, act), SigFun2<A, B, R>, SigFunVoid2<A, B> {
 
     @Suppress("UNCHECKED_CAST")
     override fun execute(args: Array<Any?>?): SlotExecResult {
@@ -66,8 +69,8 @@ internal class SigSlot2<A, B, R>(slotId: SigSlotId, act: ISigSlotAction2<A, B, R
         }
 
         return runCatching {
-            val a = checkIsNullParam(args.component1(), isNullableA)
-            val b = checkIsNullParam(args.component2(), isNullableB)
+            val a = args.component1()
+            val b = args.component2()
             action?.invoke(a as A, b as B)
         }.map {
             SlotExecResult.success(it)
@@ -75,8 +78,12 @@ internal class SigSlot2<A, B, R>(slotId: SigSlotId, act: ISigSlotAction2<A, B, R
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun invoke(a: A, b: B, act: ISlotRetValAction<R>?) {
+    override fun invoke(a: A, b: B, act: ISlotRetValAction<R>) {
         val result = action?.invoke(a, b)
-        runCatching { act?.invoke(result as R) }
+        runCatching { act.invoke(result as R) }
+    }
+
+    override fun invoke(a: A, b: B) {
+        action?.invoke(a, b)
     }
 }

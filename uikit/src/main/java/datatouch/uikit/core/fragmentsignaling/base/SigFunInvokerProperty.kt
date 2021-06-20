@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import datatouch.uikit.core.extensions.GenericExtensions.default
 import datatouch.uikit.core.fragmentsignaling.viewmodel.SignalSharedViewModel
-import datatouch.uikit.core.fragmentsignaling.interfaces.ISigCallProperty
+import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFunProperty
 import datatouch.uikit.core.fragmentsignaling.interfaces.ISlotIdOwner
 import datatouch.uikit.core.fragmentsignaling.viewmodel.SignalViewModelProvider
 import kotlin.reflect.KProperty
 import kotlin.reflect.cast
 
-internal abstract class SigCallInvokerProperty<V : ISlotIdOwner> : ISigCallProperty<V> {
+internal abstract class SigFunInvokerProperty<V : ISlotIdOwner> : ISigFunProperty<V> {
     private var sigSlotId = SigSlotId.createEmpty()
 
     override fun setValue(thisRef: Fragment, property: KProperty<*>, value: V) {
@@ -39,6 +39,10 @@ internal abstract class SigCallInvokerProperty<V : ISlotIdOwner> : ISigCallPrope
         restoreSignalHandlerId(argumentsBundle, property)
 
         return sigSlotId
+    }
+
+    protected fun getSigFunInvokerName(property: KProperty<*>): String {
+        return property.name
     }
 
     protected fun restoreSignalHandlerId(src: Bundle, property: KProperty<*>) {

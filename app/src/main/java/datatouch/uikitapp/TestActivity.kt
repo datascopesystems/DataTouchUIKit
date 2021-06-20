@@ -24,6 +24,7 @@ class TestActivity : AppCompatActivity() {
         val btnShowSignalingExample = findViewById<View>(R.id.btnShowSignalingActivity)
         btnShowSignalingExample?.setOnClickListener {
             val intent = Intent(this, ASignalTest::class.java)
+            ASignalTest.setArgs(intent, "ABCDEFG1234567")
             startActivity(intent)
         }
     }

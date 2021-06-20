@@ -9,6 +9,7 @@ import datatouch.uikit.core.fragmentsignaling.viewmodel.SignalViewModelProvider
 import kotlinx.coroutines.launch
 
 internal abstract class SignalConsumer : SlotCreationContainer() {
+
     private var isObserverStarted = false
 
     private var isConsumerInitialized = false
