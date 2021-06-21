@@ -15,7 +15,7 @@ class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>
 
     private var argFromActivity by FragmentArgs.of("Default value")
 
-    private var valueToActivityCallback by SigFactory.retVal<String>().sigFun<String>()
+    private var valueToActivityCallback by SigFactory.sigFun<String>().of<String>()
 
     fun withArg(arg: String) = apply {
         // Assign argument from parent fragment
@@ -72,16 +72,14 @@ class FSignalParent : DefaultFullScreenWindowUiBind<FragmentSignalParentBinding>
 
     // Slots - callbacks from child fragment
     // Callback with no parameters and no return value
-    private val onChildCallback by sc.slot {
+    private val onChildCallback by sc.slot().of {
         ToastNotification.showSuccess(context,"Parent fragment Slot OK")
     }
 
     // Slot with 2 Int parameters and Float return value
-    private val onCalculateSum by sc.retVal<Float>()
-        .slot<Int, Int> { a, b ->
-
+    private val onCalculateSum by sc.slot<Int, Int>().of<Float> { a, b ->
         ToastNotification.showSuccess(context,"Parent fragment Slot onCalculateSum OK")
-        return@slot (a + b).toFloat()
+        return@of (a + b).toFloat()
     }
 
 

@@ -31,9 +31,9 @@ class ASignalTest : AppCompatActivity() {
     }
 
     // Slot with 1 String parameter and 1 String return value
-    private val onFragmentValue by sc.retVal<String>().slot<String> {
+    private val onFragmentValue by sc.slot<String>().of<String> {
         ToastNotification.showSuccess(this,"Activity Slot param: $it")
-        return@slot "Activity Slot OK!!!!!"
+        return@of "Activity Slot OK!!!!!"
     }
 
     companion object {
@@ -41,5 +41,4 @@ class ASignalTest : AppCompatActivity() {
             return intent.putArg(ASignalTest::arg, arg)
         }
     }
-
 }

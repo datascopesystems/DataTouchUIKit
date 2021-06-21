@@ -2,7 +2,7 @@ package datatouch.uikit.core.fragmentsignaling.base
 
 import datatouch.uikit.core.fragmentsignaling.variation.slotcontainer.SlotContainer
 
-abstract class RetvalSlotPropertyBuilderBase(slotContainer: SlotContainer) {
+abstract class BuilderSlotProperty(slotContainer: SlotContainer) {
     private var container: SlotContainer? = slotContainer
 
     protected fun getSlotContainerOnce(): SlotContainer {

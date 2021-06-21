@@ -15,8 +15,8 @@ import datatouch.uikitapp.databinding.FragmentSignalSenderBinding
 
 class FSignalSender : DefaultFullScreenWindowUiBind<FragmentSignalSenderBinding>() {
 
-    private var simpleCallback by SigFactory.sigFun()
-    private var calcSumCallback by SigFactory.retVal<Float>().sigFun<Int, Int>()
+    private var simpleCallback by SigFactory.sigFun().of()
+    private var calcSumCallback by SigFactory.sigFun<Int, Int>().of<Float>()
 
     private var argFromParent by FragmentArgs.of("Default value 1")
 

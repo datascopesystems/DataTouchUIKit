@@ -5,55 +5,40 @@ import androidx.fragment.app.Fragment
 import datatouch.uikit.core.fragmentsignaling.variation.slotcontainer.SlotCreationContainer
 import datatouch.uikit.core.fragmentsignaling.consumer.property.ActivitySignalConsumerProperty
 import datatouch.uikit.core.fragmentsignaling.consumer.property.FragmentSignalConsumerProperty
-import datatouch.uikit.core.fragmentsignaling.interfaces.ISigFunProperty
-import datatouch.uikit.core.fragmentsignaling.variation.invokers.SigFunInvokerProperty0
-import datatouch.uikit.core.fragmentsignaling.variation.invokers.SigFunInvokerProperty1
-import datatouch.uikit.core.fragmentsignaling.variation.invokers.SigFunInvokerProperty2
-import datatouch.uikit.core.fragmentsignaling.variation.retval.RetvalSigFunPropertyBuilder
-import datatouch.uikit.core.fragmentsignaling.variation.sigfun.*
+import datatouch.uikit.core.fragmentsignaling.variation.builders.BuilderSigFun0
+import datatouch.uikit.core.fragmentsignaling.variation.builders.BuilderSigFun1
+import datatouch.uikit.core.fragmentsignaling.variation.builders.BuilderSigFun2
 import kotlin.properties.ReadOnlyProperty
 
 object SigFactory {
 
     /**
-     *  Delegate for SigFunVoid0
-     *  signal without params and no return value
-     *  @return property delegate for SigFunVoid0 type
+     *  Create sigFun builder for signal without params
      */
-    fun sigFun(): ISigFunProperty<SigFunVoid0> {
-        return SigFunInvokerProperty0<Unit, SigFunVoid0>()
+    fun sigFun(): BuilderSigFun0 {
+        return BuilderSigFun0()
     }
 
     /**
-     *  Delegate for SigFunVoid1
-     *  signal with 1 param and no return value
+     *  Create sigFun builder for signal with 1 param
      *
      *  A - param type
-     *  @param a must be ignored; it is used for overload only
-     *  @return property delegate for SigFunVoid1 type
+     *  @param a - must be ignored; it is used for overload only
      */
-    fun <A> sigFun(a: A? = null): ISigFunProperty<SigFunVoid1<A>> {
-        return SigFunInvokerProperty1<A, Unit, SigFunVoid1<A>>()
+    fun <A> sigFun(a: A? = null): BuilderSigFun1<A> {
+        return BuilderSigFun1()
     }
 
     /**
-     *  Delegate for SigFunVoid2
-     *  signal 2 params param and no return value
+     *  Create sigFun builder for signal with 2 params
      *
      *  A, B - param types
-     *  @param a must be ignored; it is used for overload only
-     *  @param b must be ignored; it is used for overload only
-     *  @return property delegate for SigFunVoid2 type
+     *  @param a - must be ignored; it is used for overload only
+     *  @param b - must be ignored; it is used for overload only
      */
-    fun <A, B> sigFun(a: A? = null, b: B? = null): ISigFunProperty<SigFunVoid2<A, B>> {
-        return SigFunInvokerProperty2<A, B, Unit, SigFunVoid2<A, B>>()
+    fun <A, B> sigFun(a: A? = null, b: B? = null): BuilderSigFun2<A, B> {
+        return BuilderSigFun2()
     }
-
-    /**
-     *  Specify return value for signals
-     *  @return property builder which can create delegates for signals with return value
-     */
-    fun <R> retVal() = RetvalSigFunPropertyBuilder<R>()
 
 
     /**
