@@ -103,9 +103,11 @@ class TextView : RelativeLayout {
         )
 
         try {
-            startIconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.TextView_tv_start_icon)
+            startIconDrawable =
+                typedArray.getAppCompatDrawable(context, R.styleable.TextView_tv_start_icon)
 
-            endIconDrawable = typedArray.getAppCompatDrawable(context, R.styleable.TextView_tv_end_icon)
+            endIconDrawable =
+                typedArray.getAppCompatDrawable(context, R.styleable.TextView_tv_end_icon)
 
             startIconColor =
                 typedArray.getColor(R.styleable.TextView_tv_start_icon_tint, InvalidColor)
@@ -291,6 +293,16 @@ class TextView : RelativeLayout {
         }
 
         return src
+    }
+
+    fun setStartIconDrawable(iconDrawable: Drawable?) {
+        this.startIconDrawable = iconDrawable
+        setupIconDrawable(ui.ivStartIcon, startIconDrawable)
+    }
+
+    fun setEndIconDrawable(iconDrawable: Drawable?) {
+        this.endIconDrawable = iconDrawable
+        setupIconDrawable(ui.ivEndIcon, endIconDrawable)
     }
 
 }
