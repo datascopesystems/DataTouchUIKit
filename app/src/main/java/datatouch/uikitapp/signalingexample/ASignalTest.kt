@@ -1,5 +1,6 @@
 package datatouch.uikitapp.signalingexample
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import datatouch.uikit.components.toast.ToastNotification
 import datatouch.uikit.core.activityargs.ActivityArgs
 import datatouch.uikit.core.activityargs.extension.putArg
+import datatouch.uikit.core.activityargs.extension.withClass
 import datatouch.uikit.core.fragmentsignaling.SigFactory
 import datatouch.uikitapp.R
 
@@ -37,8 +39,9 @@ class ASignalTest : AppCompatActivity() {
     }
 
     companion object {
-        fun setArgs(intent: Intent, arg: String): Intent {
-            return intent.putArg(ASignalTest::arg, arg)
+        fun intent(context: Context?, arg: String): Intent {
+            return Intent().withClass(context, ASignalTest::class)
+                .putArg(ASignalTest::arg, arg)
         }
     }
 }
