@@ -18,7 +18,9 @@ import datatouch.uikit.core.callbacks.UiJustCallback
 import datatouch.uikit.core.extensions.ImageViewExtensions.setColorFilterRes
 import datatouch.uikit.core.extensions.TextViewExtensions.setHintTextColorRes
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
+import datatouch.uikit.core.utils.views.ViewUtils
 import datatouch.uikit.databinding.FormEditTextBinding
+
 
 @SuppressLint("NonConstantResourceId")
 class FormEditText : LinearLayout, IFormView {
@@ -49,6 +51,9 @@ class FormEditText : LinearLayout, IFormView {
     private var enableClickOnFocus = false
     var onTextChangeCallback: UiJustCallback? = null
 
+    private var layoutWidth = 0
+    private var layoutHeight = 0
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(context, attrs)
     }
@@ -60,12 +65,18 @@ class FormEditText : LinearLayout, IFormView {
 
     private fun init(context: Context, attrs: AttributeSet) {
         initResources(context)
-        parseCustomAttributes(attrs)
-        afterViews()
+        parseAttributes(attrs)
     }
 
     private fun initResources(context: Context) {
         defaultIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_search_white)
+    }
+
+    private fun parseAttributes(attrs: AttributeSet) {
+        val parsedNativeAttributes = ViewUtils.parseNativeAttributes(context, attrs)
+        layoutHeight = parsedNativeAttributes.layoutHeight
+        layoutWidth = parsedNativeAttributes.layoutWidth
+        parseCustomAttributes(attrs)
     }
 
     private fun parseCustomAttributes(attrs: AttributeSet) {
@@ -112,21 +123,30 @@ class FormEditText : LinearLayout, IFormView {
         }
     }
 
-    fun afterViews() = ui.apply {
-        originalTypeface = et.typeface
-        et.hint = hint
-        et.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxTextLength))
-        et.setHintTextColorRes(normalHintTextColorRes)
-        et.setTypeface(originalTypeface, Typeface.NORMAL)
-        setupInputType()
-        et.maxLines = maxLines
-        refreshClearButton()
-        ivIcon.setImageDrawable(iconDrawable)
-        et.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
-        et.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
-        ivClear.setOnClickListener { et.setText("") }
-        ivMandatoryIndicator.isVisible = isMandatoryField
-        setupTheme()
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        applyLayoutParams()
+        ui.apply {
+            originalTypeface = et.typeface
+            et.hint = hint
+            et.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxTextLength))
+            et.setHintTextColorRes(normalHintTextColorRes)
+            et.setTypeface(originalTypeface, Typeface.NORMAL)
+            setupInputType()
+            et.maxLines = maxLines
+            refreshClearButton()
+            ivIcon.setImageDrawable(iconDrawable)
+            et.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
+            et.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
+            ivClear.setOnClickListener { et.setText("") }
+            ivMandatoryIndicator.isVisible = isMandatoryField
+            setupTheme()
+        }
+    }
+
+    private fun applyLayoutParams() {
+        ui.llFormEditTextRoot.layoutParams?.width = layoutWidth
+        ui.llFormEditTextRoot.layoutParams?.height = layoutHeight
     }
 
     private fun setupInputType() = ui.apply {
@@ -222,7 +242,7 @@ class FormEditText : LinearLayout, IFormView {
         super.setOnClickListener(l)
         enableClickOnFocus = true
         ui.et.isFocusableInTouchMode = false
-        ui.llFormEditTextRoot?.setOnClickListener(l)
+        ui.llFormEditTextRoot.setOnClickListener(l)
         ui.et.setOnClickListener(l)
         ui.ivIcon.setOnClickListener(l)
     }
@@ -292,6 +312,10 @@ class FormEditText : LinearLayout, IFormView {
         }
 
         ui.llFormEditTextRoot.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
+    }
+
+    private fun setupMultilineInput() {
+
     }
 
 }
