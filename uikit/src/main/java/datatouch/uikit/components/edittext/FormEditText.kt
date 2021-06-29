@@ -314,9 +314,6 @@ class FormEditText : LinearLayout, IFormView {
         ui.llFormEditTextRoot.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
     }
 
-    private fun setupMultilineInput() {
-
-    }
 
 }
 

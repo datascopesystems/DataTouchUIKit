@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import datatouch.uikit.R
 import datatouch.uikit.components.dropdown.adapter.IDropDownListAdapterItem
 import datatouch.uikit.components.dropdown.adapter.ISelectableDropDownListAdapter
+import datatouch.uikit.components.edittext.Theme
 import datatouch.uikit.core.extensions.TypedArrayExtensions.getAppCompatDrawable
 import datatouch.uikit.databinding.FormDropDownListViewBinding
 
@@ -21,6 +22,9 @@ class FormDropDownListView : LinearLayout, IFormView {
 
     private val ui = FormDropDownListViewBinding
         .inflate(LayoutInflater.from(context), this, true)
+
+    private val darkThemeBackgroundRes = R.drawable.ellipsized_primary_half_transparent_background
+    private val lightThemeBackgroundRes = R.drawable.primary_light_edit_text_rounded_corner
 
     private var verticalOffsetPx = 0
     private var selectedColor = 0
@@ -34,6 +38,7 @@ class FormDropDownListView : LinearLayout, IFormView {
     private var leftUnselectedHint = ""
     private var iconDrawable: Drawable? = null
     private var isMandatoryField = false
+    private var theme = Theme.Dark
 
     private var releaseAdapterOnDetachedFromWindow = true
 
@@ -83,6 +88,10 @@ class FormDropDownListView : LinearLayout, IFormView {
 
             isMandatoryField =
                 typedArray.getBoolean(R.styleable.FormDropDownListView_ddlv_mandatory_field, false)
+
+            val themeInt = typedArray.getInt(R.styleable.FormDropDownListView_ddlv_theme, 0)
+            theme = Theme.fromInt(themeInt)
+
         } finally {
             typedArray.recycle()
         }
@@ -103,6 +112,7 @@ class FormDropDownListView : LinearLayout, IFormView {
         ui.actv.addTextChangedListener(AfterTextChangedListener { afterTextChanged() })
         ui.actv.onFocusChangeListener = OnFocusChangeListener { _, focus -> onFocusChange(focus) }
         ui.ivMandatoryIndicator.isVisible = isMandatoryField
+        setupTheme()
     }
 
     private fun setOnClickListener() {
@@ -218,4 +228,25 @@ class FormDropDownListView : LinearLayout, IFormView {
     fun getLeftUnselectedHint(): String {
         return leftUnselectedHint
     }
+
+    fun setTheme(theme: Theme) {
+        this.theme = theme
+        setupTheme()
+    }
+
+    private fun setupTheme() {
+        // Save and restore padding
+        val paddingBottom = ui.llDropDownRoot.paddingBottom
+        val paddingTop = ui.llDropDownRoot.paddingTop
+        val paddingStart = ui.llDropDownRoot.paddingStart
+        val paddingEnd = ui.llDropDownRoot.paddingEnd
+
+        when (theme) {
+            Theme.Dark -> ui.llDropDownRoot.setBackgroundResource(darkThemeBackgroundRes)
+            Theme.Light -> ui.llDropDownRoot.setBackgroundResource(lightThemeBackgroundRes)
+        }
+
+        ui.llDropDownRoot.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
+    }
+
 }
