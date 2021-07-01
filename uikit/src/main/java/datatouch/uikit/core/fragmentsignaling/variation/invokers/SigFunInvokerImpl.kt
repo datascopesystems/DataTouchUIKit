@@ -18,6 +18,14 @@ internal class SigFunInvoker0<R>(slotId: SigSlotId, invokerName: String?, vm: Si
     override fun invoke() {
         emitSignal(Signal<R>(slotId, invokerName, null))
     }
+
+    override fun invokeBlocking(act: ISlotRetValAction<R>) {
+        emitSignalBlocking(Signal(slotId, invokerName, act))
+    }
+
+    override fun invokeBlocking() {
+        emitSignalBlocking(Signal<R>(slotId, invokerName, null))
+    }
 }
 
 internal class SigFunInvoker1<in A, R>(slotId: SigSlotId, invokerName: String?, vm: SignalSharedViewModel?)
@@ -30,6 +38,14 @@ internal class SigFunInvoker1<in A, R>(slotId: SigSlotId, invokerName: String?, 
     override fun invoke(a: A) {
         emitSignal(Signal<R>(slotId, invokerName, null, arrayOf(a)))
     }
+
+    override fun invokeBlocking(a: A, act: ISlotRetValAction<R>) {
+        emitSignalBlocking(Signal(slotId, invokerName, act, arrayOf(a)))
+    }
+
+    override fun invokeBlocking(a: A) {
+        emitSignalBlocking(Signal<R>(slotId, invokerName, null, arrayOf(a)))
+    }
 }
 
 internal class SigFunInvoker2<in A, in B, R>(slotId: SigSlotId, invokerName: String?, vm: SignalSharedViewModel?)
@@ -41,5 +57,13 @@ internal class SigFunInvoker2<in A, in B, R>(slotId: SigSlotId, invokerName: Str
 
     override fun invoke(a: A, b: B) {
         emitSignal(Signal<R>(slotId, invokerName, null, arrayOf(a, b)))
+    }
+
+    override fun invokeBlocking(a: A, b: B, act: ISlotRetValAction<R>) {
+        emitSignalBlocking(Signal(slotId, invokerName, act, arrayOf(a, b)))
+    }
+
+    override fun invokeBlocking(a: A, b: B) {
+        emitSignalBlocking(Signal<R>(slotId, invokerName, null, arrayOf(a, b)))
     }
 }

@@ -27,6 +27,14 @@ internal class SigSlot0<R>(slotId: SigSlotId, act: ISigSlotAction0<R>)
     override fun invoke() {
         action?.invoke()
     }
+
+    override fun invokeBlocking(act: ISlotRetValAction<R>) {
+        invoke(act)
+    }
+
+    override fun invokeBlocking() {
+        invoke()
+    }
 }
 
 
@@ -55,6 +63,14 @@ internal class SigSlot1<A, R>(slotId: SigSlotId, act: ISigSlotAction1<A, R>)
 
     override fun invoke(a: A) {
         action?.invoke(a)
+    }
+
+    override fun invokeBlocking(a: A, act: ISlotRetValAction<R>) {
+        invoke(a, act)
+    }
+
+    override fun invokeBlocking(a: A) {
+        invoke(a)
     }
 }
 
@@ -85,5 +101,13 @@ internal class SigSlot2<A, B, R>(slotId: SigSlotId, act: ISigSlotAction2<A, B, R
 
     override fun invoke(a: A, b: B) {
         action?.invoke(a, b)
+    }
+
+    override fun invokeBlocking(a: A, b: B, act: ISlotRetValAction<R>) {
+        invoke(a, b, act)
+    }
+
+    override fun invokeBlocking(a: A, b: B) {
+        invoke(a, b)
     }
 }

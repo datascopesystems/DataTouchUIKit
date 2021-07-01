@@ -1,17 +1,24 @@
 package datatouch.uikit.core.fragmentsignaling.viewmodel
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import datatouch.uikit.core.fragmentsignaling.interfaces.ISignal
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 internal class SignalSharedViewModel : ViewModel() {
     private val flow = MutableSharedFlow<ISignal>()
 
     fun emitSignal(signal: ISignal) {
-        this.viewModelScope.launch {
+        this.viewModelScope.launch(Dispatchers.IO) {
+            flow.emit(signal)
+        }
+    }
+
+    fun emitSignalBlocking(signal: ISignal) {
+        runBlocking(this.viewModelScope.coroutineContext) {
             flow.emit(signal)
         }
     }

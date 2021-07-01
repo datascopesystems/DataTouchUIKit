@@ -13,6 +13,11 @@ internal abstract class SigFunInvoker(override val slotId: SigSlotId,
         drop()
     }
 
+    protected fun emitSignalBlocking(signal: ISignal) {
+        vm?.emitSignalBlocking(signal)
+        drop()
+    }
+
     override fun drop() {
         vm = null
         invokerName = null
