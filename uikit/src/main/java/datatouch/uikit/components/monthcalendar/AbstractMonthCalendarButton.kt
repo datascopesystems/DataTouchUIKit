@@ -1,8 +1,10 @@
 package datatouch.uikit.components.monthcalendar
 
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -19,7 +21,9 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
     private var buttonCellType = ButtonCellType.UNDEFINED
     private var drawablesBundle: ButtonDrawablesBundle
 
-    private var isDayActive: Boolean = true
+    var isDayActive: Boolean = true
+        private set
+
     private var isToday: Boolean = false
 
     private var date: LocalDate? = null
@@ -67,10 +71,14 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
         textView.paint.isUnderlineText = isToday
     }
 
-    fun setOnClickCallback(callback: UiCallback<LocalDate?>) {
+    fun setOnClickCallback(callback: UiCallback<LocalDate?>?) {
         onClickCallback = callback
-        setOnClickListener {
-            onClickCallback?.invoke(date)
+
+        when (callback == null) {
+            true -> setOnClickListener(null)
+            else -> setOnClickListener {
+                onClickCallback?.invoke(date)
+            }
         }
     }
 
@@ -170,6 +178,18 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
             if (w < it.w || h < it.h) {
                 downsizeUIComponents()
             }
+        }
+    }
+
+    fun setDayTextSizeSp(sizeSp: Float) {
+        getButtonTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, sizeSp)
+    }
+
+    fun setDayTextBold(bold: Boolean) {
+        val tv = getButtonTextView()
+        when (bold) {
+            true -> tv.setTypeface(tv.typeface, Typeface.BOLD)
+            else -> tv.setTypeface(Typeface.create(tv.typeface, Typeface.NORMAL))
         }
     }
     
