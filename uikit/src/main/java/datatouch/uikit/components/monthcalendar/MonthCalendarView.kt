@@ -370,6 +370,18 @@ class MonthCalendarView<T : AbstractMonthCalendarButton> : LinearLayout {
         }
     }
 
+    fun forEachTableCell(action: (String, T) -> Unit) {
+        var idx = 0
+        for (i in 0 until dateTable.getRowCount()) {
+            for (j in 0 until dateTable.getColCount()) {
+                val date = dateToString(dateTable.getDate(i, j))
+                val button = buttonList[idx]
+                action.invoke(date, button)
+                idx++
+            }
+        }
+    }
+
     fun setSelectedDate(date: String, selected: Boolean) {
         val localDate = stringToDate(date)
         val index = dateTable.getIndexFromDate(localDate)
