@@ -28,6 +28,8 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
 
     private var date: LocalDate? = null
 
+    private var defaultTextSizePx = 0f
+
     private var onClickCallback: UiCallback<LocalDate?>? = null
 
     constructor(context: Context?) : super(context)
@@ -45,6 +47,7 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
     protected open fun renderUi() {
         setIsActiveDay(true)
         setupDateText()
+        defaultTextSizePx = getButtonTextView().textSize
     }
 
     fun setDrawablesBundle(bundle: ButtonDrawablesBundle) {
@@ -179,6 +182,12 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
             if (w < it.w || h < it.h) {
                 downsizeUIComponents()
             }
+        }
+    }
+
+    fun resetTextSize() {
+        if (defaultTextSizePx > 0) {
+            getButtonTextView().setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSizePx)
         }
     }
 

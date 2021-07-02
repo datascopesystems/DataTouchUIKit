@@ -327,6 +327,8 @@ class MonthCalendarView<T : AbstractMonthCalendarButton> : LinearLayout {
 
     private fun setupDateButton(button: T, row: Int, col: Int) {
         button.resetButtonState()
+        button.resetTextSize()
+        button.setDayTextBold(false)
 
         val cellType = dateTable.getCellType(row, col)
         button.setCellType(cellType)
