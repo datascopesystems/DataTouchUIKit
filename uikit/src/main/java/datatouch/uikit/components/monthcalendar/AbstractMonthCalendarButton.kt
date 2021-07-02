@@ -67,6 +67,7 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
 
         val textView = getButtonTextView()
         updateButtonTextColor(textView)
+        setDayTextBold(true)
 
         textView.paint.isUnderlineText = isToday
     }
@@ -191,6 +192,10 @@ abstract class AbstractMonthCalendarButton : LinearLayout {
             true -> tv.setTypeface(tv.typeface, Typeface.BOLD)
             else -> tv.setTypeface(Typeface.create(tv.typeface, Typeface.NORMAL))
         }
+    }
+
+    fun setDayTextColor(color: Int) {
+        getButtonTextView().setTextColor(color)
     }
     
     companion object {
