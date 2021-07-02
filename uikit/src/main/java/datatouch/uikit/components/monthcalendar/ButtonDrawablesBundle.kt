@@ -58,7 +58,7 @@ open class ButtonDrawablesBundle(val context: Context) {
     get() = Color.WHITE
 
     open val inactiveDayTextColor: Int
-    get() = 0xFFD5D5D5.toInt()
+    get() = 0xFFD0D0D0.toInt()
 
     open val todayTextColor: Int
     get() = 0xFF9ADFF2.toInt()
