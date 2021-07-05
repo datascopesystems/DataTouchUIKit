@@ -100,9 +100,13 @@ abstract class RecyclerViewListAdapter<TData, TView : View>
         if (position <= data.size) {
             val mutableData = data.toMutableList()
             mutableData.add(position, item)
-            data = mutableData
+            replaceListDataOnly(mutableData)
             notifyMyItemInserted(position)
         }
+    }
+
+    protected open fun replaceListDataOnly(newData: List<TData>) {
+        this.data = newData
     }
 
     fun appendData(item: TData) = addData(dataItemCount, item)
@@ -113,7 +117,7 @@ abstract class RecyclerViewListAdapter<TData, TView : View>
             val i = mutableData.indexOf(this)
             kotlin.runCatching {
                 mutableData[i] = item
-                data = mutableData
+                replaceListDataOnly(mutableData)
                 notifyMyItemChanged(i)
             }
         }
@@ -123,7 +127,7 @@ abstract class RecyclerViewListAdapter<TData, TView : View>
         if (position < data.size) {
             val mutableData = data.toMutableList()
             mutableData.removeAt(position)
-            data = mutableData
+            replaceListDataOnly(mutableData)
             notifyMyItemRemoved(position)
         }
     }

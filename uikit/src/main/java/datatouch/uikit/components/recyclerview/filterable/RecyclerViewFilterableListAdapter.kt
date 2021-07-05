@@ -22,4 +22,7 @@ abstract class RecyclerViewFilterableListAdapter<TItem : IListAdapterFilterable<
 
     val notFilteredData get() = filter.allData
 
+    override fun replaceListDataOnly(newData: List<TItem>) {
+        super.data = newData.toMutableList()
+    }
 }
