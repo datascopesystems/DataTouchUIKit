@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="00"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvHoursLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="bottom"
+                        android:text="@string/hours_short"
+                        android:textColor="@color/primary_light"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/hoursUnderline"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="1dp"
+                    android:visibility="invisible"
+                    android:background="@color/accent_negative_start_light" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="40sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMinutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="00"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMinutesLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="bottom"
+                        android:text="@string/minutes_short"
+                        android:textColor="@color/primary_light"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/minutesUnderline"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="1dp"
+                    android:visibility="invisible"
+                    android:background="@color/accent_end_light" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <datatouch.uikit.components.pinpad.PinPadView
+            android:id="@+id/pinPad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:checkBoxesCount="4"
+            app:singleButtonSize="65dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:background="@drawable/quick_duration_section_background">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="@string/quick_duration"
+            android:textColor="@color/primary_light"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="1dp"
+            android:background="#FFB0B0B0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv5m"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="@string/minutes5"
+            android:textColor="@color/accent_negative_start_light"
+            android:textSize="17sp"
+            android:background="@drawable/quick_duration_btn_background"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv15m"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="@string/minutes15"
+            android:textColor="@color/accent_negative_start_light"
+            android:textSize="17sp"
+            android:background="@drawable/quick_duration_btn_background"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv30m"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="@string/minutes30"
+            android:textColor="@color/accent_negative_start_light"
+            android:textSize="17sp"
+            android:background="@drawable/quick_duration_btn_background"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv1h"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="@string/hour1"
+            android:textColor="@color/accent_negative_start_light"
+            android:textSize="17sp"
+            android:background="@drawable/quick_duration_btn_background"/>
+    </LinearLayout>
+
+
+</LinearLayout>

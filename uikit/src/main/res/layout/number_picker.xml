@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvIntPart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="70dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:textAlignment="textEnd"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/intPartUnderline"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="1dp"
+                    android:visibility="invisible"
+                    android:background="@color/accent_negative_start_light" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:includeFontPadding="false"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:text="."
+                android:textColor="@color/white"
+                android:textSize="40sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFloatPart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="70dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:textAlignment="textStart"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/floatPartUnderline"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="1dp"
+                    android:visibility="invisible"
+                    android:background="@color/accent_end_light" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <datatouch.uikit.components.pinpad.PinPadView
+            android:id="@+id/pinPad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:checkBoxesCount="4"
+            app:singleButtonSize="65dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:background="@drawable/quick_duration_section_background">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="@string/number_picker_tools"
+            android:textColor="@color/primary_light"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="1dp"
+            android:background="#FFB0B0B0" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIncrement"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_arrow_up_white"
+            android:tint="@color/accent_negative_start_light"
+            android:background="@drawable/quick_duration_btn_background" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDecrement"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_arrow_down_white"
+            android:tint="@color/accent_negative_start_light"
+            android:background="@drawable/quick_duration_btn_background" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBackspace"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:src="@drawable/ic_backspace"
+            android:tint="@color/accent_negative_start_light"
+            android:background="@drawable/quick_duration_btn_background" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvChangeSign"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:includeFontPadding="false"
+            android:text="+ -"
+            android:textColor="@color/accent_negative_start_light"
+            android:textSize="26sp"
+            android:background="@drawable/quick_duration_btn_background"/>
+    </LinearLayout>
+
+
+</LinearLayout>
