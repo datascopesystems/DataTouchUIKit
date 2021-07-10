@@ -65,6 +65,7 @@ abstract class PopUpPanel {
             it.setOnDismissListener(::onDismissInternal)
 
             it.softInputMode = softInputMode
+            it.isClippingEnabled = false
         }
     }
 
