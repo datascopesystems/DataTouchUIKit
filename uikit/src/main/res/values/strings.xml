@@ -56,4 +56,15 @@
     <string name="conformation_required">Conformation Required</string>
     <string name="no_title">No Title</string>
 
+    <string name="hours_short">h</string>
+    <string name="minutes_short">m</string>
+    <string name="quick_duration">Quick\nduration</string>
+
+    <string name="minutes5">5m</string>
+    <string name="minutes15">15m</string>
+    <string name="minutes30">30m</string>
+    <string name="hour1">1h</string>
+
+    <string name="number_picker_tools">Tools</string>
+
 </resources>
